@@ -118,73 +118,8 @@ paths:
         category: application
         filename: patch-application-applications-.html     
         explorer: false 
-  "/application/consistency-groups":
-    get:
-      x-doc:
-        title: Retrieve details of a collection or consistency group
-        category: application
-        filename: get-application-consistency-groups.html
-        subcategory: Manage application consistency groups
-        explorer: false
-    post:
-      x-doc:
-        title: Create a consistency group 
-        category: application
-        filename: post-application-consistency-groups.html
-        subcategory: Manage application consistency groups
-        explorer: false
-  "/application/consistency-groups/{consistency_group.uuid}/snapshots":
-    get:
-      x-doc:
-        title: Retrieve consistency group Snapshot copies 
-        category: application
-        filename: get-application-consistency-groups-snapshots.html
-        subcategory: Manage application consistency group Snapshot copies
-        explorer: false
-    post:
-      x-doc:
-        title: Create a consistency group Snapshot copy 
-        category: application
-        filename: post-application-consistency-groups-snapshots.html
-        subcategory: Manage application consistency group Snapshot copies
-        explorer: false
-  "/application/consistency-groups/{consistency_group.uuid}/snapshots/{uuid}":
-    delete:
-      x-doc:
-        title: Delete a consistency group Snapshot copy 
-        category: application
-        filename: delete-application-consistency-groups-snapshots-.html
-        subcategory: Manage application consistency group Snapshot copies
-        explorer: false
-    get:
-      x-doc:
-        title: Retrieve a consistency group Snapshot copy 
-        category: application
-        filename: get-application-consistency-groups-snapshots-.html
-        subcategory: Manage application consistency group Snapshot copies
-        explorer: false
-  "/application/consistency-groups/{uuid}":
-    delete:
-      x-doc:
-        title: Delete a consistency group
-        category: application
-        filename: delete-application-consistency-groups-.html
-        subcategory: Manage application consistency groups
-        explorer: false
-    get:
-      x-doc:
-        title: Retrieve a consistency group
-        category: application
-        filename: get-application-consistency-groups-.html
-        subcategory: Manage application consistency groups
-        explorer: false
-    patch:
-      x-doc:
-        title: Update a consistency group
-        category: application
-        filename: patch-application-consistency-groups-.html
-        subcategory: Manage application consistency groups
-        explorer: false
+  
+  
   "/application/templates":
     get:
       x-doc:
