@@ -3,7 +3,7 @@ settings:
   github_edit: false
   github_issue: false
   internal:
-    pdf_enabled: false
+    pdf_enabled: true
     avatars_enabled: false
     lipi_enabled: false
     api_enabled: true
