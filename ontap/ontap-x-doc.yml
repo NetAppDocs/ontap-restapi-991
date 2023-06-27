@@ -3928,7 +3928,7 @@ paths:
         filename: patch-security-azure-key-vaults-.html
         subcategory: Manage Azure Key Vaults 
         explorer: false
-  "/security/azure-key-vaults/{azure_key_vault.uuid}/rekey-interna":
+  "/security/azure-key-vaults/{azure_key_vault.uuid}/rekey-internal":
     post:
       x-doc:
         title: Re-key the internal key in the key hierarchy for an SVM 
