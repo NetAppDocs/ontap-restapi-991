@@ -6263,4 +6263,10 @@ paths:
         category: storage
         filename: delete-storage-monitored-files-.html
         explorer: false  
-   
+  "/storage/file/move": 
+     post:
+       x-doc:
+         title: Start a file move operation
+         category: storage
+         filename: post-storage-file-move.html
+         explorer: false
