@@ -3806,21 +3806,6 @@ paths:
         filename: get-security-ssh-svms.html
         subcategory: View SSH SVMs
         explorer: false
-  "/security/ssh/svms/{svm.uuid}":
-    get:
-      x-doc:
-        title: Retrieve the SSH server configuration for an SVM
-        category: security
-        filename: get-security-ssh-svms-.html
-        subcategory: Manage SSH security configuration
-        explorer: false
-    patch:
-      x-doc:
-        title: Update the SSH server configuration for an SVM
-        category: security
-        filename: patch-security-ssh-svms-.html
-        subcategory: Manage SSH security configuration
-        explorer: false
   "/snapmirror/policies":
     get:
       x-doc:
@@ -4073,82 +4058,8 @@ paths:
         filename: post-storage-file-clone.html
         subcategory: Manage storage file clones
         explorer: false
-  "/storage/file/clone/split-loads":
-    get:
-      x-doc:
-        title: Retrieve the clone split load of a node
-        category: storage
-        filename: get-storage-file-clone-split-loads.html
-        subcategory: Manage storage file clones
-        explorer: false
-  "/storage/file/clone/split-loads/{node.uuid}":
-    get:
-      x-doc:
-        title: Retrieve volume file clone split load rest
-        category: storage
-        filename: get-storage-file-clone-split-loads-.html
-        subcategory: Manage storage file clones
-        explorer: false
-    patch:
-      x-doc:
-        title: Update the maximum split load
-        category: storage
-        filename: patch-storage-file-clone-split-loads-.html
-        subcategory: Manage storage file clones
-        explorer: false
-  "/storage/file/clone/split-status":
-    get:
-      x-doc:
-        title: Retrieve file clone split status of all volumes in the node
-        category: storage
-        filename: get-storage-file-clone-split-status.html
-        subcategory: Manage storage file clones
-        explorer: false
-  "/storage/file/clone/split-status/{volume.uuid}":
-    get:
-      x-doc:
-        title: Retrieve file clone split status of all volumes
-        category: storage
-        filename: get-storage-file-clone-split-status-.html
-        subcategory: Manage storage file clones
-        explorer: false
-  "/storage/file/clone/tokens":
-    get:
-      x-doc:
-        title: Retrieve information for a token
-        category: storage
-        filename: get-storage-file-clone-tokens.html
-        subcategory: Manage storage file clones
-        explorer: false
-    post:
-      x-doc:
-        title: Create a new token to reserve the split load
-        category: storage
-        filename: post-storage-file-clone-tokens.html
-        subcategory: Manage storage file clones
-        explorer: false
-  "/storage/file/clone/tokens/{node.uuid}/{uuid}":
-    delete:
-      x-doc:
-        title: Delete a specific file clone token
-        category: storage
-        filename: delete-storage-file-clone-tokens-.html
-        subcategory: Manage storage file clones
-        explorer: false
-    get:
-      x-doc:
-        title: Retrieve a file clone token
-        category: storage
-        filename: get-storage-file-clone-tokens-.html
-        subcategory: Manage storage file clones
-        explorer: false
-    patch:
-      x-doc:
-        title: Update a file clone token
-        category: storage
-        filename: patch-storage-file-clone-tokens-.html
-        subcategory: Manage storage file clones
-        explorer: false
+ 
+  
   "/storage/file/copy":
     post:
       x-doc:
@@ -4233,44 +4144,6 @@ paths:
         category: SAN
         filename: post-storage-luns.html
         subcategory: Manage LUNs
-        explorer: false
-  "/storage/luns/{lun.uuid}/attributes":
-    get:
-      x-doc:
-        title: Retrieve LUN attributes
-        category: SAN
-        filename: get-storage-luns-attributes.html
-        subcategory: Manage LUN attributes
-        explorer: false
-
-    post:
-      x-doc:
-        title: Add an attribute to a LUN
-        category: SAN
-        filename: post-storage-luns-attributes.html
-        subcategory: Manage LUN attributes
-        explorer: false
-  "/storage/luns/{lun.uuid}/attributes/{name}":
-    delete:
-      x-doc:
-        title: Delete a LUN attribute
-        category: SAN
-        filename: delete-storage-luns-attributes-.html
-        subcategory: Manage LUN attributes
-        explorer: false
-    get:
-      x-doc:
-        title: Retrieve a LUN attribute
-        category: SAN
-        filename: get-storage-luns-attributes-.html
-        subcategory: Manage LUN attributes
-        explorer: false
-    patch:
-      x-doc:
-        title: Update a LUN attribute value
-        category: SAN
-        filename: patch-storage-luns-attributes-.html
-        subcategory: Manage LUN attributes
         explorer: false
   "/storage/luns/{uuid}":
     delete:
@@ -4401,22 +4274,6 @@ paths:
         filename: patch-storage-qos-policies-.html
         subcategory: Manage QoS policies
         explorer: false
-  "/storage/qos/workloads":
-    get:
-      x-doc:
-        title: Retrieve QoS workloads
-        category: storage
-        filename: get-storage-qos-workloads.html
-        subcategory: Manage QoS workloads
-        explorer: false
-  "/storage/qos/workloads/{uuid}":
-    get:
-      x-doc:
-        title: Retrieve a QoS workload
-        category: storage
-        filename: get-storage-qos-workloads-.html
-        subcategory: Manage QoS workloads
-        explorer: false
   "/storage/qtrees":
     get:
       x-doc:
@@ -4523,13 +4380,6 @@ paths:
         filename: get-storage-shelves-.html
         subcategory: Manage shelves
         explorer: false
-    patch:
-      x-doc:
-        title: Update a shelf location led
-        category: storage
-        filename: patch-storage-shelves-.html
-        subcategory: Manage shelves
-        explorer: false
   "/storage/snaplock/audit-logs":
     get:
       x-doc:
@@ -4574,13 +4424,6 @@ paths:
           cluster
         category: snaplock
         filename: get-storage-snaplock-compliance-clocks.html
-        subcategory: Manage the SnapLock ComplianceClock
-        explorer: false
-    post:
-      x-doc:
-        title: Initialize a SnapLock ComplianceClock
-        category: snaplock
-        filename: post-storage-snaplock-compliance-clocks.html
         subcategory: Manage the SnapLock ComplianceClock
         explorer: false
   "/storage/snaplock/compliance-clocks/{node.uuid}":
@@ -5025,100 +4868,7 @@ paths:
         filename: patch-storage-volumes-snapshots-.html
         subcategory: Manage volume Snapshot copies
         explorer: false
-  "/storage/volumes/{volume.uuid}/top-metrics/clients":
-    get:
-      x-doc:
-        title: Retrieve clients with the most I/O activity
-        category: storage
-        filename: get-storage-volumes-top-metrics-clients.html
-        subcategory: Retrieve clients
-        explorer: false
-  "/storage/volumes/{volume.uuid}/top-metrics/directories":
-    get:
-      x-doc:
-        title: Retrieve directories with the greatest value performance
-          metric or capacity metric
-        category: storage
-        filename: get-storage-volumes-top-metrics-directories.html
-        subcategory: Retrieve directories
-        explorer: false
-  "/storage/volumes/{volume.uuid}/top-metrics/files":
-    get:
-      x-doc:
-        title: Retrieve files with the most I/O activity
-        category: storage
-        filename: get-storage-volumes-top-metrics-files.html
-        subcategory: Retrieve files
-        explorer: false
-  "/storage/volumes/{volume.uuid}/top-metrics/users":
-    get:
-      x-doc:
-        title: Retrieve users with the most I/O activity
-        category: storage
-        filename: get-storage-volumes-top-metrics-users.html
-        subcategory: Retrieve users
-        explorer: false
-  "/support/auto-update":
-    get:
-      x-doc:
-        title: Retrieve current status of an automatic update feature
-        category: support
-        filename: get-support-auto-update.html
-        subcategory: Manage an automatic update feature
-        explorer: false
-    patch:
-      x-doc:
-        title: Update current enabled status of an automatic update feature
-        category: support
-        filename: patch-support-auto-update.html
-        subcategory: Manage an automatic update feature
-        explorer: false
-  "/support/auto-update/configurations":
-    get:
-      x-doc:
-        title: Retrieve configuration for an automatic update
-        category: support
-        filename: get-support-auto-update-configurations.html
-        subcategory: Retrieve automatic update configuration
-        explorer: false
-  "/support/auto-update/configurations/{uuid}":
-    get:
-      x-doc:
-        title: Retrieve specific configuration for an automatic update
-        category: support
-        filename: get-support-auto-update-configurations-.html
-        subcategory: Manage automatic update configuration
-        explorer: false
-    patch:
-      x-doc:
-        title: Modify configuration for an automatic update
-        category: support
-        filename: patch-support-auto-update-configurations-.html
-        subcategory: Manage automatic update configuration
-        explorer: false
-  "/support/auto-update/updates":
-    get:
-      x-doc:
-        title: Retrieve all automatic update status
-        category: support
-        filename: get-support-auto-update-updates.html
-        subcategory: Retrieve status for all automatic updates
-        explorer: false
-  "/support/auto-update/updates/{uuid}":
-    get:
-      x-doc:
-        title: Retrieve the status of an update
-        category: support
-        filename: get-support-auto-update-updates-.html
-        subcategory: Manage automatic updates
-        explorer: false
-    patch:
-      x-doc:
-        title: Perform an action on the update
-        category: support
-        filename: patch-support-auto-update-updates-.html
-        subcategory: Manage automatic updates
-        explorer: false
+
   "/support/autosupport":
     get:
       x-doc:
@@ -5194,29 +4944,8 @@ paths:
         filename: get-support-configuration-backup-backups-.html
         subcategory: Manage configuration backups
         explorer: false
-  "/support/coredump/coredumps":
-    get:
-      x-doc:
-        title: Retrieve core dumps
-        category: support
-        filename: get-support-coredump-coredumps.html
-        subcategory: Manage core dumps
-        explorer: false
-  "/support/coredump/coredumps/{node.uuid}/{name}":
-    delete:
-      x-doc:
-        title: Delete a core dump
-        category: support
-        filename: delete-support-coredump-coredumps-.html
-        subcategory: Manage core dumps
-        explorer: false
-    get:
-      x-doc:
-        title: Retrieve a core dump
-        category: support
-        filename: get-support-coredump-coredumps-.html
-        subcategory: Manage core dumps
-        explorer: false
+  
+  
   "/support/ems":
     get:
       x-doc:
@@ -5441,59 +5170,9 @@ paths:
         filename: patch-support-snmp-users-.html
         subcategory: Manage individual SNMP users
         explorer: false
-  "/svm/migrations":
-    get:
-      x-doc:
-        title: Retrieve SVM migration status
-        category: svm
-        filename: get-svm-migrations.html
-        subcategory: SVM migration
-        explorer: false
-    post:
-      x-doc:
-        title: Create an SVM migration operation
-        category: svm
-        filename: post-svm-migrations.html
-        subcategory: SVM migration
-        explorer: false
-  "/svm/migrations/{svm_migration.uuid}/volumes":
-    get:
-      x-doc:
-        title: Retrieve transfer status of volumes in an SVM
-        category: svm
-        filename: get-svm-migrations-volumes.html
-        subcategory: SVM migration
-        explorer: false
-  "/svm/migrations/{svm_migration.uuid}/volumes/{volume.uuid}":
-    get:
-      x-doc:
-        title: Retrieve volume transfer status for a volume
-        category: svm
-        filename: get-svm-migrations-volumes-.html
-        subcategory: SVM migration
-        explorer: false
-  "/svm/migrations/{uuid}":
-    delete:
-      x-doc:
-        title: Delete SVM migrations
-        category: svm
-        filename: delete-svm-migrations-.html
-        subcategory: SVM migration
-        explorer: false
-    get:
-      x-doc:
-        title: Retrieve migration status for an SVM
-        category: svm
-        filename: get-svm-migrations-.html
-        subcategory: SVM migration
-        explorer: false
-    patch:
-      x-doc:
-        title: Update actions performed during an SVM migration
-        category: svm
-        filename: patch-svm-migrations-.html
-        subcategory: SVM migration
-        explorer: false
+
+
+    
   "/svm/peer-permissions":
     get:
       x-doc:
@@ -5582,22 +5261,6 @@ paths:
         category: svm
         filename: post-svm-svms.html
         subcategory: Manage SVMs
-        explorer: false
-  
-  "/svm/svms/{svm.uuid}/web":
-    get:
-      x-doc:
-        title: Retrieve web services security configuration
-        category: svm
-        filename: get-svm-svms-web.html
-        subcategory: Web services security configuration
-        explorer: false
-    patch:
-      x-doc:
-        title: Update web services security configuration
-        category: svm
-        filename: patch-svm-svms-web.html
-        subcategory: Web services security configuration
         explorer: false
   "/svm/svms/{uuid}":
     delete:
