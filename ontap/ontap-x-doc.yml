@@ -1555,7 +1555,6 @@ paths:
     get:
       x-doc:
         title: Retrieve CIFS protocol historical performance metrics for an SVM
-          svm
         category: NAS
         filename: get-protocols-cifs-services-metrics.html
         subcategory: Manage CIFS services
