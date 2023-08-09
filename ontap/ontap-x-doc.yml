@@ -2895,14 +2895,14 @@ paths:
         title: Retrieve portsets
         category: SAN
         filename: get-protocols-san-portsets.html
-        subcategory: Manage SAN postSets
+        subcategory: Manage SAN portsets
         explorer: false
     post:
       x-doc:
         title: Create a portset
         category: SAN
         filename: post-protocols-san-portsets.html
-        subcategory: Manage SAN postSets
+        subcategory: Manage SAN portsets
         explorer: false
   "/protocols/san/portsets/{portset.uuid}/interfaces":
     get:
@@ -2910,14 +2910,14 @@ paths:
         title: Retrieve portset network interfaces
         category: SAN
         filename: get-protocols-san-portsets-interfaces.html
-        subcategory: Manage SAN postSets
+        subcategory: Manage SAN portsets
         explorer: false
     post:
       x-doc:
         title: Add portset network interfaces
         category: SAN
         filename: post-protocols-san-portsets-interfaces.html
-        subcategory: Manage SAN postSets
+        subcategory: Manage SAN portsets
         explorer: false
   "/protocols/san/portsets/{portset.uuid}/interfaces/{uuid}":
     delete:
@@ -2925,14 +2925,14 @@ paths:
         title: Delete portset network interfaces
         category: SAN
         filename: delete-protocols-san-portsets-interfaces-.html
-        subcategory: Manage SAN postSets
+        subcategory: Manage SAN portsets
         explorer: false
     get:
       x-doc:
         title: Retrieve specific portset network interfaces
         category: SAN
         filename: get-protocols-san-portsets-interfaces-.html
-        subcategory: Manage SAN postSets
+        subcategory: Manage SAN portsets
         explorer: false
   "/protocols/san/portsets/{uuid}":
     delete:
@@ -2940,14 +2940,14 @@ paths:
         title: Delete a portset
         category: SAN
         filename: delete-protocols-san-portsets-.html
-        subcategory: Manage SAN postSets
+        subcategory: Manage SAN portsets
         explorer: false
     get:
       x-doc:
         title: Retrieve a portset
         category: SAN
         filename: get-protocols-san-portsets-.html
-        subcategory: Manage SAN postSets
+        subcategory: Manage SAN portsets
         explorer: false
   "/protocols/vscan":
     get:
@@ -3696,6 +3696,7 @@ paths:
         title: Retrieve login banner and messages of the day
         category: security
         filename: get-security-login-messages.html
+        subcategory: Manage security login messages
         explorer: false
   "/security/login/messages/{uuid}":
     get:
@@ -3703,14 +3704,14 @@ paths:
         title: Retrieve login messages configuration by UUID
         category: security
         filename: get-security-login-messages-.html
-        subcategory: View and update login message configuration
+        subcategory: Manage security login messages
         explorer: false
     patch:
       x-doc:
         title: Update login messages configuration
         category: security
         filename: patch-security-login-messages-.html
-        subcategory: View and update login message configuration
+        subcategory: Manage security login messages
         explorer: false
 
   "/security/roles":
