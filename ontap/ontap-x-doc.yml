@@ -4052,7 +4052,6 @@ paths:
         title: Create a clone of the file
         category: storage
         filename: post-storage-file-clone.html
-        subcategory: Manage storage file clones
         explorer: false
  
   
