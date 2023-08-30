@@ -3692,7 +3692,7 @@ paths:
         title: Retrieve login banner and messages of the day
         category: security
         filename: get-security-login-messages.html
-        subcategory: Manage security login messages
+        subcategory: View and update login message configuration
         explorer: false
   "/security/login/messages/{uuid}":
     get:
@@ -3700,14 +3700,14 @@ paths:
         title: Retrieve login messages configuration by UUID
         category: security
         filename: get-security-login-messages-.html
-        subcategory: Manage security login messages
+        subcategory: View and update login message configuration
         explorer: false
     patch:
       x-doc:
         title: Update login messages configuration
         category: security
         filename: patch-security-login-messages-.html
-        subcategory: Manage security login messages
+        subcategory: View and update login message configuration
         explorer: false
 
   "/security/roles":
