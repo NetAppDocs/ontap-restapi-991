@@ -15,31 +15,25 @@ settings:
     api_enabled: true
   versions: 
   # This Repo
-  - name: ONTAP
+  - version-number: "9.9.1"
     url: /ontap-restapi-991
-    version-number: "9.9.1"
   # Additional Releases
-  - name: ONTAP
+  - version-number: "9.14.1"
+    url: /ontap-restapi-9141
+  - version-number: "9.13.1"
     url: /ontap-restapi-9131
-    version-number: "9.13.1"
-  - name: ONTAP
+  - version-number: "9.12.1" 
     url: /ontap-restapi-9121
-    version-number: "9.12.1"
-  - name: ONTAP
+  - version-number: "9.11.1"
     url: /ontap-restapi-9111
-    version-number: "9.11.1"
-  - name: ONTAP
+  - version-number: "9.10.1"
     url: /ontap-restapi-9101
-    version-number: "9.10.1"
-  - name: ONTAP
-    url: /ontap-restapi-98 
-    version-number: "9.8"
-  - name: ONTAP
+  - version-number: "9.8"
+    url: /ontap-restapi-98
+  - version-number: "9.7"
     url: /ontap-restapi-97 
-    version-number: "9.7"
-  - name: ONTAP
-    url: /ontap-restapi-96 
-    version-number: "9.6"    
+  - version-number: "9.6"
+    url: /ontap-restapi-96   
 
 sidebar: 
   entries:
@@ -53,6 +47,8 @@ homepage:
   tiles:
     - title: REST API docs for other ONTAP releases 
       links:
+      - title: ONTAP 9.14.1
+        url: https://docs.netapp.com/us-en/ontap-restapi-9141/index.html
       - title: ONTAP 9.13.1
         url: https://docs.netapp.com/us-en/ontap-restapi-9131/index.html
       - title: ONTAP 9.12.1
