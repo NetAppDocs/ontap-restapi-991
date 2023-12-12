@@ -217,6 +217,7 @@ paths:
         title: Retrieve history details for firmware update requests
         category: cluster
         filename: get-cluster-firmware-history.html
+        subcategory: Manage cluster firmware history
         explorer: false
   "/cluster/jobs":
     get:
@@ -918,7 +919,7 @@ paths:
   "/name-services/unix-groups/{svm.uuid}/{unix_group.name}/users":
     post:
       x-doc:
-        title: Adds users to a UNIX group and SVM
+        title: Add users to a UNIX group and SVM
         category: name-services
         filename: post-name-services-unix-groups--users.html
         subcategory: Manage UNIX group users
@@ -3783,7 +3784,7 @@ paths:
   "/security/ssh":
     get:
       x-doc:
-        title: Retrieve cluster SSH server ciphers, mac algorithms, key exchange algorithms, and connection limits
+        title: Retrieve cluster SSH server ciphers, MAC algorithms, key exchange algorithms, and connection limits
         category: security
         filename: get-security-ssh.html
         subcategory: Manage SSH server
