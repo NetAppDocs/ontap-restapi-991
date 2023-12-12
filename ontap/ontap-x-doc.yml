@@ -4106,7 +4106,7 @@ paths:
   "/storage/flexcache/origins":
     get:
       x-doc:
-        title: Retrieve the origin of a FlexCache in the cluster
+        title: Retrieve the origin of a FlexCache volume in the cluster
         category: storage
         filename: get-storage-flexcache-origins.html
         subcategory: Manage storage FlexCache origin volumes
@@ -4114,7 +4114,7 @@ paths:
   "/storage/flexcache/origins/{uuid}":
     get:
       x-doc:
-        title: Retrieve attributes of the origin of a FlexCache in the cluster
+        title: Retrieve attributes of the origin of a FlexCache volume in the cluster
         category: storage
         filename: get-storage-flexcache-origins-.html
         subcategory: Manage storage FlexCache origin volumes
@@ -4379,7 +4379,7 @@ paths:
   "/storage/snaplock/audit-logs":
     get:
       x-doc:
-        title: Retrieve SVM configured with audit log volumes
+        title: Retrieve an SVM configured with audit log volumes
         category: snaplock
         filename: get-storage-snaplock-audit-logs.html
         subcategory: Manage SnapLock audit logs
