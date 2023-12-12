@@ -176,14 +176,14 @@ paths:
   "/cluster":
     get:
       x-doc:
-        title: Retrieve a cluster configuration
+        title: Retrieve the cluster configuration
         category: cluster
         filename: get-cluster.html
         subcategory: Manage clusters
         explorer: false
     patch:
       x-doc:
-        title: Update a cluster configuration 
+        title: Update the cluster configuration 
         category: cluster
         filename: patch-cluster.html
         subcategory: Manage clusters
@@ -336,7 +336,7 @@ paths:
         explorer: false
     get:
       x-doc:
-        title: Retrieve ONTAP Mediator state and configuration
+        title: Retrieve the ONTAP Mediator state and configuration
         category: cluster
         filename: get-cluster-mediators-.html
         subcategory: Manage cluster mediators
@@ -1667,7 +1667,7 @@ paths:
   "/protocols/cifs/unix-symlink-mapping":
     get:
       x-doc:
-        title: Retrieve UNIX symbolic link mappings for CIFS clients
+        title: Retrieve a UNIX symbolic link mappings for CIFS clients
         category: NAS
         filename: get-protocols-cifs-unix-symlink-mapping.html
         subcategory: Manage CIFS UNIX symlink mapping
@@ -1682,7 +1682,7 @@ paths:
   "/protocols/cifs/unix-symlink-mapping/{svm.uuid}/{unix_path}":
     delete:
       x-doc:
-        title: Delete UNIX symbolic link mapping for CIFS clients
+        title: Delete a UNIX symbolic link mapping for CIFS clients
         category: NAS
         filename: delete-protocols-cifs-unix-symlink-mapping-.html
         subcategory: Manage CIFS UNIX symlink mapping
@@ -1696,7 +1696,7 @@ paths:
         explorer: false
     patch:
       x-doc:
-        title: Update UNIX symbolic link mapping for CIFS clients
+        title: Update a UNIX symbolic link mapping for CIFS clients
         category: NAS
         filename: patch-protocols-cifs-unix-symlink-mapping-.html
         subcategory: Manage CIFS UNIX symlink mapping
@@ -1720,7 +1720,7 @@ paths:
         explorer: false
     patch:
       x-doc:
-        title: Update SD information
+        title: Update the SD information
         category: NAS
         filename: patch-protocols-file-security-permissions-.html
         subcategory: Manage file security permissions and audit policies
@@ -4007,7 +4007,7 @@ paths:
         title: Retrieve a collection of bridges
         category: storage
         filename: get-storage-bridges.html
-        subcategory: Manage bridges
+        subcategory: Manage storage bridges
         explorer: false
   "/storage/bridges/{wwn}":
     get:
@@ -4015,7 +4015,7 @@ paths:
         title: Retrieve a specific bridge
         category: storage
         filename: get-storage-bridges-.html
-        subcategory: Manage bridges
+        subcategory: Manage storage bridges
         explorer: false
   "/storage/cluster":
     get:
@@ -4023,7 +4023,7 @@ paths:
         title: Report cluster-wide storage details across different tiers
         category: storage
         filename: get-storage-cluster.html
-        subcategory: Manage bridges
+        subcategory: Manage storage bridges
         explorer: false
   "/storage/disks":
     get:
@@ -4121,7 +4121,7 @@ paths:
         explorer: false
     patch:
       x-doc:
-        title: Modify origin options for an origin volume in the cluster
+        title: Modify origin options for a FlexCache origin volume in the cluster
         category: storage
         filename: patch-storage-flexcache-origins-.html
         subcategory: Manage storage FlexCache origin volumes
@@ -4616,14 +4616,14 @@ paths:
         title: Retrieve Snapshot copy policies
         category: storage
         filename: get-storage-snapshot-policies.html
-        subcategory: Create and retrieve Snapshot copy policies
+        subcategory: Manage Snapshot copy policies 
         explorer: false
     post:
       x-doc:
         title: Create a Snapshot copy policy
         category: storage
         filename: post-storage-snapshot-policies.html
-        subcategory: Create and retrieve Snapshot copy policies
+        subcategory: Manage Snapshot copy policies 
         explorer: false
   "/storage/snapshot-policies/{snapshot_policy.uuid}/schedules":
     get:
@@ -4668,21 +4668,21 @@ paths:
         title: Delete a Snapshot copy policy
         category: storage
         filename: delete-storage-snapshot-policies-.html
-        subcategory: Manage Snapshot copy policies and schedules
+        subcategory: Manage Snapshot copy policies 
         explorer: false
     get:
       x-doc:
         title: Retrieve Snapshot copy policy details
         category: storage
         filename: get-storage-snapshot-policies-.html
-        subcategory: Manage Snapshot copy policies and schedules
+        subcategory: Manage Snapshot copy policies 
         explorer: false
     patch:
       x-doc:
         title: Update a Snapshot copy policy
         category: storage
         filename: patch-storage-snapshot-policies-.html
-        subcategory: Manage Snapshot copy policies and schedules
+        subcategory: Manage Snapshot copy policies 
         explorer: false
   "/storage/switches":
     get:
