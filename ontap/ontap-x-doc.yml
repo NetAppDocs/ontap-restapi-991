@@ -1667,7 +1667,7 @@ paths:
   "/protocols/cifs/unix-symlink-mapping":
     get:
       x-doc:
-        title: Retrieve a UNIX symbolic link mappings for CIFS clients
+        title: Retrieve UNIX symbolic link mappings for CIFS clients
         category: NAS
         filename: get-protocols-cifs-unix-symlink-mapping.html
         subcategory: Manage CIFS UNIX symlink mapping
