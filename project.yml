@@ -2,6 +2,7 @@ settings:
   name: ONTAP 9.9.1 REST API Documentation 
   github_edit: false
   github_issue: false
+  downlevel: true
   internal:
     pdf_enabled: true
     avatars_enabled: false
