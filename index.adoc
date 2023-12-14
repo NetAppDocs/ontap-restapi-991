@@ -7,7 +7,7 @@ lead: 'The ONTAP 9.9.1 REST API documentation provides details about and paramet
 summary: 'The ONTAP 9.9.1 REST API documentation provides details about and parameter and response information for each ONTAP call. See the Overview page to get started.'
 ---
 
-= ONTAP 9.9.1 REST API documentation 
+= ONTAP 9.9.1 REST API reference 
 :hardbreaks:
 :nofooter:
 :icons: font
