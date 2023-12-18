@@ -126,7 +126,6 @@ paths:
         title: Retrieve application templates
         category: application
         filename: get-application-templates.html
-        subcategory: View application templates
         explorer: false
   "/application/templates/{name}":
     get:
@@ -134,7 +133,6 @@ paths:
         title: Retrieve an application template
         category: application
         filename: get-application-templates-.html
-        subcategory: View application templates
         explorer: false
   "/cloud/targets":
     get:
@@ -3489,14 +3487,14 @@ paths:
         title: Retrieve Google Cloud KMS configurations for all clusters and SVMs
         category: security
         filename: get-security-gcp-kms.html
-        subcategory: Manage GCP KMS
+        subcategory: Manage Google Cloud KMS
         explorer: false
     post:
       x-doc:
         title: Create Google Cloud KMS configuration for an SVM
         category: security
         filename: post-security-gcp-kms.html
-        subcategory: Manage GCP KMS
+        subcategory: Manage Google Cloud KMS
         explorer: false
   "/security/gcp-kms/{uuid}":
     delete:
@@ -3504,21 +3502,21 @@ paths:
         title: Delete a Google Cloud KMS configuration
         category: security
         filename: delete-security-gcp-kms-.html
-        subcategory: Manage GCP KMS
+        subcategory: Manage Google Cloud KMS
         explorer: false
     get:
       x-doc:
         title: Retrieve the Google Cloud KMS configuration
         category: security
         filename: get-security-gcp-kms-.html
-        subcategory: Manage GCP KMS
+        subcategory: Manage Google Cloud KMS
         explorer: false
     patch:
       x-doc:
         title: Update the Google Cloud KMS configuration
         category: security
         filename: patch-security-gcp-kms-.html
-        subcategory: Manage GCP KMS
+        subcategory: Manage Google Cloud KMS
         explorer: false
   "/security/gcp-kms/{gcp_kms.uuid}/rekey-internal":
     post:
@@ -3526,7 +3524,7 @@ paths:
         title: Re-key the internal key in the key hierarchy for an SVM
         category: security
         filename: post-security-gcp-kms-rekey-internal.html
-        subcategory: Manage GCP KMS
+        subcategory: Manage Google Cloud KMS
         explorer: false
   "/security/gcp-kms/{gcp_kms.uuid}/restore":
     post:
@@ -3534,7 +3532,7 @@ paths:
         title: Restore keys for an SVM from a Google Cloud KMS
         category: security
         filename: post-security-gcp-kms-restore.html
-        subcategory: Manage GCP KMS
+        subcategory: Manage Google Cloud KMS
         explorer: false
   "/security/ipsec":
     get:
@@ -3661,7 +3659,6 @@ paths:
         title: List key servers configured in an external key manager
         category: security
         filename: get-security-key-managers-key-servers.html
-        subcategory: Manage security key managers
         explorer: false
     post:
       x-doc:
