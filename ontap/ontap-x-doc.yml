@@ -126,7 +126,6 @@ paths:
         title: Retrieve application templates
         category: application
         filename: get-application-templates.html
-        subcategory: View application templates
         explorer: false
   "/application/templates/{name}":
     get:
@@ -134,7 +133,6 @@ paths:
         title: Retrieve an application template
         category: application
         filename: get-application-templates-.html
-        subcategory: View application templates
         explorer: false
   "/cloud/targets":
     get:
@@ -3661,7 +3659,6 @@ paths:
         title: List key servers configured in an external key manager
         category: security
         filename: get-security-key-managers-key-servers.html
-        subcategory: Manage security key managers
         explorer: false
     post:
       x-doc:
