@@ -1,5 +1,5 @@
 settings:
-  name: ONTAP 9.9.1 REST API reference 
+  name: ONTAP REST API reference 
   github_edit: false
   downlevel: true
   internal:
@@ -18,8 +18,10 @@ settings:
   - version-number: "9.9.1"
     url: /ontap-restapi-991
   # Additional Releases
-  - version-number: "9.15.1"
+  - version-number: "9.16.1"
     url: /ontap-restapi
+  - version-number: "9.15.1"
+    url: /ontap-restapi-9151    
   - version-number: "9.14.1"
     url: /ontap-restapi-9141
   - version-number: "9.13.1"
@@ -39,7 +41,7 @@ settings:
 
 sidebar: 
   entries:
-    - title: ONTAP 9.9.1 REST API docs 
+    - title: ONTAP 9.9.1 REST API reference  
       url: /index.html
     - section: ontap
     - title: Legal notices
