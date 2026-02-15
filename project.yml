@@ -18,8 +18,10 @@ settings:
   - version-number: "9.9.1"
     url: /ontap-restapi-991
   # Additional Releases
-  - version-number: "9.17.1"
+  - version-number: "9.18.1"
     url: /ontap-restapi
+  - version-number: "9.17.1"
+    url: /ontap-restapi-9171
   - version-number: "9.16.1"
     url: /ontap-restapi-9161
   - version-number: "9.15.1"
@@ -33,13 +35,7 @@ settings:
   - version-number: "9.11.1"
     url: /ontap-restapi-9111
   - version-number: "9.10.1"
-    url: /ontap-restapi-9101
-  - version-number: "9.8"
-    url: /ontap-restapi-98
-  - version-number: "9.7"
-    url: /ontap-restapi-97 
-  - version-number: "9.6"
-    url: /ontap-restapi-96   
+    url: /ontap-restapi-9101 
 
 sidebar: 
   entries:
