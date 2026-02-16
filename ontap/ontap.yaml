@@ -73408,7 +73408,7 @@ paths:
         :\"user3\"}]}'\n```\n## Deleting a user from a group of a specific SVM\n##\
         \ Example\n### Delete the user 'user1' from group 'group1' in SVM 'vs1'\n\
         ```\n# The API:\n/api/name-services/unix-groups/{svm.uuid}/{unix_group.name}/users/{name}\n\
-        # The call:\n"
+        # The call:\n```\n"
       tags:
       - name-services
   /name-services/unix-groups/{svm.uuid}/{unix_group.name}/users/{name}:
