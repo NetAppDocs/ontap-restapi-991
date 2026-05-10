@@ -1,0 +1,340 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-security-roles.html'
+summary: 'Create a new cluster-scoped or SVM-scoped role'
+---
+
+= Create a new cluster-scoped or SVM-scoped role
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/roles`#
+
+*Introduced In:* 9.6
+
+Creates a new cluster-scoped role or an SVM-scoped role. For an SVM-scoped role, specify either the SVM name as the owner.name or SVM UUID as the owner.uuid in the request body along with other parameters for the role. The owner.uuid or owner.name are not required to be specified for a cluster-scoped role.
+
+== Required parameters
+
+* `name` - Name of the role to be created.
+* `privileges` - Array of privilege tuples. Each tuple consists of a REST API path and its desired access level.
+
+== Optional parameters
+
+* `owner.name` or `owner.uuid`  - Name or UUID of the SVM for an SVM-scoped role.
+
+== Related ONTAP commands
+
+* `security login rest-role create`
+
+== Learn more
+
+* link:manage_security_roles.html[DOC /security/roles]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|builtin
+|boolean
+a|Indicates if this is a built-in (pre-defined) role which cannot be modified or deleted.
+
+
+|name
+|string
+a|Role name
+
+
+|owner
+|link:#owner[owner]
+a|Owner name and UUID that uniquely identifies the role.
+
+
+|privileges
+|array[link:#role_privilege[role_privilege]]
+a|The list of privileges that this role has been granted.
+
+
+|scope
+|string
+a|Scope of the entity. Set to "cluster" for cluster owned objects and to "svm" for SVM owned objects.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "name": "admin",
+  "owner": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "privileges": [
+    {
+      "access": "readonly",
+      "path": "/api/storage/volumes"
+    }
+  ],
+  "scope": "string"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 2621462
+| The supplied SVM does not exist.
+
+| 5636129
+| Role with given name has not been defined.
+
+| 5636143
+| Vserver admin cannot use the API with this access level.
+
+| 5636144
+| Invalid value specified for access level.
+
+| 5636169
+| Invalid character in URI.
+
+| 5636170
+| URI does not exist.
+
+| 5636171
+| Role already exists in legacy role table.
+
+| 13434890
+| Vserver-ID failed for Vserver roles.
+
+| 13434891
+| UUID lookup failed for Vserver roles.
+
+| 13434892
+| Roles is a required field.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#owner]
+[.api-collapsible-fifth-title]
+owner
+
+Owner name and UUID that uniquely identifies the role.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#role_privilege]
+[.api-collapsible-fifth-title]
+role_privilege
+
+A tuple containing the REST endpoint and the access level assigned to that endpoint.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|access
+|string
+a|Access level for the REST endpoint.
+
+
+|path
+|string
+a|REST URI/endpoint
+
+
+|===
+
+
+[#role]
+[.api-collapsible-fifth-title]
+role
+
+A named set of privileges that defines the rights an account has when it is assigned the role.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|builtin
+|boolean
+a|Indicates if this is a built-in (pre-defined) role which cannot be modified or deleted.
+
+
+|name
+|string
+a|Role name
+
+
+|owner
+|link:#owner[owner]
+a|Owner name and UUID that uniquely identifies the role.
+
+
+|privileges
+|array[link:#role_privilege[role_privilege]]
+a|The list of privileges that this role has been granted.
+
+
+|scope
+|string
+a|Scope of the entity. Set to "cluster" for cluster owned objects and to "svm" for SVM owned objects.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

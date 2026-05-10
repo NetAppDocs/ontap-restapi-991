@@ -1,0 +1,1283 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-storage-shelves.html'
+summary: 'Retrieve shelves'
+---
+
+= Retrieve shelves
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/shelves`#
+
+*Introduced In:* 9.6
+
+Retrieves a collection of shelves.
+
+== Related ONTAP commands
+
+* `storage shelf show`
+* `storage shelf port show`
+* `storage shelf drawer show`
+
+== Learn more
+
+* link:manage_shelves.html[DOC /storage/shelves]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uid
+|string
+|query
+|False
+a|Filter by uid
+
+
+|paths.name
+|string
+|query
+|False
+a|Filter by paths.name
+
+
+|paths.node.name
+|string
+|query
+|False
+a|Filter by paths.node.name
+
+
+|paths.node.uuid
+|string
+|query
+|False
+a|Filter by paths.node.uuid
+
+
+|disk_count
+|integer
+|query
+|False
+a|Filter by disk_count
+
+
+|connection_type
+|string
+|query
+|False
+a|Filter by connection_type
+
+
+|vendor.product
+|string
+|query
+|False
+a|Filter by vendor.product
+
+* Introduced in: 9.8
+
+
+|vendor.part_number
+|string
+|query
+|False
+a|Filter by vendor.part_number
+
+* Introduced in: 9.8
+
+
+|vendor.manufacturer
+|string
+|query
+|False
+a|Filter by vendor.manufacturer
+
+* Introduced in: 9.8
+
+
+|vendor.serial_number
+|string
+|query
+|False
+a|Filter by vendor.serial_number
+
+* Introduced in: 9.8
+
+
+|errors.reason.code
+|string
+|query
+|False
+a|Filter by errors.reason.code
+
+* Introduced in: 9.9
+
+
+|errors.reason.message
+|string
+|query
+|False
+a|Filter by errors.reason.message
+
+* Introduced in: 9.9
+
+
+|model
+|string
+|query
+|False
+a|Filter by model
+
+
+|ports.internal
+|boolean
+|query
+|False
+a|Filter by ports.internal
+
+
+|ports.mac_address
+|string
+|query
+|False
+a|Filter by ports.mac_address
+
+
+|ports.designator
+|string
+|query
+|False
+a|Filter by ports.designator
+
+
+|ports.state
+|string
+|query
+|False
+a|Filter by ports.state
+
+
+|ports.remote.port
+|string
+|query
+|False
+a|Filter by ports.remote.port
+
+
+|ports.remote.phy
+|string
+|query
+|False
+a|Filter by ports.remote.phy
+
+
+|ports.remote.device
+|string
+|query
+|False
+a|Filter by ports.remote.device
+
+* Introduced in: 9.8
+
+
+|ports.remote.wwn
+|string
+|query
+|False
+a|Filter by ports.remote.wwn
+
+
+|ports.remote.mac_address
+|string
+|query
+|False
+a|Filter by ports.remote.mac_address
+
+
+|ports.remote.chassis
+|string
+|query
+|False
+a|Filter by ports.remote.chassis
+
+
+|ports.id
+|integer
+|query
+|False
+a|Filter by ports.id
+
+
+|ports.wwn
+|string
+|query
+|False
+a|Filter by ports.wwn
+
+
+|ports.cable.identifier
+|string
+|query
+|False
+a|Filter by ports.cable.identifier
+
+
+|ports.cable.serial_number
+|string
+|query
+|False
+a|Filter by ports.cable.serial_number
+
+
+|ports.cable.part_number
+|string
+|query
+|False
+a|Filter by ports.cable.part_number
+
+
+|ports.cable.length
+|string
+|query
+|False
+a|Filter by ports.cable.length
+
+
+|ports.module_id
+|string
+|query
+|False
+a|Filter by ports.module_id
+
+
+|bays.has_disk
+|boolean
+|query
+|False
+a|Filter by bays.has_disk
+
+
+|bays.state
+|string
+|query
+|False
+a|Filter by bays.state
+
+
+|bays.id
+|integer
+|query
+|False
+a|Filter by bays.id
+
+
+|bays.type
+|string
+|query
+|False
+a|Filter by bays.type
+
+
+|fans.location
+|string
+|query
+|False
+a|Filter by fans.location
+
+* Introduced in: 9.9
+
+
+|fans.state
+|string
+|query
+|False
+a|Filter by fans.state
+
+* Introduced in: 9.9
+
+
+|fans.rpm
+|integer
+|query
+|False
+a|Filter by fans.rpm
+
+* Introduced in: 9.9
+
+
+|fans.id
+|integer
+|query
+|False
+a|Filter by fans.id
+
+* Introduced in: 9.9
+
+
+|name
+|string
+|query
+|False
+a|Filter by name
+
+
+|internal
+|boolean
+|query
+|False
+a|Filter by internal
+
+
+|frus.serial_number
+|string
+|query
+|False
+a|Filter by frus.serial_number
+
+
+|frus.state
+|string
+|query
+|False
+a|Filter by frus.state
+
+
+|frus.part_number
+|string
+|query
+|False
+a|Filter by frus.part_number
+
+
+|frus.type
+|string
+|query
+|False
+a|Filter by frus.type
+
+
+|frus.id
+|integer
+|query
+|False
+a|Filter by frus.id
+
+
+|frus.firmware_version
+|string
+|query
+|False
+a|Filter by frus.firmware_version
+
+
+|module_type
+|string
+|query
+|False
+a|Filter by module_type
+
+
+|local
+|boolean
+|query
+|False
+a|Filter by local
+
+* Introduced in: 9.8
+
+
+|drawers.closed
+|boolean
+|query
+|False
+a|Filter by drawers.closed
+
+
+|drawers.error
+|string
+|query
+|False
+a|Filter by drawers.error
+
+
+|drawers.part_number
+|string
+|query
+|False
+a|Filter by drawers.part_number
+
+
+|drawers.id
+|integer
+|query
+|False
+a|Filter by drawers.id
+
+
+|drawers.disk_count
+|integer
+|query
+|False
+a|Filter by drawers.disk_count
+
+
+|drawers.serial_number
+|string
+|query
+|False
+a|Filter by drawers.serial_number
+
+
+|drawers.state
+|string
+|query
+|False
+a|Filter by drawers.state
+
+
+|id
+|string
+|query
+|False
+a|Filter by id
+
+
+|state
+|string
+|query
+|False
+a|Filter by state
+
+
+|serial_number
+|string
+|query
+|False
+a|Filter by serial_number
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+
+|max_records
+|integer
+|query
+|False
+a|Limit the number of records returned.
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is true for GET calls.  When set to false, only the number of records is returned.
+
+* Default value: 1
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning.  When iterating over a collection, the default is 15 seconds.  ONTAP returns earlier if either max records or the end of the collection is reached.
+
+* Default value: 15
+* Max value: 120
+* Min value: 0
+
+
+|order_by
+|array[string]
+|query
+|False
+a|Order results by specified fields and optional [asc|desc] direction. Default direction is 'asc' for ascending.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#shelf[shelf]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "next": {
+      "href": "/api/resourcelink"
+    },
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "records": [
+    {
+      "bays": [
+        {
+          "id": "0",
+          "state": "ok",
+          "type": "single_disk"
+        }
+      ],
+      "connection_type": "sas",
+      "disk_count": "12",
+      "drawers": [
+        {
+          "disk_count": "12",
+          "error": "string",
+          "part_number": "111-03071",
+          "serial_number": "021604008263",
+          "state": "ok"
+        }
+      ],
+      "errors": [
+        {
+          "reason": {
+            "code": "string",
+            "message": "string"
+          }
+        }
+      ],
+      "fans": [
+        {
+          "id": "1",
+          "location": "rear of the shelf on the lower left power supply",
+          "rpm": "3020",
+          "state": "ok"
+        }
+      ],
+      "frus": [
+        {
+          "firmware_version": "0191",
+          "part_number": "111-00690+A2",
+          "serial_number": "8000166294",
+          "state": "error",
+          "type": "module"
+        }
+      ],
+      "id": "1",
+      "model": "DS2246",
+      "module_type": "iom6",
+      "name": "1.1",
+      "paths": [
+        {
+          "_links": {
+            "self": {
+              "href": "/api/resourcelink"
+            }
+          },
+          "name": "2a",
+          "node": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "node1",
+            "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+          }
+        }
+      ],
+      "ports": [
+        {
+          "cable": {
+            "identifier": "500a0980000b6c3f-50000d1703544b80",
+            "length": "2m",
+            "part_number": "112-00431+A0",
+            "serial_number": "616930439"
+          },
+          "designator": "square",
+          "id": "0",
+          "mac_address": "string",
+          "module_id": "a",
+          "remote": {
+            "chassis": "string",
+            "device": "string",
+            "mac_address": "string",
+            "phy": "12",
+            "port": "string",
+            "wwn": "50000D1703544B80"
+          },
+          "state": "connected",
+          "wwn": "500A0980000B6C3F"
+        }
+      ],
+      "serial_number": "SHFMS1514000895",
+      "state": "ok",
+      "uid": "7777841915827391056",
+      "vendor": {
+        "manufacturer": "XYZ",
+        "part_number": "A92831142733",
+        "product": "LS2246",
+        "serial_number": "891234572210221"
+      }
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|next
+|link:#href[href]
+a|
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#bays]
+[.api-collapsible-fifth-title]
+bays
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|has_disk
+|boolean
+a|
+
+|id
+|integer
+a|
+
+|state
+|string
+a|
+
+|type
+|string
+a|
+
+|===
+
+
+[#drawers]
+[.api-collapsible-fifth-title]
+drawers
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|closed
+|boolean
+a|
+
+|disk_count
+|integer
+a|
+
+|error
+|string
+a|
+
+|id
+|integer
+a|
+
+|part_number
+|string
+a|
+
+|serial_number
+|string
+a|
+
+|state
+|string
+a|
+
+|===
+
+
+[#reason]
+[.api-collapsible-fifth-title]
+reason
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|===
+
+
+[#errors]
+[.api-collapsible-fifth-title]
+errors
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|reason
+|link:#reason[reason]
+a|
+
+|===
+
+
+[#fans]
+[.api-collapsible-fifth-title]
+fans
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|id
+|integer
+a|
+
+|location
+|string
+a|
+
+|rpm
+|integer
+a|
+
+|state
+|string
+a|
+
+|===
+
+
+[#frus]
+[.api-collapsible-fifth-title]
+frus
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|firmware_version
+|string
+a|
+
+|id
+|integer
+a|
+
+|part_number
+|string
+a|
+
+|serial_number
+|string
+a|
+
+|state
+|string
+a|
+
+|type
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#node]
+[.api-collapsible-fifth-title]
+node
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#paths]
+[.api-collapsible-fifth-title]
+paths
+
+Storage port
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|node
+|link:#node[node]
+a|
+
+|===
+
+
+[#cable]
+[.api-collapsible-fifth-title]
+cable
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|identifier
+|string
+a|
+
+|length
+|string
+a|
+
+|part_number
+|string
+a|
+
+|serial_number
+|string
+a|
+
+|===
+
+
+[#remote]
+[.api-collapsible-fifth-title]
+remote
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|chassis
+|string
+a|
+
+|device
+|string
+a|
+
+|mac_address
+|string
+a|
+
+|phy
+|string
+a|
+
+|port
+|string
+a|
+
+|wwn
+|string
+a|
+
+|===
+
+
+[#ports]
+[.api-collapsible-fifth-title]
+ports
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|cable
+|link:#cable[cable]
+a|
+
+|designator
+|string
+a|
+
+|id
+|integer
+a|
+
+|internal
+|boolean
+a|
+
+|mac_address
+|string
+a|
+
+|module_id
+|string
+a|
+
+|remote
+|link:#remote[remote]
+a|
+
+|state
+|string
+a|
+
+|wwn
+|string
+a|
+
+|===
+
+
+[#vendor]
+[.api-collapsible-fifth-title]
+vendor
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|manufacturer
+|string
+a|Manufacturer name
+
+
+|part_number
+|string
+a|Part number
+
+
+|product
+|string
+a|Product name
+
+
+|serial_number
+|string
+a|Serial number
+
+
+|===
+
+
+[#shelf]
+[.api-collapsible-fifth-title]
+shelf
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|bays
+|array[link:#bays[bays]]
+a|
+
+|connection_type
+|string
+a|
+
+|disk_count
+|integer
+a|
+
+|drawers
+|array[link:#drawers[drawers]]
+a|
+
+|errors
+|array[link:#errors[errors]]
+a|
+
+|fans
+|array[link:#fans[fans]]
+a|
+
+|frus
+|array[link:#frus[frus]]
+a|
+
+|id
+|string
+a|
+
+|internal
+|boolean
+a|
+
+|local
+|boolean
+a|
+
+|model
+|string
+a|
+
+|module_type
+|string
+a|
+
+|name
+|string
+a|
+
+|paths
+|array[link:#paths[paths]]
+a|
+
+|ports
+|array[link:#ports[ports]]
+a|
+
+|serial_number
+|string
+a|
+
+|state
+|string
+a|
+
+|uid
+|string
+a|
+
+|vendor
+|link:#vendor[vendor]
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

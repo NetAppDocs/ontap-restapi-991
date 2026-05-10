@@ -1,0 +1,18 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'view_ipsec_security_associations.html'
+summary: 'View IPsec security associations'
+---
+
+= View IPsec security associations
+
+
+
+== Overview
+
+* Collection Get: GET security/ipsec/security-associations
+* Instance Get: GET security/ipsec/security-associations/uuid
+
+

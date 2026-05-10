@@ -1,0 +1,211 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-security-roles--privileges-.html'
+summary: 'Update the access level for a REST API path or command/command directory path'
+---
+
+= Update the access level for a REST API path or command/command directory path
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/roles/{owner.uuid}/{name}/privileges/{path}`#
+
+*Introduced In:* 9.6
+
+Updates the privilege level for a REST API path.
+
+== Required parameters
+
+* `owner.uuid` - UUID of the SVM that houses this role.
+* `name` - Name of the role to be updated.
+* `path` - Constituent REST API path whose access level has to be updated.
+* `access` - Access level for the path (one of "all", "readonly", or "none")
+
+== Related ONTAP commands
+
+* `security login rest-role modify`
+
+== Learn more
+
+* link:manage_role_privilege_path.html[DOC /security/roles/{owner.uuid}/\{name}/privileges/\{path}]
+* link:manage_security_roles.html[DOC /security/roles]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|owner.uuid
+|string
+|path
+|True
+a|Role owner UUID
+
+
+|name
+|string
+|path
+|True
+a|Role name
+
+
+|path
+|string
+|path
+|True
+a|REST API path
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|access
+|string
+a|Access level for the REST endpoint.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "access": "readonly"
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default, Error
+```
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#role_privilege]
+[.api-collapsible-fifth-title]
+role_privilege
+
+A tuple containing the REST endpoint and the access level assigned to that endpoint.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|access
+|string
+a|Access level for the REST endpoint.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

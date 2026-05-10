@@ -1,0 +1,378 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-protocols-nfs-export-policies-.html'
+summary: 'Update export policy properties'
+---
+
+= Update export policy properties
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/nfs/export-policies/{id}`#
+
+*Introduced In:* 9.6
+
+Updates the properties of an export policy to change an export policy name or replace all export policy rules.
+
+== Related ONTAP commands
+
+* `vserver export-policy rename`
+* `vserver export-policy rule delete`
+* `vserver export-policy rule create`
+
+== Learn more
+
+* link:manage_nfs_export_policies.html[DOC /protocols/nfs/export-policies]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|id
+|integer
+|path
+|True
+a|Export Policy ID
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|id
+|integer
+a|Export Policy ID
+
+
+|name
+|string
+a|Export Policy Name
+
+
+|rules
+|array[link:#export_rule[export_rule]]
+a|Rules of the Export Policy.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "id": 0,
+  "name": "string",
+  "rules": [
+    {
+      "anonymous_user": "string",
+      "chown_mode": "string",
+      "clients": [
+        {
+          "match": "0.0.0.0/0"
+        }
+      ],
+      "index": 0,
+      "ntfs_unix_security": "string",
+      "protocols": [
+        "string"
+      ],
+      "ro_rule": [
+        "string"
+      ],
+      "rw_rule": [
+        "string"
+      ],
+      "superuser": [
+        "string"
+      ]
+    }
+  ],
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  }
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 1703950
+| Failed to rename ruleset
+
+| 1703952
+| Invalid ruleset name provided. No spaces are allowed in a ruleset name
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#export_client]
+[.api-collapsible-fifth-title]
+export_client
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|match
+|string
+a|Client Match Hostname, IP Address, Netgroup, or Domain.
+You can specify the match as a string value in any of the
+following formats:
+
+* As a hostname; for instance, host1
+* As an IPv4 address; for instance, 10.1.12.24
+* As an IPv6 address; for instance, fd20:8b1e:b255:4071::100:1
+* As an IPv4 address with a subnet mask expressed as a number of bits; for instance, 10.1.12.0/24
+* As an IPv6 address with a subnet mask expressed as a number of bits; for instance, fd20:8b1e:b255:4071::/64
+* As an IPv4 address with a network mask; for instance, 10.1.16.0/255.255.255.0
+* As a netgroup, with the netgroup name preceded by the @ character; for instance, @eng
+* As a domain name preceded by the . character; for instance, .example.com
+
+
+|===
+
+
+[#export_rule]
+[.api-collapsible-fifth-title]
+export_rule
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|allow_device_creation
+|boolean
+a|Specifies whether or not device creation is allowed.
+
+
+|allow_suid
+|boolean
+a|Specifies whether or not SetUID bits in SETATTR Op is to be honored.
+
+
+|anonymous_user
+|string
+a|User ID To Which Anonymous Users Are Mapped.
+
+
+|chown_mode
+|string
+a|Specifies who is authorized to change the ownership mode of a file.
+
+
+|clients
+|array[link:#export_client[export_client]]
+a|Array of client matches
+
+
+|index
+|integer
+a|Index of the rule within the export policy.
+
+
+|ntfs_unix_security
+|string
+a|NTFS export UNIX security options.
+
+
+|protocols
+|array[string]
+a|
+
+|ro_rule
+|array[string]
+a|Authentication flavors that the read-only access rule governs
+
+
+|rw_rule
+|array[string]
+a|Authentication flavors that the read/write access rule governs
+
+
+|superuser
+|array[string]
+a|Authentication flavors that the superuser security type governs
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#export_policy]
+[.api-collapsible-fifth-title]
+export_policy
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|id
+|integer
+a|Export Policy ID
+
+
+|name
+|string
+a|Export Policy Name
+
+
+|rules
+|array[link:#export_rule[export_rule]]
+a|Rules of the Export Policy.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

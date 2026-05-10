@@ -1,0 +1,282 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-security-key-managers-key-servers-.html'
+summary: 'Update a primary key server'
+---
+
+= Update a primary key server
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/key-managers/{uuid}/key-servers/{server}`#
+
+*Introduced In:* 9.6
+
+Updates a key server.
+
+== Related ONTAP commands
+
+* `security key-manager external modify-server`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|External key manager UUID
+
+
+|server
+|string
+|path
+|True
+a|Key server configured in the external key manager.
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|password
+|string
+a|Password credentials for connecting with the key server. This is not audited.
+
+
+|secondary_key_servers
+|array[string]
+a|A list of the secondary key servers associated with the primary key server.
+
+
+|timeout
+|integer
+a|I/O timeout in seconds for communicating with the key server.
+
+
+|username
+|string
+a|KMIP username credentials for connecting with the key server.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "password": "password",
+  "secondary_key_servers": [
+    "string"
+  ],
+  "timeout": "60",
+  "username": "username"
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 65536822
+| Multitenant key management is not supported in the current cluster version.
+
+| 65536824
+| Multitenant key management is not supported in MetroCluster configurations.
+
+| 65536828
+| External key management is not enabled for the SVM.
+
+| 65536843
+| The key management server is not configured for the SVM.
+
+| 65536845
+| Missing username.
+
+| 65536846
+| Missing password.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|password
+|string
+a|Password credentials for connecting with the key server. This is not audited.
+
+
+|secondary_key_servers
+|array[string]
+a|A list of the secondary key servers associated with the primary key server.
+
+
+|timeout
+|integer
+a|I/O timeout in seconds for communicating with the key server.
+
+
+|username
+|string
+a|KMIP username credentials for connecting with the key server.
+
+
+|===
+
+
+[#key_server]
+[.api-collapsible-fifth-title]
+key_server
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|password
+|string
+a|Password credentials for connecting with the key server. This is not audited.
+
+
+|secondary_key_servers
+|array[string]
+a|A list of the secondary key servers associated with the primary key server.
+
+
+|timeout
+|integer
+a|I/O timeout in seconds for communicating with the key server.
+
+
+|username
+|string
+a|KMIP username credentials for connecting with the key server.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

@@ -1,0 +1,358 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-security-key-managers-key-servers.html'
+summary: 'Add primary key servers to an external key manager'
+---
+
+= Add primary key servers to an external key manager
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/key-managers/{uuid}/key-servers`#
+
+*Introduced In:* 9.6
+
+Adds key servers to a configured external key manager.
+
+== Required properties
+
+* `uuid` - UUID of the external key manager.
+* `server` - Key server name.
+
+== Related ONTAP commands
+
+* `security key-manager external add-servers`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|External key manager UUID
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|password
+|string
+a|Password credentials for connecting with the key server. This is not audited.
+
+
+|records
+|array[link:#records[records]]
+a|An array of key servers specified to add multiple key servers to a key manager in a single API call. Valid in POST only and not valid if `server` is provided.
+
+
+|secondary_key_servers
+|array[string]
+a|A list of the secondary key servers associated with the primary key server.
+
+
+|server
+|string
+a|External key server for key management. If no port is provided, a default port of 5696 is used. Not valid in POST if `records` is provided.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "password": "password",
+  "records": [
+    {
+      "password": "password",
+      "secondary_key_servers": [
+        "string"
+      ],
+      "server": "keyserver1.com:5698"
+    }
+  ],
+  "secondary_key_servers": [
+    "string"
+  ],
+  "server": "keyserver1.com:5698"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#key_server[key_server]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "records": [
+    {
+      "password": "password",
+      "records": [
+        {
+          "password": "password",
+          "secondary_key_servers": [
+            "string"
+          ],
+          "server": "keyserver1.com:5698"
+        }
+      ],
+      "secondary_key_servers": [
+        "string"
+      ],
+      "server": "keyserver1.com:5698"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 65536038
+| A maximum of 4 active key servers are allowed.
+
+| 65536821
+| The certificate is not installed.
+
+| 65536822
+| Multitenant key management is not supported in the current cluster version.
+
+| 65536824
+| Multitenant key management is not supported in MetroCluster configurations.
+
+| 65536828
+| External key management is not enabled for the SVM.
+
+| 65536834
+| Failed to get existing key-server details for the SVM.
+
+| 65536852
+| Failed to query supported KMIP protocol versions.
+
+| 65536870
+| Key management servers are already configured.
+
+| 65536871
+| Duplicate key management servers exist.
+
+| 65536921
+| The following issues were found. Unable to execute command on KMIP server.
+
+| 66060338
+| Unable to establish secure connection to KMIP server due to incorrect server_ca certificates.
+
+| 66060339
+| Unable to establish secure connection to KMIP server due to incorrect client certificates.
+
+| 66060340
+| Unable to establish secure connection to KMIP server due to Cryptsoft error.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|password
+|string
+a|Password credentials for connecting with the key server. This is not audited.
+
+
+|secondary_key_servers
+|array[string]
+a|A list of the secondary key servers associated with the primary key server.
+
+
+|server
+|string
+a|External key server for key management. If no port is provided, a default port of 5696 is used. Not valid in POST if `records` is provided.
+
+
+|===
+
+
+[#key_server]
+[.api-collapsible-fifth-title]
+key_server
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|password
+|string
+a|Password credentials for connecting with the key server. This is not audited.
+
+
+|records
+|array[link:#records[records]]
+a|An array of key servers specified to add multiple key servers to a key manager in a single API call. Valid in POST only and not valid if `server` is provided.
+
+
+|secondary_key_servers
+|array[string]
+a|A list of the secondary key servers associated with the primary key server.
+
+
+|server
+|string
+a|External key server for key management. If no port is provided, a default port of 5696 is used. Not valid in POST if `records` is provided.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

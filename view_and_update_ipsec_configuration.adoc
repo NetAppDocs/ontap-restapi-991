@@ -1,0 +1,20 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'view_and_update_ipsec_configuration.html'
+summary: 'View and update IPsec configuration'
+---
+
+= View and update IPsec configuration
+
+
+
+== Overview
+
+The following operations are supported:
+
+* GET to retrieve the IPsec status: GET security/ipsec
+* Patch to update IPsec status: PATCH security/ipsec
+
+

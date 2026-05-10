@@ -1,0 +1,133 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'create_or_retrieve_event_filters.html'
+summary: 'Create or retrieve event filters'
+---
+
+= Create or retrieve event filters
+
+
+
+== Overview
+
+Manages the list of available filters. A filter is a named collection of rules that enable the system to identify events that require additional handling. A filter is linked with a destination to which the system sends specific events.
+
+When EMS processes an event, each filter is evaluated for a match. More than one filter can handle a single event.
+
+=== Filter rule position
+
+A filter's rules are evaluated sequentially, according to their position index. When a rule is added or modified, the position can be set to customize the filter's logic. If no position is specified, a new rule is appended to the end of the list.
+
+=== Filter rule types
+
+A filter rule can be one of two types: 'include' or 'exclude'.
+If an event matches the criteria of the rule, the type dictates whether it should be forwarded to the destination or ignored.
+
+=== Filter rule matching criteria
+
+A valid filter rule must contain at least one set of criteria.
+
+==== Name pattern
+
+A name pattern is matched against an event's name. Multiple characters can be matched using the wildcard character '*'.
+
+==== Severity
+
+The severity pattern is matched against an event's severity. Multiple severities can be specified in a comma separated list. A single wildcard '*' will match all severities. Valid values are:
+
+* emergency
+* alert
+* error
+* notice
+* informational
+* debug
+
+==== SNMP trap type
+
+The SNMP trap type pattern is matched against an event's trap type. Multiple trap types can be specified in a comma separated list. A single wildcard '*' matches all trap types. Valid values are:
+
+* standard
+* built_in
+* severity_based
+
+== Examples
+
+=== Retrieving a list of filters whose names contain a hyphen
+
+[,json]
+----
+
+# API
+GET /api/support/ems/filters?name=*-*
+
+# Response
+200 OK
+
+# JSON Body
+{
+"records": [
+  {
+    "name": "default-trap-events",
+    "_links": {
+      "self": {
+        "href": "/api/support/ems/filters/default-trap-events"
+      }
+    }
+  },
+  {
+    "name": "important-events",
+    "_links": {
+      "self": {
+        "href": "/api/support/ems/filters/important-events"
+      }
+    }
+  },
+  {
+    "name": "no-info-debug-events",
+    "_links": {
+      "self": {
+        "href": "/api/support/ems/filters/no-info-debug-events"
+      }
+    }
+  }
+],
+"num_records": 3,
+"_links": {
+  "self": {
+    "href": "/api/support/ems/filters?name=*-*"
+  }
+}
+}
+----
+
+=== Creating a new filter using various matching criteria
+
+[,json]
+----
+
+# API
+POST /api/support/ems/filters
+
+# JSON Body
+{
+"name": "test-filter",
+"rules": [
+  {
+    "index": 1,
+    "type": "include",
+    "message_criteria": {
+      "name_pattern": "LUN.*",
+      "severities": "alert,error",
+      "snmp_trap_types": "severity_based"
+    }
+  }
+]
+}
+
+# Response
+201 Created
+----
+
+

@@ -1,0 +1,330 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-storage-file-clone.html'
+summary: 'Create a clone of the file'
+---
+
+= Create a clone of the file
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/file/clone`#
+
+*Introduced In:* 9.6
+
+Creates a clone of the file.
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning. When doing a POST, PATCH, or DELETE operation on a single record, the default is 0 seconds.  This means that if an asynchronous operation is started, the server immediately returns HTTP code 202 (Accepted) along with a link to the job.  If a non-zero value is specified for POST, PATCH, or DELETE operations, ONTAP waits that length of time to see if the job completes so it can return something other than 202.
+
+* Default value: 0
+* Max value: 120
+* Min value: 0
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|autodelete
+|boolean
+a|Mark clone file for auto deletion.
+
+
+|destination_path
+|string
+a|Relative path of the clone/destination file in the volume.
+
+
+|is_backup
+|boolean
+a|Mark clone file for backup.
+
+
+|overwrite_destination
+|boolean
+a|Destination file gets overwritten.
+
+
+|range
+|array[string]
+a|List of block ranges for sub-file cloning in the format "source-file-block-number:destination-file-block-number:block-count"
+
+
+|source_path
+|string
+a|Relative path of the source file in the volume.
+
+
+|volume
+|link:#volume[volume]
+a|
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "destination_path": "dest_file1, dir1/dest_file2",
+  "range": [
+    "10:10:5",
+    "20:20:10"
+  ],
+  "source_path": "src_file1, dir1/src_file2, ./.snapshot/snap1/src_file3",
+  "volume": {
+    "name": "volume1",
+    "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+  }
+}
+====
+
+== Response
+
+```
+Status: 202, Accepted
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|job
+|link:#job_link[job_link]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "job": {
+    "uuid": "string"
+  }
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#volume]
+[.api-collapsible-fifth-title]
+volume
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the volume.
+
+
+|uuid
+|string
+a|Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
+
+* example: 028baa66-41bd-11e9-81d5-00a0986138f7
+* Introduced in: 9.6
+
+
+|===
+
+
+[#file_clone]
+[.api-collapsible-fifth-title]
+file_clone
+
+File clone
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|autodelete
+|boolean
+a|Mark clone file for auto deletion.
+
+
+|destination_path
+|string
+a|Relative path of the clone/destination file in the volume.
+
+
+|is_backup
+|boolean
+a|Mark clone file for backup.
+
+
+|overwrite_destination
+|boolean
+a|Destination file gets overwritten.
+
+
+|range
+|array[string]
+a|List of block ranges for sub-file cloning in the format "source-file-block-number:destination-file-block-number:block-count"
+
+
+|source_path
+|string
+a|Relative path of the source file in the volume.
+
+
+|volume
+|link:#volume[volume]
+a|
+
+|===
+
+
+[#job_link]
+[.api-collapsible-fifth-title]
+job_link
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|uuid
+|string
+a|The UUID of the asynchronous job that is triggered by a POST, PATCH, or DELETE operation.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

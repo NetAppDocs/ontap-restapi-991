@@ -1,0 +1,695 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-storage-flexcache-flexcaches.html'
+summary: 'Create a FlexCache volume in the cluster'
+---
+
+= Create a FlexCache volume in the cluster
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/flexcache/flexcaches`#
+
+*Introduced In:* 9.6
+
+Creates a FlexCache in the cluster.
+
+== Required properties
+
+* `name` - Name of FlexCache volume.
+* `origins.volume.name` or `origins.volume.uuid` - Name or UUID of origin volume.
+* `origins.svm.name` - Name of origin Vserver.
+* `svm.name` or `svm.uuid` - Name or UUID of Vserver where FlexCache will be created.
+
+== Recommended optional properties
+
+* `path` - Path to mount the FlexCache volume
+* `prepopulate.dir_paths` - List of directory-paths to be prepopulated for the FlexCache volume.
+* `prepopulate.exclude_dir_paths` - List of directory-paths to be excluded from prepopulation for he FlexCache volume.
+
+== Default property values
+
+If not specified in POST, the following default property values are assigned:
+
+* `size` - 10% of origin volume size or 1GB per constituent, whichever is greater.
+* `guarantee.type` - none. FlexCache is thin provisioned by default.
+* `constituents_per_aggregate` - 4 if aggregates.name or aggregates.uuid is used.
+* `use_tiered_aggregate` - false if aggr-list is not used. This property is only used when auto-provisioning a FlexCache volume.
+* `is_disconnected_mode_off_for_locks` - false. This property specifies if the origin will honor the cache side locks when doing the lock checks in the disconnected mode.
+* `dr_cache` - false if FlexCache is not a DR cache. This property is used to create a DR FlexCache.
+* `global_file_locking_enabled` - false. This property specifies whether global file locking is enabled on the FlexCache volume.
+
+== Related ONTAP commands
+
+* `volume flexcache create`
+* `volume flexcache prepopulate start`
+
+== Learn more
+
+* link:manage_flexcache_volumes.html[DOC /storage/flexcache/flexcaches]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning. When doing a POST, PATCH, or DELETE operation on a single record, the default is 0 seconds.  This means that if an asynchronous operation is started, the server immediately returns HTTP code 202 (Accepted) along with a link to the job.  If a non-zero value is specified for POST, PATCH, or DELETE operations, ONTAP waits that length of time to see if the job completes so it can return something other than 202.
+
+* Default value: 0
+* Max value: 120
+* Min value: 0
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|aggregates
+|array[link:#aggregates[aggregates]]
+a|
+
+|constituents_per_aggregate
+|integer
+a|Number of FlexCache constituents per aggregate when the 'aggregates' field is mentioned.
+
+
+|dr_cache
+|boolean
+a|If set to true, a DR cache is created.
+
+
+|global_file_locking_enabled
+|boolean
+a|Specifies whether or not a FlexCache volume has global file locking mode enabled. Global file locking mode is a mode where protocol read locking semantics are enforced across all FlexCaches and origins of a FlexCache volume.
+
+
+|guarantee
+|link:#guarantee[guarantee]
+a|
+
+|name
+|string
+a|FlexCache name
+
+
+|origins
+|array[link:#flexcache_relationship[flexcache_relationship]]
+a|
+
+|path
+|string
+a|The fully-qualified path in the owning SVM's namespace at which the FlexCache is mounted. The path is case insensitive and must be unique within a SVM's namespace. Path must begin with '/' and must not end with '/'. Only one FlexCache be mounted at any given junction path.
+
+
+|prepopulate
+|link:#prepopulate[prepopulate]
+a|FlexCache prepopulate
+
+
+|size
+|integer
+a|Physical size of the FlexCache. The recommended size for a FlexCache is 10% of the origin volume. The minimum FlexCache constituent size is 1GB.
+
+
+|svm
+|link:#svm[svm]
+a|FlexCache SVM
+
+
+|use_tiered_aggregate
+|boolean
+a|Specifies whether or not a Fabricpool-enabled aggregate can be used in FlexCache creation. The use_tiered_aggregate is only used when auto-provisioning a FlexCache volume.
+
+
+|uuid
+|string
+a|FlexCache UUID. Unique identifier for the FlexCache.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "aggregates": [
+    {
+      "name": "aggr1",
+      "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+    }
+  ],
+  "guarantee": {
+    "type": "string"
+  },
+  "name": "vol1",
+  "origins": [
+    {
+      "cluster": {
+        "name": "cluster1",
+        "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+      },
+      "create_time": "2018-06-04T19:00:00Z",
+      "ip_address": "10.10.10.7",
+      "size": 0,
+      "state": "string",
+      "svm": {
+        "name": "svm1",
+        "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+      },
+      "volume": {
+        "name": "volume1",
+        "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+      }
+    }
+  ],
+  "path": "/user/my_fc",
+  "prepopulate": {
+    "dir_paths": [
+      "/dir1"
+    ],
+    "exclude_dir_paths": [
+      "/dir1/dir2"
+    ]
+  },
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+}
+====
+
+== Response
+
+```
+Status: 202, Accepted
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|job
+|link:#job_link[job_link]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "job": {
+    "uuid": "string"
+  }
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 66846870
+| Either the SVM name or origin volume name is missing
+
+| 66846871
+| Constituents per aggregate are specified but aggregate name is missing
+
+| 66846872
+| More than one origin volume is specified
+
+| 66846873
+| The specified SVM UUID is incorrect for the specified SVM name
+
+| 66846874
+| The specified aggregate UUID is incorrect for the specified aggregate name
+
+| 66846875
+| The specified aggregate name does not exist
+
+| 66846876
+| The specified SVM does not exist or is not peered
+
+| 66846877
+| The specified origin SVM name is of zero length
+
+| 66846878
+| The specified SVM UUID is invalid
+
+| 66846730
+| Failed to create a FlexCache volume
+
+| 66846760
+| The specified SVM is not a data Vserver
+
+| 66846787
+| The specified aggregate is a SnapLock aggregate
+
+| 66846812
+| The specified aggregate is a Composite aggregate
+
+| 66846812
+| The specified junction path is under a FlexCache volume
+
+| 66846834
+| FlexCache encryption requires a cluster version of 9.6 or higher
+
+| 66846835
+| A volume encryption license is not found
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#aggregates]
+[.api-collapsible-fifth-title]
+aggregates
+
+Aggregate
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#guarantee]
+[.api-collapsible-fifth-title]
+guarantee
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|type
+|string
+a|The type of space guarantee of this volume in the aggregate.
+
+
+|===
+
+
+[#cluster]
+[.api-collapsible-fifth-title]
+cluster
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#volume]
+[.api-collapsible-fifth-title]
+volume
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the volume.
+
+
+|uuid
+|string
+a|Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
+
+* example: 028baa66-41bd-11e9-81d5-00a0986138f7
+* Introduced in: 9.6
+
+
+|===
+
+
+[#flexcache_relationship]
+[.api-collapsible-fifth-title]
+flexcache_relationship
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|cluster
+|link:#cluster[cluster]
+a|
+
+|create_time
+|string
+a|Creation time of the relationship.
+
+
+|ip_address
+|string
+a|Cluster managerment IP of the remote cluster.
+
+
+|size
+|integer
+a|Size of the remote volume.
+
+
+|state
+|string
+a|Volume state
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|volume
+|link:#volume[volume]
+a|
+
+|===
+
+
+[#prepopulate]
+[.api-collapsible-fifth-title]
+prepopulate
+
+FlexCache prepopulate
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|dir_paths
+|array[string]
+a|
+
+|exclude_dir_paths
+|array[string]
+a|
+
+|recurse
+|boolean
+a|Specifies whether or not the prepopulate action should search through the directory-path recursively. If not set, the default value "true" is used.
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+FlexCache SVM
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#flexcache]
+[.api-collapsible-fifth-title]
+flexcache
+
+Defines the cache endpoint of FlexCache.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|aggregates
+|array[link:#aggregates[aggregates]]
+a|
+
+|constituents_per_aggregate
+|integer
+a|Number of FlexCache constituents per aggregate when the 'aggregates' field is mentioned.
+
+
+|dr_cache
+|boolean
+a|If set to true, a DR cache is created.
+
+
+|global_file_locking_enabled
+|boolean
+a|Specifies whether or not a FlexCache volume has global file locking mode enabled. Global file locking mode is a mode where protocol read locking semantics are enforced across all FlexCaches and origins of a FlexCache volume.
+
+
+|guarantee
+|link:#guarantee[guarantee]
+a|
+
+|name
+|string
+a|FlexCache name
+
+
+|origins
+|array[link:#flexcache_relationship[flexcache_relationship]]
+a|
+
+|path
+|string
+a|The fully-qualified path in the owning SVM's namespace at which the FlexCache is mounted. The path is case insensitive and must be unique within a SVM's namespace. Path must begin with '/' and must not end with '/'. Only one FlexCache be mounted at any given junction path.
+
+
+|prepopulate
+|link:#prepopulate[prepopulate]
+a|FlexCache prepopulate
+
+
+|size
+|integer
+a|Physical size of the FlexCache. The recommended size for a FlexCache is 10% of the origin volume. The minimum FlexCache constituent size is 1GB.
+
+
+|svm
+|link:#svm[svm]
+a|FlexCache SVM
+
+
+|use_tiered_aggregate
+|boolean
+a|Specifies whether or not a Fabricpool-enabled aggregate can be used in FlexCache creation. The use_tiered_aggregate is only used when auto-provisioning a FlexCache volume.
+
+
+|uuid
+|string
+a|FlexCache UUID. Unique identifier for the FlexCache.
+
+
+|===
+
+
+[#job_link]
+[.api-collapsible-fifth-title]
+job_link
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|uuid
+|string
+a|The UUID of the asynchronous job that is triggered by a POST, PATCH, or DELETE operation.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

@@ -1,0 +1,540 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-snapmirror-relationships-transfers.html'
+summary: 'Start a SnapMirror transfer operation'
+---
+
+= Start a SnapMirror transfer operation
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/snapmirror/relationships/{relationship.uuid}/transfers`#
+
+*Introduced In:* 9.6
+
+Starts a SnapMirror transfer operation. This API initiates a restore operation if the SnapMirror relationship is of type "restore". Otherwise, it intiates a SnapMirror "initialize" operation or "update" operation based on the current SnapMirror state.
+
+== Default property values
+
+* `storage_efficiency_enabled` - _true_
+
+== Related ONTAP commands
+
+* `snapmirror update`
+* `snapmirror initialize`
+* `snapmirror restore`
+
+== Examples
+
+The following examples show how to perform SnapMirror "initialize", "update", and "restore" operations.
+
+Perform SnapMirror initialize or update
+
+----
+ POST "/api/snapmirror/relationships/e4e7e130-0279-11e9-b566-0050568e9909/transfers" '{}'
+----
+
+Perform SnapMirror initialize, update or restore with throttle value set
+
+----
+ POST "/api/snapmirror/relationships/e4e7e130-0279-11e9-b566-0050568e9909/transfers" '{"throttle":"100"}'
+----
+
+Perform SnapMirror restore transfer of a file
+
+----
+ POST "/api/snapmirror/relationships/c8c62a90-0fef-11e9-b09e-0050568e7067/transfers" '{"source_snapshot": "src", "files":[{"source_path": "/a1.txt.0", "destination_path": "/a1-renamed.txt.0"}]}'
+----
+
+== Learn more
+
+* link:manage_snapmirror_relationship_tranfers.html[DOC /snapmirror/relationships/{relationship.uuid}/transfers]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|relationship.uuid
+|string
+|path
+|True
+a|Relationship UUID
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning. When doing a POST, PATCH, or DELETE operation on a single record, the default is 0 seconds.  This means that if an asynchronous operation is started, the server immediately returns HTTP code 202 (Accepted) along with a link to the job.  If a non-zero value is specified for POST, PATCH, or DELETE operations, ONTAP waits that length of time to see if the job completes so it can return something other than 202.
+
+* Default value: 0
+* Max value: 120
+* Min value: 0
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|bytes_transferred
+|integer
+a|Bytes transferred
+
+
+|checkpoint_size
+|integer
+a|Amount of data transferred in bytes as recorded in the restart checkpoint.
+
+
+|files
+|array[link:#files[files]]
+a|This is supported for transfer of restore relationship only. This specifies the list of files or LUNs to be restored. Can contain up to eight files or LUNs.
+
+
+|relationship
+|link:#relationship[relationship]
+a|
+
+|snapshot
+|string
+a|Name of Snapshot copy being transferred.
+
+
+|source_snapshot
+|string
+a|Specifies the Snapshot copy on the source to be transferred to the destination.
+
+
+|storage_efficiency_enabled
+|boolean
+a|This is supported for transfer of restore relationship only. Set this property to "false" to turn off storage efficiency for data transferred over the wire and written to the destination.
+
+
+|throttle
+|integer
+a|Throttle, in KBs per second. This "throttle" overrides the "throttle" set on the SnapMirror relationship or SnapMirror relationship's policy. If neither of these are set, defaults to 0, which is interpreted as unlimited.
+
+
+|uuid
+|string
+a|
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "bytes_transferred": 0,
+  "checkpoint_size": 0,
+  "files": [
+    {
+      "destination_path": "/dirb/file2",
+      "source_path": "/dira/file1"
+    }
+  ],
+  "relationship": {
+    "destination": {
+      "cluster": {
+        "name": "cluster1",
+        "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+      },
+      "consistency_group_volumes": [
+        {
+          "name": "volume1",
+          "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+        }
+      ],
+      "ipspace": "Default",
+      "path": "svm1:volume1",
+      "svm": {
+        "name": "svm1",
+        "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+      }
+    },
+    "uuid": "d2d7ceea-ab52-11e8-855e-00505682a4c7"
+  },
+  "snapshot": "string",
+  "source_snapshot": "string",
+  "throttle": 0,
+  "uuid": "4ea7a442-86d1-11e0-ae1c-123478563412"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response codes
+
+|===
+| Error code | Description
+
+| 13303845
+| Restore operation failed
+
+| 13303812
+| Initialize operation failed
+
+| 13303844
+| Update operation failed
+
+| 13303846
+| Empty source path file list
+
+| 13303847
+| Invalid arguments
+
+| 13304040
+| Throttle not supported for update of Synchronous SnapMirror relationships
+
+| 6620237
+| SnapMirror relationship database write failed
+
+| 6620238
+| SnapMirror relationship database read failed
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#files]
+[.api-collapsible-fifth-title]
+files
+
+Specifies a file or LUN consisting of a source_path and an optional destination_path. If not specified, the destination_path is the same as the source_path.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|destination_path
+|string
+a|
+
+|source_path
+|string
+a|
+
+|===
+
+
+[#cluster]
+[.api-collapsible-fifth-title]
+cluster
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#consistency_group_volumes]
+[.api-collapsible-fifth-title]
+consistency_group_volumes
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the volume.
+
+
+|uuid
+|string
+a|Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
+
+* example: 028baa66-41bd-11e9-81d5-00a0986138f7
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#snapmirror_endpoint]
+[.api-collapsible-fifth-title]
+snapmirror_endpoint
+
+Endpoint of a SnapMirror relationship. For a GET request, the property "cluster" is populated when the endpoint is on a remote cluster. A POST request to create the destination SVM endpoint or to establish an SVM DR relationship must have the property "cluster" populated with the remote cluster details. A POST request to create the destination FlexVol volume, FlexGroup volume, and Consistency Group endpoints can optionally specify the "cluster" property when the source SVM and the destination SVM are peered. A POST request to establish a SnapMirror relationship between the source endpoint and destination endpoint and when the source SVM and the destination SVM are not peered, must specify the "cluster" property for the remote endpoint.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|cluster
+|link:#cluster[cluster]
+a|
+
+|consistency_group_volumes
+|array[link:#consistency_group_volumes[consistency_group_volumes]]
+a|Mandatory property for a Consistency Group endpoint. Specifies the list of FlexVol volumes for a Consistency Group.
+
+
+|ipspace
+|string
+a|Optional property to specify the IPSpace of the SVM.
+
+
+|path
+|string
+a|ONTAP FlexVol/FlexGroup - svm1:volume1
+ONTAP SVM               - svm1:
+ONTAP Consistency Group - svm1:/cg/cg_name
+
+* example: svm1:volume1
+* Introduced in: 9.6
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+[#relationship]
+[.api-collapsible-fifth-title]
+relationship
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|destination
+|link:#snapmirror_endpoint[snapmirror_endpoint]
+a|Endpoint of a SnapMirror relationship. For a GET request, the property "cluster" is populated when the endpoint is on a remote cluster. A POST request to create the destination SVM endpoint or to establish an SVM DR relationship must have the property "cluster" populated with the remote cluster details. A POST request to create the destination FlexVol volume, FlexGroup volume, and Consistency Group endpoints can optionally specify the "cluster" property when the source SVM and the destination SVM are peered. A POST request to establish a SnapMirror relationship between the source endpoint and destination endpoint and when the source SVM and the destination SVM are not peered, must specify the "cluster" property for the remote endpoint.
+
+
+|restore
+|boolean
+a|Is the relationship for restore?
+
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#snapmirror_transfer]
+[.api-collapsible-fifth-title]
+snapmirror_transfer
+
+SnapMirror transfer information
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|bytes_transferred
+|integer
+a|Bytes transferred
+
+
+|checkpoint_size
+|integer
+a|Amount of data transferred in bytes as recorded in the restart checkpoint.
+
+
+|files
+|array[link:#files[files]]
+a|This is supported for transfer of restore relationship only. This specifies the list of files or LUNs to be restored. Can contain up to eight files or LUNs.
+
+
+|relationship
+|link:#relationship[relationship]
+a|
+
+|snapshot
+|string
+a|Name of Snapshot copy being transferred.
+
+
+|source_snapshot
+|string
+a|Specifies the Snapshot copy on the source to be transferred to the destination.
+
+
+|storage_efficiency_enabled
+|boolean
+a|This is supported for transfer of restore relationship only. Set this property to "false" to turn off storage efficiency for data transferred over the wire and written to the destination.
+
+
+|throttle
+|integer
+a|Throttle, in KBs per second. This "throttle" overrides the "throttle" set on the SnapMirror relationship or SnapMirror relationship's policy. If neither of these are set, defaults to 0, which is interpreted as unlimited.
+
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

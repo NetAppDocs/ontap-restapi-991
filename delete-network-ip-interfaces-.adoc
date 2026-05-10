@@ -1,0 +1,46 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'delete-network-ip-interfaces-.html'
+summary: 'Delete an IP interface'
+---
+
+= Delete an IP interface
+
+[.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/network/ip/interfaces/{uuid}`#
+
+*Introduced In:* 9.6
+
+Deletes an IP interface.
+
+== Related ONTAP commands
+
+* `network interface delete`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|IP interface UUID
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+

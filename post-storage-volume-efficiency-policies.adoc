@@ -1,0 +1,403 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-storage-volume-efficiency-policies.html'
+summary: 'Create a volume efficiency policy'
+---
+
+= Create a volume efficiency policy
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/volume-efficiency-policies`#
+
+*Introduced In:* 9.8
+
+Creates a volume efficiency policy.
+
+== Required properties
+
+* `svm.uuid` or `svm.name` - Existing SVM in which to create the volume efficiency policy.
+* `name` - Name for the volume efficiency policy.
+
+== Recommended optional properties
+
+* `type` - Type of volume policy.
+* `schedule` - Schedule the volume efficiency defined in minutes, hourly, daily and weekly.
+* `duration` - Indicates the allowed duration for a session for policy type "threshold" and "auto".
+* `start_threshold_percent` - Indicates the start threshold percentage for the policy type "threshold". It is mutually exclusive of the schedule.
+* `qos_policy` - QoS policy for the sis operation.
+* `comment` - A comment associated with the volume efficiency policy.
+* `enabled` - Is the volume efficiency policy enabled?
+
+== Default property values
+
+If not specified in POST, the following default property values are assigned:
+
+* `type` - auto
+* `enabled` - true
+* `qos_policy` - best_effort
+
+== Related ONTAP commands
+
+* `volume efficiency policy create`
+
+== Learn more
+
+* link:manage_volume_efficiency_policies.html[DOC /storage/volume-efficiency-policies]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment associated with the volume efficiency policy.
+
+
+|duration
+|integer
+a|This field is used with the policy types "scheduled" and "auto" to indicate the allowed duration for a session, in hours. Possible value is a number between 0 and 999 inclusive. Default is unlimited indicated by value 0.
+
+
+|enabled
+|boolean
+a|Is the volume efficiency policy enabled?
+
+
+|name
+|string
+a|Name of the volume efficiency policy.
+
+
+|qos_policy
+|string
+a|QoS policy for the sis operation. Possible values are background and best_effort. In background, sis operation will run in background with minimal or no impact on data serving client operations. In best_effort, sis operations may have some impact on data serving client operations.
+
+
+|schedule
+|link:#schedule[schedule]
+a|
+
+|start_threshold_percent
+|integer
+a|This field is used with the policy type "threshold" to indicate the threshold percentage for triggering the volume efficiency policy. It is mutuallly exclusive of the schedule.
+
+
+|svm
+|link:#svm[svm]
+a|SVM, applies only to SVM-scoped objects.
+
+
+|type
+|string
+a|Type of volume efficiency policy.
+
+
+|uuid
+|string
+a|Unique identifier of volume efficiency policy.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "comment": "string",
+  "duration": "5",
+  "enabled": 1,
+  "name": "default",
+  "qos_policy": "string",
+  "schedule": {
+    "name": "daily"
+  },
+  "start_threshold_percent": "30",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "type": "string",
+  "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 6881341
+| Specified schedule not found.
+
+| 6881344
+| Failed to queue specified job.
+
+| 6881345
+| This operation is not permitted on a node SVM.
+
+| 6881349
+| Policy name is not valid.
+
+| 6881362
+| Threshold percentage cannot be less than 1 percent.
+
+| 6881433
+| For "{\{0}}" type policy, attribute "{\{1}}" is not supported.
+
+| 6881435
+| Only a policy of type "threshold" can set the "start-threshold-percent" attribute.
+
+| 6881436
+| For a policy of type "scheduled", a valid "schedule" is a required attribute.
+
+| 6881454
+| An efficiency policy of type "threshold" requires an effective cluster version of ONTAP 8.3 or later.
+
+| 6881474
+| Duration cannot be null.
+
+| 6881475
+| Duration is not valid.
+
+| 6881476
+| Duration cannot be less than 1 hour.
+
+| 6881477
+| Duration cannot be more than 999 hours.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#schedule]
+[.api-collapsible-fifth-title]
+schedule
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|Schedule at which volume efficiency policies are captured on the SVM. Some common schedules already defined in the system are hourly, daily, weekly, at 5 minute intervals, and at 8 hour intervals. Volume efficiency policies with custom schedules can be referenced.
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+SVM, applies only to SVM-scoped objects.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#volume_efficiency_policy]
+[.api-collapsible-fifth-title]
+volume_efficiency_policy
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment associated with the volume efficiency policy.
+
+
+|duration
+|integer
+a|This field is used with the policy types "scheduled" and "auto" to indicate the allowed duration for a session, in hours. Possible value is a number between 0 and 999 inclusive. Default is unlimited indicated by value 0.
+
+
+|enabled
+|boolean
+a|Is the volume efficiency policy enabled?
+
+
+|name
+|string
+a|Name of the volume efficiency policy.
+
+
+|qos_policy
+|string
+a|QoS policy for the sis operation. Possible values are background and best_effort. In background, sis operation will run in background with minimal or no impact on data serving client operations. In best_effort, sis operations may have some impact on data serving client operations.
+
+
+|schedule
+|link:#schedule[schedule]
+a|
+
+|start_threshold_percent
+|integer
+a|This field is used with the policy type "threshold" to indicate the threshold percentage for triggering the volume efficiency policy. It is mutuallly exclusive of the schedule.
+
+
+|svm
+|link:#svm[svm]
+a|SVM, applies only to SVM-scoped objects.
+
+
+|type
+|string
+a|Type of volume efficiency policy.
+
+
+|uuid
+|string
+a|Unique identifier of volume efficiency policy.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

@@ -1,0 +1,338 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-security.html'
+summary: 'Retrieve information about security configured on the cluster'
+---
+
+= Retrieve information about security configured on the cluster
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security`#
+
+*Introduced In:* 9.7
+
+Retrieves information about the security configured on the cluster.
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|max_records
+|integer
+|query
+|False
+a|Limit the number of records returned.
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is true for GET calls.  When set to false, only the number of records is returned.
+
+* Default value: 1
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning.  When iterating over a collection, the default is 15 seconds.  ONTAP returns earlier if either max records or the end of the collection is reached.
+
+* Default value: 15
+* Max value: 120
+* Min value: 0
+
+
+|order_by
+|array[string]
+|query
+|False
+a|Order results by specified fields and optional [asc|desc] direction. Default direction is 'asc' for ascending.
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|fips
+|link:#fips[fips]
+a|Cluster-wide Federal Information Processing Standards (FIPS) mode information.
+
+
+|onboard_key_manager_configurable_status
+|link:#onboard_key_manager_configurable_status[onboard_key_manager_configurable_status]
+a|Indicates whether the Onboard Key Manager can be configured in the cluster.
+
+
+|software_data_encryption
+|link:#software_data_encryption[software_data_encryption]
+a|Cluster-wide software data encryption related information.
+
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "onboard_key_manager_configurable_status": {
+    "code": "65537300",
+    "message": "No platform support for volume encryption in following nodes - node1, node2."
+  }
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#fips]
+[.api-collapsible-fifth-title]
+fips
+
+Cluster-wide Federal Information Processing Standards (FIPS) mode information.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|enabled
+|boolean
+a|Indicates whether or not the software FIPS mode is enabled on the cluster. Our FIPS compliance involves configuring the use of only approved algorithms in applicable contexts (for example TLS), as well as the use of formally validated cryptographic module software implementations, where applicable. The US government documents concerning FIPS 140-2 outline the relevant security policies in detail.
+
+
+|===
+
+
+[#onboard_key_manager_configurable_status]
+[.api-collapsible-fifth-title]
+onboard_key_manager_configurable_status
+
+Indicates whether the Onboard Key Manager can be configured in the cluster.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|integer
+a|Code corresponding to the status message. Returns a 0 if the Onboard Key Manager can be configured in the cluster.
+
+
+|message
+|string
+a|Reason that Onboard Key Manager cannot be configured in the cluster.
+
+
+|supported
+|boolean
+a|Set to true if the Onboard Key Manager can be configured in the cluster.
+
+
+|===
+
+
+[#software_data_encryption]
+[.api-collapsible-fifth-title]
+software_data_encryption
+
+Cluster-wide software data encryption related information.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|conversion_enabled
+|boolean
+a|Indicates whether or not software encryption conversion is enabled on the cluster. A PATCH request initiates the conversion of all non-encrypted metadata volumes in the cluster to encrypted metadata volumes and all non-NAE aggregates to NAE aggregates. For the PATCH request to start, the cluster must have either an Onboard or an external key manager set up and the aggregates should either be empty or have only metadata volumes. No data volumes should be present in any of the aggregates in the cluster. For MetroCluster configurations, a PATCH request enables conversion on all the aggregates and metadata volumes of both local and remote clusters and is not allowed when the MetroCluster is in switchover state.
+
+
+|disabled_by_default
+|boolean
+a|Indicates whether or not default software data at rest encryption is disabled on the cluster.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

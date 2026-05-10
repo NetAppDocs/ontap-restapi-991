@@ -1,0 +1,76 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_role_privilege_path.html'
+summary: 'Manage role privilege path'
+---
+
+= Manage role privilege path
+
+
+
+== Overview
+
+A role can comprise of multiple tuples and each tuple consists of the REST API path and its access level. These APIs can be used to retrieve and modify the access level or delete one of the constituent REST API paths within a role.
+
+The role can be SVM-scoped or cluster-scoped.
+
+Specify the owner UUID and the role name in the URI path. The owner UUID corresponds to the UUID of the SVM for which the role has been created and can be obtained from the response body of a GET request performed on one of the following APIs:
+_/api/security/roles_ for all roles
+_/api/security/roles/?scope=svm_ for SVM-scoped roles
+_/api/security/roles/?owner.name=+++<svm-name>+++</i> for roles in a specific SVM This API response contains the complete URI for each tuple of the role and can be used for GET, PATCH, or DELETE operations.+++</svm-name>+++_
+
+NOTE: The access level for paths in pre-defined roles cannot be updated.
+
+== Examples
+
+=== Updating the access level for a path in the privilege tuple of an existing role
+
+----
+
+# The API:
+PATCH "/api/security/roles/{owner.uuid}/{name}/privileges/{path}"
+
+# The call:
+curl -X PATCH "https://<mgmt-ip>/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges/%2Fapi%2Fprotocols" -d '{"access":"all"}'
+----
+
+=== Retrieving the access level for a path in the privilege tuple of an existing role
+
+----
+
+# The API:
+GET "/api/security/roles/{owner.uuid}/{name}/privileges/{path}"
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges/%2Fapi%2Fprotocols"
+
+# The response:
+{
+"owner": {
+  "uuid": "aaef7c38-4bd3-11e9-b238-0050568e2e25"
+},
+"name": "svm_role1",
+"path": "/api/protocols",
+"access": "all",
+"_links": {
+  "self": {
+    "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges/%2Fapi%2Fprotocols"
+  }
+}
+}
+----
+
+=== Deleting a privilege tuple from an existing role
+
+----
+
+# The API:
+DELETE "/api/security/roles/{owner.uuid}/{name}/privileges/{path}"
+
+# The call:
+curl -X DELETE "https://<mgmt-ip>/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges/%2Fapi%2Fprotocols"
+----
+
+

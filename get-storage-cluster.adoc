@@ -1,0 +1,489 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-storage-cluster.html'
+summary: 'Report cluster-wide storage details across different tiers'
+---
+
+= Report cluster-wide storage details across different tiers
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/cluster`#
+
+*Introduced In:* 9.6
+
+Reports cluster wide storage details across different tiers. By default, this endpoint returns all fields.
+Supports the following roles: admin, and readonly.
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|max_records
+|integer
+|query
+|False
+a|Limit the number of records returned.
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is true for GET calls.  When set to false, only the number of records is returned.
+
+* Default value: 1
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning.  When iterating over a collection, the default is 15 seconds.  ONTAP returns earlier if either max records or the end of the collection is reached.
+
+* Default value: 15
+* Max value: 120
+* Min value: 0
+
+
+|order_by
+|array[string]
+|query
+|False
+a|Order results by specified fields and optional [asc|desc] direction. Default direction is 'asc' for ascending.
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|block_storage
+|link:#block_storage[block_storage]
+a|
+
+|cloud_storage
+|link:#cloud_storage[cloud_storage]
+a|
+
+|efficiency
+|link:#space_efficiency[space_efficiency]
+a|Storage efficiency
+
+
+|efficiency_without_snapshots
+|link:#space_efficiency[space_efficiency]
+a|Storage efficiency that does not include the savings provided by Snapshot copies.
+
+
+|efficiency_without_snapshots_flexclones
+|link:#space_efficiency[space_efficiency]
+a|Storage efficiency that does not include the savings provided by Snapshot copies and FlexClones.
+
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "block_storage": {
+    "medias": [
+      {
+        "efficiency": {
+          "logical_used": 0,
+          "ratio": 0,
+          "savings": 0
+        },
+        "efficiency_without_snapshots": {
+          "logical_used": 0,
+          "ratio": 0,
+          "savings": 0
+        },
+        "efficiency_without_snapshots_flexclones": {
+          "logical_used": 0,
+          "ratio": 0,
+          "savings": 0
+        },
+        "type": "string"
+      }
+    ]
+  },
+  "cloud_storage": {
+    "used": 0
+  },
+  "efficiency": {
+    "logical_used": 0,
+    "ratio": 0,
+    "savings": 0
+  },
+  "efficiency_without_snapshots": {
+    "logical_used": 0,
+    "ratio": 0,
+    "savings": 0
+  },
+  "efficiency_without_snapshots_flexclones": {
+    "logical_used": 0,
+    "ratio": 0,
+    "savings": 0
+  }
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#space_efficiency]
+[.api-collapsible-fifth-title]
+space_efficiency
+
+Storage Efficiency
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|logical_used
+|integer
+a|Logical used
+
+
+|ratio
+|number
+a|Data reduction ratio (logical_used / used)
+
+
+|savings
+|integer
+a|Space saved by storage efficiencies (logical_used - used)
+
+
+|===
+
+
+[#space_efficiency]
+[.api-collapsible-fifth-title]
+space_efficiency
+
+Storage efficiency that does not include the savings provided by Snapshot copies.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|logical_used
+|integer
+a|Logical used
+
+
+|ratio
+|number
+a|Data reduction ratio (logical_used / used)
+
+
+|savings
+|integer
+a|Space saved by storage efficiencies (logical_used - used)
+
+
+|===
+
+
+[#space_efficiency]
+[.api-collapsible-fifth-title]
+space_efficiency
+
+Storage efficiency that does not include the savings provided by Snapshot copies and FlexClones.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|logical_used
+|integer
+a|Logical used
+
+
+|ratio
+|number
+a|Data reduction ratio (logical_used / used)
+
+
+|savings
+|integer
+a|Space saved by storage efficiencies (logical_used - used)
+
+
+|===
+
+
+[#medias]
+[.api-collapsible-fifth-title]
+medias
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|available
+|integer
+a|Available space
+
+
+|efficiency
+|link:#space_efficiency[space_efficiency]
+a|Storage Efficiency
+
+
+|efficiency_without_snapshots
+|link:#space_efficiency[space_efficiency]
+a|Storage efficiency that does not include the savings provided by Snapshot copies.
+
+
+|efficiency_without_snapshots_flexclones
+|link:#space_efficiency[space_efficiency]
+a|Storage efficiency that does not include the savings provided by Snapshot copies and FlexClones.
+
+
+|size
+|integer
+a|Total space
+
+
+|type
+|string
+a|The type of media being used
+
+
+|used
+|integer
+a|Used space
+
+
+|===
+
+
+[#block_storage]
+[.api-collapsible-fifth-title]
+block_storage
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|inactive_data
+|integer
+a|Inactive data across all aggregates
+
+
+|medias
+|array[link:#medias[medias]]
+a|
+
+|physical_used
+|integer
+a|Total physical used space across the cluster
+
+
+|size
+|integer
+a|Total space across the cluster
+
+
+|used
+|integer
+a|Space used (includes volume reserves)
+
+
+|===
+
+
+[#cloud_storage]
+[.api-collapsible-fifth-title]
+cloud_storage
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|used
+|integer
+a|Total space used in cloud.
+
+
+|===
+
+
+[#space_efficiency]
+[.api-collapsible-fifth-title]
+space_efficiency
+
+Storage efficiency
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|logical_used
+|integer
+a|Logical used
+
+
+|ratio
+|number
+a|Data reduction ratio (logical_used / used)
+
+
+|savings
+|integer
+a|Space saved by storage efficiencies (logical_used - used)
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

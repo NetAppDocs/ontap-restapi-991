@@ -1,0 +1,392 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-protocols-fpolicy-policies-.html'
+summary: 'Retrieve an FPolicy configuration for an SVM'
+---
+
+= Retrieve an FPolicy configuration for an SVM
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/fpolicy/{svm.uuid}/policies/{name}`#
+
+*Introduced In:* 9.6
+
+Retrieves a particular FPolicy policy configuration for a specified SVM. Cluster-level FPolicy policy configuration details cannot be retrieved for a data SVM.
+
+== Related ONTAP commands
+
+* `fpolicy policy show`
+* `fpolicy policy scope show`
+* `fpolicy show`
+
+== Learn more
+
+* link:manage_svm_fpolicy_configuration.html[DOC /protocols/fpolicy/{svm.uuid}/policies]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|name
+|string
+|path
+|True
+a|
+
+|svm.uuid
+|string
+|path
+|True
+a|UUID of the SVM to which this object belongs.
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|enabled
+|boolean
+a|Specifies if the policy is enabled on the SVM or not. If no value is
+mentioned for this field but priority is set, then this policy will be enabled.
+
+
+|engine
+|link:#fpolicy_engine_reference[fpolicy_engine_reference]
+a|FPolicy external engine
+
+
+|events
+|array[link:#fpolicy_event_reference[fpolicy_event_reference]]
+a|
+
+|mandatory
+|boolean
+a|Specifies what action to take on a file access event in a case when all primary and secondary servers are down or no response is received from the FPolicy servers within a given timeout period. When this parameter is set to true, file access events will be denied under these circumstances.
+
+
+|name
+|string
+a|Specifies the name of the policy.
+
+
+|priority
+|integer
+a|Specifies the priority that is assigned to this policy.
+
+
+|scope
+|link:#scope[scope]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "engine": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "name": "string"
+  },
+  "events": [
+    "event_nfs_close",
+    "event_open"
+  ],
+  "name": "fp_policy_1",
+  "scope": {
+    "exclude_export_policies": [
+      "string"
+    ],
+    "exclude_extension": [
+      "string"
+    ],
+    "exclude_shares": [
+      "string"
+    ],
+    "exclude_volumes": [
+      "vol1",
+      "vol_svm1",
+      "*"
+    ],
+    "include_export_policies": [
+      "string"
+    ],
+    "include_extension": [
+      "string"
+    ],
+    "include_shares": [
+      "sh1",
+      "share_cifs"
+    ],
+    "include_volumes": [
+      "vol1",
+      "vol_svm1"
+    ]
+  }
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#fpolicy_engine_reference]
+[.api-collapsible-fifth-title]
+fpolicy_engine_reference
+
+FPolicy external engine
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the FPolicy external engine.
+
+
+|===
+
+
+[#fpolicy_event_reference]
+[.api-collapsible-fifth-title]
+fpolicy_event_reference
+
+FPolicy events
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|===
+
+
+[#scope]
+[.api-collapsible-fifth-title]
+scope
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|exclude_export_policies
+|array[string]
+a|
+
+|exclude_extension
+|array[string]
+a|
+
+|exclude_shares
+|array[string]
+a|
+
+|exclude_volumes
+|array[string]
+a|
+
+|include_export_policies
+|array[string]
+a|
+
+|include_extension
+|array[string]
+a|
+
+|include_shares
+|array[string]
+a|
+
+|include_volumes
+|array[string]
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

@@ -1,0 +1,307 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-security-ssh.html'
+summary: 'Update the SSH server setting for a cluster'
+---
+
+= Update the SSH server setting for a cluster
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/ssh`#
+
+*Introduced In:* 9.7
+
+Updates the SSH server setting for a cluster.
+
+== Optional parameters
+
+* `ciphers` - Encryption algorithms for the payload
+* `key_exchange_algorithms` - SSH key exchange algorithms
+* `mac_algorithms` - MAC algorithms
+* `max_authentication_retry_count` - Maximum authentication retries allowed before closing the connection
+* `connections_per_second` - Maximum allowed connections per second
+* `max_instances` - Maximum allowed connections per node
+* `per_source_limit` - Maximum allowed connections from the same client host
+
+== Related ONTAP commands
+
+* `security ssh`
+* `security protocol ssh`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|ciphers
+|array[string]
+a|Ciphers for encrypting the data.
+
+
+|connections_per_second
+|integer
+a|Maximum connections allowed per second.
+
+
+|key_exchange_algorithms
+|array[string]
+a|Key exchange algorithms.
+
+
+|mac_algorithms
+|array[string]
+a|MAC algorithms.
+
+
+|max_authentication_retry_count
+|integer
+a|Maximum authentication retries allowed before closing the connection.
+
+
+|max_instances
+|integer
+a|Maximum possible simultaneous connections.
+
+
+|per_source_limit
+|integer
+a|Maximum connections from the same client host.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "ciphers": [
+    "aes256_ctr",
+    "aes192_ctr",
+    "aes128_ctr"
+  ],
+  "key_exchange_algorithms": [
+    "diffie_hellman_group_exchange_sha256",
+    "diffie_hellman_group14_sha1"
+  ],
+  "mac_algorithms": [
+    "hmac_sha1",
+    "hmac_sha2_512_etm"
+  ]
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 10682372
+| There must be at least one key exchange algorithm associated with the SSH configuration.
+
+| 10682373
+| There must be at least one cipher associated with the SSH configuration.
+
+| 10682375
+| Failed to modify SSH key exchange algorithms.
+
+| 10682378
+| Failed to modify SSH ciphers.
+
+| 10682399
+| Key exchange algorithm not supported in FIPS enabled mode.
+
+| 10682400
+| Failed to modify SSH MAC algorithms.
+
+| 10682401
+| MAC algorithm not supported in FIPS enabled mode.
+
+| 10682403
+| There must be at least one MAC algorithm with the SSH configuration.
+
+| 10682413
+| Failed to modify maximum authentication retry attempts.
+
+| 10682413
+| Failed to modify maximum authentication retry attempts.
+
+| 10682418
+| Cipher not supported in FIPS enabled mode.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#cluster_ssh_server]
+[.api-collapsible-fifth-title]
+cluster_ssh_server
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|ciphers
+|array[string]
+a|Ciphers for encrypting the data.
+
+
+|connections_per_second
+|integer
+a|Maximum connections allowed per second.
+
+
+|key_exchange_algorithms
+|array[string]
+a|Key exchange algorithms.
+
+
+|mac_algorithms
+|array[string]
+a|MAC algorithms.
+
+
+|max_authentication_retry_count
+|integer
+a|Maximum authentication retries allowed before closing the connection.
+
+
+|max_instances
+|integer
+a|Maximum possible simultaneous connections.
+
+
+|per_source_limit
+|integer
+a|Maximum connections from the same client host.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

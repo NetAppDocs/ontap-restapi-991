@@ -1,0 +1,220 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-protocols-ndmp-svms-.html'
+summary: 'Update the NDMP configuration for an SVM'
+---
+
+= Update the NDMP configuration for an SVM
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/ndmp/svms/{svm.uuid}`#
+
+*Introduced In:* 9.7
+
+Updates the NDMP configuration for a specific SVM.
+
+== Related ONTAP commands
+
+* `vserver services ndmp modify`
+
+== Learn more
+
+* link:manage_ndmp_configuration_of_svm.html[DOC /protocols/ndmp/svms]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|svm.uuid
+|string
+|path
+|True
+a|SVM UUID
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|authentication_types
+|array[string]
+a|NDMP authentication types.
+
+
+|enabled
+|boolean
+a|Is the NDMP service enabled on the SVM?
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "authentication_types": [
+    "plaintext",
+    "challenge"
+  ],
+  "enabled": 1,
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  }
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|authentication_types
+|array[string]
+a|NDMP authentication types.
+
+
+|enabled
+|boolean
+a|Is the NDMP service enabled on the SVM?
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "authentication_types": [
+    "plaintext",
+    "challenge"
+  ],
+  "enabled": 1,
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  }
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#ndmp_svm]
+[.api-collapsible-fifth-title]
+ndmp_svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|authentication_types
+|array[string]
+a|NDMP authentication types.
+
+
+|enabled
+|boolean
+a|Is the NDMP service enabled on the SVM?
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+//end collapsible .Definitions block
+====

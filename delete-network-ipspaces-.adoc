@@ -1,0 +1,46 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'delete-network-ipspaces-.html'
+summary: 'Delete an IPspace object'
+---
+
+= Delete an IPspace object
+
+[.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/network/ipspaces/{uuid}`#
+
+*Introduced In:* 9.6
+
+Deletes an IPspace object.
+
+== Related ONTAP commands
+
+* `network ipspace delete`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|IPspace UUID
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+

@@ -1,0 +1,99 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_ems_configuration.html'
+summary: 'Manage EMS configuration'
+---
+
+= Manage EMS configuration
+
+
+
+== Overview
+
+The Event Management System (EMS) collects and processes events, and sends notification of the events through various reporting mechanisms. The following endpoints defined under '/support/ems', allow you to query a list of observed events, and configure which events you handle and how you are notified:
+
+* /support/ems
+* /support/ems/events
+* /support/ems/messages
+* /support/ems/filters
+* /support/ems/filters/\{name}/rules
+* /support/ems/filters/\{name}/rules/\{index}
+* /support/ems/destinations
+* /support/ems/destinations/\{name}
+
+== Examples
+
+=== Configuring an email destination
+
+The following example configures EMS to send a support email when a WAFL event is observed with an error severity.
+
+==== Configure the system-wide email parameters
+
+[,json]
+----
+
+# API
+PATCH /support/ems
+
+# JSON Body
+{
+"mail_from": "administrator@mycompany.com",
+"mail_server": "smtp@mycompany.com"
+}
+
+# Response
+200 OK
+----
+
+=== Configuring a filter with an enclosed rule
+
+[,json]
+----
+
+# API
+POST /support/ems/filters
+
+# JSON Body
+{
+"name": "critical-wafl",
+"rules": [
+  {
+    "index": 1,
+    "type": "include",
+    "message_criteria": {
+      "name_pattern": "wafl.*",
+      "severities": "emergency,error,alert"
+    }
+  }
+]
+}
+
+# Response
+201 Created
+----
+
+=== Setting up an email destination
+
+[,json]
+----
+
+# API
+POST /support/ems/destinations
+
+# JSON Body
+{
+"name": "Technician_Email",
+"type": "email",
+"destination": "technician@mycompany.com",
+"filters": [
+  { "name" : "critical-wafl" }
+]
+}
+
+# Response
+201 Created
+----
+
+

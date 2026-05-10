@@ -1,0 +1,332 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-security.html'
+summary: 'Update the software FIPS mode or enable conversion of non-encrypted metadata volumes non-NAE aggregates'
+---
+
+= Update the software FIPS mode or enable conversion of non-encrypted metadata volumes non-NAE aggregates
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security`#
+
+*Introduced In:* 9.8
+
+Updates the software FIPS mode or enables conversion of non-encrypted metadata volumes to encrypted metadata volumes and non-NAE aggregates to NAE aggregates.
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning. When doing a POST, PATCH, or DELETE operation on a single record, the default is 0 seconds.  This means that if an asynchronous operation is started, the server immediately returns HTTP code 202 (Accepted) along with a link to the job.  If a non-zero value is specified for POST, PATCH, or DELETE operations, ONTAP waits that length of time to see if the job completes so it can return something other than 202.
+
+* Default value: 0
+* Max value: 120
+* Min value: 0
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|fips
+|link:#fips[fips]
+a|Cluster-wide Federal Information Processing Standards (FIPS) mode information.
+
+
+|software_data_encryption
+|link:#software_data_encryption[software_data_encryption]
+a|Cluster-wide software data encryption related information.
+
+
+|===
+
+
+== Response
+
+```
+Status: 202, Accepted
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|job
+|link:#job_link[job_link]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "job": {
+    "uuid": "string"
+  }
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 52428830
+| Cannot enable FIPS-compliant mode because the configured minimum security strength for certificates is not compatible.
+
+| 52559974
+| Cannot enable FIPS-compliant mode because a certificate that is not FIPS-compliant is in use.
+
+| 196608081
+| Cannot start software encryption conversion while there are data volumes in the cluster.
+
+| 196608082
+| The operation is not valid when the MetroCluster is in switchover mode.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#fips]
+[.api-collapsible-fifth-title]
+fips
+
+Cluster-wide Federal Information Processing Standards (FIPS) mode information.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|enabled
+|boolean
+a|Indicates whether or not the software FIPS mode is enabled on the cluster. Our FIPS compliance involves configuring the use of only approved algorithms in applicable contexts (for example TLS), as well as the use of formally validated cryptographic module software implementations, where applicable. The US government documents concerning FIPS 140-2 outline the relevant security policies in detail.
+
+
+|===
+
+
+[#onboard_key_manager_configurable_status]
+[.api-collapsible-fifth-title]
+onboard_key_manager_configurable_status
+
+Indicates whether the Onboard Key Manager can be configured in the cluster.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|integer
+a|Code corresponding to the status message. Returns a 0 if the Onboard Key Manager can be configured in the cluster.
+
+
+|message
+|string
+a|Reason that Onboard Key Manager cannot be configured in the cluster.
+
+
+|supported
+|boolean
+a|Set to true if the Onboard Key Manager can be configured in the cluster.
+
+
+|===
+
+
+[#software_data_encryption]
+[.api-collapsible-fifth-title]
+software_data_encryption
+
+Cluster-wide software data encryption related information.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|conversion_enabled
+|boolean
+a|Indicates whether or not software encryption conversion is enabled on the cluster. A PATCH request initiates the conversion of all non-encrypted metadata volumes in the cluster to encrypted metadata volumes and all non-NAE aggregates to NAE aggregates. For the PATCH request to start, the cluster must have either an Onboard or an external key manager set up and the aggregates should either be empty or have only metadata volumes. No data volumes should be present in any of the aggregates in the cluster. For MetroCluster configurations, a PATCH request enables conversion on all the aggregates and metadata volumes of both local and remote clusters and is not allowed when the MetroCluster is in switchover state.
+
+
+|disabled_by_default
+|boolean
+a|Indicates whether or not default software data at rest encryption is disabled on the cluster.
+
+
+|===
+
+
+[#security_config]
+[.api-collapsible-fifth-title]
+security_config
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|fips
+|link:#fips[fips]
+a|Cluster-wide Federal Information Processing Standards (FIPS) mode information.
+
+
+|software_data_encryption
+|link:#software_data_encryption[software_data_encryption]
+a|Cluster-wide software data encryption related information.
+
+
+|===
+
+
+[#job_link]
+[.api-collapsible-fifth-title]
+job_link
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|uuid
+|string
+a|The UUID of the asynchronous job that is triggered by a POST, PATCH, or DELETE operation.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

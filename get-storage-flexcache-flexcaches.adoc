@@ -1,0 +1,819 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-storage-flexcache-flexcaches.html'
+summary: 'Retrieve a FlexCache volume in the cluster'
+---
+
+= Retrieve a FlexCache volume in the cluster
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/flexcache/flexcaches`#
+
+*Introduced In:* 9.6
+
+Retrieves FlexCache in the cluster.
+
+== Expensive properties
+
+There is an added cost to retrieving values for these properties. They are not included by default in GET results and must be explicitly requested using the `fields` query parameter. See link:getting_started_with_the_ontap_rest_api.html#Requesting_specific_fields[Requesting specific fields] to learn more.
+
+* `origins.ip_address` - IP address of origin.
+* `origins.size` - Physical size of origin.
+* `origins.state` - State of origin.
+* `size` - Physical size of FlexCache.
+* `guarantee.type` - Space guarantee style of FlexCache.
+* `aggregates.name` or `aggregates.uuid` - Name or UUID of aggregrate of FlexCache volume.
+* `path` - Fully-qualified path of the owning SVM's namespace where the FlexCache is mounted.
+
+== Related ONTAP commands
+
+* `volume flexcache show`
+
+== Learn more
+
+* link:manage_flexcache_volumes.html[DOC /storage/flexcache/flexcaches]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|aggregates.name
+|string
+|query
+|False
+a|Filter by aggregates.name
+
+
+|aggregates.uuid
+|string
+|query
+|False
+a|Filter by aggregates.uuid
+
+
+|svm.uuid
+|string
+|query
+|False
+a|Filter by svm.uuid
+
+
+|svm.name
+|string
+|query
+|False
+a|Filter by svm.name
+
+
+|global_file_locking_enabled
+|boolean
+|query
+|False
+a|Filter by global_file_locking_enabled
+
+* Introduced in: 9.9
+
+
+|use_tiered_aggregate
+|boolean
+|query
+|False
+a|Filter by use_tiered_aggregate
+
+* Introduced in: 9.8
+
+
+|uuid
+|string
+|query
+|False
+a|Filter by uuid
+
+
+|size
+|integer
+|query
+|False
+a|Filter by size
+
+
+|origins.size
+|integer
+|query
+|False
+a|Filter by origins.size
+
+
+|origins.create_time
+|string
+|query
+|False
+a|Filter by origins.create_time
+
+
+|origins.volume.name
+|string
+|query
+|False
+a|Filter by origins.volume.name
+
+
+|origins.volume.uuid
+|string
+|query
+|False
+a|Filter by origins.volume.uuid
+
+
+|origins.svm.uuid
+|string
+|query
+|False
+a|Filter by origins.svm.uuid
+
+
+|origins.svm.name
+|string
+|query
+|False
+a|Filter by origins.svm.name
+
+
+|origins.state
+|string
+|query
+|False
+a|Filter by origins.state
+
+
+|origins.cluster.name
+|string
+|query
+|False
+a|Filter by origins.cluster.name
+
+
+|origins.cluster.uuid
+|string
+|query
+|False
+a|Filter by origins.cluster.uuid
+
+
+|origins.ip_address
+|string
+|query
+|False
+a|Filter by origins.ip_address
+
+
+|constituents_per_aggregate
+|integer
+|query
+|False
+a|Filter by constituents_per_aggregate
+
+
+|name
+|string
+|query
+|False
+a|Filter by name
+
+
+|guarantee.type
+|string
+|query
+|False
+a|Filter by guarantee.type
+
+* Introduced in: 9.7
+
+
+|path
+|string
+|query
+|False
+a|Filter by path
+
+
+|dr_cache
+|boolean
+|query
+|False
+a|Filter by dr_cache
+
+* Introduced in: 9.9
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning.  When iterating over a collection, the default is 15 seconds.  ONTAP returns earlier if either max records or the end of the collection is reached.
+
+* Default value: 15
+* Max value: 120
+* Min value: 0
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+
+|max_records
+|integer
+|query
+|False
+a|Limit the number of records returned.
+
+
+|order_by
+|array[string]
+|query
+|False
+a|Order results by specified fields and optional [asc|desc] direction. Default direction is 'asc' for ascending.
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is true for GET calls.  When set to false, only the number of records is returned.
+
+* Default value: 1
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#flexcache[flexcache]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "next": {
+      "href": "/api/resourcelink"
+    },
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": "/api/resourcelink"
+        }
+      },
+      "aggregates": [
+        {
+          "_links": {
+            "self": {
+              "href": "/api/resourcelink"
+            }
+          },
+          "name": "aggr1",
+          "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+        }
+      ],
+      "guarantee": {
+        "type": "string"
+      },
+      "name": "vol1",
+      "origins": [
+        {
+          "cluster": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "cluster1",
+            "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+          },
+          "create_time": "2018-06-04T19:00:00Z",
+          "ip_address": "10.10.10.7",
+          "size": 0,
+          "state": "string",
+          "svm": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "svm1",
+            "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+          },
+          "volume": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "volume1",
+            "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+          }
+        }
+      ],
+      "path": "/user/my_fc",
+      "svm": {
+        "_links": {
+          "self": {
+            "href": "/api/resourcelink"
+          }
+        },
+        "name": "svm1",
+        "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+      },
+      "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|next
+|link:#href[href]
+a|
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#aggregates]
+[.api-collapsible-fifth-title]
+aggregates
+
+Aggregate
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#guarantee]
+[.api-collapsible-fifth-title]
+guarantee
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|type
+|string
+a|The type of space guarantee of this volume in the aggregate.
+
+
+|===
+
+
+[#cluster]
+[.api-collapsible-fifth-title]
+cluster
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#volume]
+[.api-collapsible-fifth-title]
+volume
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the volume.
+
+
+|uuid
+|string
+a|Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
+
+* example: 028baa66-41bd-11e9-81d5-00a0986138f7
+* Introduced in: 9.6
+
+
+|===
+
+
+[#flexcache_relationship]
+[.api-collapsible-fifth-title]
+flexcache_relationship
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|cluster
+|link:#cluster[cluster]
+a|
+
+|create_time
+|string
+a|Creation time of the relationship.
+
+
+|ip_address
+|string
+a|Cluster managerment IP of the remote cluster.
+
+
+|size
+|integer
+a|Size of the remote volume.
+
+
+|state
+|string
+a|Volume state
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|volume
+|link:#volume[volume]
+a|
+
+|===
+
+
+[#prepopulate]
+[.api-collapsible-fifth-title]
+prepopulate
+
+FlexCache prepopulate
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+FlexCache SVM
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#flexcache]
+[.api-collapsible-fifth-title]
+flexcache
+
+Defines the cache endpoint of FlexCache.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|aggregates
+|array[link:#aggregates[aggregates]]
+a|
+
+|constituents_per_aggregate
+|integer
+a|Number of FlexCache constituents per aggregate when the 'aggregates' field is mentioned.
+
+
+|dr_cache
+|boolean
+a|If set to true, a DR cache is created.
+
+
+|global_file_locking_enabled
+|boolean
+a|Specifies whether or not a FlexCache volume has global file locking mode enabled. Global file locking mode is a mode where protocol read locking semantics are enforced across all FlexCaches and origins of a FlexCache volume.
+
+
+|guarantee
+|link:#guarantee[guarantee]
+a|
+
+|name
+|string
+a|FlexCache name
+
+
+|origins
+|array[link:#flexcache_relationship[flexcache_relationship]]
+a|
+
+|path
+|string
+a|The fully-qualified path in the owning SVM's namespace at which the FlexCache is mounted. The path is case insensitive and must be unique within a SVM's namespace. Path must begin with '/' and must not end with '/'. Only one FlexCache be mounted at any given junction path.
+
+
+|size
+|integer
+a|Physical size of the FlexCache. The recommended size for a FlexCache is 10% of the origin volume. The minimum FlexCache constituent size is 1GB.
+
+
+|svm
+|link:#svm[svm]
+a|FlexCache SVM
+
+
+|use_tiered_aggregate
+|boolean
+a|Specifies whether or not a Fabricpool-enabled aggregate can be used in FlexCache creation. The use_tiered_aggregate is only used when auto-provisioning a FlexCache volume.
+
+
+|uuid
+|string
+a|FlexCache UUID. Unique identifier for the FlexCache.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

@@ -1,0 +1,19 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_application_snapshot_copies.html'
+summary: 'Manage application Snapshot copies'
+---
+
+= Manage application Snapshot copies
+
+
+
+== Overview
+
+Applications support Snapshot copies across all member storage elements. These Snapshot copies can be created and restored at any time or as scheduled. Most applications have hourly Snapshot copies enabled by default, unless the RPO setting is overridden during the creation of the application. An application Snapshot copy can be flagged as either _application consistent_, or _crash consistent_. From an ONTAP perspective, there is no difference between these two consistency types. These types are available for record keeping so that Snapshot copies taken after the application is quiesced (application consistent) can be tracked separately from those Snapshot copies taken without first quiescing the application (crash consistent). By default, all application Snapshot copies are flagged to be _crash consistent_, and Snapshot copies taken at a scheduled time are also considered _crash consistent_.
+
+The functionality provided by these APIs is not integrated with the host application. Snapshot copies have limited value without host coordination, so the use of the SnapCenter Backup Management suite is recommended to ensure correct interaction between host applications and ONTAP.
+
+

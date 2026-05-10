@@ -1,0 +1,353 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-storage-volume-efficiency-policies-.html'
+summary: 'Update a volume efficiency policy'
+---
+
+= Update a volume efficiency policy
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/storage/volume-efficiency-policies/{uuid}`#
+
+*Introduced In:* 9.8
+
+Updates a volume efficiency policy.
+
+== Related ONTAP commands
+
+* `volume efficiency policy modify`
+
+== Learn more
+
+* link:manage_volume_efficiency_policies.html[DOC /storage/volume-efficiency-policies]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|Volume efficiency policy UUID
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment associated with the volume efficiency policy.
+
+
+|duration
+|integer
+a|This field is used with the policy types "scheduled" and "auto" to indicate the allowed duration for a session, in hours. Possible value is a number between 0 and 999 inclusive. Default is unlimited indicated by value 0.
+
+
+|enabled
+|boolean
+a|Is the volume efficiency policy enabled?
+
+
+|qos_policy
+|string
+a|QoS policy for the sis operation. Possible values are background and best_effort. In background, sis operation will run in background with minimal or no impact on data serving client operations. In best_effort, sis operations may have some impact on data serving client operations.
+
+
+|schedule
+|link:#schedule[schedule]
+a|
+
+|start_threshold_percent
+|integer
+a|This field is used with the policy type "threshold" to indicate the threshold percentage for triggering the volume efficiency policy. It is mutuallly exclusive of the schedule.
+
+
+|type
+|string
+a|Type of volume efficiency policy.
+
+
+|uuid
+|string
+a|Unique identifier of volume efficiency policy.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "comment": "string",
+  "duration": "5",
+  "enabled": 1,
+  "qos_policy": "string",
+  "schedule": {
+    "name": "daily"
+  },
+  "start_threshold_percent": "30",
+  "type": "string",
+  "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Code
+
+|===
+| Error Code | Description
+
+| 6881341
+| Specified schedule not found.
+
+| 6881344
+| Failed to queue specified job.
+
+| 6881348
+| This operation cannot be performed because the specified policy is owned by the cluster admin.
+
+| 6881349
+| Policy name is not valid.
+
+| 6881362
+| Threshold percentage cannot be less than 1 percent.
+
+| 6881433
+| For "{\{0}}" type policy, "{\{1}}" duration is not supported.
+
+| 6881435
+| Only a policy of type "threshold" can set the "start-threshold-percent" attribute.
+
+| 6881436
+| For a policy of type "scheduled", a valid "schedule" is a required attribute.
+
+| 6881438
+| For "{\{0}}" policy, modification of attributes is not allowed.
+
+| 6881474
+| Duration cannot be null.
+
+| 6881475
+| Duration is not valid.
+
+| 6881476
+| Duration cannot be less than 1 hour.
+
+| 6881477
+| Duration cannot be more than 999 hours.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#schedule]
+[.api-collapsible-fifth-title]
+schedule
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|Schedule at which volume efficiency policies are captured on the SVM. Some common schedules already defined in the system are hourly, daily, weekly, at 5 minute intervals, and at 8 hour intervals. Volume efficiency policies with custom schedules can be referenced.
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+SVM, applies only to SVM-scoped objects.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#volume_efficiency_policy]
+[.api-collapsible-fifth-title]
+volume_efficiency_policy
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment associated with the volume efficiency policy.
+
+
+|duration
+|integer
+a|This field is used with the policy types "scheduled" and "auto" to indicate the allowed duration for a session, in hours. Possible value is a number between 0 and 999 inclusive. Default is unlimited indicated by value 0.
+
+
+|enabled
+|boolean
+a|Is the volume efficiency policy enabled?
+
+
+|qos_policy
+|string
+a|QoS policy for the sis operation. Possible values are background and best_effort. In background, sis operation will run in background with minimal or no impact on data serving client operations. In best_effort, sis operations may have some impact on data serving client operations.
+
+
+|schedule
+|link:#schedule[schedule]
+a|
+
+|start_threshold_percent
+|integer
+a|This field is used with the policy type "threshold" to indicate the threshold percentage for triggering the volume efficiency policy. It is mutuallly exclusive of the schedule.
+
+
+|type
+|string
+a|Type of volume efficiency policy.
+
+
+|uuid
+|string
+a|Unique identifier of volume efficiency policy.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

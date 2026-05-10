@@ -1,0 +1,25 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_snapmirror_relationships.html'
+summary: 'Manage SnapMirror relationships'
+---
+
+= Manage SnapMirror relationships
+
+
+
+== Overview
+
+This API manages asynchronous extended data protection (XDP) relationships for FlexVols, FlexGroups, or SVMs. It is also used to manage a synchronous relationship between FlexVol volumes, which provides zero RPO data protection and active synchronous relationship with automated failover between Consistency Group endpoints which provides zero RTO data protection. To create an asynchronous extended data protection relationship with FlexVol volumes, FlexGroup volumes, or SVMs, use the policy of type "async". To create a synchronous relationship between FlexVol volumes, use the policy of type "sync" with sync_type of either "sync" or "strict_sync". To create an active synchronous relationship with automated failover between Consistency Group endpoints, use the policy of type "sync" with sync_type "automated_failover". You can create an asynchronous extended data protection relationship between the source and destination which can be used by the transfer APIs to perform SnapMirror "restore" operations.
+
+To create FlexVol or FlexGroup SnapMirror relationships, the source volume must be in the "online" state and be a read-write type; the destination volume must be in the "online" state and be a data protection type.
+To create SnapMirror relationships between SVMs, the source SVM must be of subtype "default" and the destination SVM of subtype "dp_destination". Additionally, SVMs must be peered before a relationship can be established between them when the "create_destination" property is not specified. When the "create_destination" property is specified then the destination SVM is provisioned on the destination cluster and the SVM peer relationship is established between the source SVM and the new destination SVM provided the source SVM has the SVM peering permission for the destination cluster.
+DP FlexVol SnapMirror relationships cannot be created using this API but existing relationships can be listed or managed.
+The SnapMirror functionality is subdivided into relationship APIs and transfer APIs:
+
+* SnapMirror relationship APIs are used to create and manage the SnapMirror relationships.
+* SnapMirror transfer APIs are used to manage data transfers.
+
+

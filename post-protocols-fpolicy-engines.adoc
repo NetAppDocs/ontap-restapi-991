@@ -1,0 +1,332 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-protocols-fpolicy-engines.html'
+summary: 'Create the FPolicy engine configuration for an SVM'
+---
+
+= Create the FPolicy engine configuration for an SVM
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/fpolicy/{svm.uuid}/engines`#
+
+*Introduced In:* 9.6
+
+Creates an FPolicy engine configuration for a specified SVM. FPolicy engine creation is allowed only on data SVMs.
+
+== Required properties
+
+* `svm.uuid` - Existing SVM in which to create the FPolicy engine.
+* `name` - Name of external engine.
+* `port` - Port number of the FPolicy server application.
+* `primary_servers` - List of primary FPolicy servers to which the node will send notifications.
+
+== Recommended optional properties
+
+* `secondary_servers` - It is recommended to configure secondary FPolicy server to which the node will send notifications when the primary server is down.
+
+== Default property values
+
+* `type` - _synchronous_
+
+== Related ONTAP commands
+
+* `fpolicy policy external-engine create`
+
+== Learn more
+
+* link:manage_fpolicy_engine_configuration.html[DOC /protocols/fpolicy/{svm.uuid}/engines]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+
+|svm.uuid
+|string
+|path
+|True
+a|UUID of the SVM to which this object belongs.
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|Specifies the name to assign to the external server configuration.
+
+
+|port
+|integer
+a|Port number of the FPolicy server application.
+
+
+|primary_servers
+|array[string]
+a|
+
+|secondary_servers
+|array[string]
+a|
+
+|type
+|string
+a|The notification mode determines what ONTAP does after sending notifications to FPolicy servers.
+The possible values are:
+
+***** synchronous  - After sending a notification, wait for a response from the FPolicy server.
+
+***** asynchronous - After sending a notification, file request processing continues.
+
+* Default value: 1
+* enum: ["synchronous", "asynchronous"]
+* Introduced in: 9.6
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "name": "fp_ex_eng",
+  "port": "9876",
+  "primary_servers": [
+    "10.132.145.20",
+    "10.140.101.109"
+  ],
+  "secondary_servers": [
+    "10.132.145.20",
+    "10.132.145.21"
+  ],
+  "type": "string"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#fpolicy_engine[fpolicy_engine]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "records": [
+    {
+      "name": "fp_ex_eng",
+      "port": "9876",
+      "primary_servers": [
+        "10.132.145.20",
+        "10.140.101.109"
+      ],
+      "secondary_servers": [
+        "10.132.145.20",
+        "10.132.145.21"
+      ],
+      "type": "string"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 9764885
+| The primary secondary server has a redundant IP address
+
+| 9764953
+| The name of the FPolicy engine is "native" which is reserved by the system
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#fpolicy_engine]
+[.api-collapsible-fifth-title]
+fpolicy_engine
+
+The engine defines how ONTAP makes and manages connections to external FPolicy servers.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|Specifies the name to assign to the external server configuration.
+
+
+|port
+|integer
+a|Port number of the FPolicy server application.
+
+
+|primary_servers
+|array[string]
+a|
+
+|secondary_servers
+|array[string]
+a|
+
+|type
+|string
+a|The notification mode determines what ONTAP does after sending notifications to FPolicy servers.
+The possible values are:
+
+***** synchronous  - After sending a notification, wait for a response from the FPolicy server.
+
+***** asynchronous - After sending a notification, file request processing continues.
+
+* Default value: 1
+* enum: ["synchronous", "asynchronous"]
+* Introduced in: 9.6
+
+
+|===
+
+
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

@@ -1,0 +1,788 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-protocols-cifs-services-.html'
+summary: 'Retrieve a CIFS server'
+---
+
+= Retrieve a CIFS server
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/cifs/services/{svm.uuid}`#
+
+*Introduced In:* 9.6
+
+Retrieves a CIFS server.
+
+== Related ONTAP commands
+
+* `vserver cifs server show`
+* `vserver cifs server options show`
+* `vserver cifs server security show`
+
+== Learn more
+
+* link:manage_cifs_services.html[DOC /protocols/cifs/services]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|svm.uuid
+|string
+|path
+|True
+a|
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|ad_domain
+|link:#ad_domain[ad_domain]
+a|
+
+|comment
+|string
+a|A descriptive text comment for the CIFS server. SMB clients can see the CIFS server comment when browsing servers on the network. If there is a space in the comment, you must enclose the entire string in quotation marks.
+
+
+|default_unix_user
+|string
+a|Specifies the UNIX user to which any authenticated CIFS user is mapped to, if the normal user mapping rules fails.
+
+
+|enabled
+|boolean
+a|Specifies if the CIFS service is administratively enabled.
+
+
+|metric
+|link:#metric[metric]
+a|
+
+|name
+|string
+a|The name of the CIFS server.
+
+
+|netbios
+|link:#cifs_netbios[cifs_netbios]
+a|
+
+|security
+|link:#cifs_service_security[cifs_service_security]
+a|
+
+|statistics
+|link:#statistics[statistics]
+a|
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "ad_domain": {
+    "fqdn": "example.com",
+    "organizational_unit": "string",
+    "user": "string"
+  },
+  "comment": "This CIFS Server Belongs to CS Department",
+  "default_unix_user": "string",
+  "metric": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "duration": "PT15S",
+    "iops": {
+      "read": "200",
+      "total": "1000",
+      "write": "100"
+    },
+    "latency": {
+      "read": "200",
+      "total": "1000",
+      "write": "100"
+    },
+    "status": "ok",
+    "throughput": {
+      "read": "200",
+      "total": "1000",
+      "write": "100"
+    },
+    "timestamp": "2017-01-25T11:20:13Z"
+  },
+  "name": "CIFS1",
+  "netbios": {
+    "aliases": [
+      "ALIAS_1",
+      "ALIAS_2",
+      "ALIAS_3"
+    ],
+    "wins_servers": [
+      "10.224.65.20",
+      "10.224.65.21"
+    ]
+  },
+  "security": {
+    "lm_compatibility_level": "string",
+    "restrict_anonymous": "string"
+  },
+  "statistics": {
+    "iops_raw": {
+      "read": "200",
+      "total": "1000",
+      "write": "100"
+    },
+    "latency_raw": {
+      "read": "200",
+      "total": "1000",
+      "write": "100"
+    },
+    "status": "ok",
+    "throughput_raw": {
+      "read": "200",
+      "total": "1000",
+      "write": "100"
+    },
+    "timestamp": "2017-01-25T11:20:13Z"
+  },
+  "svm": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  }
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#ad_domain]
+[.api-collapsible-fifth-title]
+ad_domain
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|fqdn
+|string
+a|The fully qualified domain name of the Windows Active Directory to which this CIFS server belongs. A CIFS server appears as a member of Windows server object in the Active Directory store. POST and PATCH only.
+
+
+|organizational_unit
+|string
+a|Specifies the organizational unit within the Active Directory domain to associate with the CIFS server. POST and PATCH only.
+
+
+|user
+|string
+a|The user account used to add this CIFS server to the Active Directory. POST and DELETE only.
+
+
+|===
+
+
+[#iops]
+[.api-collapsible-fifth-title]
+iops
+
+The rate of I/O operations observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#latency]
+[.api-collapsible-fifth-title]
+latency
+
+The round trip latency in microseconds observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#throughput]
+[.api-collapsible-fifth-title]
+throughput
+
+The rate of throughput bytes per second observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#metric]
+[.api-collapsible-fifth-title]
+metric
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|duration
+|string
+a|The duration over which this sample is calculated. The time durations are represented in the ISO-8601 standard format. Samples can be calculated over the following durations:
+
+
+|iops
+|link:#iops[iops]
+a|The rate of I/O operations observed at the storage object.
+
+
+|latency
+|link:#latency[latency]
+a|The round trip latency in microseconds observed at the storage object.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_ delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput
+|link:#throughput[throughput]
+a|The rate of throughput bytes per second observed at the storage object.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#cifs_netbios]
+[.api-collapsible-fifth-title]
+cifs_netbios
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|aliases
+|array[string]
+a|
+
+|enabled
+|boolean
+a|Specifies whether NetBios name service (NBNS) is enabled for the CIFS. If this service is enabled, the CIFS server will start sending the broadcast for name registration.
+
+
+|wins_servers
+|array[string]
+a|
+
+|===
+
+
+[#cifs_service_security]
+[.api-collapsible-fifth-title]
+cifs_service_security
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|encrypt_dc_connection
+|boolean
+a|Specifies whether encryption is required for domain controller connections.
+
+
+|kdc_encryption
+|boolean
+a|Specifies whether AES-128 and AES-256 encryption is enabled for all Kerberos-based communication with the Active Directory KDC.
+To take advantage of the strongest security with Kerberos-based communication, AES-256 and AES-128 encryption can be enabled on the CIFS server.
+Kerberos-related communication for CIFS is used during CIFS server creation on the SVM, as well
+as during the SMB session setup phase.
+The CIFS server supports the following encryption types for Kerberos communication:
+
+***** RC4-HMAC
+
+***** DES
+
+***** AES
+When the CIFS server is created, the domain controller creates a computer machine account in
+Active Directory. After a newly created machine account authenticates, the KDC and the CIFS server
+negotiates encryption types. At this time, the KDC becomes aware of the encryption capabilities of
+the particular machine account and uses those capabilities in subsequent communication with the
+CIFS server.
+In addition to negotiating encryption types during CIFS server creation, the encryption types are
+renegotiated when a machine account password is reset.
+
+
+|lm_compatibility_level
+|string
+a|It is CIFS server minimum security level, also known as the LMCompatibilityLevel. The minimum security level is the minimum level of the security tokens that        the CIFS server accepts from SMB clients.
+The available values are:
+
+* lm_ntlm_ntlmv2_krb          Accepts LM, NTLM, NTLMv2 and Kerberos
+* ntlm_ntlmv2_krb             Accepts NTLM, NTLMv2 and Kerberos
+* ntlmv2_krb                  Accepts NTLMv2 and Kerberos
+* krb                         Accepts Kerberos only
+
+
+|restrict_anonymous
+|string
+a|Specifies what level of access an anonymous user is granted. An anonymous user (also known as a "null user") can list or enumerate certain types of system information from Windows hosts on the network, including user names and details, account policies, and share names. Access for the anonymous user can be controlled by specifying one of three access restriction settings.
+ The available values are:
+
+** no_restriction   - No access restriction for an anonymous user.
+
+** no_enumeration   - Enumeration is restricted for an anonymous user.
+
+** no_access        - All access is restricted for an anonymous user.
+
+
+|smb_encryption
+|boolean
+a|Specifies whether encryption is required for incoming CIFS traffic.
+
+
+|smb_signing
+|boolean
+a|Specifies whether signing is required for incoming CIFS traffic. SMB signing helps to ensure that network traffic between the CIFS server and the client is not compromised.
+
+
+|===
+
+
+[#iops_raw]
+[.api-collapsible-fifth-title]
+iops_raw
+
+The number of I/O operations observed at the storage object. This should be used along with delta time to calculate the rate of I/O operations per unit of time.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#latency_raw]
+[.api-collapsible-fifth-title]
+latency_raw
+
+The raw latency in microseconds observed at the storage object. This should be divided by the raw IOPS value to calculate the average latency per I/O operation.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#throughput_raw]
+[.api-collapsible-fifth-title]
+throughput_raw
+
+Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#statistics]
+[.api-collapsible-fifth-title]
+statistics
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|iops_raw
+|link:#iops_raw[iops_raw]
+a|The number of I/O operations observed at the storage object. This should be used along with delta time to calculate the rate of I/O operations per unit of time.
+
+
+|latency_raw
+|link:#latency_raw[latency_raw]
+a|The raw latency in microseconds observed at the storage object. This should be divided by the raw IOPS value to calculate the average latency per I/O operation.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput_raw
+|link:#throughput_raw[throughput_raw]
+a|Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

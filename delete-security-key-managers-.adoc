@@ -1,0 +1,203 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'delete-security-key-managers-.html'
+summary: 'Delete key managers'
+---
+
+= Delete key managers
+
+[.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/security/key-managers/{uuid}`#
+
+*Introduced In:* 9.6
+
+Deletes a key manager.
+
+== Related ONTAP commands
+
+* `security key-manager external disable`
+* `security key-manager onboard disable`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|Key manager UUID
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 65536208
+| Failed to delete the SVM Key ID.
+
+| 65536233
+| Internal error. Deletion of km_wrapped_kdb key database has failed for the Onboard Key Manager.
+
+| 65536234
+| Internal error. Deletion of cluster_kdb key database has failed for the Onboard Key Manager.
+
+| 65536239
+| Encrypted volumes are found for the SVM.
+
+| 65536242
+| One or more Storage Encryption devices are assigned an authentication key.
+
+| 65536242
+| One or more Storage Encryption devices are assigned an authentication key.
+
+| 65536800
+| Failed to lookup onboard keys.
+
+| 65536813
+| Encrypted kernel core files found.
+
+| 65536817
+| Failed to determine if key manager is safe to disable.
+
+| 65536822
+| Multitenant key management is not supported in the current cluster version.
+
+| 65536827
+| Failed to determine if the SVM has any encrypted volumes.
+
+| 65536828
+| External key management is not enabled for the SVM.
+
+| 65536867
+| Encrypted volumes are found for the SVM.
+
+| 196608301
+| Failed to determine the type of encryption.
+
+| 196608305
+| NAE aggregates are found in the cluster.
+|===
+
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

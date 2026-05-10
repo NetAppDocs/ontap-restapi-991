@@ -1,0 +1,144 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_storage_aggregate_plexes.html'
+summary: 'Manage storage aggregate plexes'
+---
+
+= Manage storage aggregate plexes
+
+
+
+== Overview
+
+The Storage Aggregate Plex API provides relevant state information for each plex in the aggregate.
+For each plex, details are provided for the RAID groups in the plex and the disks that make up each RAID group.
+
+== Examples
+
+=== Retrieving the list of plexes in an aggregate
+
+The following example shows the response with the list of plexes in an aggregate:
+
+----
+
+# The API:
+/api/storage/aggregates/{uuid}/plexes
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/storage/aggregates/19425837-f2fa-4a9f-8f01-712f626c983c/plexes" -H "accept: application/json"
+
+# The response:
+{
+"records": [
+  {
+    "name": "plex0",
+  },
+  {
+    "name": "plex4",
+  }
+],
+"num_records": 2,
+}
+----
+
+=== Retrieving a specific plex in an aggregate
+
+The following example shows the response when requesting a specific plex of an aggregate:
+
+----
+
+# The API:
+/api/storage/aggregates/{uuid}/plexes/{name}
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/storage/aggregates/19425837-f2fa-4a9f-8f01-712f626c983c/plexes/plex0" -H "accept: application/json"
+
+# The response:
+{
+"aggregate": {
+  "uuid": "19425837-f2fa-4a9f-8f01-712f626c983c",
+  "name": "test1",
+},
+"name": "plex0",
+"online": true,
+"state": "normal",
+"pool": "pool0",
+"resync": {
+  "active": false
+},
+"raid_groups": [
+  {
+    "name": "rg0",
+    "raid_type": "raid_dp",
+    "cache_tier": false,
+    "degraded": false,
+    "recomputing_parity": {
+      "active": false
+    },
+    "reconstruct": {
+      "active": false
+    },
+    "disks": [
+      {
+        "position": "dparity",
+        "state": "normal",
+        "type": "ssd",
+        "usable_size": 86769664,
+        "disk": {
+          "name": "1.1.29",
+        }
+      },
+      {
+        "position": "parity",
+        "state": "normal",
+        "type": "ssd",
+        "usable_size": 86769664,
+        "disk": {
+          "name": "1.1.4",
+        }
+      },
+      {
+        "position": "data",
+        "state": "normal",
+        "type": "ssd",
+        "usable_size": 86769664,
+        "disk": {
+          "name": "1.1.30",
+        }
+      },
+      {
+        "position": "data",
+        "state": "normal",
+        "type": "ssd",
+        "usable_size": 86769664,
+        "disk": {
+          "name": "1.1.5",
+        }
+      },
+      {
+        "position": "data",
+        "state": "normal",
+        "type": "ssd",
+        "usable_size": 86769664,
+        "disk": {
+          "name": "1.1.31",
+        }
+      },
+      {
+        "position": "data",
+        "state": "normal",
+        "type": "ssd",
+        "usable_size": 86769664,
+        "disk": {
+          "name": "1.1.6",
+        }
+      }
+    ]
+  }
+],
+}
+----
+
+

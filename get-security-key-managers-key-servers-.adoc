@@ -1,0 +1,300 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-security-key-managers-key-servers-.html'
+summary: 'Retrieve key servers configured in an external key manager'
+---
+
+= Retrieve key servers configured in an external key manager
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/key-managers/{uuid}/key-servers/{server}`#
+
+*Introduced In:* 9.6
+
+Retrieves key servers configured in an external key manager.
+
+== Related ONTAP commands
+
+* `security key-manager external show`
+* `security key-manager external show-status`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|External key manager UUID
+
+
+|server
+|string
+|path
+|True
+a|Key server configured in the key manager.
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|password
+|string
+a|Password credentials for connecting with the key server. This is not audited.
+
+
+|secondary_key_servers
+|array[string]
+a|A list of the secondary key servers associated with the primary key server.
+
+
+|server
+|string
+a|External key server for key management. If no port is provided, a default port of 5696 is used. Not valid in POST if `records` is provided.
+
+
+|timeout
+|integer
+a|I/O timeout in seconds for communicating with the key server.
+
+
+|username
+|string
+a|KMIP username credentials for connecting with the key server.
+
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "password": "password",
+  "secondary_key_servers": [
+    "string"
+  ],
+  "server": "keyserver1.com:5698",
+  "timeout": "60",
+  "username": "username"
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|password
+|string
+a|Password credentials for connecting with the key server. This is not audited.
+
+
+|secondary_key_servers
+|array[string]
+a|A list of the secondary key servers associated with the primary key server.
+
+
+|server
+|string
+a|External key server for key management. If no port is provided, a default port of 5696 is used. Not valid in POST if `records` is provided.
+
+
+|timeout
+|integer
+a|I/O timeout in seconds for communicating with the key server.
+
+
+|username
+|string
+a|KMIP username credentials for connecting with the key server.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

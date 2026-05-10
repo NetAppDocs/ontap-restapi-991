@@ -1,0 +1,288 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-protocols-san-igroups-initiators-.html'
+summary: 'Update an initiator'
+---
+
+= Update an initiator
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/san/igroups/{igroup.uuid}/initiators/{name}`#
+
+*Introduced In:* 9.9
+
+Updates an initiator of an initiator group.
+This API only supports modification of initiators owned directly by the
+initiator group. Initiators of nested initiator groups must be
+modified on the initiator group that directly owns the initiator.
+
+== Related ONTAP commands
+
+* `lun igroup initiator modify`
+
+== Learn more
+
+* link:manage_san_igroups.html[DOC /protocols/san/igroups]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|igroup.uuid
+|string
+|path
+|True
+a|The unique identifier of the initiator group.
+
+
+|name
+|string
+|path
+|True
+a|The initiator name.
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment available for use by the administrator. Valid in POST and PATCH.
+
+
+|igroup
+|link:#igroup[igroup]
+a|The initiator group in which the initiator is found.
+
+Note that this does not mean that the initiator cannot also be found in other initiator groups.
+
+
+|records
+|array[link:#records[records]]
+a|An array of initiators specified to add multiple initiators to an initiator group in a single API call. Not allowed when the `name` property is used.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "comment": "string",
+  "igroup": {
+    "uuid": "4ea7a442-86d1-11e0-ae1c-123478563412"
+  },
+  "records": [
+    {
+      "comment": "string"
+    }
+  ]
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 5374034
+| An initiator is not a member of the initiator group.
+
+| 5374744
+| The cluster is currently running in a mixed version and the initiators cannot be modified until the effective cluster version reaches 9.9.1.
+
+| 5374852
+| The initiator group does not exist.
+
+| 5374918
+| A subset of the provided list of initiators were modified before a failure occurred.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#igroup]
+[.api-collapsible-fifth-title]
+igroup
+
+The initiator group in which the initiator is found.
+
+Note that this does not mean that the initiator cannot also be found in other initiator groups.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|uuid
+|string
+a|The unique identifier of the initiator group.
+
+
+|===
+
+
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment available for use by the administrator. Valid in POST and PATCH.
+
+
+|===
+
+
+[#igroup_initiator]
+[.api-collapsible-fifth-title]
+igroup_initiator
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment available for use by the administrator. Valid in POST and PATCH.
+
+
+|igroup
+|link:#igroup[igroup]
+a|The initiator group in which the initiator is found.
+
+Note that this does not mean that the initiator cannot also be found in other initiator groups.
+
+
+|records
+|array[link:#records[records]]
+a|An array of initiators specified to add multiple initiators to an initiator group in a single API call. Not allowed when the `name` property is used.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

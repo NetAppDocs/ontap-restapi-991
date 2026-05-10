@@ -1,0 +1,210 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'display_metrocluster_diagnostics.html'
+summary: 'Display MetroCluster diagnostics'
+---
+
+= Display MetroCluster diagnostics
+
+
+
+== Overview
+
+You can use this API to initiate a MetroCluster diagnostics operation and fetch the results of a completed diagnostics operation on a MetroCluster over IP configuration. The GET operation retrieves the results of a completed diagnostics operation for the MetroCluster over IP configuration. The POST request can be used to start a MetroCluster diagnostics operation or set up a schedule for the diagnostics to be run periodically.
+
+== Starting a MetroCluster diagnostics operation
+
+A new MetroCluster diagnostics operation can be started by issuing a POST to /cluster/metrocluster/diagnostics. There are no extra parameters required to initiate a diagnostics operation.
+
+=== Polling the POST job for status of diagnostics operation
+
+After a successful POST /cluster/diagnostics operation is issued, an HTTP status code of 202 (Accepted) is returned along with a job UUID and a link in the body of the response. The POST job continues asynchronously and can be monitored by using the job UUID and the /cluster/jobs API. The "message" field in the response of the GET /cluster/jobs/\{uuid} request shows the current step in the job, and the "state" field shows the overall state of the job.
+
+'''
+
+== Examples
+
+=== Running the diagnostics operation
+
+This example shows the POST request for starting a diagnostic operation for a MetroCluster over IP configuration and the responses returned:
+
+----
+
+#API
+/api/cluster/metrocluster/diagnostics
+----
+
+=== POST Request
+
+----
+curl -X POST https://<mgmt-ip>/api/cluster/metrocluster/diagnostics
+----
+
+=== POST Response
+
+----
+HTTP/1.1 202 Accepted
+Date: Tue, 22 Sep 2020 17:20:53 GMT
+Server: libzapid-httpd
+X-Content-Type-Options: nosniff
+Cache-Control: no-cache,no-store,must-revalidate
+Location: /api/cluster/metrocluster/diagnostics
+Content-Length: 189
+Content-Type: application/hal+json
+{
+"job": {
+  "uuid": "f7d3804c-fcf7-11ea-acaf-005056bb47c1",
+  "_links": {
+    "self": {
+      "href": "/api/cluster/jobs/f7d3804c-fcf7-11ea-acaf-005056bb47c1"
+    }
+  }
+}
+}
+----
+
+=== Monitoring the job progress
+
+Use the link provided in the response to the POST request to fetch information for the diagnostics operation job.
+
+==== Request
+
+----
+curl -X GET https://<mgmt-ip>/api/cluster/jobs/f7d3804c-fcf7-11ea-acaf-005056bb47c1
+----
+
+==== Job status response
+
+----
+HTTP/1.1 202 Accepted
+Date: Tue, 22 Sep 2020 17:21:12 GMT
+Server: libzapid-httpd
+X-Content-Type-Options: nosniff
+Cache-Control: no-cache,no-store,must-revalidate
+Content-Length: 345
+Content-Type: application/hal+json
+{
+"uuid": "f7d3804c-fcf7-11ea-acaf-005056bb47c1",
+"description": "POST /api/cluster/metrocluster/diagnostics",
+"state": "running",
+"message": "Checking nodes...",
+"code": 2432853,
+"start_time": "2020-09-22T13:20:53-04:00",
+"_links": {
+  "self": {
+    "href": "/api/cluster/jobs/f7d3804c-fcf7-11ea-acaf-005056bb47c1"
+  }
+}
+}
+----
+
+==== Final status of the diagnostics job
+
+----
+HTTP/1.1 202 Accepted
+Date: Tue, 22 Sep 2020 17:29:04 GMT
+Server: libzapid-httpd
+X-Content-Type-Options: nosniff
+Cache-Control: no-cache,no-store,must-revalidate
+Content-Length: 372
+Content-Type: application/hal+json
+{
+"uuid": "f7d3804c-fcf7-11ea-acaf-005056bb47c1",
+"description": "POST /api/cluster/metrocluster/diagnostics",
+"state": "success",
+"message": "success",
+"code": 0,
+"start_time": "2020-09-22T13:20:53-04:00",
+"end_time": "2020-09-22T13:22:04-04:00",
+"_links": {
+  "self": {
+    "href": "/api/cluster/jobs/f7d3804c-fcf7-11ea-acaf-005056bb47c1"
+  }
+}
+}
+----
+
+=== Retrieving the diagnostics operation
+
+==== Request
+
+----
+curl -X GET https://<mgmt-ip>/api/cluster/metrocluster/diagnostics
+----
+
+==== Response
+
+----
+HTTP/1.1 202 Accepted
+Date: Tue, 22 Sep 2020 18:04:28 GMT
+Server: libzapid-httpd
+X-Content-Type-Options: nosniff
+Cache-Control: no-cache,no-store,must-revalidate
+Content-Length: 1005
+Content-Type: application/hal+json
+{
+"node": {
+  "timestamp": "2020-09-22T13:47:01-04:00",
+  "state": "ok",
+  "summary": {
+    "message": ""
+  }
+},
+"interface": {
+  "timestamp": "2020-09-22T13:47:01-04:00",
+  "state": "ok",
+  "summary": {
+    "message": ""
+  }
+},
+"aggregate": {
+  "timestamp": "2020-09-22T13:47:01-04:00",
+  "state": "ok",
+  "summary": {
+    "message": ""
+  }
+},
+"cluster": {
+  "timestamp": "2020-09-22T13:47:01-04:00",
+  "state": "ok",
+  "summary": {
+    "message": ""
+  }
+},
+"connection": {
+  "timestamp": "2020-09-22T13:47:01-04:00",
+  "state": "ok",
+  "summary": {
+    "message": ""
+  }
+},
+"volume": {
+  "timestamp": "2020-09-22T13:47:01-04:00",
+  "state": "ok",
+  "summary": {
+    "message": ""
+  }
+},
+"config_replication": {
+  "timestamp": "2020-09-22T13:47:01-04:00",
+  "state": "ok",
+  "summary": {
+    "message": ""
+  }
+},
+"_links": {
+  "self": {
+    "href": "/api/cluster/metrocluster/diagnostics"
+  }
+}
+}
+----
+
+=== Related ONTAP Commands
+
+* `metrocluster check run`
+* `metrocluster check show`
+
+

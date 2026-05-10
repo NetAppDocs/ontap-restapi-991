@@ -1,0 +1,731 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-security-azure-key-vaults.html'
+summary: 'Retrieve AKVs configured for all clusters and SVMs'
+---
+
+= Retrieve AKVs configured for all clusters and SVMs
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/azure-key-vaults`#
+
+*Introduced In:* 9.8
+
+Retrieves AKVs configured for all clusters and SVMs.
+Note: This method is only available to the Azure NetApp Files Cloud Volume Services.
+
+== Related ONTAP commands
+
+* `security key-manager external azure show`
+* `security key-manager external azure check`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|state.code
+|integer
+|query
+|False
+a|Filter by state.code
+
+
+|state.available
+|boolean
+|query
+|False
+a|Filter by state.available
+
+
+|state.message
+|string
+|query
+|False
+a|Filter by state.message
+
+
+|scope
+|string
+|query
+|False
+a|Filter by scope
+
+
+|svm.uuid
+|string
+|query
+|False
+a|Filter by svm.uuid
+
+
+|svm.name
+|string
+|query
+|False
+a|Filter by svm.name
+
+
+|ekmip_reachability.node.name
+|string
+|query
+|False
+a|Filter by ekmip_reachability.node.name
+
+
+|ekmip_reachability.node.uuid
+|string
+|query
+|False
+a|Filter by ekmip_reachability.node.uuid
+
+
+|ekmip_reachability.reachable
+|boolean
+|query
+|False
+a|Filter by ekmip_reachability.reachable
+
+
+|ekmip_reachability.message
+|string
+|query
+|False
+a|Filter by ekmip_reachability.message
+
+
+|ekmip_reachability.code
+|integer
+|query
+|False
+a|Filter by ekmip_reachability.code
+
+
+|proxy_port
+|integer
+|query
+|False
+a|Filter by proxy_port
+
+
+|uuid
+|string
+|query
+|False
+a|Filter by uuid
+
+
+|proxy_username
+|string
+|query
+|False
+a|Filter by proxy_username
+
+
+|proxy_type
+|string
+|query
+|False
+a|Filter by proxy_type
+
+
+|name
+|string
+|query
+|False
+a|Filter by name
+
+
+|client_id
+|string
+|query
+|False
+a|Filter by client_id
+
+
+|azure_reachability.message
+|string
+|query
+|False
+a|Filter by azure_reachability.message
+
+
+|azure_reachability.reachable
+|boolean
+|query
+|False
+a|Filter by azure_reachability.reachable
+
+
+|azure_reachability.code
+|integer
+|query
+|False
+a|Filter by azure_reachability.code
+
+
+|proxy_host
+|string
+|query
+|False
+a|Filter by proxy_host
+
+
+|key_id
+|string
+|query
+|False
+a|Filter by key_id
+
+
+|tenant_id
+|string
+|query
+|False
+a|Filter by tenant_id
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+
+|max_records
+|integer
+|query
+|False
+a|Limit the number of records returned.
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning.  When iterating over a collection, the default is 15 seconds.  ONTAP returns earlier if either max records or the end of the collection is reached.
+
+* Default value: 15
+* Max value: 120
+* Min value: 0
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is true for GET calls.  When set to false, only the number of records is returned.
+
+* Default value: 1
+
+
+|order_by
+|array[string]
+|query
+|False
+a|Order results by specified fields and optional [asc|desc] direction. Default direction is 'asc' for ascending.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#azure_key_vault[azure_key_vault]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "next": {
+      "href": "/api/resourcelink"
+    },
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": "/api/resourcelink"
+        }
+      },
+      "azure_reachability": {
+        "code": "346758",
+        "message": "AKV service is not reachable from all nodes - reason."
+      },
+      "client_id": "aaaaaaaa-bbbb-aaaa-bbbb-aaaaaaaaaaaa",
+      "ekmip_reachability": [
+        {
+          "code": "346758",
+          "message": "embedded KMIP server status unavailable on node.",
+          "node": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "node1",
+            "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+          }
+        }
+      ],
+      "key_id": "https://keyvault1.vault.azure.net/keys/key1",
+      "name": "https://kmip-akv-keyvault.vault.azure.net/",
+      "proxy_host": "proxy.eng.com",
+      "proxy_port": "1234",
+      "proxy_type": "http",
+      "proxy_username": "proxyuser",
+      "scope": "string",
+      "state": {
+        "code": "346758",
+        "message": "Top-level internal key protection key (KEK) is unavailable on the following nodes with the associated reasons: Node: node1. Reason: No volumes created yet for the SVM. Wrapped KEK status will be available after creating encrypted volumes."
+      },
+      "svm": {
+        "_links": {
+          "self": {
+            "href": "/api/resourcelink"
+          }
+        },
+        "name": "svm1",
+        "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+      },
+      "tenant_id": "zzzzzzzz-yyyy-zzzz-yyyy-zzzzzzzzzzzz",
+      "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|next
+|link:#href[href]
+a|
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#azure_reachability]
+[.api-collapsible-fifth-title]
+azure_reachability
+
+Indicates whether or not the AKV service is reachable from all the nodes in the cluster.
+This is an advanced property; there is an added cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|integer
+a|Code corresponding to the status message. Returns a 0 if AKV service is reachable from all nodes in the cluster.
+
+
+|message
+|string
+a|Error message set when reachability is false.
+
+
+|reachable
+|boolean
+a|Set to true when the AKV service is reachable from all nodes of the cluster.
+
+
+|===
+
+
+[#node]
+[.api-collapsible-fifth-title]
+node
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#ekmip_reachability]
+[.api-collapsible-fifth-title]
+ekmip_reachability
+
+Provides the connectivity status for the given SVM on the given node to all EKMIP servers configured on all nodes of the cluster.
+This is an advanced property; there is an added cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|integer
+a|Code corresponding to the error message. Returns a 0 if a given SVM is able to communicate to the EKMIP servers of all of the nodes in the cluster.
+
+
+|message
+|string
+a|Error message set when cluster-wide EKMIP server availability from the given SVM and node is false.
+
+
+|node
+|link:#node[node]
+a|
+
+|reachable
+|boolean
+a|Set to true if the given SVM on the given node is able to communicate to all EKMIP servers configured on all nodes in the cluster.
+
+
+|===
+
+
+[#state]
+[.api-collapsible-fifth-title]
+state
+
+Indicates whether or not the AKV wrapped internal key is available cluster wide.
+This is an advanced property; there is an added cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|available
+|boolean
+a|Set to true when an AKV wrapped internal key is present on all nodes of the cluster.
+
+
+|code
+|integer
+a|Code corresponding to the status message. Returns a 0 if AKV wrapped key is available on all nodes in the cluster.
+
+
+|message
+|string
+a|Error message set when top-level internal key protection key (KEK) availability on cluster is false.
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#azure_key_vault]
+[.api-collapsible-fifth-title]
+azure_key_vault
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|azure_reachability
+|link:#azure_reachability[azure_reachability]
+a|Indicates whether or not the AKV service is reachable from all the nodes in the cluster.
+This is an advanced property; there is an added cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+
+
+|client_id
+|string
+a|Application client ID of the deployed Azure application with appropriate access to an AKV.
+
+
+|ekmip_reachability
+|array[link:#ekmip_reachability[ekmip_reachability]]
+a|
+
+|key_id
+|string
+a|Key Identifier of AKV key encryption key.
+
+
+|name
+|string
+a|Name of the deployed AKV that is used by the Azure NetApp Files Cloud Volume Services for storing keys.
+
+
+|proxy_host
+|string
+a|Proxy host.
+
+
+|proxy_port
+|integer
+a|Proxy port.
+
+
+|proxy_type
+|string
+a|Type of proxy.
+
+
+|proxy_username
+|string
+a|Proxy username.
+
+
+|scope
+|string
+a|Set to "svm" for interfaces owned by an SVM. Otherwise, set to "cluster".
+
+
+|state
+|link:#state[state]
+a|Indicates whether or not the AKV wrapped internal key is available cluster wide.
+This is an advanced property; there is an added cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|tenant_id
+|string
+a|Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV.
+
+
+|uuid
+|string
+a|A unique identifier for the Azure Key Vault (AKV).
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

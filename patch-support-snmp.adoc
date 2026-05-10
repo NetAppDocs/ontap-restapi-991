@@ -1,0 +1,216 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-support-snmp.html'
+summary: 'Update cluster-wide SNMP configuration'
+---
+
+= Update cluster-wide SNMP configuration
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/support/snmp`#
+
+*Introduced In:* 9.7
+
+Updates the cluster wide SNMP configuration, such as enabling or disabling SNMP and enabling or disabling authentication traps.
+
+== Related ONTAP commands
+
+* `options snmp.enable`
+* `system snmp authtrap`
+
+== Learn more
+
+* link:manage_cluster-wide_snmp_configuration.html[DOC /support/snmp]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|auth_traps_enabled
+|boolean
+a|Specifies whether to enable or disable SNMP authentication traps.
+
+
+|enabled
+|boolean
+a|Specifies whether to enable or disable SNMP.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "auth_traps_enabled": 1,
+  "enabled": 1
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 1179738
+| Cluster identification not available for modification since a cluster has not been created.
+
+| 1179739
+| Cluster identification modification is not available in maintenance mode or other boot modes.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#self_link]
+[.api-collapsible-fifth-title]
+self_link
+[#snmp]
+[.api-collapsible-fifth-title]
+snmp
+
+Cluster-wide SNMP configuration.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|auth_traps_enabled
+|boolean
+a|Specifies whether to enable or disable SNMP authentication traps.
+
+
+|enabled
+|boolean
+a|Specifies whether to enable or disable SNMP.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

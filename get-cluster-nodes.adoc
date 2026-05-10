@@ -1,0 +1,2179 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-cluster-nodes.html'
+summary: 'Retrieve nodes in a cluster'
+---
+
+= Retrieve nodes in a cluster
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/nodes`#
+
+*Introduced In:* 9.6
+
+Retrieves the nodes in the cluster.
+
+== Expensive properties
+
+There is an added cost to retrieving values for these properties. They are not included by default in GET results and must be explicitly requested using the `fields` query parameter. See link:getting_started_with_the_ontap_rest_api.html#Requesting_specific_fields[Requesting specific fields] to learn more.
+
+* `statistics.+*+`
+* `metric.+*+`
+
+== Related ONTAP commands
+
+* `system node show`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|metric.processor_utilization
+|integer
+|query
+|False
+a|Filter by metric.processor_utilization
+
+* Introduced in: 9.8
+
+
+|metric.timestamp
+|string
+|query
+|False
+a|Filter by metric.timestamp
+
+* Introduced in: 9.8
+
+
+|metric.status
+|string
+|query
+|False
+a|Filter by metric.status
+
+* Introduced in: 9.8
+
+
+|metric.duration
+|string
+|query
+|False
+a|Filter by metric.duration
+
+* Introduced in: 9.8
+
+
+|state
+|string
+|query
+|False
+a|Filter by state
+
+* Introduced in: 9.7
+
+
+|serial_number
+|string
+|query
+|False
+a|Filter by serial_number
+
+
+|version.major
+|integer
+|query
+|False
+a|Filter by version.major
+
+
+|version.minor
+|integer
+|query
+|False
+a|Filter by version.minor
+
+
+|version.full
+|string
+|query
+|False
+a|Filter by version.full
+
+
+|version.generation
+|integer
+|query
+|False
+a|Filter by version.generation
+
+
+|uptime
+|integer
+|query
+|False
+a|Filter by uptime
+
+
+|date
+|string
+|query
+|False
+a|Filter by date
+
+
+|service_processor.mac_address
+|string
+|query
+|False
+a|Filter by service_processor.mac_address
+
+
+|service_processor.ipv4_interface.address
+|string
+|query
+|False
+a|Filter by service_processor.ipv4_interface.address
+
+
+|service_processor.ipv4_interface.gateway
+|string
+|query
+|False
+a|Filter by service_processor.ipv4_interface.gateway
+
+
+|service_processor.ipv4_interface.netmask
+|string
+|query
+|False
+a|Filter by service_processor.ipv4_interface.netmask
+
+
+|service_processor.firmware_version
+|string
+|query
+|False
+a|Filter by service_processor.firmware_version
+
+
+|service_processor.link_status
+|string
+|query
+|False
+a|Filter by service_processor.link_status
+
+
+|service_processor.state
+|string
+|query
+|False
+a|Filter by service_processor.state
+
+
+|service_processor.dhcp_enabled
+|boolean
+|query
+|False
+a|Filter by service_processor.dhcp_enabled
+
+
+|service_processor.ipv6_interface.address
+|string
+|query
+|False
+a|Filter by service_processor.ipv6_interface.address
+
+
+|service_processor.ipv6_interface.netmask
+|integer
+|query
+|False
+a|Filter by service_processor.ipv6_interface.netmask
+
+
+|service_processor.ipv6_interface.gateway
+|string
+|query
+|False
+a|Filter by service_processor.ipv6_interface.gateway
+
+
+|location
+|string
+|query
+|False
+a|Filter by location
+
+
+|system_id
+|string
+|query
+|False
+a|Filter by system_id
+
+* Introduced in: 9.7
+
+
+|uuid
+|string
+|query
+|False
+a|Filter by uuid
+
+
+|management_interfaces.ip.address
+|string
+|query
+|False
+a|Filter by management_interfaces.ip.address
+
+
+|management_interfaces.name
+|string
+|query
+|False
+a|Filter by management_interfaces.name
+
+
+|management_interfaces.uuid
+|string
+|query
+|False
+a|Filter by management_interfaces.uuid
+
+
+|membership
+|string
+|query
+|False
+a|Filter by membership
+
+
+|storage_configuration
+|string
+|query
+|False
+a|Filter by storage_configuration
+
+* Introduced in: 9.9
+
+
+|statistics.timestamp
+|string
+|query
+|False
+a|Filter by statistics.timestamp
+
+* Introduced in: 9.8
+
+
+|statistics.processor_utilization_raw
+|integer
+|query
+|False
+a|Filter by statistics.processor_utilization_raw
+
+* Introduced in: 9.8
+
+
+|statistics.status
+|string
+|query
+|False
+a|Filter by statistics.status
+
+* Introduced in: 9.8
+
+
+|statistics.processor_utilization_base
+|integer
+|query
+|False
+a|Filter by statistics.processor_utilization_base
+
+* Introduced in: 9.8
+
+
+|nvram.battery_state
+|string
+|query
+|False
+a|Filter by nvram.battery_state
+
+* Introduced in: 9.9
+
+
+|nvram.id
+|integer
+|query
+|False
+a|Filter by nvram.id
+
+* Introduced in: 9.9
+
+
+|name
+|string
+|query
+|False
+a|Filter by name
+
+
+|cluster_interfaces.ip.address
+|string
+|query
+|False
+a|Filter by cluster_interfaces.ip.address
+
+
+|cluster_interfaces.name
+|string
+|query
+|False
+a|Filter by cluster_interfaces.name
+
+
+|cluster_interfaces.uuid
+|string
+|query
+|False
+a|Filter by cluster_interfaces.uuid
+
+
+|system_machine_type
+|string
+|query
+|False
+a|Filter by system_machine_type
+
+* Introduced in: 9.7
+
+
+|metrocluster.type
+|string
+|query
+|False
+a|Filter by metrocluster.type
+
+* Introduced in: 9.8
+
+
+|metrocluster.custom_vlan_capable
+|boolean
+|query
+|False
+a|Filter by metrocluster.custom_vlan_capable
+
+* Introduced in: 9.8
+
+
+|metrocluster.ports.name
+|string
+|query
+|False
+a|Filter by metrocluster.ports.name
+
+* Introduced in: 9.8
+
+
+|model
+|string
+|query
+|False
+a|Filter by model
+
+
+|vm.provider_type
+|string
+|query
+|False
+a|Filter by vm.provider_type
+
+* Introduced in: 9.7
+
+
+|ha.ports.state
+|string
+|query
+|False
+a|Filter by ha.ports.state
+
+* Introduced in: 9.7
+
+
+|ha.ports.number
+|integer
+|query
+|False
+a|Filter by ha.ports.number
+
+* Introduced in: 9.7
+
+
+|ha.giveback.state
+|string
+|query
+|False
+a|Filter by ha.giveback.state
+
+* Introduced in: 9.7
+
+
+|ha.giveback.failure.message
+|string
+|query
+|False
+a|Filter by ha.giveback.failure.message
+
+* Introduced in: 9.7
+
+
+|ha.giveback.failure.code
+|integer
+|query
+|False
+a|Filter by ha.giveback.failure.code
+
+* Introduced in: 9.7
+
+
+|ha.auto_giveback
+|boolean
+|query
+|False
+a|Filter by ha.auto_giveback
+
+
+|ha.partners.name
+|string
+|query
+|False
+a|Filter by ha.partners.name
+
+
+|ha.partners.uuid
+|string
+|query
+|False
+a|Filter by ha.partners.uuid
+
+
+|ha.enabled
+|boolean
+|query
+|False
+a|Filter by ha.enabled
+
+
+|ha.takeover.failure.code
+|integer
+|query
+|False
+a|Filter by ha.takeover.failure.code
+
+* Introduced in: 9.7
+
+
+|ha.takeover.failure.message
+|string
+|query
+|False
+a|Filter by ha.takeover.failure.message
+
+* Introduced in: 9.7
+
+
+|ha.takeover.state
+|string
+|query
+|False
+a|Filter by ha.takeover.state
+
+* Introduced in: 9.7
+
+
+|vendor_serial_number
+|string
+|query
+|False
+a|Filter by vendor_serial_number
+
+* Introduced in: 9.7
+
+
+|owner
+|string
+|query
+|False
+a|Filter by owner
+
+* Introduced in: 9.9
+
+
+|controller.flash_cache.model
+|string
+|query
+|False
+a|Filter by controller.flash_cache.model
+
+
+|controller.flash_cache.slot
+|string
+|query
+|False
+a|Filter by controller.flash_cache.slot
+
+
+|controller.flash_cache.firmware_version
+|string
+|query
+|False
+a|Filter by controller.flash_cache.firmware_version
+
+
+|controller.flash_cache.firmware_file
+|string
+|query
+|False
+a|Filter by controller.flash_cache.firmware_file
+
+* Introduced in: 9.9
+
+
+|controller.flash_cache.serial_number
+|string
+|query
+|False
+a|Filter by controller.flash_cache.serial_number
+
+
+|controller.flash_cache.state
+|string
+|query
+|False
+a|Filter by controller.flash_cache.state
+
+
+|controller.flash_cache.capacity
+|integer
+|query
+|False
+a|Filter by controller.flash_cache.capacity
+
+
+|controller.flash_cache.hardware_revision
+|string
+|query
+|False
+a|Filter by controller.flash_cache.hardware_revision
+
+
+|controller.flash_cache.device_id
+|integer
+|query
+|False
+a|Filter by controller.flash_cache.device_id
+
+* Introduced in: 9.9
+
+
+|controller.flash_cache.part_number
+|string
+|query
+|False
+a|Filter by controller.flash_cache.part_number
+
+
+|controller.failed_fan.message.code
+|string
+|query
+|False
+a|Filter by controller.failed_fan.message.code
+
+* Introduced in: 9.9
+
+
+|controller.failed_fan.message.message
+|string
+|query
+|False
+a|Filter by controller.failed_fan.message.message
+
+* Introduced in: 9.9
+
+
+|controller.failed_fan.count
+|integer
+|query
+|False
+a|Filter by controller.failed_fan.count
+
+* Introduced in: 9.9
+
+
+|controller.board
+|string
+|query
+|False
+a|Filter by controller.board
+
+* Introduced in: 9.9
+
+
+|controller.failed_power_supply.message.message
+|string
+|query
+|False
+a|Filter by controller.failed_power_supply.message.message
+
+* Introduced in: 9.9
+
+
+|controller.failed_power_supply.message.code
+|string
+|query
+|False
+a|Filter by controller.failed_power_supply.message.code
+
+* Introduced in: 9.9
+
+
+|controller.failed_power_supply.count
+|integer
+|query
+|False
+a|Filter by controller.failed_power_supply.count
+
+* Introduced in: 9.9
+
+
+|controller.memory_size
+|integer
+|query
+|False
+a|Filter by controller.memory_size
+
+* Introduced in: 9.9
+
+
+|controller.cpu.count
+|integer
+|query
+|False
+a|Filter by controller.cpu.count
+
+* Introduced in: 9.9
+
+
+|controller.cpu.firmware_release
+|string
+|query
+|False
+a|Filter by controller.cpu.firmware_release
+
+* Introduced in: 9.9
+
+
+|controller.cpu.processor
+|string
+|query
+|False
+a|Filter by controller.cpu.processor
+
+* Introduced in: 9.9
+
+
+|controller.over_temperature
+|string
+|query
+|False
+a|Filter by controller.over_temperature
+
+
+|controller.frus.state
+|string
+|query
+|False
+a|Filter by controller.frus.state
+
+
+|controller.frus.type
+|string
+|query
+|False
+a|Filter by controller.frus.type
+
+
+|controller.frus.id
+|string
+|query
+|False
+a|Filter by controller.frus.id
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+
+|max_records
+|integer
+|query
+|False
+a|Limit the number of records returned.
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is true for GET calls.  When set to false, only the number of records is returned.
+
+* Default value: 1
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning.  When iterating over a collection, the default is 15 seconds.  ONTAP returns earlier if either max records or the end of the collection is reached.
+
+* Default value: 15
+* Max value: 120
+* Min value: 0
+
+
+|order_by
+|array[string]
+|query
+|False
+a|Order results by specified fields and optional [asc|desc] direction. Default direction is 'asc' for ascending.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|num_records
+|integer
+a|
+
+|records
+|array[link:#records[records]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "next": {
+      "href": "/api/resourcelink"
+    },
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": "/api/resourcelink"
+        }
+      },
+      "cluster_interfaces": [
+        {
+          "_links": {
+            "self": {
+              "href": "/api/resourcelink"
+            }
+          },
+          "ip": {
+            "address": "10.10.10.7"
+          },
+          "name": "lif1",
+          "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+        }
+      ],
+      "controller": {
+        "board": "System Board XXVIII",
+        "cpu": {
+          "count": "20",
+          "firmware_release": "string",
+          "processor": "string"
+        },
+        "failed_fan": {
+          "count": "1",
+          "message": {
+            "code": "111411207",
+            "message": "There are no failed fans."
+          }
+        },
+        "failed_power_supply": {
+          "count": "1",
+          "message": {
+            "code": "111411208",
+            "message": "There are no failed power supplies."
+          }
+        },
+        "flash_cache": [
+          {
+            "capacity": "1024000000000",
+            "device_id": "0",
+            "firmware_file": "X9170_O000Z6300NVM",
+            "firmware_version": "NA05",
+            "hardware_revision": "A1",
+            "model": "X1970A",
+            "part_number": "119-00207",
+            "serial_number": "A22P5061550000187",
+            "slot": "6-1",
+            "state": "string"
+          }
+        ],
+        "frus": [
+          {
+            "id": "string",
+            "state": "string",
+            "type": "string"
+          }
+        ],
+        "memory_size": "1024000000",
+        "over_temperature": "string"
+      },
+      "date": "2019-04-17T11:49:26-04:00",
+      "ha": {
+        "giveback": {
+          "failure": {
+            "code": "852126",
+            "message": "Failed to initiate giveback. Run the \"storage failover show-giveback\" command for more information."
+          },
+          "state": "failed"
+        },
+        "partners": [
+          {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "node1",
+            "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+          }
+        ],
+        "ports": [
+          {
+            "number": "0",
+            "state": "active"
+          }
+        ],
+        "takeover": {
+          "failure": {
+            "code": "852130",
+            "message": "Failed to initiate takeover. Run the \"storage failover show-takeover\" command for more information."
+          },
+          "state": "failed"
+        }
+      },
+      "location": "rack 2 row 5",
+      "management_interfaces": [
+        {
+          "_links": {
+            "self": {
+              "href": "/api/resourcelink"
+            }
+          },
+          "ip": {
+            "address": "10.10.10.7"
+          },
+          "name": "lif1",
+          "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+        }
+      ],
+      "membership": "string",
+      "metric": {
+        "_links": {
+          "self": {
+            "href": "/api/resourcelink"
+          }
+        },
+        "duration": "PT15S",
+        "processor_utilization": "13",
+        "status": "ok",
+        "timestamp": "2017-01-25T11:20:13Z"
+      },
+      "metrocluster": {
+        "ports": [
+          {
+            "name": "e1b"
+          }
+        ],
+        "type": "string"
+      },
+      "model": "FAS3070",
+      "name": "node-01",
+      "nvram": {
+        "battery_state": "string",
+        "id": 0
+      },
+      "owner": "Example Corp",
+      "serial_number": "4048820-60-9",
+      "service_processor": {
+        "firmware_version": "string",
+        "ipv4_interface": {
+          "address": "10.10.10.7",
+          "gateway": "10.1.1.1",
+          "netmask": "24"
+        },
+        "ipv6_interface": {
+          "address": "fd20:8b1e:b255:5011:10:141:4:97",
+          "gateway": "fd20:8b1e:b255:5011:10::1",
+          "netmask": "64"
+        },
+        "link_status": "string",
+        "mac_address": "string",
+        "state": "string"
+      },
+      "state": "string",
+      "statistics": {
+        "processor_utilization_base": "12345123",
+        "processor_utilization_raw": "13",
+        "status": "ok",
+        "timestamp": "2017-01-25T11:20:13Z"
+      },
+      "storage_configuration": "string",
+      "system_id": "0537035403",
+      "system_machine_type": "7Y56-CTOWW1",
+      "uptime": "300536",
+      "uuid": "4ea7a442-86d1-11e0-ae1c-123478563412",
+      "vendor_serial_number": "791603000068",
+      "version": {
+        "full": "NetApp Release 9.4.0: Sun Nov 05 18:20:57 UTC 2017",
+        "generation": "9",
+        "major": "4",
+        "minor": "0"
+      },
+      "vm": {
+        "provider_type": "string"
+      }
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|next
+|link:#href[href]
+a|
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#node_setup_ip]
+[.api-collapsible-fifth-title]
+node_setup_ip
+
+The IP configuration for cluster setup.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|address
+|string
+a|IPv4 or IPv6 address
+
+
+|===
+
+
+[#cluster_interface]
+[.api-collapsible-fifth-title]
+cluster_interface
+
+The cluster network IP address of the node to be added.
+
+[#ip]
+[.api-collapsible-fifth-title]
+ip
+
+IP information
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|address
+|string
+a|IPv4 or IPv6 address
+
+
+|===
+
+
+[#cluster_interfaces]
+[.api-collapsible-fifth-title]
+cluster_interfaces
+
+Network interface
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|ip
+|link:#ip[ip]
+a|IP information
+
+
+|name
+|string
+a|The name of the interface.
+
+
+|uuid
+|string
+a|The UUID that uniquely identifies the interface.
+
+
+|===
+
+
+[#cpu]
+[.api-collapsible-fifth-title]
+cpu
+
+CPU information.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|count
+|integer
+a|Number of CPUs on the node.
+
+
+|firmware_release
+|string
+a|Firmware release number. Defined by the CPU manufacturer.
+
+
+|processor
+|string
+a|CPU type on the node.
+
+
+|===
+
+
+[#message]
+[.api-collapsible-fifth-title]
+message
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Error code describing the current condition of chassis fans.
+
+
+|message
+|string
+a|Message describing the current condition of chassis fans. It is only of use when `failed_fan.count` is not zero.
+
+
+|===
+
+
+[#failed_fan]
+[.api-collapsible-fifth-title]
+failed_fan
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|count
+|integer
+a|Specifies a count of the number of chassis fans that are not operating within the recommended RPM range.
+
+
+|message
+|link:#message[message]
+a|
+
+|===
+
+
+[#message]
+[.api-collapsible-fifth-title]
+message
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Error code describing the current condition of power supply.
+
+
+|message
+|string
+a|Message describing the state of any power supplies that are currently degraded. It is only of use when `failed_power_supply.count` is not zero.
+
+
+|===
+
+
+[#failed_power_supply]
+[.api-collapsible-fifth-title]
+failed_power_supply
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|count
+|integer
+a|Number of failed power supply units.
+
+
+|message
+|link:#message[message]
+a|
+
+|===
+
+
+[#flash_cache]
+[.api-collapsible-fifth-title]
+flash_cache
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|capacity
+|integer
+a|Size in bytes
+
+
+|device_id
+|integer
+a|
+
+|firmware_file
+|string
+a|
+
+|firmware_version
+|string
+a|
+
+|hardware_revision
+|string
+a|
+
+|model
+|string
+a|
+
+|part_number
+|string
+a|
+
+|serial_number
+|string
+a|
+
+|slot
+|string
+a|
+
+|state
+|string
+a|
+
+|===
+
+
+[#frus]
+[.api-collapsible-fifth-title]
+frus
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|id
+|string
+a|
+
+|state
+|string
+a|
+
+|type
+|string
+a|
+
+|===
+
+
+[#controller]
+[.api-collapsible-fifth-title]
+controller
+
+Controller information
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|board
+|string
+a|Type of the system board. This is defined by vendor.
+
+
+|cpu
+|link:#cpu[cpu]
+a|CPU information.
+
+
+|failed_fan
+|link:#failed_fan[failed_fan]
+a|
+
+|failed_power_supply
+|link:#failed_power_supply[failed_power_supply]
+a|
+
+|flash_cache
+|array[link:#flash_cache[flash_cache]]
+a|A list of Flash-Cache devices. Only returned when requested by name.
+
+
+|frus
+|array[link:#frus[frus]]
+a|List of FRUs on the node. Only returned when requested by name.
+
+
+|memory_size
+|integer
+a|Memory available on the node, in bytes.
+
+
+|over_temperature
+|string
+a|Specifies whether the hardware is currently operating outside of its recommended temperature range. The hardware shuts down if the temperature exceeds critical thresholds.
+
+
+|===
+
+
+[#failure]
+[.api-collapsible-fifth-title]
+failure
+
+Indicates the failure code and message.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|integer
+a|Message code
+
+
+|message
+|string
+a|Detailed message based on the state.
+
+
+|===
+
+
+[#giveback]
+[.api-collapsible-fifth-title]
+giveback
+
+Represents the state of the node that is giving storage back to its HA partner.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|failure
+|link:#failure[failure]
+a|Indicates the failure code and message.
+
+
+|state
+|string
+a|
+
+|===
+
+
+[#partners]
+[.api-collapsible-fifth-title]
+partners
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#ports]
+[.api-collapsible-fifth-title]
+ports
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|number
+|integer
+a|HA port number
+
+
+|state
+|string
+a|HA port state:
+
+* _down_ - Logical HA link is down.
+* _initialized_ - Logical HA link is initialized. The physical link is up, but the subnet manager hasn't started to configure the port.
+* _armed_ - Logical HA link is armed. The physical link is up and the subnet manager started but did not yet complete configuring the port.
+* _active_ - Logical HA link is active.
+* _reserved_ - Logical HA link is active, but the physical link is down.
+
+
+|===
+
+
+[#takeover]
+[.api-collapsible-fifth-title]
+takeover
+
+This represents the state of the node that is taking over storage from its HA partner.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|failure
+|link:#failure[failure]
+a|Indicates the failure code and message.
+
+
+|state
+|string
+a|
+
+|===
+
+
+[#ha]
+[.api-collapsible-fifth-title]
+ha
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|auto_giveback
+|boolean
+a|Specifies whether giveback is automatically initiated when the node that owns the storage is ready.
+
+
+|enabled
+|boolean
+a|Specifies whether or not storage failover is enabled.
+
+
+|giveback
+|link:#giveback[giveback]
+a|Represents the state of the node that is giving storage back to its HA partner.
+
+
+|partners
+|array[link:#partners[partners]]
+a|Nodes in this node's High Availability (HA) group.
+
+
+|ports
+|array[link:#ports[ports]]
+a|
+
+|takeover
+|link:#takeover[takeover]
+a|This represents the state of the node that is taking over storage from its HA partner.
+
+
+|===
+
+
+[#management_interface]
+[.api-collapsible-fifth-title]
+management_interface
+
+The management interface of the node to be added. The subnet mask is set based on the management interface of the cluster or the managment interfaces of other nodes.
+
+[#management_interfaces]
+[.api-collapsible-fifth-title]
+management_interfaces
+
+Network interface
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|ip
+|link:#ip[ip]
+a|IP information
+
+
+|name
+|string
+a|The name of the interface.
+
+
+|uuid
+|string
+a|The UUID that uniquely identifies the interface.
+
+
+|===
+
+
+[#metric]
+[.api-collapsible-fifth-title]
+metric
+
+CPU performance for the nodes.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|duration
+|string
+a|The duration over which this sample is calculated. The time durations are represented in the ISO-8601 standard format. Samples can be calculated over the following durations:
+
+
+|processor_utilization
+|integer
+a|Average CPU Utilization for the node
+
+
+|status
+|string
+a|Errors associated with the sample. For example, if the aggregation of data over multiple nodes fails, then any partial errors might return "ok" on success or "error" on an internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#ports]
+[.api-collapsible-fifth-title]
+ports
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|===
+
+
+[#metrocluster]
+[.api-collapsible-fifth-title]
+metrocluster
+
+Metrocluster
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|custom_vlan_capable
+|boolean
+a|Indicates whether the MetroCluster over IP platform supports custom VLAN IDs.
+
+
+|ports
+|array[link:#ports[ports]]
+a|MetroCluster over IP ports.
+
+
+|type
+|string
+a|The Metrocluster configuration type
+
+
+|===
+
+
+[#nvram]
+[.api-collapsible-fifth-title]
+nvram
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|battery_state
+|string
+a|Specifies status of the NVRAM battery. Possible values:
+
+* _battery_ok_
+* _battery_partially_discharged_
+* _battery_fully_discharged_
+* _battery_not_present_
+* _battery_near_end_of_life_
+* _battery_at_end_of_life_
+* _battery_unknown_
+* _battery_over_charged_
+* _battery_fully_charged_
+
+
+|id
+|integer
+a|Vendor specific NVRAM ID of the node.
+
+
+|===
+
+
+[#ipv4_interface]
+[.api-collapsible-fifth-title]
+ipv4_interface
+
+Object to setup an interface along with its default router.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|address
+|string
+a|IPv4 or IPv6 address
+
+
+|gateway
+|string
+a|The IPv4 or IPv6 address of the default router.
+
+
+|netmask
+|string
+a|Input as netmask length (16) or IPv4 mask (255.255.0.0). For IPv6, the default value is 64 with a valid range of 1 to 127. Output is always netmask length.
+
+
+|===
+
+
+[#ipv6_interface]
+[.api-collapsible-fifth-title]
+ipv6_interface
+
+Object to setup an interface along with its default router.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|address
+|string
+a|IPv6 address
+
+
+|gateway
+|string
+a|The IPv6 address of the default router.
+
+
+|netmask
+|integer
+a|The IPv6 netmask/prefix length. The default value is 64 with a valid range of 1 to 127.
+
+
+|===
+
+
+[#service_processor]
+[.api-collapsible-fifth-title]
+service_processor
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|dhcp_enabled
+|boolean
+a|Set to "true" to use DHCP to configure an IPv4 interface.
+
+
+|firmware_version
+|string
+a|The version of firmware installed.
+
+
+|ipv4_interface
+|link:#ipv4_interface[ipv4_interface]
+a|Object to setup an interface along with its default router.
+
+
+|ipv6_interface
+|link:#ipv6_interface[ipv6_interface]
+a|Object to setup an interface along with its default router.
+
+
+|link_status
+|string
+a|
+
+|mac_address
+|string
+a|
+
+|state
+|string
+a|
+
+|===
+
+
+[#statistics]
+[.api-collapsible-fifth-title]
+statistics
+
+Raw CPU performance for the nodes.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|processor_utilization_base
+|integer
+a|Base counter for CPU Utilization.
+
+
+|processor_utilization_raw
+|integer
+a|Raw CPU Utilization for the node. This should be divided by the processor_utilization_base to calculate the percentage CPU utilization for the node.
+
+
+|status
+|string
+a|Errors associated with the sample. For example, if the aggregation of data over multiple nodes fails, then any partial errors might return "ok" on success or "error" on an internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#version]
+[.api-collapsible-fifth-title]
+version
+
+This returns the cluster version information.  When the cluster has more than one node, the cluster version is equivalent to the lowest of generation, major, and minor versions on all nodes.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|full
+|string
+a|The full cluster version string.
+
+
+|generation
+|integer
+a|The generation portion of the version.
+
+
+|major
+|integer
+a|The major portion of the version.
+
+
+|minor
+|integer
+a|The minor portion of the version.
+
+
+|===
+
+
+[#vm]
+[.api-collapsible-fifth-title]
+vm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|provider_type
+|string
+a|Cloud provider where the VM is hosted.
+
+
+|===
+
+
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+Complete node information
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|cluster_interfaces
+|array[link:#cluster_interfaces[cluster_interfaces]]
+a|
+
+|controller
+|link:#controller[controller]
+a|Controller information
+
+
+|date
+|string
+a|The current or "wall clock" time of the node in ISO-8601 date, time, and time zone format.
+The ISO-8601 date and time are localized based on the ONTAP cluster's timezone setting.
+
+* example: 2019-04-17T11:49:26-04:00
+* format: date-time
+* readOnly: 1
+
+
+|ha
+|link:#ha[ha]
+a|
+
+|location
+|string
+a|
+
+|management_interfaces
+|array[link:#management_interfaces[management_interfaces]]
+a|
+
+|membership
+|string
+a|Possible values:
+
+* _available_ - A node is detected on the internal cluster network and can be added to the cluster.  Nodes that have a membership of "available" are not returned when a GET request is called when the cluster exists. Provide a query on the "membership" property for _available_ to scan for nodes on the cluster network. Nodes that have a membership of "available" are returned automatically before a cluster is created.
+* _joining_ - Joining nodes are in the process of being added to the cluster. The node might be progressing through the steps to become a member or might have failed. The job to add the node or create the cluster provides details on the current progress of the node.
+* _member_ - Nodes that are members have successfully joined the cluster.
+
+
+|metric
+|link:#metric[metric]
+a|CPU performance for the nodes.
+
+
+|metrocluster
+|link:#metrocluster[metrocluster]
+a|Metrocluster
+
+
+|model
+|string
+a|
+
+|name
+|string
+a|
+
+|nvram
+|link:#nvram[nvram]
+a|
+
+|owner
+|string
+a|Owner of the node.
+
+
+|serial_number
+|string
+a|
+
+|service_processor
+|link:#service_processor[service_processor]
+a|
+
+|state
+|string
+a|State of the node:
+
+* _up_ - Node is up and operational.
+* _booting_ - Node is booting up.
+* _down_ - Node has stopped or is dumping core.
+* _taken_over_ - Node has been taken over by its HA partner and is not yet waiting for giveback.
+* _waiting_for_giveback_ - Node has been taken over by its HA partner and is waiting for the HA partner to giveback disks.
+* _degraded_ - Node has one or more critical services offline.
+* _unknown_ - Node or its HA partner cannot be contacted and there is no information on the node's state.
+
+
+|statistics
+|link:#statistics[statistics]
+a|Raw CPU performance for the nodes.
+
+
+|storage_configuration
+|string
+a|The storage configuration in the system. Possible values:
+
+* _mixed_path_
+* _single_path_
+* _multi_path_
+* _quad_path_
+* _mixed_path_ha_
+* _single_path_ha_
+* _multi_path_ha_
+* _quad_path_ha_
+* _unknown_
+
+
+|system_id
+|string
+a|
+
+|system_machine_type
+|string
+a|OEM system machine type.
+
+
+|uptime
+|integer
+a|The total time, in seconds, that the node has been up.
+
+
+|uuid
+|string
+a|
+
+|vendor_serial_number
+|string
+a|OEM vendor serial number.
+
+
+|version
+|link:#version[version]
+a|This returns the cluster version information.  When the cluster has more than one node, the cluster version is equivalent to the lowest of generation, major, and minor versions on all nodes.
+
+
+|vm
+|link:#vm[vm]
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

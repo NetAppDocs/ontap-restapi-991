@@ -1,0 +1,390 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-storage-snapshot-policies.html'
+summary: 'Create a Snapshot copy policy'
+---
+
+= Create a Snapshot copy policy
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/snapshot-policies`#
+
+*Introduced In:* 9.6
+
+Creates a Snapshot copy policy.
+
+== Required properties
+
+* `svm.uuid` or `svm.name` - Existing SVM in which to create the Snapshot copy policy.
+* `name` - Name for the Snapshot copy policy.
+* `copies.schedule` - Schedule at which Snapshot copies are captured on the volume.
+* `copies.count` - Number of Snapshot copies to maintain for this schedule.
+
+== Recommended optional properties
+
+* `copies.prefix` - Prefix to use when creating Snapshot copies at regular intervals.
+
+== Default property values
+
+If not specified in POST, the following default property values are assigned:
+
+* `enabled` - _true_
+* `copies.prefix` - Value of `schedule.name`
+
+== Related ONTAP commands
+
+* `snapshot policy create`
+
+== Learn more
+
+* link:manage_snapshot_copy_policies.html[DOC /storage/snapshot-policies]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment associated with the Snapshot copy policy.
+
+
+|copies
+|array[link:#copies[copies]]
+a|
+
+|enabled
+|boolean
+a|Is the Snapshot copy policy enabled?
+
+
+|name
+|string
+a|Name of the Snapshot copy policy.
+
+
+|scope
+|string
+a|Set to "svm" when the request is on a data SVM, otherwise set to "cluster".
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "comment": "string",
+  "copies": [
+    {
+      "prefix": "string",
+      "schedule": {
+        "name": "hourly"
+      },
+      "snapmirror_label": "string"
+    }
+  ],
+  "enabled": 1,
+  "name": "default",
+  "scope": "string",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 1638407
+| When adding schedule to a Snapshot copy policy, the count for that schedule must be specified.
+
+| 1638408
+| When adding schedule to a Snapshot copy policy, the schedule name must be specified.
+
+| 1638413
+| Schedule not found.
+
+| 1638417
+| Specified policy name is invalid.
+
+| 1638451
+| This operation would result in total Snapshot copy count for the policy to exceed maximum supported count.
+
+| 1638508
+| Another schedule has the same prefix within this policy.
+
+| 1638526
+| This operation is not supported on a node Vserver.
+
+| 1638527
+| Policy name already exists.
+
+| 1638528
+| This operation is not supported in a mixed-version cluster.
+
+| 1638531
+| This operation is not supported because specified policy is owned by the cluster admin.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#schedule]
+[.api-collapsible-fifth-title]
+schedule
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|Schedule at which Snapshot copies are captured on the volume. Some common schedules already defined in the system are hourly, daily, weekly, at 15 minute intervals, and at 5 minute intervals. Snapshot copy policies with custom schedules can be referenced.
+
+
+|===
+
+
+[#copies]
+[.api-collapsible-fifth-title]
+copies
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|count
+|integer
+a|The number of Snapshot copies to maintain for this schedule.
+
+
+|prefix
+|string
+a|The prefix to use while creating Snapshot copies at regular intervals.
+
+
+|schedule
+|link:#schedule[schedule]
+a|
+
+|snapmirror_label
+|string
+a|Label for SnapMirror operations
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#snapshot_policy]
+[.api-collapsible-fifth-title]
+snapshot_policy
+
+The Snapshot copy policy object is associated with a read-write volume used to create and delete Snapshot copies at regular intervals.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment associated with the Snapshot copy policy.
+
+
+|copies
+|array[link:#copies[copies]]
+a|
+
+|enabled
+|boolean
+a|Is the Snapshot copy policy enabled?
+
+
+|name
+|string
+a|Name of the Snapshot copy policy.
+
+
+|scope
+|string
+a|Set to "svm" when the request is on a data SVM, otherwise set to "cluster".
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

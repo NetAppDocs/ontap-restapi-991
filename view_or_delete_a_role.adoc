@@ -1,0 +1,81 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'view_or_delete_a_role.html'
+summary: 'View or delete a role'
+---
+
+= View or delete a role
+
+
+
+== Overview
+
+This APi is used to retrieve or delete a role. The role can be SVM-scoped or cluster-scoped.
+
+Specify the owner UUID and the role name in the URI path. The owner UUID corresponds to the UUID of the SVM for which the role has been created and can be obtained from the response body of a GET call performed on one of the following APIs:
+_/api/security/roles_ for all roles
+_/api/security/roles/?scope=svm_ for SVM-scoped roles
+_/api/security/roles/?owner.name=\{svm-name}_ for roles in a specific SVM
+This API response contains the complete URI for each role that can be used for retrieving or deleting a role.
+
+NOTE: The pre-defined roles can be retrieved but cannot be deleted.
+
+== Examples
+
+=== Retrieving a role configuration
+
+----
+
+# The API:
+GET "/api/security/roles/{owner.uuid}/{name}"
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/secure_role"
+
+# The response:
+{
+"owner": {
+  "uuid": "aaef7c38-4bd3-11e9-b238-0050568e2e25",
+  "name": "svm1",
+  "_links": {
+    "self": {
+      "href": "/api/svm/svms/aaef7c38-4bd3-11e9-b238-0050568e2e25"
+    }
+  }
+},
+"name": "secure_role",
+"privileges": [
+  {
+    "path": "/api/security",
+    "access": "all",
+    "_links": {
+      "self": {
+        "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/secure_role/privileges/%2Fapi%2Fsecurity"
+      }
+    }
+  }
+],
+"builtin": false,
+"scope": "svm",
+"_links": {
+  "self": {
+    "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/secure_role"
+  }
+}
+}
+----
+
+=== Deleting a custom role
+
+----
+
+# The API:
+DELETE "/api/security/roles/{owner.uuid}/{name}"
+
+# The call:
+curl -X DELETE "https://<mgmt-ip>/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1"
+----
+
+

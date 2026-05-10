@@ -1,0 +1,1013 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-protocols-nfs-services-.html'
+summary: 'Update NFS configuration for an SVM'
+---
+
+= Update NFS configuration for an SVM
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/nfs/services/{svm.uuid}`#
+
+*Introduced In:* 9.6
+
+Updates the NFS configuration of an SVM.
+
+== Related ONTAP commands
+
+* `vserver nfs modify`
+* `vserver nfs on`
+* `vserver nfs off`
+* `vserver nfs start`
+* `vserver nfs stop`
+
+== Learn more
+
+* link:manage_nfs_services.html[DOC /protocols/nfs/services]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|svm.uuid
+|string
+|path
+|True
+a|
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|auth_sys_extended_groups_enabled
+|boolean
+a|Specifies whether or not extended groups support over AUTH_SYS is enabled.
+
+
+|enabled
+|boolean
+a|Specifies if the NFS service is administratively enabled.
+
+
+|extended_groups_limit
+|integer
+a|Specifies the maximum auxillary groups supported over AUTH_SYS and RPCSEC_GSS.
+
+
+|positive_cached_credential_ttl
+|integer
+a|Specifies the time to live value (in msecs) of a positive cached credential
+
+
+|protocol
+|link:#protocol[protocol]
+a|
+
+|rquota_enabled
+|boolean
+a|Specifies whether or not the remote quota feature is enabled.
+
+
+|showmount_enabled
+|boolean
+a|Specifies whether or not the showmount feature is enabled.
+
+
+|state
+|string
+a|Specifies the state of the NFS service on the SVM. The following values are supported:
+
+***** online - NFS server is ready to accept client requests.
+
+***** offline - NFS server is not ready to accept client requests.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|transport
+|link:#transport[transport]
+a|
+
+|vstorage_enabled
+|boolean
+a|Specifies whether or not the VMware vstorage feature is enabled.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "extended_groups_limit": "32",
+  "positive_cached_credential_ttl": "7200000",
+  "protocol": {
+    "v4_id_domain": "string"
+  },
+  "state": "string",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  }
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 3276916
+| Vserver is not running
+
+| 3277069
+| Cannot disable TCP because the SnapDiff RPC server is in the \"on\" state
+
+| 3277087
+| Attempting to reduce the number of bits used for NFSv3 FSIDs and File IDs from 64 to 32 on Vserver. This could result in collisions between different File IDs and is not recommended
+
+| 3277088
+| Attempting to increase the number of bits used for NFSv3 FSIDs and File IDs from 32 to 64 on Vserver. This could result in older client software no longer working with the volumes owned by Vserver
+
+| 3277090
+| Attempting to disallow multiple FSIDs per mount point on Vserver. Since this Vserver currently uses 32-bit NFSv3 FSIDs and File IDs, this could result in collisions between different File IDs and is not recommended
+
+| 3277099
+| Domain name contains invalid characters or its too short. Allowed characters are: alphabetical characters (A-Za-z), numeric characters (0-9), minus sign (-), and the period (.). The first character must be alphabetical or numeric, last character must not be a minus sign or a period. Minimum supported length: 2 characters, maximum of 256 characters
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#iops]
+[.api-collapsible-fifth-title]
+iops
+
+The rate of I/O operations observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#latency]
+[.api-collapsible-fifth-title]
+latency
+
+The round trip latency in microseconds observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#throughput]
+[.api-collapsible-fifth-title]
+throughput
+
+The rate of throughput bytes per second observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#v3]
+[.api-collapsible-fifth-title]
+v3
+
+The NFSv3 operations
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|duration
+|string
+a|The duration over which this sample is calculated. The time durations are represented in the ISO-8601 standard format. Samples can be calculated over the following durations:
+
+
+|iops
+|link:#iops[iops]
+a|The rate of I/O operations observed at the storage object.
+
+
+|latency
+|link:#latency[latency]
+a|The round trip latency in microseconds observed at the storage object.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_ delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput
+|link:#throughput[throughput]
+a|The rate of throughput bytes per second observed at the storage object.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#v4]
+[.api-collapsible-fifth-title]
+v4
+
+The NFSv4 operations
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|duration
+|string
+a|The duration over which this sample is calculated. The time durations are represented in the ISO-8601 standard format. Samples can be calculated over the following durations:
+
+
+|iops
+|link:#iops[iops]
+a|The rate of I/O operations observed at the storage object.
+
+
+|latency
+|link:#latency[latency]
+a|The round trip latency in microseconds observed at the storage object.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_ delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput
+|link:#throughput[throughput]
+a|The rate of throughput bytes per second observed at the storage object.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#v41]
+[.api-collapsible-fifth-title]
+v41
+
+The NFSv4.1 operations
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|duration
+|string
+a|The duration over which this sample is calculated. The time durations are represented in the ISO-8601 standard format. Samples can be calculated over the following durations:
+
+
+|iops
+|link:#iops[iops]
+a|The rate of I/O operations observed at the storage object.
+
+
+|latency
+|link:#latency[latency]
+a|The round trip latency in microseconds observed at the storage object.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_ delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput
+|link:#throughput[throughput]
+a|The rate of throughput bytes per second observed at the storage object.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#metric]
+[.api-collapsible-fifth-title]
+metric
+
+Historical performance numbers, such as IOPS latency and throughput, for SVM-NFS protocol.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|v3
+|link:#v3[v3]
+a|The NFSv3 operations
+
+
+|v4
+|link:#v4[v4]
+a|The NFSv4 operations
+
+
+|v41
+|link:#v41[v41]
+a|The NFSv4.1 operations
+
+
+|===
+
+
+[#v40_features]
+[.api-collapsible-fifth-title]
+v40_features
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|acl_enabled
+|boolean
+a|Specifies whether NFSv4.0 ACLs is enabled.
+
+
+|read_delegation_enabled
+|boolean
+a|Specifies whether NFSv4.0 Read Delegation is enabled.
+
+
+|write_delegation_enabled
+|boolean
+a|Specifies whether NFSv4.0 Write Delegation is enabled.
+
+
+|===
+
+
+[#v41_features]
+[.api-collapsible-fifth-title]
+v41_features
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|acl_enabled
+|boolean
+a|Specifies whether NFSv4.1 or later ACLs is enabled.
+
+
+|pnfs_enabled
+|boolean
+a|Specifies whether NFSv4.1 or later Parallel NFS is enabled.
+
+
+|read_delegation_enabled
+|boolean
+a|Specifies whether NFSv4.1 or later Read Delegation is enabled.
+
+
+|write_delegation_enabled
+|boolean
+a|Specifies whether NFSv4.1 or later Write Delegation is enabled.
+
+
+|===
+
+
+[#protocol]
+[.api-collapsible-fifth-title]
+protocol
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|v3_64bit_identifiers_enabled
+|boolean
+a|Specifies whether 64-bit support for NFSv3 FSIDs and file IDs is enabled.
+
+
+|v3_enabled
+|boolean
+a|Specifies whether NFSv3 protocol is enabled.
+
+
+|v40_enabled
+|boolean
+a|Specifies whether NFSv4.0 protocol is enabled.
+
+
+|v40_features
+|link:#v40_features[v40_features]
+a|
+
+|v41_enabled
+|boolean
+a|Specifies whether NFSv4.1 or later protocol is enabled.
+
+
+|v41_features
+|link:#v41_features[v41_features]
+a|
+
+|v4_64bit_identifiers_enabled
+|boolean
+a|Specifies whether 64-bit support for NFSv4.x FSIDs and file IDs is enabled.
+
+
+|v4_id_domain
+|string
+a|Specifies the domain portion of the string form of user and group
+names as defined by the NFSv4 protocol.
+
+
+|===
+
+
+[#iops_raw]
+[.api-collapsible-fifth-title]
+iops_raw
+
+The number of I/O operations observed at the storage object. This should be used along with delta time to calculate the rate of I/O operations per unit of time.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#latency_raw]
+[.api-collapsible-fifth-title]
+latency_raw
+
+The raw latency in microseconds observed at the storage object. This should be divided by the raw IOPS value to calculate the average latency per I/O operation.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#throughput_raw]
+[.api-collapsible-fifth-title]
+throughput_raw
+
+Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#v3]
+[.api-collapsible-fifth-title]
+v3
+
+The NFSv3 operations
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|iops_raw
+|link:#iops_raw[iops_raw]
+a|The number of I/O operations observed at the storage object. This should be used along with delta time to calculate the rate of I/O operations per unit of time.
+
+
+|latency_raw
+|link:#latency_raw[latency_raw]
+a|The raw latency in microseconds observed at the storage object. This should be divided by the raw IOPS value to calculate the average latency per I/O operation.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput_raw
+|link:#throughput_raw[throughput_raw]
+a|Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#v4]
+[.api-collapsible-fifth-title]
+v4
+
+The NFSv4 operations
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|iops_raw
+|link:#iops_raw[iops_raw]
+a|The number of I/O operations observed at the storage object. This should be used along with delta time to calculate the rate of I/O operations per unit of time.
+
+
+|latency_raw
+|link:#latency_raw[latency_raw]
+a|The raw latency in microseconds observed at the storage object. This should be divided by the raw IOPS value to calculate the average latency per I/O operation.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput_raw
+|link:#throughput_raw[throughput_raw]
+a|Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#v41]
+[.api-collapsible-fifth-title]
+v41
+
+The NFSv4.1 operations
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|iops_raw
+|link:#iops_raw[iops_raw]
+a|The number of I/O operations observed at the storage object. This should be used along with delta time to calculate the rate of I/O operations per unit of time.
+
+
+|latency_raw
+|link:#latency_raw[latency_raw]
+a|The raw latency in microseconds observed at the storage object. This should be divided by the raw IOPS value to calculate the average latency per I/O operation.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput_raw
+|link:#throughput_raw[throughput_raw]
+a|Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#statistics]
+[.api-collapsible-fifth-title]
+statistics
+
+Realtime performance numbers, such as IOPS latency and throughput, for SVM-NFS protocol.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|v3
+|link:#v3[v3]
+a|The NFSv3 operations
+
+
+|v4
+|link:#v4[v4]
+a|The NFSv4 operations
+
+
+|v41
+|link:#v41[v41]
+a|The NFSv4.1 operations
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#transport]
+[.api-collapsible-fifth-title]
+transport
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|tcp_enabled
+|boolean
+a|Specifies whether TCP transports are enabled on the server.
+
+
+|udp_enabled
+|boolean
+a|Specifies whether UDP transports are enabled on the server.
+
+
+|===
+
+
+[#nfs_service]
+[.api-collapsible-fifth-title]
+nfs_service
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|auth_sys_extended_groups_enabled
+|boolean
+a|Specifies whether or not extended groups support over AUTH_SYS is enabled.
+
+
+|enabled
+|boolean
+a|Specifies if the NFS service is administratively enabled.
+
+
+|extended_groups_limit
+|integer
+a|Specifies the maximum auxillary groups supported over AUTH_SYS and RPCSEC_GSS.
+
+
+|positive_cached_credential_ttl
+|integer
+a|Specifies the time to live value (in msecs) of a positive cached credential
+
+
+|protocol
+|link:#protocol[protocol]
+a|
+
+|rquota_enabled
+|boolean
+a|Specifies whether or not the remote quota feature is enabled.
+
+
+|showmount_enabled
+|boolean
+a|Specifies whether or not the showmount feature is enabled.
+
+
+|state
+|string
+a|Specifies the state of the NFS service on the SVM. The following values are supported:
+
+***** online - NFS server is ready to accept client requests.
+
+***** offline - NFS server is not ready to accept client requests.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|transport
+|link:#transport[transport]
+a|
+
+|vstorage_enabled
+|boolean
+a|Specifies whether or not the VMware vstorage feature is enabled.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

@@ -1,0 +1,523 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-protocols-file-access-tracing-events--.html'
+summary: 'Retrieve trace results for a sequence number'
+---
+
+= Retrieve trace results for a sequence number
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/file-access-tracing/events/{node.uuid}/{svm.uuid}/{index}`#
+
+*Introduced In:* 9.8
+
+Retrieves trace results for the specified sequence number.
+
+== Related ONTAP commands
+
+* `vserver security trace trace-result show`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|node.uuid
+|string
+|path
+|True
+a|Node UUID.
+
+
+|index
+|integer
+|path
+|True
+a|Sequence number of traced event.
+
+
+|svm.uuid
+|string
+|path
+|True
+a|UUID of the SVM to which this object belongs.
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|create_time
+|string
+a|Specifies the time at which the trace event entry was generated.
+
+
+|filter
+|link:#file_access_filter[file_access_filter]
+a|ONTAP allows creation of filters for file access tracing for both CIFS and NFS. These filters have protocols, path, username  and client IP based on which file access operations are logged.
+
+* Introduced in: 9.8
+
+
+|index
+|integer
+a|Specifies the sequence number of the security trace event.
+
+
+|node
+|link:#node[node]
+a|
+
+|reason
+|link:#reason[reason]
+a|Displays the allowed or denied reason for the file access tracing events that are generated.
+
+
+|session_id
+|integer
+a|Specifies the CIFS session ID for the file access trace event, this is generated only for CIFS file accesses.
+
+
+|share
+|link:#share[share]
+a|
+
+|svm
+|link:#svm_reference[svm_reference]
+a|SVM, applies only to SVM-scoped objects.
+
+
+|volume
+|link:#volume[volume]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "create_time": "2018-06-04T19:00:00Z",
+  "filter": {
+    "client_ip": "10.140.68.143",
+    "index": "1",
+    "path": "/dir1/dir2",
+    "protocol": "string",
+    "svm": {
+      "_links": {
+        "self": {
+          "href": "/api/resourcelink"
+        }
+      },
+      "name": "svm1",
+      "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+    },
+    "unix_user": "root",
+    "windows_user": "cifs1/administrator"
+  },
+  "index": "1",
+  "node": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "name": "node1",
+    "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+  },
+  "reason": {
+    "message": "Access is allowed because the operation is trusted and no security is configured."
+  },
+  "session_id": "2628976282477527056",
+  "share": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "name": "sh1"
+  },
+  "svm": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "volume": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "name": "volume1",
+    "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+  }
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#svm_reference]
+[.api-collapsible-fifth-title]
+svm_reference
+
+SVM, applies only to SVM-scoped objects.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#file_access_filter]
+[.api-collapsible-fifth-title]
+file_access_filter
+
+ONTAP allows creation of filters for file access tracing for both CIFS and NFS. These filters have protocols, path, username  and client IP based on which file access operations are logged.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|client_ip
+|string
+a|Specifies the IP address from which the client accesses the file or directory.
+
+
+|enabled
+|boolean
+a|Specifies whether to enable or disable the filter. Filters are enabled by default and are deleted after 60 mins.
+
+
+|index
+|integer
+a|Position of the file access tracing filter.
+
+
+|path
+|string
+a|Specifies the path for which permission tracing can be applied. The value can be complete path from root of CIFS share or root of volume for NFS.
+
+
+|protocol
+|string
+a|Specifies the protocol for which permission trace is required.
+
+
+|svm
+|link:#svm_reference[svm_reference]
+a|SVM, applies only to SVM-scoped objects.
+
+
+|trace_allowed_ops
+|boolean
+a|Specifies if the filter can trace file access denied and allowed events. The value of trace-allow is false by default, and it traces access denied events. The value is set to true for tracing access allowed events.
+
+
+|unix_user
+|string
+a|Specifies the UNIX username whose access requests you want to trace. The filter would match only if the request is received with this user.
+
+
+|windows_user
+|string
+a|Specifies the Windows username whose access requests you want to trace. The filter would match only if the request is received with this user.
+
+
+|===
+
+
+[#node]
+[.api-collapsible-fifth-title]
+node
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#reason]
+[.api-collapsible-fifth-title]
+reason
+
+Displays the allowed or denied reason for the file access tracing events that are generated.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|message
+|string
+a|The error message.
+
+
+|===
+
+
+[#share]
+[.api-collapsible-fifth-title]
+share
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|Share name
+
+
+|===
+
+
+[#volume]
+[.api-collapsible-fifth-title]
+volume
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the volume.
+
+
+|uuid
+|string
+a|Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
+
+* example: 028baa66-41bd-11e9-81d5-00a0986138f7
+* Introduced in: 9.6
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

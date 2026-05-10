@@ -1,0 +1,394 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-protocols-san-igroups-initiators.html'
+summary: 'Add initiators to an initiator group'
+---
+
+= Add initiators to an initiator group
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/san/igroups/{igroup.uuid}/initiators`#
+
+*Introduced In:* 9.6
+
+Adds one or more initiators to an initiator group.
+This API does not support adding initiators to an initiator group that
+already contains nested initiator groups.
+
+== Required properties
+
+* `name` or `records.name` - Initiator name(s) to add to the initiator group.
+
+== Related ONTAP commands
+
+* `lun igroup add`
+
+== Learn more
+
+* link:manage_san_igroups.html[DOC /protocols/san/igroups]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|igroup.uuid
+|string
+|path
+|True
+a|The unique identifier of the initiator group.
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment available for use by the administrator. Valid in POST and PATCH.
+
+
+|igroup
+|link:#igroup[igroup]
+a|The initiator group in which the initiator is found.
+
+Note that this does not mean that the initiator cannot also be found in other initiator groups.
+
+
+|name
+|string
+a|The FC WWPN, iSCSI IQN, or iSCSI EUI that identifies the host initiator. Valid in POST only and not allowed when the `records` property is used.
+
+An FC WWPN consists of 16 hexadecimal digits grouped as 8 pairs separated by colons. The format for an iSCSI IQN is _iqn.yyyy-mm.reverse_domain_name:any_. The iSCSI EUI format consists of the _eui._ prefix followed by 16 hexadecimal characters.
+
+
+|records
+|array[link:#records[records]]
+a|An array of initiators specified to add multiple initiators to an initiator group in a single API call. Not allowed when the `name` property is used.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "comment": "string",
+  "igroup": {
+    "uuid": "4ea7a442-86d1-11e0-ae1c-123478563412"
+  },
+  "name": "iqn.1998-01.com.corp.iscsi:name1",
+  "records": [
+    {
+      "comment": "string",
+      "name": "iqn.1998-01.com.corp.iscsi:name1"
+    }
+  ]
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of records.
+
+
+|records
+|array[link:#igroup_initiator[igroup_initiator]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "records": [
+    {
+      "comment": "string",
+      "igroup": {
+        "uuid": "4ea7a442-86d1-11e0-ae1c-123478563412"
+      },
+      "name": "iqn.1998-01.com.corp.iscsi:name1",
+      "records": [
+        {
+          "comment": "string",
+          "name": "iqn.1998-01.com.corp.iscsi:name1"
+        }
+      ]
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 1254193
+| Adding an initiator would cause the initiator to be mapped to the same LUN more than once.
+
+| 1254324
+| Adding an initiator would cause the initiator to have the same logical unit identifier for multiple LUN maps.
+
+| 5373969
+| A supplied initiator name looks like an iSCSI IQN initiator, but the portions after the prefix are missing.
+
+| 5373971
+| A supplied initiator name looks like an iSCSI IQN initiator, but the date portion is invalid.
+
+| 5373972
+| A supplied initiator name looks like an iSCSI IQN initiator, but the naming authority portion is invalid.
+
+| 5373977
+| A supplied initiator name looks like an iSCSI EUI initiator, but the length is invalid.
+
+| 5373978
+| A supplied initiator name looks like an iSCSI EUI initiator, but the format is invalid.
+
+| 5373992
+| A supplied initiator name was too long to be valid.
+
+| 5373993
+| A supplied initiator name did not match any valid format.
+
+| 5374033
+| Initiators must be supplied.
+
+| 5374035
+| A supplied initiator is already in the initiator group.
+
+| 5374038
+| An invalid Fibre Channel WWPN was supplied.
+
+| 5374039
+| An invalid iSCSI initiator name was supplied.
+
+| 5374734
+| An initiator is already in another initiator group with a conflicting operating system type.
+
+| 5374852
+| The initiator group specified in the URI does not exist.
+
+| 5374917
+| Multiple matching initiators have been supplied with conflicting comments.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#igroup]
+[.api-collapsible-fifth-title]
+igroup
+
+The initiator group in which the initiator is found.
+
+Note that this does not mean that the initiator cannot also be found in other initiator groups.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|uuid
+|string
+a|The unique identifier of the initiator group.
+
+
+|===
+
+
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment available for use by the administrator. Valid in POST and PATCH.
+
+
+|name
+|string
+a|The FC WWPN, iSCSI IQN, or iSCSI EUI that identifies the host initiator. Valid in POST only and not allowed when the `records` property is used.
+
+An FC WWPN consists of 16 hexadecimal digits grouped as 8 pairs separated by colons. The format for an iSCSI IQN is _iqn.yyyy-mm.reverse_domain_name:any_. The iSCSI EUI format consists of the _eui._ prefix followed by 16 hexadecimal characters.
+
+
+|===
+
+
+[#igroup_initiator]
+[.api-collapsible-fifth-title]
+igroup_initiator
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|A comment available for use by the administrator. Valid in POST and PATCH.
+
+
+|igroup
+|link:#igroup[igroup]
+a|The initiator group in which the initiator is found.
+
+Note that this does not mean that the initiator cannot also be found in other initiator groups.
+
+
+|name
+|string
+a|The FC WWPN, iSCSI IQN, or iSCSI EUI that identifies the host initiator. Valid in POST only and not allowed when the `records` property is used.
+
+An FC WWPN consists of 16 hexadecimal digits grouped as 8 pairs separated by colons. The format for an iSCSI IQN is _iqn.yyyy-mm.reverse_domain_name:any_. The iSCSI EUI format consists of the _eui._ prefix followed by 16 hexadecimal characters.
+
+
+|records
+|array[link:#records[records]]
+a|An array of initiators specified to add multiple initiators to an initiator group in a single API call. Not allowed when the `name` property is used.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

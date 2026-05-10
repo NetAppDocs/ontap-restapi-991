@@ -1,0 +1,408 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-protocols-nvme-subsystems-hosts.html'
+summary: 'Add NVMe subsystem hosts'
+---
+
+= Add NVMe subsystem hosts
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/nvme/subsystems/{subsystem.uuid}/hosts`#
+
+*Introduced In:* 9.6
+
+Adds NVMe subsystem host(s) to an NVMe subsystem.
+
+== Required properties
+
+* `nqn` or `records.nqn` - NVMe host(s) NQN(s) to add to the NVMe subsystem.
+
+== Related ONTAP commands
+
+* `vserver nvme subsystem host add`
+
+== Learn more
+
+* link:manage_nvme_subsystems.html[DOC /protocols/nvme/subsystems]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|subsystem.uuid
+|string
+|path
+|True
+a|The unique identifier of the NVMe subsystem.
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|io_queue
+|link:#io_queue[io_queue]
+a|The properties of the submission queue used to submit I/O commands for execution by the NVMe controller.
+
+
+|nqn
+|string
+a|The NVMe qualified name (NQN) used to identify the NVMe storage target. Not allowed in POST when the `records` property is used.
+
+
+|records
+|array[link:#records[records]]
+a|An array of NVMe hosts specified to add multiple NVMe hosts to an NVMe subsystem in a single API call. Valid in POST only.
+
+
+|subsystem
+|link:#subsystem[subsystem]
+a|The NVMe subsystem to which the NVMe host has been provisioned.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "io_queue": {
+    "count": "4",
+    "depth": "32"
+  },
+  "nqn": "nqn.1992-01.example.com:string",
+  "records": [
+    {
+      "io_queue": {
+        "count": "4",
+        "depth": "32"
+      },
+      "nqn": "nqn.1992-01.example.com:string",
+      "subsystem": {
+        "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+      }
+    }
+  ],
+  "subsystem": {
+    "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+  }
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of records.
+
+
+|records
+|array[link:#nvme_subsystem_host[nvme_subsystem_host]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "records": [
+    {
+      "io_queue": {
+        "count": "4",
+        "depth": "32"
+      },
+      "nqn": "nqn.1992-01.example.com:string",
+      "records": [
+        {
+          "io_queue": {
+            "count": "4",
+            "depth": "32"
+          },
+          "nqn": "nqn.1992-01.example.com:string",
+          "subsystem": {
+            "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+          }
+        }
+      ],
+      "subsystem": {
+        "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+      }
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 72089705
+| The NVMe subsystem host already exists for the NVMe subsystem.
+
+| 72089771
+| The NQN is invalid. A non-empty qualifier is required after the prefix. An example of a valid NQN is _nqn.1992-01.com.example:string_.
+
+| 72089772
+| The NQN is invalid. Add the prefix _'nqn'_. An example of a valid NQN is _nqn.1992-01.com.example:string_.
+
+| 72089773
+| The NQN is invalid. The date field must be formatted _yyyy-mm_. An example of a valid NQN is _nqn.1992-01.com.example:string_.
+
+| 72090001
+| The NVMe subsystem does not exist.
+
+| 72090002
+| The POST request of hosts to an NVMe subsystem can only contain an 'nqn' property or 'records' property, but not both.
+
+| 72090003
+| The elements in the records array for a POST of hosts to an NVMe subsystem must contain only the nqn property.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#io_queue]
+[.api-collapsible-fifth-title]
+io_queue
+
+The properties of the submission queue used to submit I/O commands for execution by the NVMe controller.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|count
+|integer
+a|The number of I/O queue pairs. The default value is inherited from the owning NVMe subsystem.
+
+
+|depth
+|integer
+a|The I/O queue depth. The default value is inherited from the owning NVMe subsystem.
+
+
+|===
+
+
+[#subsystem]
+[.api-collapsible-fifth-title]
+subsystem
+
+The NVMe subsystem to which the NVMe host has been provisioned.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|uuid
+|string
+a|The unique identifier of the NVMe subsystem.
+
+
+|===
+
+
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+The NVMe host provisioned to access NVMe namespaces mapped to a subsystem.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|io_queue
+|link:#io_queue[io_queue]
+a|The properties of the submission queue used to submit I/O commands for execution by the NVMe controller.
+
+
+|nqn
+|string
+a|The NVMe qualified name (NQN) used to identify the NVMe storage target. Not allowed in POST when the `records` property is used.
+
+
+|subsystem
+|link:#subsystem[subsystem]
+a|The NVMe subsystem to which the NVMe host has been provisioned.
+
+
+|===
+
+
+[#nvme_subsystem_host]
+[.api-collapsible-fifth-title]
+nvme_subsystem_host
+
+The NVMe host provisioned to access NVMe namespaces mapped to a subsystem.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|io_queue
+|link:#io_queue[io_queue]
+a|The properties of the submission queue used to submit I/O commands for execution by the NVMe controller.
+
+
+|nqn
+|string
+a|The NVMe qualified name (NQN) used to identify the NVMe storage target. Not allowed in POST when the `records` property is used.
+
+
+|records
+|array[link:#records[records]]
+a|An array of NVMe hosts specified to add multiple NVMe hosts to an NVMe subsystem in a single API call. Valid in POST only.
+
+
+|subsystem
+|link:#subsystem[subsystem]
+a|The NVMe subsystem to which the NVMe host has been provisioned.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

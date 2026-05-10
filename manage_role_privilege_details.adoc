@@ -1,0 +1,80 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_role_privilege_details.html'
+summary: 'Manage role privilege details'
+---
+
+= Manage role privilege details
+
+
+
+== Overview
+
+This API is used to configure the role privileges (tuples of REST URI path and its access levels). It also retrieves all of the privilege tuples for a role and can add a tuple to an existing role.
+
+The role can be SVM-scoped or cluster-scoped.
+
+Specify the owner UUID and the role name in the URI path. The owner UUID corresponds to the UUID of the SVM for which the role has been created and can be obtained from the response body of a GET request performed on one of the following APIs:
+_/api/security/roles_ for all the roles
+_/api/security/roles/?scope=svm_ for SVM-scoped roles
+_/api/security/roles/?owner.name=+++<svm-name>+++</i> for roles in a specific SVM This API response contains the complete URI for each role and can be used after suffixing it with _"privileges"_.+++</svm-name>+++_
+
+NOTE: The pre-defined roles can be retrieved but cannot be updated.
+
+== Examples
+
+=== Adding a privilege tuple for an existing custom role
+
+----
+
+# The API:
+POST "/security/roles/{owner.uuid}/{name}/privileges"
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges" -d '{"access":"readonly","path":"/api/protocols"}'
+----
+
+=== Retrieving all the privilege tuples for a role
+
+----
+
+# The API:
+GET "/api/security/roles/{owner.uuid}/{name}/privileges"
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges"
+
+# The response:
+{
+"records": [
+  {
+    "path": "/api/application",
+    "access": "all",
+    "_links": {
+      "self": {
+        "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges/%2Fapi%2Fapplication"
+      }
+    }
+  },
+  {
+    "path": "/api/protocols",
+    "access": "readonly",
+    "_links": {
+      "self": {
+        "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges/%2Fapi%2Fprotocols"
+      }
+    }
+  }
+],
+"num_records": 2,
+"_links": {
+  "self": {
+    "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/svm_role1/privileges"
+  }
+}
+}
+----
+
+

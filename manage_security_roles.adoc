@@ -1,0 +1,216 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_security_roles.html'
+summary: 'Manage security roles'
+---
+
+= Manage security roles
+
+
+
+== Overview
+
+ONTAP supports Role Based Access Control (RBAC) wherein a user account must be associated with a role and the role defines the privileges and rights for that user account. A privilege defines the access level of the API as either "none", "readonly", or "all". This specifies whether the user account can perform only a GET operation or POST, PATCH, and DELETE operations as well. A role can comprise of multiple tuples and each tuple consists of the REST API and its access level.
+For example, "role1" might be a role that has a tuple {"access":"all","path":"/api/storage/volume"}, which means that a user account with "role1" can perform all GET, POST, PATCH, and DELETE requests on the _api/storage/volume_ API or derived APIs which have _api/storage/volume_ as the prefix.
+
+In cases where a role has tuples with multiple APIs having the same prefix, the highest match wins out.
+For example, if "role1" has the following tuples: {"access":"readonly","path":"/api/cluster"} and {"access":"all","path":"/api/cluster/schedules"}, then only a GET request is allowed on APIs with _api/cluster_ as the prefix; while POST, PATCH and DELETE requests are possible on the _api/cluster/schedules_ API.
+
+=== Predefined (built-in) roles
+
+Related REST APIs are used to form predefined cluster-scoped and SVM-scoped roles, such as: "admin", "backup", "readonly" for cluster and "vsadmin", "vsadmin-backup", "vsadmin-protocol" for SVMs.
+These can be retrieved by calling a GET request on _/api/security/roles_ API and can be assigned to user accounts. See the examples for _api/security/accounts_.
+
+These predefined roles cannot be modified or deleted.
+
+=== Mapped roles
+
+Before REST APIs, the RBAC roles (legacy roles) were defined to contain the CLI commands and their access levels. Now, almost all REST APIs map to one or more CLI commands. When a role is created using a POST request on _/api/security/roles_, a mapped legacy role is created. This legacy role has the same access level (as that of the REST API) for the mapped CLI commands. However, if a legacy role with the same name already exists, the POST operation fails and you need to choose a unique name for the role. The legacy roles cannot be managed using the REST endpoint _/api/security/roles_ or its derivatives. Legacy roles are managed using the CLI commands "security login role <create \| modify \| delete> -role +++<rolename>+++".+++</rolename>+++
+
+Note that the mapped legacy role (for the REST API role created) cannot be manipulated using the CLI.
+
+The reverse case is not true; the creation of a legacy role will not create a mapped role with equivalent REST APIs.
+
+=== API restrictions
+
+Numerous APIs are scoped for the cluster level only. This results in an access error if assigned to an SVM-scoped role. For example, _api/cluster/nodes_ does not work when added as a tuple entry for an SVM-scoped role.
+
+A number of APIs allowed for an SVM-scoped role might have restrictions on the access level. For example, _/api/network/ethernet/ports_ cannot have an access level of "all" for an SVM-scoped role; this results in an access error when a POST or PATCH request is made.
+
+Roles created with a REST API path prefix which is common to many APIs might have restrictions based on the scope of the role; cluster or SVM.
+For example, {"access":"all","path":"/api/security"} might be a tuple entry for an SVM role. Any GET, POST, PATCH, or DELETE operation fails on API _/api/security/accounts_ while the same on _/api/security/login/messages_ succeeds. However, a role with exactly the same tuple when created at the cluster-scope level allows the operations.
+
+Numerous APIs have restrictions on the objects that can be operated on based on the context of the SVM or cluster. For example, a POST request on _/api/security/authentication/password_ API changes the password for a user account. If executed in the context of an SVM (POST request on an SVM interface), only the password of the user executing the POST can be modified, and attempts to modify the password of any other user results in an access error. However, if a POST request is performed by a cluster administrator account, the password for any user account (cluster or SVM) can be modified.
+
+== Examples
+
+=== Creating a cluster-scoped custom role
+
+Specify the role name and the tuples (of REST APIs and their access level) in the body of the POST request. The owner.uuid or owner.name are not required to be specified for a cluster-scoped role.
+
+----
+
+# The API:
+POST "/api/security/roles"
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/security/roles" -d '{"name":"cluster_role", "privileges" : [{"access":"readonly","path":"/api/cluster/jobs"},{"access":"all","path":"/api/application/applications"},{"access":"readonly","path":"/api/application/templates"}]}'
+----
+
+=== Creating an SVM-scoped custom role
+
+For an SVM-scoped role, specify either owner.name or owner.uuid in the request body along with other parameters for the role. These correspond to the name or UUID of the SVM for which the role is being created and can be obtained from the response body of the GET request performed on the _/api/svm/svms_ API.
+
+----
+
+# The API:
+POST "/api/security/roles"
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/security/roles" -d '{"owner": {"uuid" : "9f93e553-4b02-11e9-a3f9-005056bb7acd"},"name":"svm_role", "privileges" : [{"access":"readonly","path":"/api/cluster/jobs"},{"access":"all","path":"/api/application/applications"},{"access":"readonly","path":"/api/application/templates"}]}'
+----
+
+=== Retrieving the configured roles
+
+All of the roles or a filtered list of roles (for example by name, predefined, and so on) can be retrieved.
+
+----
+
+# The API:
+GET "/api/security/roles"
+
+# The call to retrieve all the roles configured in the cluster:
+curl -X GET "https://<mgmt-ip>/api/security/roles"
+
+# The response:
+{
+"records": [
+  {
+    "owner": {
+      "uuid": "2903de6f-4bd2-11e9-b238-0050568e2e25",
+      "name": "cluster1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/2903de6f-4bd2-11e9-b238-0050568e2e25"
+        }
+      }
+    },
+    "name": "admin",
+    "privileges": [
+      {
+        "path": "/api",
+        "access": "all",
+        "_links": {
+          "self": {
+            "href": "/api/security/roles/2903de6f-4bd2-11e9-b238-0050568e2e25/admin/privileges/%2Fapi"
+          }
+        }
+      }
+    ],
+    "builtin": true,
+    "scope": "cluster",
+    "_links": {
+      "self": {
+        "href": "/api/security/roles/2903de6f-4bd2-11e9-b238-0050568e2e25/admin"
+      }
+    }
+  },
+  {
+    "owner": {
+      "uuid": "aaef7c38-4bd3-11e9-b238-0050568e2e25",
+      "name": "svm1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/aaef7c38-4bd3-11e9-b238-0050568e2e25"
+        }
+      }
+    },
+    "name": "vsadmin",
+    "privileges": [
+      {
+        "path": "/api/application/applications",
+        "access": "all",
+        "_links": {
+          "self": {
+            "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/vsadmin/privileges/%2Fapi%2Fapplication%2Fapplications"
+          }
+        }
+      },
+      {
+        "path": "/api/application/templates",
+        "access": "readonly",
+        "_links": {
+          "self": {
+            "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/vsadmin/privileges/%2Fapi%2Fapplication%2Ftemplates"
+          }
+        }
+      },
+      {
+        "path": "/api/cluster",
+        "access": "readonly",
+        "_links": {
+          "self": {
+            "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/vsadmin/privileges/%2Fapi%2Fcluster"
+          }
+        }
+      },
+      {
+        "path": "/api/svm/svms",
+        "access": "readonly",
+        "_links": {
+          "self": {
+            "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/vsadmin/privileges/%2Fapi%2Fsvm%2Fsvms"
+          }
+        }
+      },
+      {
+        "path": "/api/svms",
+        "access": "readonly",
+        "_links": {
+          "self": {
+            "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/vsadmin/privileges/%2Fapi%2Fsvms"
+          }
+        }
+      }
+    ],
+    "builtin": true,
+    "scope": "svm",
+    "_links": {
+      "self": {
+        "href": "/api/security/roles/aaef7c38-4bd3-11e9-b238-0050568e2e25/vsadmin"
+      }
+    }
+  }
+],
+"num_records": 2,
+"_links": {
+  "self": {
+    "href": "/api/security/roles"
+  }
+}
+}
+----
+
+=== Using a scoped call to retrieve the configured roles
+
+----
+
+# Scoped call to retrieve all the roles for a particular SVM using owner.uuid:
+curl -X GET "https://<mgmt-ip>/api/security/roles/?owner.uuid=aaef7c38-4bd3-11e9-b238-0050568e2e25"
+
+# Scoped call to retrieve all the roles for a particular SVM using owner.name:
+curl -X GET "https://<mgmt-ip>/api/security/roles/?owner.name=svm1"
+
+# Scoped call to retrieve the roles having vsadmin as the prefix in the role name:
+curl -X GET "https://<mgmt-ip>/api/security/roles/?name=vsadmin*"
+
+# Scoped call to retrieve the predefined roles:
+curl -X GET "https://<mgmt-ip>/api/security/roles/?builtin=true"
+
+# Scoped call to retrieve the custom roles:
+curl -X GET "https://<mgmt-ip>/api/security/roles/?builtin=false"
+----
+
+

@@ -1,0 +1,525 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-security-certificates.html'
+summary: 'Create or install security certificates'
+---
+
+= Create or install security certificates
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/certificates`#
+
+*Introduced In:* 9.6
+
+Creates or installs a certificate.
+
+== Required properties
+
+* `svm.uuid` or `svm.name` - Existing SVM in which to create or install the certificate.
+* `common_name` - Common name of the certificate. Required when creating a certificate.
+* `type` - Type of certificate.
+* `public_certificate` - Public key certificate in PEM format. Required when installing a certificate.
+* `private_key` - Private key certificate in PEM format. Required when installing a CA-signed certificate.
+
+== Recommended optional properties
+
+* `expiry_time` - Certificate expiration time. Specifying an expiration time is recommended when creating a certificate.
+* `key_size` - Key size of the certificate in bits. Specifying a strong key size is recommended when creating a certificate.
+* `name` - Unique certificate name per SVM. If one is not provided, it is automatically generated.
+
+== Default property values
+
+If not specified in POST, the following default property values are assigned:
+
+* `key_size` - _2048_
+* `expiry_time` - _P365DT_
+* `hash_function` - _sha256_
+
+== Related ONTAP commands
+
+* `security certificate create`
+* `security certificate install`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|authority_key_identifier
+|string
+a|Provides the key identifier of the issuing CA certificate that signed the SSL certificate.
+
+
+|ca
+|string
+a|Certificate authority
+
+
+|common_name
+|string
+a|FQDN or custom common name. Provide on POST when creating a self-signed certificate.
+
+
+|expiry_time
+|string
+a|Certificate expiration time. Can be provided on POST if creating self-signed certificate. The expiration time range is between 1 day to 10 years.
+
+
+|hash_function
+|string
+a|Hashing function. Can be provided on POST when creating a self-signed certificate. Hash functions md5 and sha1 are not allowed on POST.
+
+
+|intermediate_certificates
+|array[string]
+a|Chain of intermediate Certificates in PEM format. Only valid in POST when installing a certificate.
+
+
+|key_size
+|integer
+a|Key size of requested Certificate in bits. One of 512, 1024, 1536, 2048, 3072. Can be provided on POST if creating self-signed certificate. Key size of 512 is not allowed on POST.
+
+
+|name
+|string
+a|Certificate name. If not provided in POST, a unique name specific to the SVM is automatically generated.
+
+
+|private_key
+|string
+a|Private key Certificate in PEM format. Only valid for create when installing a CA-signed certificate. This is not audited.
+
+
+|public_certificate
+|string
+a|Public key Certificate in PEM format. If this is not provided in POST, a self-signed certificate is created.
+
+
+|serial_number
+|string
+a|Serial number of certificate.
+
+
+|subject_key_identifier
+|string
+a|Provides the key identifier used to identify the public key in the SSL certificate.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|type
+|string
+a|Type of Certificate. The following types are supported:
+
+* client - a certificate and its private key used by an SSL client in ONTAP.
+* server - a certificate and its private key used by an SSL server in ONTAP.
+* client_ca - a Certificate Authority certificate used by an SSL server in ONTAP to verify an SSL client certificate.
+* server_ca - a Certificate Authority certificate used by an SSL client in ONTAP to verify an SSL server certificate.
+* root_ca - a self-signed certificate used by ONTAP to sign other certificates by acting as a Certificate Authority.
+* enum: ["client", "server", "client_ca", "server_ca", "root_ca"]
+* Introduced in: 9.6
+
+
+|uuid
+|string
+a|Unique ID that identifies a certificate.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "authority_key_identifier": "26:1F:C5:53:5B:D7:9E:E2:37:74:F4:F4:06:09:03:3D:EB:41:75:D7",
+  "ca": "string",
+  "common_name": "test.domain.com",
+  "expiry_time": "string",
+  "hash_function": "string",
+  "intermediate_certificates": [
+    "-----BEGIN CERTIFICATE----- MIIBuzCCAWWgAwIBAgIIFTZBrqZwUUMwDQYJKoZIhvcNAQELBQAwHDENMAsGA1UE AxMEVEVTVDELMAkGA1UEBhMCVVMwHhcNMTgwNjA4MTgwOTAxWhcNMTkwNjA4MTgw OTAxWjAcMQ0wCwYDVQQDEwRURVNUMQswCQYDVQQGEwJVUzBcMA0GCSqGSIb3DQEB AQUAA0sAMEgCQQDaPvbqUJJFJ6NNTyK3Yb+ytSjJ9aa3yUmYTD9uMiP+6ycjxHWB e8u9z6yCHsW03ync+dnhE5c5z8wuDAY0fv15AgMBAAGjgYowgYcwDAYDVR0TBAUw AwEB/zALBgNVHQ8EBAMCAQYwHQYDVR0OBBYEFMJ7Ev/o/3+YNzYh5XNlqqjnw4zm MEsGA1UdIwREMEKAFMJ7Ev/o/3+YNzYh5XNlqqjnw4zmoSCkHjAcMQ0wCwYDVQQD EwRURVNUMQswCQYDVQQGEwJVU4IIFTZBrqZwUUMwDQYJKoZIhvcNAQELBQADQQAv DovYeyGNnknjGI+TVNX6nDbyzf7zUPqnri0KuvObEeybrbPW45sgsnT5dyeE/32U 9Yr6lklnkBtVBDTmLnrC -----END CERTIFICATE-----"
+  ],
+  "name": "cert1",
+  "private_key": "-----BEGIN PRIVATE KEY----- MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAu1/a8f3G47cZ6pel Hd3aONMNkGJ8vSCH5QjicuDm92VtVwkAACEjIoZSLYlJvPD+odL+lFzVQSmkneW7 VCGqYQIDAQABAkAcfNpg6GCQxoneLOghvlUrRotNZGvqpUOEAvHK3X7AJhz5SU4V an36qvsAt5ghFMVM2iGvGaXbj0dAd+Jg64pxAiEA32Eh9mPtFSmZhTIUMeGcPmPk qIYCEuP8a/ZLmI9s4TsCIQDWvLQuvjSVfwPhi0TFAb5wqAET8X5LBFqtGX5QlUep EwIgFnqM02Gc4wtLoqa2d4qPkYu13+uUW9hLd4XSd6i/OS8CIQDT3elU+Rt+qIwW u0cFrVvNYSV3HNzDfS9N/IoxTagfewIgPvXADe5c2EWbhCUkhN+ZCf38AKewK9TW lQcDy4L+f14= -----END PRIVATE KEY-----",
+  "public_certificate": "-----BEGIN CERTIFICATE----- MIIBuzCCAWWgAwIBAgIIFTZBrqZwUUMwDQYJKoZIhvcNAQELBQAwHDENMAsGA1UE AxMEVEVTVDELMAkGA1UEBhMCVVMwHhcNMTgwNjA4MTgwOTAxWhcNMTkwNjA4MTgw OTAxWjAcMQ0wCwYDVQQDEwRURVNUMQswCQYDVQQGEwJVUzBcMA0GCSqGSIb3DQEB AQUAA0sAMEgCQQDaPvbqUJJFJ6NNTyK3Yb+ytSjJ9aa3yUmYTD9uMiP+6ycjxHWB e8u9z6yCHsW03ync+dnhE5c5z8wuDAY0fv15AgMBAAGjgYowgYcwDAYDVR0TBAUw AwEB/zALBgNVHQ8EBAMCAQYwHQYDVR0OBBYEFMJ7Ev/o/3+YNzYh5XNlqqjnw4zm MEsGA1UdIwREMEKAFMJ7Ev/o/3+YNzYh5XNlqqjnw4zmoSCkHjAcMQ0wCwYDVQQD EwRURVNUMQswCQYDVQQGEwJVU4IIFTZBrqZwUUMwDQYJKoZIhvcNAQELBQADQQAv DovYeyGNnknjGI+TVNX6nDbyzf7zUPqnri0KuvObEeybrbPW45sgsnT5dyeE/32U 9Yr6lklnkBtVBDTmLnrC -----END CERTIFICATE-----",
+  "serial_number": "string",
+  "subject_key_identifier": "26:1F:C5:53:5B:D7:9E:E2:37:74:F4:F4:06:09:03:3D:EB:41:75:D8",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "type": "string",
+  "uuid": "string"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#security_certificate[security_certificate]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "records": [
+    {
+      "authority_key_identifier": "26:1F:C5:53:5B:D7:9E:E2:37:74:F4:F4:06:09:03:3D:EB:41:75:D7",
+      "ca": "string",
+      "common_name": "test.domain.com",
+      "expiry_time": "string",
+      "hash_function": "string",
+      "intermediate_certificates": [
+        "-----BEGIN CERTIFICATE----- MIIBuzCCAWWgAwIBAgIIFTZBrqZwUUMwDQYJKoZIhvcNAQELBQAwHDENMAsGA1UE AxMEVEVTVDELMAkGA1UEBhMCVVMwHhcNMTgwNjA4MTgwOTAxWhcNMTkwNjA4MTgw OTAxWjAcMQ0wCwYDVQQDEwRURVNUMQswCQYDVQQGEwJVUzBcMA0GCSqGSIb3DQEB AQUAA0sAMEgCQQDaPvbqUJJFJ6NNTyK3Yb+ytSjJ9aa3yUmYTD9uMiP+6ycjxHWB e8u9z6yCHsW03ync+dnhE5c5z8wuDAY0fv15AgMBAAGjgYowgYcwDAYDVR0TBAUw AwEB/zALBgNVHQ8EBAMCAQYwHQYDVR0OBBYEFMJ7Ev/o/3+YNzYh5XNlqqjnw4zm MEsGA1UdIwREMEKAFMJ7Ev/o/3+YNzYh5XNlqqjnw4zmoSCkHjAcMQ0wCwYDVQQD EwRURVNUMQswCQYDVQQGEwJVU4IIFTZBrqZwUUMwDQYJKoZIhvcNAQELBQADQQAv DovYeyGNnknjGI+TVNX6nDbyzf7zUPqnri0KuvObEeybrbPW45sgsnT5dyeE/32U 9Yr6lklnkBtVBDTmLnrC -----END CERTIFICATE-----"
+      ],
+      "name": "cert1",
+      "private_key": "-----BEGIN PRIVATE KEY----- MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAu1/a8f3G47cZ6pel Hd3aONMNkGJ8vSCH5QjicuDm92VtVwkAACEjIoZSLYlJvPD+odL+lFzVQSmkneW7 VCGqYQIDAQABAkAcfNpg6GCQxoneLOghvlUrRotNZGvqpUOEAvHK3X7AJhz5SU4V an36qvsAt5ghFMVM2iGvGaXbj0dAd+Jg64pxAiEA32Eh9mPtFSmZhTIUMeGcPmPk qIYCEuP8a/ZLmI9s4TsCIQDWvLQuvjSVfwPhi0TFAb5wqAET8X5LBFqtGX5QlUep EwIgFnqM02Gc4wtLoqa2d4qPkYu13+uUW9hLd4XSd6i/OS8CIQDT3elU+Rt+qIwW u0cFrVvNYSV3HNzDfS9N/IoxTagfewIgPvXADe5c2EWbhCUkhN+ZCf38AKewK9TW lQcDy4L+f14= -----END PRIVATE KEY-----",
+      "public_certificate": "-----BEGIN CERTIFICATE----- MIIBuzCCAWWgAwIBAgIIFTZBrqZwUUMwDQYJKoZIhvcNAQELBQAwHDENMAsGA1UE AxMEVEVTVDELMAkGA1UEBhMCVVMwHhcNMTgwNjA4MTgwOTAxWhcNMTkwNjA4MTgw OTAxWjAcMQ0wCwYDVQQDEwRURVNUMQswCQYDVQQGEwJVUzBcMA0GCSqGSIb3DQEB AQUAA0sAMEgCQQDaPvbqUJJFJ6NNTyK3Yb+ytSjJ9aa3yUmYTD9uMiP+6ycjxHWB e8u9z6yCHsW03ync+dnhE5c5z8wuDAY0fv15AgMBAAGjgYowgYcwDAYDVR0TBAUw AwEB/zALBgNVHQ8EBAMCAQYwHQYDVR0OBBYEFMJ7Ev/o/3+YNzYh5XNlqqjnw4zm MEsGA1UdIwREMEKAFMJ7Ev/o/3+YNzYh5XNlqqjnw4zmoSCkHjAcMQ0wCwYDVQQD EwRURVNUMQswCQYDVQQGEwJVU4IIFTZBrqZwUUMwDQYJKoZIhvcNAQELBQADQQAv DovYeyGNnknjGI+TVNX6nDbyzf7zUPqnri0KuvObEeybrbPW45sgsnT5dyeE/32U 9Yr6lklnkBtVBDTmLnrC -----END CERTIFICATE-----",
+      "serial_number": "string",
+      "subject_key_identifier": "26:1F:C5:53:5B:D7:9E:E2:37:74:F4:F4:06:09:03:3D:EB:41:75:D8",
+      "svm": {
+        "name": "svm1",
+        "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+      },
+      "type": "string",
+      "uuid": "string"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 3735645
+| Cannot specify a value for serial. It is generated automatically.
+
+| 3735622
+| The certificate type is not supported.
+
+| 3735664
+| The specified key size is not supported in FIPS mode.
+
+| 3735665
+| The specified hash function is not supported in FIPS mode.
+
+| 3735553
+| Failed to create self-signed Certificate.
+
+| 3735646
+| Failed to store the certificates.
+
+| 3735693
+| The certificate installation failed as private key was empty.
+
+| 3735618
+| Cannot accept private key for server_ca or client_ca.
+
+| 52363365
+| Failed to allocate memory.
+
+| 52559975
+| Failed to read the certificate due to incorrect formatting.
+
+| 52363366
+| Unsupported key type.
+
+| 52560123
+| Failed to read the key due to incorrect formatting.
+
+| 52559972
+| The certificates start date is later than the current date.
+
+| 52559976
+| The certificate and private key do not match.
+
+| 52559973
+| The certificate has expired.
+
+| 52363366
+| Logic error: use of a dead object.
+
+| 3735696
+| Intermediate certificates are not supported with client_ca and server_ca type certificates.
+
+| 52559974
+| The certificate is not supported in FIPS mode.
+
+| 3735676
+| Cannot continue the installation without a value for the common name. Since the subject field in the certificate is empty, the field "common_name" must have a value to continue with the installation.
+
+| 3735558
+| Failed to extract information about Common Name from the certificate.
+
+| 3735588
+| The common name (CN) extracted from the certificate is not valid.
+
+| 3735632
+| Failed to extract Certificate Authority Information from the certificate.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#security_certificate]
+[.api-collapsible-fifth-title]
+security_certificate
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|authority_key_identifier
+|string
+a|Provides the key identifier of the issuing CA certificate that signed the SSL certificate.
+
+
+|ca
+|string
+a|Certificate authority
+
+
+|common_name
+|string
+a|FQDN or custom common name. Provide on POST when creating a self-signed certificate.
+
+
+|expiry_time
+|string
+a|Certificate expiration time. Can be provided on POST if creating self-signed certificate. The expiration time range is between 1 day to 10 years.
+
+
+|hash_function
+|string
+a|Hashing function. Can be provided on POST when creating a self-signed certificate. Hash functions md5 and sha1 are not allowed on POST.
+
+
+|intermediate_certificates
+|array[string]
+a|Chain of intermediate Certificates in PEM format. Only valid in POST when installing a certificate.
+
+
+|key_size
+|integer
+a|Key size of requested Certificate in bits. One of 512, 1024, 1536, 2048, 3072. Can be provided on POST if creating self-signed certificate. Key size of 512 is not allowed on POST.
+
+
+|name
+|string
+a|Certificate name. If not provided in POST, a unique name specific to the SVM is automatically generated.
+
+
+|private_key
+|string
+a|Private key Certificate in PEM format. Only valid for create when installing a CA-signed certificate. This is not audited.
+
+
+|public_certificate
+|string
+a|Public key Certificate in PEM format. If this is not provided in POST, a self-signed certificate is created.
+
+
+|serial_number
+|string
+a|Serial number of certificate.
+
+
+|subject_key_identifier
+|string
+a|Provides the key identifier used to identify the public key in the SSL certificate.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|type
+|string
+a|Type of Certificate. The following types are supported:
+
+* client - a certificate and its private key used by an SSL client in ONTAP.
+* server - a certificate and its private key used by an SSL server in ONTAP.
+* client_ca - a Certificate Authority certificate used by an SSL server in ONTAP to verify an SSL client certificate.
+* server_ca - a Certificate Authority certificate used by an SSL client in ONTAP to verify an SSL server certificate.
+* root_ca - a self-signed certificate used by ONTAP to sign other certificates by acting as a Certificate Authority.
+* enum: ["client", "server", "client_ca", "server_ca", "root_ca"]
+* Introduced in: 9.6
+
+
+|uuid
+|string
+a|Unique ID that identifies a certificate.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

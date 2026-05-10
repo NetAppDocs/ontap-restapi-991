@@ -1,0 +1,442 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-protocols-cifs-shares-.html'
+summary: 'Update a CIFS share'
+---
+
+= Update a CIFS share
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/cifs/shares/{svm.uuid}/{name}`#
+
+*Introduced In:* 9.6
+
+Updates a CIFS share.
+
+== Related ONTAP commands
+
+* `vserver cifs share modify`
+* `vserver cifs share properties add`
+* `vserver cifs share properties remove`
+
+== Learn more
+
+* link:manage_cifs_shares.html[DOC /protocols/cifs/shares]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|name
+|string
+|path
+|True
+a|Share Name
+
+
+|svm.uuid
+|string
+|path
+|True
+a|UUID of the SVM to which this object belongs.
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|access_based_enumeration
+|boolean
+a|If enabled, all folders inside this share are visible to a user based on that individual user access right; prevents
+the display of folders or other shared resources that the user does not have access to.
+
+
+|change_notify
+|boolean
+a|Specifies whether CIFS clients can request for change notifications for directories on this share.
+
+
+|comment
+|string
+a|Specify the CIFS share descriptions.
+
+
+|encryption
+|boolean
+a|Specifies that SMB encryption must be used when accessing this share. Clients that do not support encryption are not
+able to access this share.
+
+
+|no_strict_security
+|boolean
+a|Specifies whether or not CIFS clients can follow a unix symlinks outside the share boundaries.
+
+
+|oplocks
+|boolean
+a|Specify whether opportunistic locks are enabled on this share. "Oplocks" allow clients to lock files and cache content locally,
+which can increase performance for file operations.
+
+
+|path
+|string
+a|The fully-qualified pathname in the owning SVM namespace that is shared through this share.
+If this is a home directory share then the path should be dynamic by specifying the pattern
+%w (Windows user name), %u (UNIX user name), or %d (domain name) variables in any combination.
+ONTAP generates the path dynamically for the connected user and this path is appended to each
+search path to find the full Home Directory path.
+
+* example: /volume_1/eng_vol/
+* maxLength: 256
+* minLength: 1
+* Introduced in: 9.6
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|unix_symlink
+|string
+a|Controls the access of UNIX symbolic links to CIFS clients.
+The supported values are:
+
+***** local - Enables only local symbolic links which is within the same CIFS share.
+
+***** widelink - Enables both local symlinks and widelinks.
+
+***** disable - Disables local symlinks and widelinks.
+
+
+|volume
+|link:#volume[volume]
+a|
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "comment": "HR Department Share",
+  "home_directory": null,
+  "path": "/volume_1/eng_vol/",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "unix_symlink": "string",
+  "volume": {
+    "name": "volume1",
+    "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+  }
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 655628
+| 'SMB_ENCRYPTION' property cannot be set on CIFS share because the CIFS server does not support SMB3.0
+
+| 655551
+| CIFS Share modification failed because the specified path does not exist
+
+| 655620
+| Cannot set symlink properties for admin shares
+
+| 656420
+| Cannot modify the standard share ipc$
+
+| 656421
+| Cannot modify the standard share admin$
+
+| 656422
+| Failed to modify the home directory share because the directory shares must specify a path relative to one or more home directory search paths
+
+| 656423
+| Failed to modify CIFS share. The Shares must define an absolute share path
+
+| 656425
+| Failed to modify the CIFS share because the path for an administrative share cannot be modified
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#acls]
+[.api-collapsible-fifth-title]
+acls
+
+The permissions that users and groups have on a CIFS share.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|permission
+|string
+a|Specifies the access rights that a user or group has on the defined CIFS Share.
+The following values are allowed:
+
+* no_access    - User does not have CIFS share access
+* read         - User has only read access
+* change       - User has change access
+* full_control - User has full_control access
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#volume]
+[.api-collapsible-fifth-title]
+volume
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the volume.
+
+
+|uuid
+|string
+a|Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
+
+* example: 028baa66-41bd-11e9-81d5-00a0986138f7
+* Introduced in: 9.6
+
+
+|===
+
+
+[#cifs_share]
+[.api-collapsible-fifth-title]
+cifs_share
+
+CIFS share is a named access point in a volume. Before users and applications can access data on the CIFS server over SMB,
+a CIFS share must be created with sufficient share permission. CIFS shares are tied to the CIFS server on the SVM.
+When a CIFS share is created, ONTAP creates a default ACL for the share with Full Control permissions for Everyone.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|access_based_enumeration
+|boolean
+a|If enabled, all folders inside this share are visible to a user based on that individual user access right; prevents
+the display of folders or other shared resources that the user does not have access to.
+
+
+|change_notify
+|boolean
+a|Specifies whether CIFS clients can request for change notifications for directories on this share.
+
+
+|comment
+|string
+a|Specify the CIFS share descriptions.
+
+
+|encryption
+|boolean
+a|Specifies that SMB encryption must be used when accessing this share. Clients that do not support encryption are not
+able to access this share.
+
+
+|no_strict_security
+|boolean
+a|Specifies whether or not CIFS clients can follow a unix symlinks outside the share boundaries.
+
+
+|oplocks
+|boolean
+a|Specify whether opportunistic locks are enabled on this share. "Oplocks" allow clients to lock files and cache content locally,
+which can increase performance for file operations.
+
+
+|path
+|string
+a|The fully-qualified pathname in the owning SVM namespace that is shared through this share.
+If this is a home directory share then the path should be dynamic by specifying the pattern
+%w (Windows user name), %u (UNIX user name), or %d (domain name) variables in any combination.
+ONTAP generates the path dynamically for the connected user and this path is appended to each
+search path to find the full Home Directory path.
+
+* example: /volume_1/eng_vol/
+* maxLength: 256
+* minLength: 1
+* Introduced in: 9.6
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|unix_symlink
+|string
+a|Controls the access of UNIX symbolic links to CIFS clients.
+The supported values are:
+
+***** local - Enables only local symbolic links which is within the same CIFS share.
+
+***** widelink - Enables both local symlinks and widelinks.
+
+***** disable - Disables local symlinks and widelinks.
+
+
+|volume
+|link:#volume[volume]
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

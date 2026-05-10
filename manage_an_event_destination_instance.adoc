@@ -1,0 +1,83 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_an_event_destination_instance.html'
+summary: 'Manage an event destination instance'
+---
+
+= Manage an event destination instance
+
+
+
+== Overview
+
+Manages a specific instance of a destination. There are limits to the information that you can modify after a destination is created. For example, you cannot change a destination's type, but you can modify the underlying details of the type.
+See the documentation for <</docs/support/support_ems_destinations,/support/ems/destinations>> for details on the various properties in a destination.
+
+== Examples
+
+=== Retrieving a specific destination instance
+
+[,json]
+----
+
+# API
+GET /api/support/ems/destinations/snmp-traphost
+
+# Response
+200 OK
+
+# JSON Body
+{
+"name": "snmp-traphost",
+"type": "snmp",
+"destination": "",
+"filters": [
+  {
+    "name": "default-trap-events",
+    "_links": {
+      "self": {
+        "href": "/api/support/ems/filters/default-trap-events"
+      }
+    }
+  }
+],
+"_links": {
+  "self": {
+    "href": "/api/support/ems/destinations/snmp-traphost"
+  }
+}
+}
+----
+
+=== Updating an existing destination (change of email address)
+
+[,json]
+----
+
+# API
+PATCH /api/support/ems/destinations/test-destination
+
+# JSON Body
+{
+"destination": "support@mycompany.com"
+}
+
+# Response
+200 OK
+----
+
+=== Deleting an existing destination
+
+[,json]
+----
+
+# API
+DELETE /api/support/ems/destinations/test-destination
+
+# Response
+200 OK
+----
+
+

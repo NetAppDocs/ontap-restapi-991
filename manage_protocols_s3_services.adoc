@@ -1,0 +1,382 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_protocols_s3_services.html'
+summary: 'Manage protocols S3 services'
+---
+
+= Manage protocols S3 services
+
+
+
+== Overview
+
+An S3 server is an object store server that is compatible with the Amazon S3 protocol. In the initial version, only a subset of the protocol features necessary to support Fabric Pool capacity tier usecases are implemented. S3 server allows you to store objects in ONTAP using Amazon S3 protocol. This feature can be used as a target object store server for ONTAP FabricPools.
+
+== Performance monitoring
+
+Performance of the SVM can be monitored by the `metric.+*+` and `statistics.+*+` properties. These show the performance of the SVM in terms of IOPS, latency and throughput. The `metric.+*+` properties denote an average whereas `statistics.+*+` properties denote a real-time monotonically increasing value aggregated across all nodes.
+
+== Examples
+
+=== Retrieving all of the S3 configurations
+
+----
+
+# The API:
+/api/protocols/s3/services
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/s3/services?fields=*&return_records=true&return_timeout=15" -H "accept: application/json"
+
+# The response:
+{
+"records": [
+  {
+    "svm": {
+      "uuid": "cf90b8f2-8071-11e9-8190-0050568eae21",
+      "name": "vs2"
+    },
+    "name": "s1",
+    "comment": "S3 server",
+    "enabled": false,
+  },
+  {
+    "svm": {
+      "uuid": "d7f1219c-7f8e-11e9-9124-0050568eae21",
+      "name": "vs1"
+    },
+    "name": "Server-1",
+    "comment": "S3 server",
+    "enabled": true,
+    "buckets": [
+      {
+        "uuid": "e08665af-8114-11e9-8190-0050568eae21",
+        "name": "bucket-1",
+        "volume": {
+          "name": "fg_oss_1559026220",
+          "uuid": "de146bff-8114-11e9-8190-0050568eae21"
+        },
+        "size": 209715200,
+        "logical_used_size": 157286400,
+        "encryption": {
+          "enabled": false
+        },
+        "comment": "s3 bucket"
+      },
+      {
+        "uuid": "fb1912ef-8114-11e9-8190-0050568eae21",
+        "name": "bucket-2",
+        "volume": {
+          "name": "fg_oss_1559026269",
+          "uuid": "f9b1cdd0-8114-11e9-8190-0050568eae21"
+        },
+        "size": 104857600,
+        "logical_used_size": 78643200,
+        "encryption": {
+          "enabled": false
+        },
+        "comment": "s3 bucket"
+      }
+    ],
+    "users": [
+      {
+        "name": "user-1",
+        "comment": "S3 user",
+        "access_key": "3333_w162ypaTi7_aAQuJo76Z16zc9Gz_W3IN83bDQWkcCN3jYU_z_xn20XATMKKa90509KCH__r4lh1IPU58vf1QlWAJt8k2F1BPjPtM6CsDRX_dOP_QZkF5N9fBuz3"
+      },
+      {
+        "name": "user-2",
+        "comment": "",
+        "access_key": "g6T24qhH92dOA6gc1WTcDO_2oNZhQ6Drl2zu5_s5Id_QK1wLgghgxsD2xP1xqG7oX1T_9AI0D39q65CY3FAg0CbAtVU_903bSnCnht3xqjbrF5_3Cs9RnY8nE_az1Ltc"
+      }
+    ]
+  }
+],
+"num_records": 2
+}
+----
+
+=== Retrieving all S3 configurations for a particular SVM
+
+----
+
+# The API:
+/api/protocols/s3/services/{svm.uuid}
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/s3/services/24c2567a-f269-11e8-8852-0050568e5298?fields=*" -H "accept: application/json"
+
+# The response:
+{
+"svm": {
+  "uuid": "d7f1219c-7f8e-11e9-9124-0050568eae21",
+  "name": "vs1"
+},
+"name": "Server-1",
+"comment": "S3 server",
+"enabled": true,
+"buckets": [
+  {
+    "uuid": "e08665af-8114-11e9-8190-0050568eae21",
+    "name": "bucket-1",
+    "volume": {
+      "name": "fg_oss_1559026220",
+      "uuid": "de146bff-8114-11e9-8190-0050568eae21"
+    },
+    "size": 209715200,
+    "logical_used_size": 157286400,
+    "encryption": {
+      "enabled": false
+    },
+    "comment": "s3 bucket",
+    "policy": {
+      "statements": [
+        {
+          "effect": "deny",
+          "actions": [
+            "*Object"
+          ],
+          "principals": [
+            "mike"
+          ],
+          "resources": [
+            "bucket-1/policy-docs/*",
+            "bucket-1/confidential-*"
+          ],
+          "sid": "DenyAccessToGetPutDeleteObjectForMike"
+        },
+        {
+          "effect": "allow",
+          "actions": [
+            "GetObject"
+          ],
+          "principals": [
+            "*"
+          ],
+          "resources": [
+            "bucket-1/readme"
+          ],
+          "sid": "AccessToGetObjectForAnonymousUser"
+        }
+      ]
+    }
+  },
+  {
+    "uuid": "fb1912ef-8114-11e9-8190-0050568eae21",
+    "name": "bucket-2",
+    "volume": {
+      "name": "fg_oss_1559026269",
+      "uuid": "f9b1cdd0-8114-11e9-8190-0050568eae21"
+    },
+    "size": 1677721600,
+    "logical_used_size": 1075838976,
+    "encryption": {
+      "enabled": false
+    },
+    "comment": "s3 bucket"
+  }
+],
+"users": [
+  {
+    "name": "user-1",
+    "comment": "s3 user",
+    "access_key": "3333_w162ypaTi7_aAQuJo76Z16zc9Gz_W3IN83bDQWkcCN3jYU_z_xn20XATMKKa90509KCH__r4lh1IPU58vf1QlWAJt8k2F1BPjPtM6CsDRX_dOP_QZkF5N9fBuz3"
+  },
+  {
+    "name": "user-2",
+    "comment": "",
+    "access_key": "g6T24qhH92dOA6gc1WTcDO_2oNZhQ6Drl2zu5_s5Id_QK1wLgghgxsD2xP1xqG7oX1T_9AI0D39q65CY3FAg0CbAtVU_903bSnCnht3xqjbrF5_3Cs9RnY8nE_az1Ltc"
+  }
+]
+}
+----
+
+=== Creating an S3 server, users, and buckets configurations with required fields specified
+
+----
+
+# The API:
+/api/protocols/s3/services
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/protocols/s3/services" -H "accept: application/hal+json" -H "Content-Type: application/json" -d "{ \"buckets\": [ { \"name\": \"bucket-1\" }, { \"name\": \"bucket-2\" } ], \"enabled\": true, \"name\": \"Server-1\", \"svm\": { \"uuid\": \"d49ef663-7f8e-11e9-9b2c-0050568e4594\" }, \"users\": [ { \"name\": \"user-1\" }, { \"name\": \"user-2\" } ]}"
+
+# The response:
+HTTP/1.1 201 Created
+Date: Fri, 31 May 2019 08:44:16 GMT
+Server: libzapid-httpd
+X-Content-Type-Options: nosniff
+Cache-Control: no-cache,no-store,must-revalidate
+Location: /api/protocols/s3/services/
+Content-Length: 623
+Content-Type: application/hal+json
+{
+"num_records": 1,
+"records": [
+  {
+    "users": [
+      {
+        "name": "user-1",
+        "access_key": "x129aL0q9bu3J_4_2S0OcU34AA5DJXXB_j9R34_60tqiqAS5_c8PAgN6Lg1zkv_76P4IxNWir9st9uhhgldb31u364Cczq_c39C1fUP7HDheUmYY6u4xt61_N7Sw6c33",
+        "secret_key": "gh0pYc__43Csnx_Ks4_C0tb_5AfT4HZTfQl8xN8Dl5TjqB90oNt5ZaPO6Hs4h6Q4Fq4B4uq5Cqht82X6vcE32c3uLZB8pXAAx819LWPgpOSwD5xga2RE3czr1qhCd9V6"
+      },
+      {
+        "name": "user-2",
+        "access_key": "nntYZrNN65mKn57yS04o1sDp_D0AY58jdwCW573_5x2OPW09AbyFl86DB7r30N2373_bA12n08aovQp8ySItRss9AjsYoSj7TsIiHOW_Y21DaqYPl5I2a849b11y8X4c",
+        "secret_key": "bjtsPXV2D8BM6pZNQ9pzmKoXU3qIv2yQ3957dhjK4X7M2dB6Rjtrq1As_8cS_4bSP0jt_P31R5eLdZ_zcBO9Z_ZRMldTc1Bw_5c7LugBnzG2D3xXB91jqLaP2xnKn_Zg"
+      }
+    ],
+    "job": {
+      "uuid": "f51675dd-820a-11e9-a762-0050568e4594",
+      "_links": {
+        "self": {
+          "href": "/api/cluster/jobs/f51675dd-820a-11e9-a762-0050568e4594"
+        }
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "/api/protocols/s3/services/"
+      }
+    }
+  }
+]
+}
+----
+
+=== Creating an S3 server, users, and buckets configurations
+
+----
+
+# The API:
+/api/protocols/s3/services
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/protocols/s3/services" -H "accept: application/hal+json" -H "Content-Type: application/json" -d "{ \"buckets\": [ { \"aggregates\": [ { \"name\": \"aggr1\", \"uuid\": \"1cd8a442-86d1-11e0-ae1c-123478563412\" } ], \"constituents_per_aggregate\": 4, \"name\": \"bucket-1\", \"size\": \"209715200\",  \"policy\": { \"statements\": [ { \"actions\": [ \"*\" ], \"conditions\": [ { \"operator\": \"ip_address\", \"source_ips\": [ \"1.1.1.1/23\", \"1.2.2.2/20\" ] } ], \"effect\": \"allow\", \"resources\": [ \"bucket-1\", \"bucket-1*\" ], \"sid\": \"fullAccessForAllPrincipalsToBucket\"} ] } }, { \"aggregates\": [ { \"name\": \"aggr1\", \"uuid\": \"1cd8a442-86d1-11e0-ae1c-123478563412\" }, { \"name\": \"aggr2\", \"uuid\": \"982fc4d0-d1a2-4da4-9c47-5b433f24757d\"} ], \"constituents_per_aggregate\": 4, \"name\": \"bucket-2\" } ], \"enabled\": true, \"name\": \"Server-1\", \"svm\": { \"name\": \"vs1\", \"uuid\": \"d49ef663-7f8e-11e9-9b2c-0050568e4594\" }, \"users\": [ { \"name\": \"user-1\" }, { \"name\": \"user-2\" } ]}"
+
+# The response:
+HTTP/1.1 201 Created
+Date: Fri, 31 May 2019 08:44:16 GMT
+Server: libzapid-httpd
+X-Content-Type-Options: nosniff
+Cache-Control: no-cache,no-store,must-revalidate
+Location: /api/protocols/s3/services/
+Content-Length: 623
+Content-Type: application/hal+json
+{
+"num_records": 1,
+"records": [
+  {
+    "users": [
+      {
+        "name": "user-1",
+        "access_key": "x129aL0q9bu3J_4_2S0OcU34AA5DJXXB_j9R34_60tqiqAS5_c8PAgN6Lg1zkv_76P4IxNWir9st9uhhgldb31u364Cczq_c39C1fUP7HDheUmYY6u4xt61_N7Sw6c33",
+        "secret_key": "gh0pYc__43Csnx_Ks4_C0tb_5AfT4HZTfQl8xN8Dl5TjqB90oNt5ZaPO6Hs4h6Q4Fq4B4uq5Cqht82X6vcE32c3uLZB8pXAAx819LWPgpOSwD5xga2RE3czr1qhCd9V6"
+      },
+      {
+        "name": "user-2",
+        "access_key": "nntYZrNN65mKn57yS04o1sDp_D0AY58jdwCW573_5x2OPW09AbyFl86DB7r30N2373_bA12n08aovQp8ySItRss9AjsYoSj7TsIiHOW_Y21DaqYPl5I2a849b11y8X4c",
+        "secret_key": "bjtsPXV2D8BM6pZNQ9pzmKoXU3qIv2yQ3957dhjK4X7M2dB6Rjtrq1As_8cS_4bSP0jt_P31R5eLdZ_zcBO9Z_ZRMldTc1Bw_5c7LugBnzG2D3xXB91jqLaP2xnKn_Zg"
+      }
+    ],
+    "job": {
+      "uuid": "f51675dd-820a-11e9-a762-0050568e4594",
+      "_links": {
+        "self": {
+          "href": "/api/cluster/jobs/f51675dd-820a-11e9-a762-0050568e4594"
+        }
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "/api/protocols/s3/services/"
+      }
+    }
+  }
+]
+}
+----
+
+=== Creating an S3 server configuration
+
+----
+
+# The API:
+/api/protocols/s3/services
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/protocols/s3/services" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"comment\": \"S3 server\", \"enabled\": true, \"name\": \"Server-1\", \"svm\": { \"name\": \"vs1\", \"uuid\": \"db2ec036-8375-11e9-99e1-0050568e3ed9\" } }"
+----
+
+=== Disable s3 server for the specified SVM
+
+----
+
+# The API:
+/api/protocols/s3/services/{svm.uuid}
+
+# The call:
+curl -X PATCH "https://<mgmt-ip>/api/protocols/s3/services/03ce5c36-f269-11e8-8852-0050568e5298" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"enabled\": false }"
+----
+
+=== Deleting the S3 server for a specified SVM
+
+----
+
+# The API:
+/api/protocols/s3/services/{svm.uuid}
+
+# The call:
+curl -X DELETE "https://<mgmt-ip>/api/protocols/s3/services/a425f10b-ad3b-11e9-b559-0050568e8222?delete_all=false" -H  "accept: application/json"
+HTTP/1.1 200 OK
+Date: Wed, 14 Aug 2019 07:04:24 GMT
+Server: libzapid-httpd
+X-Content-Type-Options: nosniff
+Cache-Control: no-cache,no-store,must-revalidate
+Content-Length: 132
+Content-Type: application/json
+{
+"num_records": 1,
+"records": [
+  {
+    "job": {
+      "uuid": "bf74ba50-be61-11e9-bea8-0050568e8222"
+    }
+  }
+]
+}
+----
+
+=== Deleting all of the S3 server configuration for a specified SVM
+
+----
+
+# The API:
+/api/protocols/s3/services/{svm.uuid}
+
+# The call:
+curl -X DELETE "https://<mgmt-ip>/api/protocols/s3/services/03ce5c36-f269-11e8-8852-0050568e5298?delete_all=true" -H "accept: application/json"
+
+# The response:
+HTTP/1.1 200 OK
+Date: Sat, 01 Jun 2019 15:46:39 GMT
+Server: libzapid-httpd
+X-Content-Type-Options: nosniff
+Cache-Control: no-cache,no-store,must-revalidate
+Content-Length: 132
+Content-Type: application/hal+json
+{
+"num_records": 1,
+"records": [
+  {
+    "job": {
+      "uuid": "71eaaf02-8484-11e9-91f7-0050568ebc5f"
+    }
+  }
+]
+}
+----
+
+

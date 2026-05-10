@@ -1,0 +1,1259 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'getting_started_with_the_ontap_rest_api.html'
+summary: 'Getting started with the ONTAP REST API'
+---
+
+= Getting started with the ONTAP REST API
+
+
+
+ONTAP adds support for an expansive RESTful API. The documentation below provides information about the types of API calls available to you, as well as details about using each API endpoint. You can learn more about the ONTAP REST API at the ONTAP Automation docs site:  https://docs.netapp.com/us-en/ontap-automation/index.html. NetApp welcomes your comments and suggestions about the ONTAP REST API and the documentation for its use.</br>
+
+== Using the ONTAP REST API online documentation
+
+Each API method includes usage examples, as well as a model that displays all the required and optional properties supported by the method. Click the _Model_ link, available with each API method, to see all the required and optional properties supported by each method.
+
+== Features for all ONTAP APIs
+
+[#Getting_started_with_the_ONTAP_REST_API]
+=== Getting started with the ONTAP REST API
+
+[.api-collapsible-third-title]
+Overview
+
+Let's review some key things about RESTful APIs and how they're implemented in ONTAP:
+
+*** REST API URLs identify the resources that you'll be working with, including clusters, SVMs, and storage.
+
+*** REST APIs use HTTP methods GET, POST, PATCH, DELETE, and OPTIONS to indicate their actions.
+
+*** REST APIs return common HTTP status codes to indicate the results of each call. Additional error details can be included in the results body.
+
+*** REST APIs request and response bodies are encoded using JSON.
+
+*** REST APIs support hyperlinking among resources using the Content-Type "application/hal+json".
+
+*** GET calls on collections usually return only name and UUID by default. If you want to retrieve additional properties, you need to specify them using the "`fields`" query parameter.
+
+*** ONTAP supports query-based DELETE or PATCH for all collection endpoints.
+If you're already familiar with the ONTAPI API (also known as ZAPI), there are some similarities between ONTAP REST APIs and ONTAPI. For example:
+
+*** Both support the same transport and security mechanisms.
+
+*** Both paginate results based on either number of seconds or number of records.
+
+*** Both support filtering the returned records based on property values.
+
+*** Both support limiting the returned properties.
+
+*** Both support concurrent requests. If ONTAP temporarily can't handle additional calls, it will respond with an HTTP error status code of 503.
+However, there are important differences between REST APIs and the ONTAP CLI and ONTAPI that you should understand as well:
+
+*** In many cases, ONTAP REST APIs use different names for fields and features.
+
+*** REST APIs do not expose infrequently used CLI parameters.
+
+*** REST APIs do not treat the cluster or nodes as an SVM (aka Vserver).
+
+*** REST GET APIs support specifying a maximum time before paginating results. However, the default time is 15 seconds for REST (instead of 90 seconds for ONTAPI).
+
+*** REST APIs are generally ordered by UUID or ID, so a rename operation using the PATCH method doesn't change the path keys.
+
+*** REST APIs use one or more of the following properties to identify a resource: "name", "uuid", "id".
+
+*** REST APIs often execute the equivalent of multiple CLI commands in a single request.
+
+*** REST API properties use underscores instead of hyphens between words.
+
+*** REST API dates are always in ISO-8601 format.
+
+*** REST API comparisons between enum values (for <, >, ranges, and `order_by`) are done alphabetically. (In CLI and ONTAPI, enum comparisions are done based on an internal value for the enum.)
+
+*** REST API field '<' queries exclude records where the specified field is not set. You can add "\|null" (eg: limit=<10\|null) to also return records where the specified field is not set.
+
+[#HAL_linking]
+=== HAL linking
+
+[.api-collapsible-third-title]
+Hypertext Application Language (HAL)
+
+ONTAP REST APIs use HAL as the mechanism to support Hypermedia as the Engine of Application State (HATEOAS). When an object or attribute is returned that identifies a specific resource, a HAL-encoded link is also returned so that you can easily discover resources and be able to obtain more details about the resource.
+
+[.api-collapsible-fourth-title]
+Example
+
+----
+"aggregate": {
+    "uuid": "19425837-f2fa-4a9f-8f01-712f626c983c",
+    "name": "aggr0",
+    "_links": {
+        "self": {
+            "href": "/api/storage/aggregates/19425837-f2fa-4a9f-8f01-712f626c983c"
+        }
+    }
+}
+----
+
+[#Query_parameters]
+=== Query parameters
+
+[.api-collapsible-third-title]
+Overview
+
+The following is a list of all the globally supported query parameters. This list is intended as a quick reference for syntax purposes. The query parameters are described in more detail in other sections of this documentation. Note that multiple queries can be combined using an "&".
+
+----
+
+# Request specific fields
+fields=<field>[,...]
+
+# Query fields by value. If the value contains query characters (*|,!<>..), it must be quoted to avoid their special query meaning
+<field>=<query value>
+
+# Return the records array
+return_records=<true|false>
+
+# Timeout and return after the specified number of seconds
+return_timeout=<0..120 seconds>
+
+# The number of records to collect (or act on for query-based PATCH/DELETE) before returning
+max_records=<number of records>
+
+# Request a customized sort ordering
+order_by=<field [asc|desc]>[,...]
+$orderBy=<field [asc|desc]>[,...]
+
+# Pretty print JSON response bodies
+pretty=<true|false>
+
+# Continue after encountering a failure. Only applicable to query-based PATCH and DELETE.
+continue_on_failure=<true|false>
+
+# Begin returning records starting at an offset from the first record
+offset=<offset from first record>
+----
+
+[#Query_based_PATCH_and_DELETE]
+=== Query-based PATCH and DELETE
+
+[.api-collapsible-third-title]
+Overview
+
+Although they are not documented as individual methods in the list of REST APIs, every API supporting PATCH or DELETE on a resource instance also supports PATCH or DELETE on the collection as long as at least one field is specified in the query portion of the URL. A PATCH or DELETE method issued on a collection is equivalent to internally doing a query-based GET, followed by a serial PATCH or DELETE operation on each matching record. However, it only does the operation for `return_timeout` seconds, which is 15 seconds by default. If a query-based operation is not completed before `return_timeout` seconds, the API returns a next link. The client must use the next link with the same HTTP method to continue the operation. Query-based operations will not continue to the next record until the operation on the prior record is completed, even for operations that are normally asynchronous.
+
+[.api-collapsible-fourth-title]
+Example
+
+----
+
+# Modify the state of all volumes named "simpson" to be offline
+PATCH /api/storage/volumes?name=simpson
+{ "state": "offline" }
+----
+
+[#Record_filtering]
+=== Record filtering
+
+[.api-collapsible-third-title]
+Overview
+
+Records may either be filtered by performing queries that only apply to a single field at a time (though multiple of such queries may be done simultaneously for different fields), or by applying queries that search across a set of fields for a value fulfilling a single specified query.
+
+[#Filtering records with single field queries]
+
+[.api-collapsible-third-title]
+
+Filtering records with single field queries
+
+You can filter the results of a GET call using any attribute. The supplied query can either be for an exact value or can leverage special query operators.
+
+----
+<field>=<query value>
+----
+
+Filtering allows you to select objects where the specified field matches the supplied query, or which can contain wildcards, ranges, negations, or an OR-defined list of the above. The special query operators include the following:
+
+[.api-collapsible-fourth-title]
+Wildcard: `*`
+
+----
+abc*
+abc*xyz
+
+***xyz
+----
+
+[.api-collapsible-fourth-title]
+Comparison: `+<   >   <=   >=+`
+
+----
+<10
+>=joe
+----
+
+[.api-collapsible-fourth-title]
+Range: `..`
+
+----
+3..10
+jim..joe
+----
+
+[.api-collapsible-fourth-title]
+Negation: `!`
+
+----
+!3
+!joe
+!abc*
+!jim..joe
+----
+
+[.api-collapsible-fourth-title]
+Any of a list: `|`
+
+----
+3|5
+3|5..9|>100
+----
+
+[.api-collapsible-fourth-title]
+Escaping: `{} and ""`
+
+The special query characters above can be treated literally, with no special meaning, by enclosing the value in either double quotes or curly braces.
+
+----
+"joe*"
+{a|b}
+----
+
+[#Filtering records with cross-field queries]
+
+[.api-collapsible-third-title]
+
+Filtering records with cross-field queries
+
+Cross-field queries are useful when multiple fields should be searched for a value or some combination of values. Whereas traditional queries only allow a single field to be searched for a value, cross-field queries will return rows where any field in a specified set of fields matches the query. Cross-field queries may only be used for GET requests.
+
+The fields to be queried across are specified in the "query_fields=" parameter. This should be a comma-delimited list of fields, or simply `+*+`  to search across all fields.
+To specify the query to use in the search, pass in the "query=" parameter to a GET request with the string to use as the query. Fields may also be excluded from searching prefixing with '!'. This is useful if all fields are specified with '*', and then certain fields wish to be excluded, or if an an entire object was queried, to exclude certain sub-fields.
+
+[#Structure of the query]
+
+[.api-collapsible-third-title]
+
+Structure of the query
+
+The query string represents a pattern to search for in all fields specified.
+
+The `+*+`  character is used to indicate wildcard character matching. `+*+`   matches 0 or more of any character. For a query of "foo*bar", matches will include "foo123abcbar", "foobar", and "foo___123abcbar".
+To search for any match among several possible patterns, the values may be ORed together with the '|' character. For example, to seach for "foo" OR "bar", pass in "query=foo|bar". This may be extended to an arbitrary number of values, such as "query=foo|bar|baz".
+
+Similarly, the query can be used to specify that multiple patterns must be found across all fields specified in "query_fields" for a row to be returned. To specify that multiple patterns must be found, include a space between each one. For example, to search across fields where the fields must contain both "foo" AND "bar", provide "query=foo bar". Again, this may be used on an arbitrary number of patterns. To search for rows that contain all of "foo" AND "bar" AND "baz" within the fields specified, provide "query=foo bar baz".
+
+It should be noted that it is possible for all of the matches to a query to appear in a single field. For example, if "query=foo bar", and a field queried contains "foo bar blah", it will be considered a match. Obviously the queries matches can also be spread across different fields.
+
+[#Examples]
+
+[.api-collapsible-third-title]
+
+Examples
+
+The following data is used for the examples below:
+
+|===
+| id | name | color | flavor | number | tree
+
+| 1
+| widget1
+| blue
+| chocolate
+| 1 2 3
+| black cherry
+
+| 2
+| widget2
+| red
+| spinach
+| three fifty
+| maple
+
+| 3
+| widget3
+| rainbow
+| strawberry
+| thirty
+| spruce
+
+| 4
+| widget4
+| brown
+| strawberry chocolate
+| thirteen
+| willow
+|===
+
+*Request:* 'query_fields=color', 'query=red'
+
+*Response:*
+
+|===
+| id | name | color | flavor | number | tree
+
+| 2
+| widget3
+| red
+| spinach
+| three fifty
+| maple
+|===
+
+*Explanation:* The only row with a "color" column matching "red" is row 2.
+
+*Request:* 'query_fields=id,number', 'query=3'
+
+*Response:*
+
+|===
+| id | name | color | flavor | number | tree
+
+| 1
+| widget1
+| blue
+| chocolate
+| 1 2 3
+| black cherry
+
+| 3
+| widget3
+| rainbow
+| strawberry
+| fourty two
+| spruce
+|===
+
+*Explanation:* Column "id" for row 3 matches the query, and column "number" for number for row 1 matches as well.
+
+*Request:* 'query_fields=flavor', 'query=chocolate\|strawberry'
+
+*Response:*
+
+|===
+| id | name | color | flavor | number | tree
+
+| 1
+| widget1
+| blue
+| chocolate
+| 1 2 3
+| black cherry
+
+| 3
+| widget3
+| rainbow
+| strawberry
+| fourty two
+| spruce
+
+| 4
+| widget4
+| brown
+| strawberry chocolate
+| thirteen
+| willow
+|===
+
+*Explanation:* This query returns rows containing chocolate and/or strawberry in the flavor column. Rows 1, 2, and 4 all contain matches. Row 4 actually matches both queries.
+
+*Request:* 'query_fields=flavor', 'query=chocolate strawberry'
+
+*Response:*
+
+|===
+| id | name | color | flavor | number | tree
+
+| 4
+| widget4
+| brown
+| strawberry chocolate
+| thirteen
+| willow
+|===
+
+*Explanation:* This query returns rows containing chocolate AND strawberry in the flavor column. Only row 4 contains matches for both queries.
+
+*Request:* 'query_fields=name,number', 'query=*3\|three'
+
+*Response:*
+
+|===
+| id | name | color | flavor | number | tree
+
+| 1
+| widget1
+| blue
+| chocolate
+| 1 2 3
+| black cherry
+
+| 2
+| widget2
+| red
+| spinach
+| three fifty
+| maple
+
+| 3
+| widget3
+| rainbow
+| strawberry
+| fourty two
+| spruce
+|===
+
+*Explanation:* Searches across the name and number columns for a value either ending in '3', or containing "three". Row 1 contains 3 in the number field matching the first query, row 3 has a name of "widget3", matching the first query, and row 2 has a number containing three, matching the second query.
+
+*Request:* 'query_fields=_', 'query=1\|2\|3 th_'
+
+*Response:*
+
+|===
+| id | name | color | flavor | number | tree
+
+| 2
+| widget2
+| red
+| spinach
+| three fifty
+| maple
+
+| 3
+| widget3
+| rainbow
+| strawberry
+| thirty
+| spruce
+|===
+
+*Explanation:* Searches across all columns, looking for rows where a row both contains either 1 and/or 2 and/or 3, and contains a value starting with "th". Row 1 contains a value matching 1 or 2 or 3, but has no column that begins with th. Similarly, row 4 has a value beginning with "th", but does not contain 1 or 2 or 3. Therefore only rows 2 and 3 are returned, which match both queries.
+
+[#Cross-Field Query Errors]
+
+[.api-collapsible-third-title]
+
+Cross-Field Query Errors
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description | HTTP Code
+
+| 262272
+| The specified query contains an unmatched quote.
+| 400
+
+| 262273
+| Both 'query_fields' and 'query' must be specified if either one is specified.
+| 400
+
+| 262274
+| The specified query is either empty or is equivalent to an empty query.
+| 400
+
+| 262274
+| The parameters 'query_fields' and 'query' may only be specified for GET requests.
+| 400
+
+| 262275
+| At least one field must be specified for the cross-field query.
+| 400
+
+| 262276
+| A field was specified twice for the 'query_fields' parameter.
+| 400
+|===
+
+[#Requesting_specific_fields]
+=== Requesting specific fields
+
+[.api-collapsible-third-title]
+Overview
+
+By default, calling GET on a collection generally returns only the properties that uniquely identify the record, along with a HAL 'self' link to the resource instance. However, you can choose the specific fields you want using the `fields` parameter. The `fields` parameter can also be used with GET when retrieving a single resource instance.
+
+For discovery purposes, except for the CLI passthrough, the client can retrieve all standard properties using `fields=\*`. These are the same properties returned when a GET is called on the specific instance using the path keys. However, using `fields=\*` is more expensive than selecting only the specific fields that are needed. In addition, because future releases may include additional properties in this list, or remove properties that were included by default, we strongly discourage using this in client-side software that is depending on specific fields being returned.
+
+Some fields are more expensive to retrieve and are not included when using `fields=\*` (or the instance-level GET). These fields are noted in the documentation. They can be returned either by specifying the fields directly, or by using `fields=\*\*`. However, we again strongly discourage this from being encoded into any client-side software. The performance of client software will suffer if a future version of ONTAP adds support for additional expensive properties.
+
+----
+fields=<field>[,...]
+----
+
+The `fields` input parameter allows you to specify exactly which fields you want to be returned.
+
+[#Objects with fields]
+
+[.api-collapsible-third-title]
+
+Objects with fields
+
+When an API contains fields that are objects, an entire object can be specified to return every field within the object. Individual fields within the object can be specified using dotted notation, as demonstrated below. Braces can be used to specify multiple fields within an object without repeating the object name. Braces can be nested within each other to select individual attributes within an object hierarchy.
+
+NOTE: Dotted notation for arrays does not include array indices.
+
+[#Examples]
+
+[.api-collapsible-third-title]
+
+Examples
+
+----
+{
+  "a": "<string>",
+  "b": {
+    "c": "<string>",
+    "d": "<string>"
+  },
+  "e": [
+    {
+      "f": "<string1>",
+      "g": "<string1>"
+    },
+    {
+      "f": "<string2>",
+      "g": "<string2>"
+    }
+  ]
+}
+----
+
+Example `fields` query:
+
+----
+fields=a,b     // Fetch a, b.c, and b.d
+fields=a,b.c,e // Fetch a, b.c, e.f, and e.g
+fields=b.d     // Fetch b.d
+fields=e.f     // Fetch e.f
+fields=b,!b.c  // Fetch b.*, but not b.c
+fields=b.{c,d} // Fetch b.c and b.d
+----
+
+[#Records_and_pagination]
+=== Records and pagination
+
+[.api-collapsible-third-title]
+Records
+
+Several query parameters control the return of records.
+
+----
+return_records=<true|false>
+----
+
+The default setting for `return_records` is `true` for GET calls and `false` for all other methods. When `false`, the array of records is not returned.
+
+----
+return_timeout=<0..120 seconds>
+----
+
+The `return_timeout` parameter specifies the number of seconds the cluster spends performing an operation before returning. The allowed range is `0` to `120` seconds. If the timeout is reached, GET calls return the records collected along with a pagination link. Other methods return and complete asynchronously. See Non-blocking-operations for more details.
+
+The default setting for `return_timeout` is `15` seconds for GET calls. For all other methods it is `0` seconds. This means that these calls might execute asynchronously in order to return as fast as possible.
+
+NOTE: If the `order_by` parameter is specified, the operation might take longer because the collection is sorted before it is returned.
+
+----
+max_records=<number of records>
+----
+
+The `max_records` parameter limits the number of records that are returned (or acted on) before providing the "next" pagination link.
+
+----
+offset=<offset from the first record>
+----
+
+The `offset` parameter determines how many records to skip over prior to returning the first record.
+
+For example, if you have a total of 15 records, and specify an offset of 10, only records 11-15 inclusive will be returned. When combined with a query or sorting specification, the offset will apply after the query or sorting, meaning that you will get records beginning at the Nth record, taking into account the query and sort order. Note that the cost of skipping over N records is likely as great as actually returning those N records.
+
+[#Pagination]
+
+[.api-collapsible-third-title]
+
+Pagination
+
+All calls to GET on a resource collection allow you to page through the results. If the `max_records` parameter is not specified, the cluster returns as many records as possible within the `return_timeout` time threshold. The number of records returned can be further limited by specifying a value for the `max_records` parameter. When the operation reaches either the `return_timeout` or the `max_records` threshold, it stops and returns the records as well as a HAL link that can be used to get the next page of records. It is possible for a pagination link to be returned even if there are no additional records. This occurs because the cluster does not check if there is an additional record before returning when it reaches a threshold. When there are potentially additional records, the response header will also contain a `Link` header containing the link followed by `rel="next"`.
+
+The following is an example of the "next" link, which returns with a collection of records:
+
+----
+"_links": {
+    "next": {
+        "href": "/api/storage/aggregates?start.aggregate=aggr25&max_records=25"
+    }
+}
+----
+
+[#Count only]
+
+[.api-collapsible-third-title]
+
+Count only
+
+The response to collection operations includes a `num_records` field. By passing `return_records=false` with a GET call, you can retrieve the number of records without returning the records themselves. However, if either the `return_timeout` or `max_records` threshold is reached, an incomplete or partial number of records is returned and the "next" link must be called to retrieve additional record counts. All the partial counts must be added together to calculate the total count.
+
+[#Record_sorting]
+=== Record sorting
+
+[.api-collapsible-third-title]
+Overview
+
+By default, records in a collection are returned in the order defined by the object. You can change the order by specifying the `order_by` query parameter. Most uses of the `order_by` parameter collect and reorder _all records_ in the collection. This can be expensive when the collection is large. Therefore, clients are discouraged from paginating through the results with `max_records` when using `order_by`.
+
+----
+order_by=<field [asc|desc]>[,...]
+----
+
+If you want to sort on multiple fields (where the prior key value is the same), separate any fields (and optional direction) with a comma.
+
+By default, sorting is done in ascending order based on the field type's ordering. If `desc` is specified after a field name, that field is sorted in descending order. Combining this with `max_records` allows you to see the `top` or `bottom` records based on the value of the specified field(s). When using this `top` or `bottom` functionality, queries on certain fields might require more time to search the entire collection regardless of the number of records actually returned.
+
+Important Notes:
+
+*** When you use the `order_by` parameter, the `return_timeout` might be exceeded because the collection is sorted before it is returned.
+
+*** Using `order_by` on either a property of type array, or a nested property within an array (not including the records array), returns the records in an unspecified order.
+
+[#Examples]
+
+[.api-collapsible-third-title]
+
+Examples
+
+----
+
+# Sort the volume collection from largest to smallest by size:
+GET /api/storage/volumes?order_by=size desc
+
+# Find the top 5 applications using the most IOPS:
+GET /api/application/applications?order_by=statistics.iops.total desc,name asc&max_records=5
+
+# Find the top 10 applications using the most space and then
+
+# if multiple applications are using the same space, sort them by IOPS:
+GET /api/application/applications?order_by=statistics.space.used desc,statistics.iops.total desc&max_records=10
+----
+
+[#Response_body]
+=== Response body
+
+[.api-collapsible-third-title]
+Overview
+
+Every API call returns a top-level JSON object. These JSON objects includes GET calls that contain an array of records. This nesting technique allows metadata about the resource or resource collection to be returned as well as each resource instance.
+
+GET calls that return an array of records can contain the following top-level elements:
+
+----
+{
+  "records": [ {}, ... ]
+  "num_records": <N>
+  "_links": {
+    "self": {
+      "href": ...
+    },
+    "next": {
+      "href": ...
+    }
+  }
+}
+----
+
+*** `records` - The array of records.
+
+*** `num_records` - The number of records in the array.
+
+*** `_links` - Links to relevant APIs, possibly including:
+
+***** `self` - A link to retrieve the same data again.
+
+***** `next` - If there are potentially more records, a link to retrieve the next page of records.
+
+[#Custom response bodies]
+
+[.api-collapsible-third-title]
+
+Custom response bodies
+
+Some APIs might include additional top-level elements. For example, some APIs may include a top-level `errors` array which can include errors if the array of records is incomplete (for reasons other than pagination). See the documentation for each API to check for custom top-level elements.
+
+[#Error objects]
+
+[.api-collapsible-third-title]
+
+Error objects
+
+When an error occurs, an error object is returned in the response body. The `target` element is returned when ONTAP determines the error is due to a specific input field that you've supplied.
+
+----
+"error": {
+   "message": "<string>",
+   "code": <integer>[,
+   "target": "<string>"]
+}
+----
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description | HTTP Code
+
+| 1
+| An entry with the same identifiers already exists.
+| 409
+
+| 2
+| A field has an invalid value, is missing, or an extra field was provided.
+| 400
+
+| 3
+| The operation is not supported.
+| 405
+
+| 4
+| An entry with the specified identifiers was not found.
+| 404
+
+| 6
+| Permission denied.
+| 403
+
+| 7
+| Resource limit exceeded.
+| 503
+
+| 8
+| Resource in use.
+| 409
+
+| 65541
+| RPC timed out.
+| 500
+
+| 65552
+| Generic RPC failure.
+| 500
+
+| 65562
+| Internal RPC error
+| 500
+
+| 262177
+| Missing value.
+| 400
+
+| 262179
+| Unexpected argument. Argument shown in error message body.
+| 400
+
+| 262185
+| Invalid value with value in the body of the error.
+| 400
+
+| 262186
+| A field is used in an invalid context with another field, as shown in error message body.
+| 400
+
+| 262188
+| A field was specified twice. Location of assignments shown in error message body.
+| 400
+
+| 262197
+| Invalid value provided for field. Value and field shown in error message body.
+| 400
+
+| 262198
+| A request body is not allowed on GET, HEAD, and DELETE.
+| 400
+
+| 262199
+| Invalid JSON with error location provided in body of the error.
+| 400
+
+| 262200
+| Invalid JSON range, with range provided in the body of the error.
+| 400
+
+| 262201
+| Invalid JSON due to unknown formatting issue.
+| 400
+
+| 262245
+| Invalid value with reason provided in body of the error.
+| 400
+
+| 262247
+| Invalid value for a field, with value and field in body of the error.
+| 400
+
+| 262248
+| A value is missing assignment operator.
+| 400
+
+| 262255
+| An array was found in the JSON when it was not expected.
+| 400
+
+| 262286
+| Mismatching braces found in the fields= query.
+| 400
+
+| 393271
+| A node is out of quorum. Body of error message identifies node.
+| 500
+
+| 39387137
+| A provided URL is invalid.
+| 400
+|===
+
+[#Synchronous_and_asynchronous_operations]
+=== Synchronous and asynchronous operations
+
+[.api-collapsible-third-title]
+Overview
+
+POST, PATCH, or DELETE operations that can take more than `2` seconds are considered _asynchronous_ operations. They are implemented as non-blocking operations. Any API call that is expected to return in less than `2` seconds is considered _synchronous_. Synchronous operations ignore the `return_timeout` parameter.
+
+[#API response]
+
+[.api-collapsible-third-title]
+
+API response
+
+If the `return_timeout` is less than the time it takes for an operation to complete, the server returns the code `202 Accepted` after waiting for the specified `return_timeout` seconds. The default `return_timeout` for non-blocking operations is `0` seconds, meaning the operation returns as fast as possible. However, the operation never returns the success code `200 OK`, but instead returns either an error or the code `202 Accepted`.
+
+[#The Location header]
+
+[.api-collapsible-third-title]
+
+The Location header
+
+When a POST operation that is creating a resource returns `201 Created` (synchronous) or `202 Accepted` (asynchronous), the response header includes the `Location` of the resource. For asynchronous operations, a GET call on this resource link may return code `404 Not Found` until the operation successfully completes. Use the returned job link instead of the Location link to determine when the asynchronous operation is complete. POST operations that return code `200 OK` do not populate the Location header.
+
+[#Tracking non-blocking operations]
+
+[.api-collapsible-third-title]
+
+Tracking non-blocking operations
+
+Non-blocking or asynchronous operations are executed using _jobs_. The response to a non-blocking operation includes information about the job performing the operation, including a HAL link to the job resource. The job record also includes `state` and `message` fields. The `message` field indicates the progress of the operation while the `state` field indicates `running`. When a job is successful, the `state` and `message` fields indicate `success`. If an operation fails for any reason, the job's `state` reports `error`, and the `message` describes the problem that the operation encountered.
+
+For POST operations, when a job is successfully completed, you can use the link from the `Location` header of the original response to retrieve the resource.
+
+See link:get-cluster-jobs.html[GET /cluster/jobs]
+
+[#HTTP_status_codes]
+=== HTTP status codes
+
+[.api-collapsible-third-title]
+Overview
+
+The following supported HTTP status codes are returned by ONTAP:
+
+*** 200 OK: Returned for success when not creating a new object
+
+*** 201 Created: Returned for success after the creation of an object
+
+*** 202 Accepted: Returned when a job has been successfully started, but the operation is not complete
+
+*** 400 Bad Request: Returned if the input could not be parsed
+
+*** 401 Unauthorized: Returned if user authentication failed
+
+*** 403 Forbidden: Returned for authorization (RBAC) errors
+
+*** 404 Not Found: Returned when the specified resource does not exist
+
+*** 405 Method Not Allowed: Returned when the specified resource does not support the method (for example, POST or DELETE calls)
+
+*** 409 Conflict: Returned when there is a conflict with a different object that must be created, modified, or deleted before this operation can succeed
+
+*** 500 Internal Error: Returned for most other internal error codes
+
+*** 502 Bad Gateway: Returned if the application is temporarily unreachable. Try again later
+
+*** 503 Service Unavailable: Returned if the server is temporarily overloaded. Try again later.
+
+[#HTTP_methods]
+=== HTTP methods
+
+[.api-collapsible-third-title]
+Overview
+
+The ONTAP REST API supports the following HTTP methods:
+
+*** GET: Supported on all collections to retrieve the records
+
+*** POST: When supported, calls on a collection to create the supplied resource
+
+*** PATCH: When supported, calls on a specific resource to update the supplied properties
+
+*** DELETE: When supported, calls on a specific resource to delete the resource
+
+*** HEAD: Supported wherever GET is supported. It makes a GET call, but only returns the HTTP headers
+
+*** OPTIONS: Supported on every endpoint so that you can determine which HTTP methods are supported
+
+[#Size_properties]
+=== Size properties
+
+[.api-collapsible-third-title]
+Overview
+
+Many objects contain properties related to various sizes. Examples can be found in the `aggregate` object, `volume` object, `lun` object and `nvme_namespace` object. These properties are documented as type `integer`.
+
+Unless otherwise documented, all sizes are reported in GET in bytes.
+
+Depending on the development language-specific code generation, the API typically also requires an integer value in bytes for POST and PATCH input as well.
+
+Where a string value is accepted, such as query parameters and ad-hoc curl requests, any of the following suffixes can be used to specify different units:
+
+|===
+| Suffix | Definition
+
+| KB
+| kilobytes (1024 bytes, aka kibibytes)
+
+| MB
+| megabytes (KB x 1024, aka mebibytes)
+
+| GB
+| gigabytes (MB x 1024, aka gibibytes)
+
+| TB
+| terabytes (GB x 1024, aka tebibytes)
+
+| PB
+| petabytes (TB x 1024, aka pebibytes)
+|===
+
+[#SVM_tunneling]
+=== SVM tunneling
+
+[.api-collapsible-third-title]
+Overview
+
+SVM tunneling allows for the scoping of REST APIs to any SVM from the cluster admin SVM interface. The HTTP headers "X-Dot-SVM-Name" and/or "X-Dot-SVM-UUID" are an alternative to supplying svm.name and/or svm.uuid in the request query or body. This allows for setting a context for an HTTP connection and reusing it for multiple calls. The cluster management interface or node management interface can be used instead of the desired SVM's interface.
+
+[#Examples]
+
+[.api-collapsible-third-title]
+
+Examples
+
+Creates a new volume on SVM "vs0":
+
+----
+curl  -H "X-Dot-SVM-Name:vs0" -X POST "https://<mgmt-ip>/api/storage/volumes" -d '{"name":"vol1","aggregates":[{"name":"aggr1"}]}'
+{
+  "job": {
+    "uuid": "b271e19d-c5cb-11e9-b97d-005056ac2211",
+    "_links": {
+      "self": {
+        "href": "/api/cluster/jobs/b271e19d-c5cb-11e9-b97d-005056ac2211"
+      }
+    }
+  }
+}
+----
+
+Retrieves all volumes on SVM "vs0":
+
+----
+curl -H "X-Dot-SVM-Name:vs0" -X GET "https://<mgmt-ip>/api/storage/volumes"
+{
+  "records":[
+   {
+     "uuid":"a61e474-929a-4c78-882a-b72986ccf276",
+     "name":"root_vs0",
+     "_links":{
+       "self":{
+         "href":"/api/storage/volumes/aa61e474-929a-4c78-882a-b72986ccf276"
+       }
+     }
+   },
+   {
+     "uuid":"b26c64f5-c5cb-11e9-b97d-005056ac2211",
+     "name":"vol1",
+     "_links":{
+       "self":{
+         "href":"/api/storage/volumes/b26c64f5-c5cb-11e9-b97d-005056ac2211"
+       }
+     }
+   }
+ ],
+ "num_records": 2,
+ "_links": {
+   "self":{
+     "href":"/api/storage/volumes"
+    }
+  }
+ }
+----
+
+Deletes a volume on SVM "vs0" using the X-Dot-SVM-UUID header:
+
+----
+curl -H "X-Dot-SVM-UUID:85ebedff-c43e-11e9-bc27-005056ac2211" -X DELETE "https://<mgmt-ip>/api/storage/volumes?name=vol1"
+{
+  "jobs":[
+    {
+      "uuid":"4acf3f58-c5d2-11e9-b97d-005056ac2211",
+      "_links":{
+        "self":{
+          "href":"/api/cluster/jobs/4acf3f58-c5d2-11e9-b97d-005056ac2211"
+        }
+      }
+    }
+  ],
+  "num_records": 1,
+  "_links":{
+    "self":{
+      "href":"/api/storage/volumes?name=vol1"
+    }
+  }
+}
+----
+
+Retrieves all IP interfaces on SVM "vs3":
+
+----
+curl -H "accept: application/json" -H "X-Dot-SVM-Name:vs3" -X GET "https://<mgmt-ip>/api/network/ip/interfaces"
+{
+  "records":[
+    {
+      "uuid":"83aeeac9-c5d8-11e9-b97d-005056ac2211",
+      "name": "vs3_data_1"
+    },
+    {
+      "uuid":"9c612bc0-c5a5-11e9-b97d-005056ac2211",
+      "name":"vs3_data"
+    }
+  ],
+  "num_records": 2
+}
+----
+
+[#Using_the_private_CLI_passthrough_with_the_ONTAP_REST_API]
+=== Using the private CLI passthrough with the ONTAP REST API
+
+[.api-collapsible-third-title]
+REST API access to CLI commands
+
+To help CLI and ONTAP users transition to the ONTAP REST API, ONTAP provides a private REST API endpoint that can be used to access any CLI command. Usage of this API call is recorded and returned in the AutoSupport data collection so that NetApp can identify usablity and functionality improvements in the REST API for future releases. There is no per-API documentation for the REST API access for each CLI command. Unlike the documented REST APIs, the API paths and properties for the CLI passthrough correspond very closely to the CLI. There are several rules that govern all the differences between a CLI command and the REST API mirroring the CLI command.
+
+[.api-collapsible-fourth-title]
+Rules for path differences when accessing a CLI command through the REST API
+
+The API paths mirror the CLI paths, except for the use of the "show", "create", "modify", and "delete" verbs. Instead of using these four CLI verbs in the REST API, the corresponding HTTP methods must be used (GET, POST, PATCH, and DELETE). The four CLI verbs are removed from the API path supporting a command. For any commands where the last verb is hyphenated and begins with one of these verbs (for example, "show-space" or "delete-all"), you must remove the verb and following hyphen from the path. Any space in a full command path becomes a forward slash in the REST API (for example, "system node" becomes "/api/private/cli/system/node"). For non-show CLI commands that use non-standard verbs, the POST method should be used on the full path with the final verb in the API path. For example, "volume rehost" becomes "POST /api/private/cli/volume/rehost" and "cluster add-node" becomes "POST /api/private/cli/cluster/add-node".
+
+To know which HTTP methods are supported for an API call, both documented and CLI-based, clients can use the "OPTIONS" HTTP method. For example, using OPTIONS on "/api/private/cli/volume" returns 'OK' with the HTTP "Allow" header containing a list of the supported HTTP methods (for example, "Allow: GET, HEAD, OPTIONS, POST, DELETE, PATCH"). For feature-specific CLI verbs, you can use OPTIONS on the API path. For example, using OPTIONS on "/api/private/cli/volume/restrict" returns with the HTTP header "Allow: OPTIONS, POST". Some of the CLI "show" commands do not contain the standard verb. For example, calling OPTIONS on "/api/private/cli/cluster/add-node-status" returns "Allow: GET, HEAD, OPTIONS".
+
+There are some commands in the CLI that will not work using REST APIs. This includes most show commands that do not support "show -fields" in the CLI. The REST API also does not support CLI commands that create a new shell (like "run" and "vserver context").
+
+Here are several examples of mappings from the ONTAP CLI to the ONTAP REST API for the /api/private/cli path:
+
+*** volume show       &rarr; GET /api/private/cli/volume
+
+*** volume create     &rarr; POST /api/private/cli/volume
+
+*** volume modify     &rarr; PATCH /api/private/cli/volume
+
+*** volume delete     &rarr; DELETE /api/private/cli/volume
+
+*** volume restrict   &rarr; POST /api/private/cli/volume/restrict
+
+*** volume show-space        &rarr; GET /api/private/cli/volume/space
+
+*** volume show-footprint    &rarr; GET /api/private/cli/volume/footprint
+
+*** cluster add-node         &rarr; POST /api/private/cli/cluster/add-node
+
+*** cluster add-node-status  &rarr; GET /api/private/cli/system/node/add-node-status
+
+*** system node coredump show       &rarr; GET /api/private/cli/system/node/coredump
+
+*** system node coredump delete     &rarr; DELETE /api/private/cli/system/node/coredump
+
+*** system node coredump delete-all &rarr; DELETE /api/private/cli/system/node/coredump/all
+
+[.api-collapsible-fourth-title]
+Rules for field differences when accessing a CLI command through the REST API
+
+All CLI parameters are supported in the CLI-based REST APIs. However, REST converts hyphens (-) in CLI parameter names to underscores (_) in the REST API JSON response body. In general, REST API responses use the same formatting for property values as ONTAPI. For example, enumerated values are formatted in lowercase instead of uppercase and with underscores instead of hyphens in the REST API response body. Both CLI and ONTAPI formats are allowed on input. Also similar to ONTAPI, sizes and percentages in REST are encoded as integers in bytes. Unlike ONTAPI or the CLI, date and time values in REST are encoded with the ISO-8601 format. All fields that you want returned from the GET call must be specified using the `fields` parameter. Note that the /api/private/cli/... APIs do not support "fields=*".
+
+[#Examples]
+
+[.api-collapsible-third-title]
+
+Examples
+
+Retrieve OPTIONS for volumes endpoint (with results contained in header):
+
+----
+curl -X OPTIONS "https://<mgmt-ip>/api/private/cli/volume" --include
+Allow: GET, HEAD, OPTIONS, POST, DELETE, PATCH
+{
+}
+----
+
+GET size and percent-used for all volumes:
+
+----
+curl -X GET "https://<mgmt-ip>/api/private/cli/volume?fields=size,percent-used&pretty=false"
+{
+  "records": [
+    { "vserver": "vs1", "volume": "vol1", "size": 20971520, "percent_used": 73 },
+    { "vserver": "vs1", "volume": "vol2", "size": 20971520, "percent_used": 87 },
+    ...
+  ]
+}
+----
+
+GET size and percent-used for a specific volume:
+
+----
+curl -X GET "https://<mgmt-ip>/api/private/cli/volume?volume=vol2&pretty=false"
+{
+  "records": [
+    { "vserver": "vs1", "volume": "vol2", "size": 209715203864, "percent_used": 89 },
+    ...
+  ]
+}
+----
+
+POST a new volume with all required attributes:
+
+----
+curl -X POST "https://<mgmt-ip>/api/private/cli/volume" -d '{"volume":"vol3","vserver":"vs0","aggregate":"aggr1"}'
+{
+  "job": {
+    "uuid": "f7b5f5cb-54a2-11e9-930a-005056ac6a3f",
+    "_links": {
+      "self": {
+        "href": "/api/cluster/jobs/f7b5f5cb-54a2-11e9-930a-005056ac6a3f"
+      }
+    }
+  },
+  "cli_output": "[Job 36] Job is queued: Create vol2."
+}
+----
+
+Attempt to DELETE an online volume:
+
+----
+curl -X DELETE "https://<mgmt-ip>/api/private/cli/volume?vserver=vs1&volume=vol1"
+{
+  "num_records": 0,
+  "error: {
+    "message": "Volume vol1 in Vserver vs1 must be offline to be deleted.",
+    "code": "917658"
+  }
+}
+----
+
+PATCH a volume to become offline:
+
+----
+curl -X PATCH "https://<mgmt-ip>/api/private/cli/volume?vserver=vs1&volume=vol1" -d '{ "state": "offline" }'
+{
+  "num_records": 1,
+  "cli_output: "Volume modify successful on volume vol1 of Vserver vs1.\n"
+}
+----
+
+DELETE the offline volume:
+
+----
+curl -X DELETE "https://<mgmt-ip>/api/private/cli/volume?vserver=vs1&volume=vol1"
+{
+  "jobs": [
+    {
+      "uuid": "3f35a934-4b40-11e9-9f4d-005056bbf4eb",
+      "_links": {
+        "self": {
+          "href": "/api/cluster/jobs/3f35a934-4b40-11e9-9f4d-005056bbf4eb"
+        }
+      }
+    }
+  ],
+  "num_records": 1,
+  "cli_output": "[Job 1243] Job succeeded: Successful\n"
+}
+----
+
+NOTE: When POST is called for a command that uses a job, the REST API does not wait for the job to complete, unless `return_timeout` is specified. However, PATCH and DELETE calls on the command path (using queries on key fields in the query portion of the URI) wait up to 15 seconds for the operation to complete if the `return_timeout` parameter is not specified.
+
+DELETE an offline volume without waiting:
+
+----
+curl -X DELETE "https://<mgmt-ip>/api/private/cli/volume?vserver=vs1&volume=vol2&return_timeout=0"
+{
+  "jobs": [
+    {
+      "uuid": "a7138c5e-4b69-11e9-9f4d-005056bbf4eb",
+      "_links": {
+        "self": {
+          "href": "/api/cluster/jobs/a7138c5e-4b69-11e9-9f4d-005056bbf4eb",
+        }
+      }
+    }
+  ],
+  "num_records": 1,
+  "cli_output": "[Job 1247] Job is queued: Delete vol1.\n"
+}
+----
+
+[#CLI message output]
+
+[.api-collapsible-third-title]
+
+CLI message output
+
+As shown in the previous example, any non-field and non-error based output that would have appeared in the CLI is returned in a top-level `cli_output` attribute in the response body. This does not contain normal CLI headers or field values. It only displays messages that were printed to the CLI.
+
+[#HTTP status codes]
+
+[.api-collapsible-third-title]
+
+HTTP status codes
+
+Error codes in the response body are mapped to the most appropriate HTTP status codes. In cases where this is not done, the HTTP status code defaults to 500. This does not necessarily indicate that the error is internal to ONTAP.
+
+[#Security]
+
+[.api-collapsible-third-title]
+
+Security
+
+All CLI-based REST APIs are RBAC-controlled, based on the role of the authenticated user and have the same protections they have in the CLI.
+
+[#Location of CLI fields for CLI-based REST APIs:]
+
+[.api-collapsible-third-title]
+
+Location of CLI fields for CLI-based REST APIs:
+
+*** POST APIs: All CLI fields must be provided in the request body.
+
+*** GET APIs: All desired CLI fields (except keys) must be specified in the `fields` parameter. The non-key fields returned via the CLI will not be returned if not requested. The client can also provide a query for any field.
+
+*** PATCH APIs: The client can provide a query for any field, but at least one field must have a query. To modify only a single record, all CLI keys must contain an exact query. All new values for the object must be provided in the request body.
+
+*** DELETE APIs: The client can provide a query for any field, but at least one field must have a query. To delete only a single record, all CLI keys must contain an exact query. Non-attribute inputs (such as `force`) must be provided in the query portion of the URI.
+
+

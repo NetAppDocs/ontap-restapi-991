@@ -1,0 +1,60 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_unix_group_users.html'
+summary: 'Manage UNIX group users'
+---
+
+= Manage UNIX group users
+
+
+
+== Overview
+
+You can use this API to add or delete UNIX users to a UNIX group of an SVM.
+
+== Adding users to a UNIX group
+
+The UNIX group users POST endpoint adds UNIX users to the specified UNIX group and the SVM.
+Multiple users can be added in a single call using the "records" parameter.
+
+== Examples
+
+=== Adding a single user to the group 'group1'
+
+----
+
+# The API:
+/api/name-services/unix-groups/{svm.uuid}/{unix_group.name}/users
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/name-services/unix-groups/179d3c85-7053-11e8-b9b8-005056b41bd1/group1/users" -H "accept: application/hal+json" -H "Content-Type: application/json" -d '{ "name": "user4" }'
+----
+
+=== Adding multiple users to the group 'group1' in a single REST call
+
+----
+
+# The API:
+/api/name-services/unix-groups/{svm.uuid}/{unix_group.name}/users
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/name-services/unix-groups/179d3c85-7053-11e8-b9b8-005056b41bd1/group1/users" -H "accept: application/hal+json" -H "Content-Type: application/json" -d '{ "records": [{"name":"user1"}, {"name":"user2"}, {"name":"user3"}]}'
+----
+
+== Deleting a user from a group of a specific SVM
+
+== Example
+
+=== Delete the user 'user1' from group 'group1' in SVM 'vs1'
+
+----
+
+# The API:
+/api/name-services/unix-groups/{svm.uuid}/{unix_group.name}/users/{name}
+
+# The call:
+----
+
+

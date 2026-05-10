@@ -1,0 +1,263 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_cifs_services.html'
+summary: 'Manage CIFS services'
+---
+
+= Manage CIFS services
+
+
+
+== Overview
+
+A CIFS server is necessary to provide SMB clients with access to the Storage Virtual Machine (SVM). Before you begin, the following prerequisites must be in place:
+
+** At least one SVM LIF must exist on the SVM.
+
+** The LIFs must be able to connect to the DNS servers configured on the SVM and to an Active Directory domain controller of the domain to which you want to join the CIFS server.
+
+** The DNS servers must contain the service location records that are needed to locate the Active Directory domain services.
+
+** The cluster time must be synchronized to within five minutes of the Active Directory domain controller.
+
+== Performance monitoring
+
+Performance of the SVM can be monitored by the `metric.+*+` and `statistics.+*+` properties. These show the performance of the SVM in terms of IOPS, latency and throughput. The `metric.+*+` properties denote an average whereas `statistics.+*+` properties denote a real-time monotonically increasing value aggregated across all nodes.
+
+=== Information on the CIFS server
+
+You must keep the following in mind when creating the CIFS server:
+
+** The CIFS server name might or might not be the same as the SVM name.
+
+** The CIFS server name can be up to 15 characters in length.
+
+** The following characters are not allowed: @ # * ( ) = + [ ] \| ; : " , < > \ / ?
+
+** You must use the FQDN when specifying the domain.
+
+** The default is to add the CIFS server machine account to the Active Directory "CN=Computer" object.
+
+** You can choose to add the CIFS server to a different organizational unit (OU) by specifying the "organizational_unit" parameter. When specifying the OU, do not specify the domain portion of the distinguished name; only specify the OU or CN portion of the distinguished name. ONTAP appends the value provided for the required "-domain" parameter onto the value provided for the "-ou" parameter to create the Active Directory distinguished name, which is used when joining the Active Directory domain.
+
+** You can optionally choose to add a text comment of up to 48 characters about the CIFS server. If there is a space in the comment text, you must enclose the entire string in quotation marks.
+
+** You can optionally choose to add a comma-delimited list of one or more NetBIOS aliases for the CIFS server.
+
+** The initial administrative status of the CIFS server is "up".
+
+** The +++<i>+++large-mtu+++</i>+++ and _multichannel_ features are enabled for the new CIFS server.
+
+** If LDAP is configured with the _use_start_tls_ and _session_security_ features, the new CIFS server will also have this property set.
+
+== Examples
+
+=== Creating a CIFS server
+
+To create a CIFS server, use the following API. Note the _return_records=true_ query parameter used to obtain the newly created entry in the response.
+
+'''
+
+----
+
+# The API:
+POST /api/protocols/cifs/services
+
+# The call:
+ curl -X POST "https://<mgmt-ip>/api/protocols/cifs/services?return_records=true" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"ad_domain\": { \"fqdn\": \"CIFS-2008R2-AD.GDL.ENGLAB.NETAPP.COM\", \"organizational_unit\": \"CN=Computers\", \"password\": \"cifs*123\", \"user\": \"administrator\" }, \"comment\": \"This CIFS Server Belongs to CS Department\", \"default_unix_user\": \"string\", \"enabled\": true, \"name\": \"CIFS-DOC\", \"netbios\": { \"aliases\": [ \"ALIAS_1\", \"ALIAS_2\", \"ALIAS_3\" ], \"enabled\": false, \"wins_servers\": [ \"10.224.65.20\", \"10.224.65.21\" ] }, \"security\": { \"kdc_encryption\": false, \"encrypt_dc_connection\": false, \"restrict_anonymous\": \"no_enumeration\", \"smb_encryption\": false, \"smb_signing\": false }, \"svm\": { \"name\": \"vs1\", \"uuid\": \"ef087155-f9e2-11e8-ac52-0050568ea248\" }}"
+
+# The response:
+{
+"num_records": 1,
+"records": [
+  {
+    "svm": {
+      "uuid": "9f5ab4cb-f703-11e8-91cc-0050568eca13",
+      "name": "vs1"
+    },
+    "name": "CIFS-DOC",
+    "ad_domain": {
+      "fqdn": "CIFS-2008R2-AD.GDL.ENGLAB.NETAPP.COM",
+      "user": "administrator",
+      "password": "cifs*123",
+      "organizational_unit": "CN=Computers"
+    },
+    "enabled": true,
+    "comment": "This CIFS Server Belongs to CS Department",
+    "security": {
+      "restrict_anonymous": "no_enumeration",
+      "smb_signing": false,
+      "smb_encryption": false,
+      "encrypt_dc_connection": false,
+      "kdc_encryption": false
+    },
+    "netbios": {
+      "aliases": [
+        "ALIAS_1",
+        "ALIAS_2",
+        "ALIAS_3"
+      ],
+      "wins_servers": [
+        "10.224.65.20",
+        "10.224.65.21"
+      ],
+      "enabled": false
+    },
+    "default_unix_user": "string"
+  }
+],
+"job": {
+  "uuid": "f232b6da-00a4-11e9-a8c1-0050568eca13",
+  "_links": {
+    "self": {
+      "href": "/api/cluster/jobs/f232b6da-00a4-11e9-a8c1-0050568eca13"
+    }
+  }
+}
+}
+----
+
+'''
+
+=== Retrieving the full CIFS server configuration for all SVMs in the cluster
+
+'''
+
+----
+
+# The API:
+GET /api/protocols/cifs/services
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/cifs/services?fields=*&return_records=true&return_timeout=15" -H "accept: application/json"
+
+# The response:
+{
+"records": [
+  {
+    "svm": {
+      "uuid": "9f5ab4cb-f703-11e8-91cc-0050568eca13",
+      "name": "vs1"
+    },
+    "name": "CIFS-DOC",
+    "ad_domain": {
+      "fqdn": "CIFS-2008R2-AD.GDL.ENGLAB.NETAPP.COM",
+      "organizational_unit": "CN=Computers"
+    },
+    "enabled": true,
+    "comment": "This CIFS Server Belongs to CS Department",
+    "security": {
+      "restrict_anonymous": "no_enumeration",
+      "smb_signing": false,
+      "smb_encryption": false,
+      "encrypt_dc_connection": false,
+      "kdc_encryption": false,
+      "lm_compatibility_level": "lm_ntlm_ntlmv2_krb"
+    },
+    "netbios": {
+      "aliases": [
+        "ALIAS_1",
+        "ALIAS_2",
+        "ALIAS_3"
+      ],
+      "wins_servers": [
+        "10.224.65.20",
+        "10.224.65.21"
+      ],
+      "enabled": false
+    },
+    "default_unix_user": "string"
+  }
+],
+"num_records": 1
+}
+----
+
+'''
+
+=== Retrieving CIFS server configuration details for a specific SVM
+
+'''
+
+----
+
+# The API:
+GET /api/protocols/cifs/services/{svm.uuid}
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/cifs/services/9f5ab4cb-f703-11e8-91cc-0050568eca13" -H "accept: application/json"
+
+# The response:
+{
+"svm": {
+  "uuid": "9f5ab4cb-f703-11e8-91cc-0050568eca13",
+  "name": "vs1"
+},
+"name": "CIFS-DOC",
+"ad_domain": {
+  "fqdn": "CIFS-2008R2-AD.GDL.ENGLAB.NETAPP.COM",
+  "organizational_unit": "CN=Computers"
+},
+"enabled": true,
+"comment": "This CIFS Server Belongs to CS Department",
+"security": {
+  "restrict_anonymous": "no_enumeration",
+  "smb_signing": false,
+  "smb_encryption": false,
+  "encrypt_dc_connection": false,
+  "kdc_encryption": false,
+  "lm_compatibility_level": "lm_ntlm_ntlmv2_krb"
+},
+"netbios": {
+  "aliases": [
+    "ALIAS_1",
+    "ALIAS_2",
+    "ALIAS_3"
+  ],
+  "wins_servers": [
+    "10.224.65.20",
+    "10.224.65.21"
+  ],
+  "enabled": false
+},
+"default_unix_user": "string"
+}
+----
+
+'''
+
+=== Updating CIFS server properties for the specified SVM
+
+'''
+
+----
+
+# The API:
+PATCH /api/protocols/cifs/services/{svm.uuid}
+
+# The call:
+curl -X PATCH "https://<mgmt-ip>/api/protocols/cifs/services/9f5ab4cb-f703-11e8-91cc-0050568eca13" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"comment\": \"CIFS SERVER MODIFICATION\" }"
+----
+
+'''
+
+=== Removing a CIFS server for a specific SVM
+
+To delete a CIFS server, use the following API. This will delete the CIFS server along with other CIFS configurations such as CIFS share, share ACLs, homedir search-path, and so on.
+
+'''
+
+----
+
+# The API:
+DELETE /api/protocols/cifs/services/{svm.uuid}
+
+# The call:
+curl -X DELETE "https://<mgmt-ip>/api/protocols/cifs/services/9f5ab4cb-f703-11e8-91cc-0050568eca13" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"ad_domain\": { \"password\": \"cifs*123\", \"user\": \"administrator\" } }"
+----
+
+'''
+
+

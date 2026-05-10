@@ -1,0 +1,1210 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-snapmirror-relationships.html'
+summary: 'Create a SnapMirror relationship'
+---
+
+= Create a SnapMirror relationship
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/snapmirror/relationships`#
+
+*Introduced In:* 9.6
+
+Creates a SnapMirror relationship. This API can optionally provision the destination endpoint when it does not exist. This API must be executed on the cluster containing the destination endpoint unless the destination endpoint is being provisioned. When the destination endpoint is being provisioned, this API can also be executed from the cluster containing the source endpoint. Provisioning of the destination endpoint from the source cluster is supported for the FlexVol volume, FlexGroup volume and Consistency Group endpoints. For SVM endpoint, provisioning of the destination SVM endpoint is not supported from the source cluster.
+When the destination endpoint exists the source SVM and the destination SVM must be in an SVM peer relationship. When provisioning the destination endpoint, the SVM peer relationship between the source SVM and the destination SVM is established as part of the destination, provision provided the source SVM has SVM peering permission for the destination cluster.
+
+== Required properties
+
+* `source.path` - Path to the source endpoint of the SnapMirror relationship.
+* `destination.path` - Path to the destination endpoint of the SnapMirror relationship.
+* `destination.consistency_group_volumes` - List of FlexVol volumes of type "RW" that are constituents of a Consistency Group.
+* `destination.consistency_group_volumes` - List of FlexVol volumes of type "DP" that are constituents of a Consistency Group.
+
+== Recommended optional properties
+
+* `policy.name` or `policy.uuid` - Policy governing the SnapMirror relationship.
+* `state` - Set the state to "snapmirrored" to automatically initialize the relationship.
+* `create_destination.enabled` - Enable this property to provision the destination endpoint.
+
+== Default property values
+
+If not specified in POST, the following default property values are assigned:
+
+* `policy.name` - _Asynchronous_
+* `restore` - _false_
+* `create_destination.tiering.policy` - `_snapshot_only_` (when `create_destination.tiering.supported` is _true_ for FlexVol volume)
+* `create_destination.tiering.policy` - `_none_` (when `create_destination.tiering.supported` is _true_ for FlexGroup volume)
+* `create_destination.storage_service.enforce_performance` - `_false_`
+* `source.ipspace` - `_Default_`
+* `destination.ipspace` - `_Default_`
+* `throttle` - _0_
+
+== Related ONTAP commands
+
+* `snapmirror create`
+* `snapmirror protect`
+
+== Important notes
+
+* The property "transfer_schedule" if set on a SnapMirror relationship overrides the "transfer_schedule" set on the policy being used with the SnapMirror relationship.
+* The property "throttle" if set on a SnapMirror relationship overrides the "throttle" set on the policy being used with the SnapMirror relationship.
+* The properties "transfer_schedule" and "throttle" are not supported when "restore" is set to "true".
+* The property "transfer_schedule" cannot be set to null (no-quotes) during SnapMirror relationship POST.
+* The property "throttle" is not supported when "create_destination.enabled" is set to "true".
+* The property "identity_preservation" is applicable to only SnapMirror relationships with SVM endpoints and it indicates which configuration of the source SVM is replicated to the destination SVM.
+
+== Examples
+
+The following examples show how to create FlexVol, FlexGroup, SVM and Consistency Group SnapMirror relationships. Note that the source SVM name should be the local name of the peer SVM.
+
+Creating a FlexVol SnapMirror relationship of type XDP.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:src_vol"}, "destination": { "path": "dst_svm:dst_vol"}}'
+----
+
+Creating a FlexGroup SnapMirror relationship of type XDP.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:source_flexgrp"}, "destination": { "path": "dst_svm:dest_flexgrp"}}'
+----
+
+Creating a SVM SnapMirror relationship of type XDP.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": { "path": "src_svm:"}, "destination": { "path": "dst_svm:"}}'
+----
+
+Creating a SnapMirror relationship in order to restore from a destination.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:src_vol"}, "destination": { "path": "dst_svm:dst_vol"}, "restore": "true"}'
+----
+
+Provision the destination FlexVol volume endpoint and create a SnapMirror relationship of type XDP.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:src_vol"}, "destination": { "path": "dst_svm:dst_vol"}, "create_destination": { "enable": "true" }}'
+----
+
+Provision the destination FlexVol volume endpoint on a Fabricpool with a tiering policy and create a SnapMirror relationship of type XDP.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:src_vol"}, "destination": { "path": "dst_svm:dst_vol"}, "create_destination": { "enable": "true", "tiering": { "supported": "true", "policy": "auto" } } }'
+----
+
+Provision the destination FlexVol volume endpoint using storage service and create a SnapMirror relationship of type XDP.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:src_vol"}, "destination": { "path": "dst_svm:dst_vol"}, "create_destination": { "enable": "true", "storage_service": { "enabled": "true", "name": "extreme", "enforce_performance": "true" } } }'
+----
+
+Provision the destination SVM endpoint and create a SnapMirror relationship of type XDP.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:", "cluster": { "name": "cluster_src" }}, "destination": { "path": "dst_svm:"}, "create_destination": { "enable": "true" }}'
+----
+
+Create a SnapMirror relationship with Consistency Group endpoint.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": { "path": "src_svm:/cg/cg_src_vol", "consistency_group_volumes": "src_vol_1, src_vol_2"}, "destination": { "path": "dst_svm:/cg/cg_dst_vol", "consistency_group_volumes": "dst_vol_1, dst_vol_2"}, "policy": "AutomatedFailOver" }'
+----
+
+Provision the destination Consistency Group endpoint on a Fabricpool with a tiering policy, create a SnapMirror relationship with a SnapMirror policy of type "sync" and sync_type of "automated_failover", and initialize the SnapMirror relationship with state as "in_sync".
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:/cg/cg_src_vol", "consistency_group_volumes": "src_vol_1, src_vol_2"}, "destination": { "path": "dst_svm:/cg/cg_dst_vol", "consistency_group_volumes": "dst_vol_1, dst_vol_2"}, "create_destination": { "enable": "true", "tiering": { "supported": "true" } }, "policy": "AutomatedFailOver", "state": "in_sync" }'
+----
+
+Provision the destination Consistency Group endpoint with storage service, create a SnapMirror relationship with a SnapMirror policy of type "sync" and sync_type of "automated_failover", and initialize the SnapMirror relationship with state as "in_sync".
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:/cg/cg_src_vol", "consistency_group_volumes": "src_vol_1, src_vol_2"}, "destination": { "path": "dst_svm:/cg/cg_dst_vol", "consistency_group_volumes": "dst_vol_1, dst_vol_2"}, "create_destination": { "enable": "true", "storage_service": { "enabled": "true", "name": "extreme", "enforce_performance": "true" } }, "policy": "AutomatedFailOver", "state": "in_sync" }'
+----
+
+Creating a FlexVol volume SnapMirror relationship of type XDP with transfer_schedule and throttle.
+
+----
+ POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:src_vol"}, "destination": { "path": "dst_svm:dst_vol"}, "transfer_schedule":{"uuid":"817500fa-092d-44c5-9c10-7b54f7b2f20a", "name":"5min"}, "throttle":100}'
+----
+
+== Learn more
+
+* link:manage_snapmirror_relationships.html[DOC /snapmirror/relationships]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning. When doing a POST, PATCH, or DELETE operation on a single record, the default is 0 seconds.  This means that if an asynchronous operation is started, the server immediately returns HTTP code 202 (Accepted) along with a link to the job.  If a non-zero value is specified for POST, PATCH, or DELETE operations, ONTAP waits that length of time to see if the job completes so it can return something other than 202.
+
+* Default value: 0
+* Max value: 120
+* Min value: 0
+
+
+|validate_only
+|boolean
+|query
+|False
+a|Validate the operation and its parameters, without actually performing the operation.
+
+* Introduced in: 9.7
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|create_destination
+|link:#snapmirror_destination_creation[snapmirror_destination_creation]
+a|Use this object to provision the destination endpoint when establishing a SnapMirror relationship for a FlexVol volume, FlexGroup volume, SVM, or Consistency Group. Given a source endpoint, the destination endpoint is provisioned in the SVM specified in the "destination.path" property. While protecting an SVM, the SVM destination endpoint can only be provisioned on the local cluster. To provision the SVM destination endpoint use the optional "source.cluster.name" property to specify the remote cluster name or use the optional "source.cluster.uuid" property to specify the remote cluster UUID. When "create_destination.enabled" option is specified while making a POST for a SnapMirror relationship, the relationship can be automatically initialized by setting the "state" either to "snapmirrored" when the policy is of type "async" or to "in_sync" when the policy is of type "sync". The "destination.path" property must specify the destination endpoint path. For example, for FlexVol volume and FlexGroup volume, the "destination.path" can be specified as +++<destination-SVM-name:dp-volume-name>+++, for SVM data protection, the "destination.path" must be specified as <destination-SVM-name:>, and for Consistency Group, the "destination.path" must be specified as <destination-SVM-name:/cg/consistency-group-name> along with the "destination.consistency_group_volumes" property to indicate the list of destination volumes of type "DP" in the Consistency Group. For a FlexVol volume, a FlexGroup volume, or a Consistency Group destination endpoint, the properties in this object can be specified either from the source or the destination cluster. For an SVM destination endpoint, the properties in this object can be specified from the destination cluster only. This object is not supported for non ONTAP endpoints.+++</destination-SVM-name:dp-volume-name>+++
+
+* Introduced in: 9.7
+* x-ntap-createOnly: true
+
+
+|destination
+|link:#snapmirror_endpoint[snapmirror_endpoint]
+a|Endpoint of a SnapMirror relationship. For a GET request, the property "cluster" is populated when the endpoint is on a remote cluster. A POST request to create the destination SVM endpoint or to establish an SVM DR relationship must have the property "cluster" populated with the remote cluster details. A POST request to create the destination FlexVol volume, FlexGroup volume, and Consistency Group endpoints can optionally specify the "cluster" property when the source SVM and the destination SVM are peered. A POST request to establish a SnapMirror relationship between the source endpoint and destination endpoint and when the source SVM and the destination SVM are not peered, must specify the "cluster" property for the remote endpoint.
+
+
+|exported_snapshot
+|string
+a|Snapshot copy exported to clients on destination.
+
+
+|healthy
+|boolean
+a|Is the relationship healthy?
+
+
+|identity_preservation
+|string
+a|Specifies which configuration of the source SVM is replicated to the destination SVM. This property is applicable only for SVM data protection with "async" policy type. This "identity_preservation" overrides the "identity_preservation" set on the SnapMirror relationship's policy.
+
+
+|lag_time
+|string
+a|Time since the exported Snapshot copy was created.
+
+
+|policy
+|link:#policy[policy]
+a|Basic policy information of the relationship.
+
+
+|preserve
+|boolean
+a|Set to true on resync to preserve Snapshot copies on the destination that are newer than the latest common Snapshot copy. This property is applicable only for relationships with FlexVol volume or FlexGroup volume endpoints and when the PATCH state is being changed to "snapmirrored".
+
+
+|quick_resync
+|boolean
+a|Set to true to reduce resync time by not preserving storage efficiency. This property is applicable only for relationships with FlexVol volume endpoints and when the PATCH state is being changed to "snapmirrored".
+
+
+|recover_after_break
+|boolean
+a|Set to true to recover from a failed SnapMirror break operation on a FlexGroup volume relationship. This restores all destination FlexGroup constituent volumes to the latest Snapshot copy, and any writes to the read-write constituents are lost. This property is applicable only for SnapMirror relationships with FlexGroup volume endpoints and when the PATCH state is being changed to "broken_off".
+
+
+|restore
+|boolean
+a|Set to true to create a relationship for restore. To trigger restore-transfer, use transfers POST on the restore relationship. SnapMirror relationships with the policy type "async" can be restored. SnapMirror relationships with the policy type "sync" cannot be restored.
+
+
+|restore_to_snapshot
+|string
+a|Specifies the Snapshot copy to restore to on the destination during the break operation. This property is applicable only for SnapMirror relationships with FlexVol volume endpoints and when the PATCH state is being changed to "broken_off".
+
+
+|source
+|link:#snapmirror_endpoint[snapmirror_endpoint]
+a|Endpoint of a SnapMirror relationship. For a GET request, the property "cluster" is populated when the endpoint is on a remote cluster. A POST request to create the destination SVM endpoint or to establish an SVM DR relationship must have the property "cluster" populated with the remote cluster details. A POST request to create the destination FlexVol volume, FlexGroup volume, and Consistency Group endpoints can optionally specify the "cluster" property when the source SVM and the destination SVM are peered. A POST request to establish a SnapMirror relationship between the source endpoint and destination endpoint and when the source SVM and the destination SVM are not peered, must specify the "cluster" property for the remote endpoint.
+
+
+|state
+|string
+a|State of the relationship.
+To initialize the relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".
+To break the relationship, PATCH the state to "broken_off" for relationships with a policy of type "async" or "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" cannot be "broken_off".
+To resync the relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" can be in "broken_off" state due to a failed attempt of SnapMirror failover.
+To pause the relationship, suspending further transfers, PATCH the state to "paused" for relationships with a policy of type "async" or "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" cannot be "paused".
+To resume transfers for a paused relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".
+The entries "in_sync", "out_of_sync", and "synchronizing" are only applicable to relationships with a policy of type "sync". A PATCH call on the state change only triggers the transition to the specified state. You must poll on the "state", "healthy" and "unhealthy_reason" properties using a GET request to determine if the transition is successful. To automatically initialize the relationship when specifying "create_destination" property, set the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".
+
+
+|throttle
+|integer
+a|Throttle, in KBs per second. This "throttle" overrides the "throttle" set on the SnapMirror relationship's policy. If both are not set, defaults to 0, which is interpreted as unlimited.
+
+
+|transfer
+|link:#transfer[transfer]
+a|Basic information on the current transfer or the last transfer if there is no active transfer at the time of the request.
+
+
+|transfer_schedule
+|link:#transfer_schedule[transfer_schedule]
+a|Schedule used to update asynchronous relationships. This "transfer_schedule" overrides the "transfer_schedule" set on the SnapMirror relationship's policy. To remove the "transfer_schedule", set its value to null (no-quotes).
+
+
+|unhealthy_reason
+|array[link:#snapmirror_error[snapmirror_error]]
+a|Reason the relationship is not healthy. It is a concatenation of up to four levels of error messages.
+
+
+|uuid
+|string
+a|
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "create_destination": {
+    "storage_service": {
+      "name": "string"
+    },
+    "tiering": {
+      "policy": "string"
+    }
+  },
+  "destination": {
+    "cluster": {
+      "name": "cluster1",
+      "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+    },
+    "consistency_group_volumes": [
+      {
+        "name": "volume1",
+        "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+      }
+    ],
+    "ipspace": "Default",
+    "path": "svm1:volume1",
+    "svm": {
+      "name": "svm1",
+      "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+    }
+  },
+  "exported_snapshot": "string",
+  "identity_preservation": "string",
+  "lag_time": "PT8H35M42S",
+  "policy": {
+    "name": "Asynchronous",
+    "type": "string",
+    "uuid": "4ea7a442-86d1-11e0-ae1c-123478563412"
+  },
+  "restore_to_snapshot": "string",
+  "source": {
+    "cluster": {
+      "name": "cluster1",
+      "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+    },
+    "consistency_group_volumes": [
+      {
+        "name": "volume1",
+        "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+      }
+    ],
+    "ipspace": "Default",
+    "path": "svm1:volume1",
+    "svm": {
+      "name": "svm1",
+      "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+    }
+  },
+  "state": "snapmirrored",
+  "throttle": 0,
+  "transfer": {
+    "end_time": "2020-12-02T18:36:19-08:00",
+    "state": "string",
+    "total_duration": "PT28M41S'",
+    "uuid": "4ea7a442-86d1-11e0-ae1c-123478563412"
+  },
+  "transfer_schedule": {
+    "name": "weekly",
+    "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+  },
+  "unhealthy_reason": [
+    {
+      "code": "6621444",
+      "message": "Failed to complete update operation on one or more item relationships.",
+      "parameters": []
+    },
+    {
+      "code": "6621445",
+      "message": "Group Update failed",
+      "parameters": []
+    }
+  ],
+  "uuid": "4ea7a442-86d1-11e0-ae1c-123478563412"
+}
+====
+
+== Response
+
+```
+Status: 202, Accepted
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|job
+|link:#job_link[job_link]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "job": {
+    "uuid": "string"
+  }
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 6620374
+| Internal error. Failed to get SVM information.
+
+| 6620478
+| Internal error. Failed to check SnapMirror capability.
+
+| 6621834
+| Object store configuration does not exist for specified vserver.
+
+| 13303819
+| Could not retrieve SnapMirror policy information.
+
+| 13303821
+| Invalid SnapMirror policy UUID.
+
+| 13303841
+| This operation is not supported for SnapMirror relationships between these endpoints.
+
+| 13303852
+| destination.path provided does not contain \":\".
+
+| 13303853
+| Restore relationships are not supported for SVM-DR endpoints.
+
+| 13303868
+| Create of destination endpoint and SnapMirror relationship failed.
+
+| 13303869
+| Creating a destination endpoint is not supported for restore relationships.
+
+| 13303870
+| A tiering policy cannot be specified if tiering is not being set to supported.
+
+| 13303871
+| Storage service properties cannot be specified if the storage service is not being enabled.
+
+| 13303872
+| Specified property requires a later effective cluster version.
+
+| 13303873
+| Specifying a state when creating a relationship is only supported when creating a destination endpoint.
+
+| 13303874
+| Specified state is not supported when creating this relationship.
+
+| 13303875
+| Destination aggregates do not have sufficient space for hosting copies of source volumes.
+
+| 13303876
+| Destination cluster does not have composite aggregates.
+
+| 13303877
+| Source or destination cluster must be specified.
+
+| 13303878
+| The specified fields do not match.
+
+| 13303879
+| Source cluster name or UUID is needed to provision a destination SVM on the local cluster.
+
+| 13303880
+| Source cluster must be remote for provisioning a destination SVM on the local cluster.
+
+| 13303881
+| Network validation failed.
+
+| 13303882
+| SVM validation failed.
+
+| 13303883
+| Encryption is not enabled on the destination cluster.
+
+| 13303887
+| Synchronous SnapMirror relationships between FlexGroup volumes are not supported.
+
+| 13303888
+| Synchronous SnapMirror relationships require an effective cluster version of 9.5 or later on both the source and destination clusters.
+
+| 13303889
+| Asynchronous SnapMirror relationships between FlexGroup volumes require an effective cluster version of 9.5 or later on both the source and destination clusters.
+
+| 13303890
+| Asynchronous SnapMirror relationships between FlexVol volumes require an effective cluster version of 9.3, 9.5, or later on both the source and destination clusters.
+
+| 13303891
+| Creating a destination endpoint with storage service requires an effective cluster version of 9.7 or later.
+
+| 13303892
+| Fetching remote information from the destination cluster failed.
+
+| 13303893
+| Updating job description failed.
+
+| 13303894
+| Destination volume name is invalid. It must contain the source volume name and have a suffix when creating a destination endpoint on a cluster with an effective cluster version of 9.6 or earlier.
+
+| 13303895
+| Operation on the remote destination cluster is not supported.
+
+| 13303916
+| FlexGroup volumes are not supported on SnapLock aggregates.
+
+| 13303918
+| No suitable destination aggregate type is available.
+
+| 13303919
+| Only FabricPool enabled aggregates are available on the destination.
+
+| 13303920
+| Only SnapLock aggregates are available on the destination. FlexGroup volumes are not supported on SnapLock aggregates.
+
+| 13303921
+| Unable to retrieve the SnapMirror capabilities of the destination cluster.
+
+| 13303922
+| Specified source SVM is not a data SVM.
+
+| 13303923
+| Specified destination SVM is not a data SVM.
+
+| 13303924
+| Source SVM has an invalid Snapshot copy policy.
+
+| 13303925
+| SnapMirror validation has failed.
+
+| 13303930
+| The specified tiering policy is not supported for destination volumes of Synchronous relationships.
+
+| 13303938
+| Fetching information from the local cluster failed.
+
+| 13303939
+| Could not create an SVM peer relationship.
+
+| 13303944
+| An SVM-DR relationship is not supported because the source SVM has CIFS configured and the associated SnapMirror policy has either the "identity_preservation" property not set or set to "exclude_network_and_protocol_config".
+
+| 13303966
+| Consistency Group relationships require a policy of type "sync" with a sync_type of "automated_failover".
+
+| 13303967
+| Consistency Group volume is not a FlexVol volume.
+
+| 13303968
+| Unsupported volume type for the Consistency Group.
+
+| 13303969
+| SnapMirror relationships between SVM endpoints and object store endpoints are not supported.
+
+| 13303970
+| Unsupported policy type for the Consistency Group.
+
+| 13303971
+| SnapMirror relationships between Consistency Group endpoints and object store endpoints are not supported.
+
+| 13303976
+| Source or destination SVM is already part of an SVM-DR relation.
+
+| 13303977
+| Destination Consistency Group volume UUIDs are not expected while provisioning the destination volumes.
+
+| 13303978
+| Number of Consistency Group volume names and UUIDs does not match.
+
+| 13303979
+| Number of Consistency Group volumes exceeds the allowed limit.
+
+| 13303980
+| Number of source and destination Consistency Group volumes do not match.
+
+| 13303981
+| ISCSI or FCP protocol is not configured.
+
+| 13303982
+| SAN data interface is not configured on the SVM.
+
+| 13304021
+| No suitable storage can be found meeting the specified requirements. No FabricPool enabled aggregates are available on the destination.
+
+| 13304022
+| No suitable storage can be found meeting the specified requirements. No non-root, non-taken-over, non-SnapLock, non-composite aggregates are available on the destination.
+
+| 13304032
+| In an "All SAN Array", an SVM-DR relationship is not supported when the associated SnapMirror policy does not have the "identity_preservation" property set to "exclude_network_and_protocol_config".
+
+| 13304080
+| Specified UUID and name do not match.
+
+| 13304082
+| Specified properties are mutually exclusive.
+
+| 13304083
+| The specified property is not supported because all nodes in the cluster are not capable of supporting the property.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+[#status]
+[.api-collapsible-fifth-title]
+status
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Status code
+
+
+|message
+|string
+a|SnapMirror Consistency Group failover status.
+
+
+|===
+
+
+[#snapmirror_consistency_group_failover]
+[.api-collapsible-fifth-title]
+snapmirror_consistency_group_failover
+
+SnapMirror Consistency Group failover information. The SnapMirror Consistency Group failover can be a planned or an unplanned operation. Only active SnapMirror Consistency Group failover operation progress can be monitored using this object. In case of an error during the failover operation, the property "consistency_group_failover.error" holds the reason for the error. ONTAP automatically retries any failed SnapMirror Consistency Group failover operation.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|status
+|link:#status[status]
+a|
+
+|===
+
+
+[#storage_service]
+[.api-collapsible-fifth-title]
+storage_service
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|enabled
+|boolean
+a|This property indicates whether to create the destination endpoint using storage service.
+
+
+|enforce_performance
+|boolean
+a|Optional property to enforce storage service performance on the destination endpoint. This property is applicable to FlexVol volume, FlexGroup volume, and Consistency Group endpoints.
+
+
+|name
+|string
+a|Optional property to specify the storage service name for the destination endpoint. This property is considered when the property "create_destination.storage_service.enabled" is set to "true". When the property "create_destination.storage_service.enabled" is set to "true" and the "create_destination.storage_service.name" for the endpoint is not specified, then ONTAP selects the highest storage service available on the cluster to provision the destination endpoint. This property is applicable to FlexVol volume, FlexGroup volume, and Consistency Group endpoints.
+
+* enum: ["extreme", "performance", "value"]
+* Introduced in: 9.6
+
+
+|===
+
+
+[#tiering]
+[.api-collapsible-fifth-title]
+tiering
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|policy
+|string
+a|Optional property to specify the destination endpoint's tiering policy when "create_destination.tiering.supported" is set to "true". This property is applicable to FlexVol volume, FlexGroup volume, and Consistency Group endpoints. This property determines whether the user data blocks of the destination endpoint in a FabricPool will be tiered to the cloud store when they become cold. FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of the destination endpoint volume blocks increases if they are accessed frequently and decreases when they are not.
+all &dash; This policy allows tiering of both destination endpoint Snapshot copies and the user transfered data blocks to the cloud store as soon as possible by ignoring the temperature on the volume blocks. This tiering policy is not applicable for Consistency Group destination endpoints or for synchronous relationships.
+auto &dash; This policy allows tiering of both destination endpoint Snapshot copies and the active file system user data to the cloud store
+none &dash; Destination endpoint volume blocks will not be tiered to the cloud store.
+snapshot_only &dash; This policy allows tiering of only the destination endpoint volume Snapshot copies not associated with the active file system. The default tiering policy is "snapshot_only" for a FlexVol volume and "none" for a FlexGroup volume.
+
+
+|supported
+|boolean
+a|Optional property to enable provisioning of the destination endpoint volumes on FabricPool aggregates. This property is applicable to FlexVol volume, FlexGroup volume, and Consistency Group endpoints. Only FabricPool aggregates are used if this property is set to "true" and only non FabricPool aggregates are used if this property is set to "false". Tiering support for a FlexGroup volume can be changed by moving all of the constituents to the required aggregates. Note that in order to tier data, not only do the destination endpoint volumes need to support tiering by using FabricPools, the "create_destination.tiering.policy" must not be "none". A destination endpoint that uses FabricPools but has a tiering "policy" of "none" supports tiering but will not tier any data.
+
+
+|===
+
+
+[#snapmirror_destination_creation]
+[.api-collapsible-fifth-title]
+snapmirror_destination_creation
+
+Use this object to provision the destination endpoint when establishing a SnapMirror relationship for a FlexVol volume, FlexGroup volume, SVM, or Consistency Group. Given a source endpoint, the destination endpoint is provisioned in the SVM specified in the "destination.path" property. While protecting an SVM, the SVM destination endpoint can only be provisioned on the local cluster. To provision the SVM destination endpoint use the optional "source.cluster.name" property to specify the remote cluster name or use the optional "source.cluster.uuid" property to specify the remote cluster UUID. When "create_destination.enabled" option is specified while making a POST for a SnapMirror relationship, the relationship can be automatically initialized by setting the "state" either to "snapmirrored" when the policy is of type "async" or to "in_sync" when the policy is of type "sync". The "destination.path" property must specify the destination endpoint path. For example, for FlexVol volume and FlexGroup volume, the "destination.path" can be specified as +++<destination-svm-name:dp-volume-name>+++, for SVM data protection, the "destination.path" must be specified as <destination-svm-name:>, and for Consistency Group, the "destination.path" must be specified as <destination-svm-name:> along with the "destination.consistency_group_volumes" property to indicate the list of destination volumes of type "DP" in the Consistency Group. For a FlexVol volume, a FlexGroup volume, or a Consistency Group destination endpoint, the properties in this object can be specified either from the source or the destination cluster. For an SVM destination endpoint, the properties in this object can be specified from the destination cluster only. This object is not supported for non ONTAP endpoints.</destination-svm-name:></destination-svm-name:>+++</destination-svm-name:dp-volume-name>+++
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|enabled
+|boolean
+a|Optional property to create the destination endpoint when establishing a SnapMirror relationship. It is assumed to be "false" if no other property is set and assumed to be "true" if any other property is set.
+
+
+|storage_service
+|link:#storage_service[storage_service]
+a|
+
+|tiering
+|link:#tiering[tiering]
+a|
+
+|===
+
+
+[#cluster]
+[.api-collapsible-fifth-title]
+cluster
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#consistency_group_volumes]
+[.api-collapsible-fifth-title]
+consistency_group_volumes
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the volume.
+
+
+|uuid
+|string
+a|Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
+
+* example: 028baa66-41bd-11e9-81d5-00a0986138f7
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#snapmirror_endpoint]
+[.api-collapsible-fifth-title]
+snapmirror_endpoint
+
+Endpoint of a SnapMirror relationship. For a GET request, the property "cluster" is populated when the endpoint is on a remote cluster. A POST request to create the destination SVM endpoint or to establish an SVM DR relationship must have the property "cluster" populated with the remote cluster details. A POST request to create the destination FlexVol volume, FlexGroup volume, and Consistency Group endpoints can optionally specify the "cluster" property when the source SVM and the destination SVM are peered. A POST request to establish a SnapMirror relationship between the source endpoint and destination endpoint and when the source SVM and the destination SVM are not peered, must specify the "cluster" property for the remote endpoint.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|cluster
+|link:#cluster[cluster]
+a|
+
+|consistency_group_volumes
+|array[link:#consistency_group_volumes[consistency_group_volumes]]
+a|Mandatory property for a Consistency Group endpoint. Specifies the list of FlexVol volumes for a Consistency Group.
+
+
+|ipspace
+|string
+a|Optional property to specify the IPSpace of the SVM.
+
+
+|path
+|string
+a|ONTAP FlexVol/FlexGroup - svm1:volume1
+ONTAP SVM               - svm1:
+ONTAP Consistency Group - svm1:/cg/cg_name
+
+* example: svm1:volume1
+* Introduced in: 9.6
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+[#policy]
+[.api-collapsible-fifth-title]
+policy
+
+Basic policy information of the relationship.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|type
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#transfer]
+[.api-collapsible-fifth-title]
+transfer
+
+Basic information on the current transfer or the last transfer if there is no active transfer at the time of the request.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|bytes_transferred
+|integer
+a|Bytes transferred.
+
+
+|end_time
+|string
+a|End time of the last transfer.
+
+
+|state
+|string
+a|
+
+|total_duration
+|string
+a|Transfer elapsed time.
+
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#transfer_schedule]
+[.api-collapsible-fifth-title]
+transfer_schedule
+
+Schedule used to update asynchronous relationships. This "transfer_schedule" overrides the "transfer_schedule" set on the SnapMirror relationship's policy. To remove the "transfer_schedule", set its value to null (no-quotes).
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|Job schedule name
+
+
+|uuid
+|string
+a|Job schedule UUID
+
+
+|===
+
+
+[#snapmirror_error]
+[.api-collapsible-fifth-title]
+snapmirror_error
+
+SnapMirror error
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|integer
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|parameters
+|array[string]
+a|Parameters for the error message
+
+
+|===
+
+
+[#snapmirror_relationship]
+[.api-collapsible-fifth-title]
+snapmirror_relationship
+
+SnapMirror relationship information. The SnapMirror relatiosnhip can be either "async" or "sync" based on the type of SnapMirror policy associated with the relationship. The source and destination endpoints of a SnapMirror relationship must be of the same type, for example, if the source endpoint is a FlexVol volume then the destination endpoint must be a FlexVol volume.
+The SnapMirror policy type "async" can be used when the SnapMirror relationship has FlexVol volume or FlexGroup volume or SVM as the endpoint. The SnapMirror policy type "sync" can be used when the SnapMirror relationship has FlexVol volume as the endpoint. The SnapMirror policy type "sync" with "sync_type" as "automated_failover" can be used when the SnapMirror relationship has Consistency Group as the endpoint.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|create_destination
+|link:#snapmirror_destination_creation[snapmirror_destination_creation]
+a|Use this object to provision the destination endpoint when establishing a SnapMirror relationship for a FlexVol volume, FlexGroup volume, SVM, or Consistency Group. Given a source endpoint, the destination endpoint is provisioned in the SVM specified in the "destination.path" property. While protecting an SVM, the SVM destination endpoint can only be provisioned on the local cluster. To provision the SVM destination endpoint use the optional "source.cluster.name" property to specify the remote cluster name or use the optional "source.cluster.uuid" property to specify the remote cluster UUID. When "create_destination.enabled" option is specified while making a POST for a SnapMirror relationship, the relationship can be automatically initialized by setting the "state" either to "snapmirrored" when the policy is of type "async" or to "in_sync" when the policy is of type "sync". The "destination.path" property must specify the destination endpoint path. For example, for FlexVol volume and FlexGroup volume, the "destination.path" can be specified as +++<destination-SVM-name:dp-volume-name>+++, for SVM data protection, the "destination.path" must be specified as <destination-SVM-name:>, and for Consistency Group, the "destination.path" must be specified as <destination-SVM-name:/cg/consistency-group-name> along with the "destination.consistency_group_volumes" property to indicate the list of destination volumes of type "DP" in the Consistency Group. For a FlexVol volume, a FlexGroup volume, or a Consistency Group destination endpoint, the properties in this object can be specified either from the source or the destination cluster. For an SVM destination endpoint, the properties in this object can be specified from the destination cluster only. This object is not supported for non ONTAP endpoints.+++</destination-SVM-name:dp-volume-name>+++
+
+* Introduced in: 9.7
+* x-ntap-createOnly: true
+
+
+|destination
+|link:#snapmirror_endpoint[snapmirror_endpoint]
+a|Endpoint of a SnapMirror relationship. For a GET request, the property "cluster" is populated when the endpoint is on a remote cluster. A POST request to create the destination SVM endpoint or to establish an SVM DR relationship must have the property "cluster" populated with the remote cluster details. A POST request to create the destination FlexVol volume, FlexGroup volume, and Consistency Group endpoints can optionally specify the "cluster" property when the source SVM and the destination SVM are peered. A POST request to establish a SnapMirror relationship between the source endpoint and destination endpoint and when the source SVM and the destination SVM are not peered, must specify the "cluster" property for the remote endpoint.
+
+
+|exported_snapshot
+|string
+a|Snapshot copy exported to clients on destination.
+
+
+|healthy
+|boolean
+a|Is the relationship healthy?
+
+
+|identity_preservation
+|string
+a|Specifies which configuration of the source SVM is replicated to the destination SVM. This property is applicable only for SVM data protection with "async" policy type. This "identity_preservation" overrides the "identity_preservation" set on the SnapMirror relationship's policy.
+
+
+|lag_time
+|string
+a|Time since the exported Snapshot copy was created.
+
+
+|policy
+|link:#policy[policy]
+a|Basic policy information of the relationship.
+
+
+|preserve
+|boolean
+a|Set to true on resync to preserve Snapshot copies on the destination that are newer than the latest common Snapshot copy. This property is applicable only for relationships with FlexVol volume or FlexGroup volume endpoints and when the PATCH state is being changed to "snapmirrored".
+
+
+|quick_resync
+|boolean
+a|Set to true to reduce resync time by not preserving storage efficiency. This property is applicable only for relationships with FlexVol volume endpoints and when the PATCH state is being changed to "snapmirrored".
+
+
+|recover_after_break
+|boolean
+a|Set to true to recover from a failed SnapMirror break operation on a FlexGroup volume relationship. This restores all destination FlexGroup constituent volumes to the latest Snapshot copy, and any writes to the read-write constituents are lost. This property is applicable only for SnapMirror relationships with FlexGroup volume endpoints and when the PATCH state is being changed to "broken_off".
+
+
+|restore
+|boolean
+a|Set to true to create a relationship for restore. To trigger restore-transfer, use transfers POST on the restore relationship. SnapMirror relationships with the policy type "async" can be restored. SnapMirror relationships with the policy type "sync" cannot be restored.
+
+
+|restore_to_snapshot
+|string
+a|Specifies the Snapshot copy to restore to on the destination during the break operation. This property is applicable only for SnapMirror relationships with FlexVol volume endpoints and when the PATCH state is being changed to "broken_off".
+
+
+|source
+|link:#snapmirror_endpoint[snapmirror_endpoint]
+a|Endpoint of a SnapMirror relationship. For a GET request, the property "cluster" is populated when the endpoint is on a remote cluster. A POST request to create the destination SVM endpoint or to establish an SVM DR relationship must have the property "cluster" populated with the remote cluster details. A POST request to create the destination FlexVol volume, FlexGroup volume, and Consistency Group endpoints can optionally specify the "cluster" property when the source SVM and the destination SVM are peered. A POST request to establish a SnapMirror relationship between the source endpoint and destination endpoint and when the source SVM and the destination SVM are not peered, must specify the "cluster" property for the remote endpoint.
+
+
+|state
+|string
+a|State of the relationship.
+To initialize the relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".
+To break the relationship, PATCH the state to "broken_off" for relationships with a policy of type "async" or "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" cannot be "broken_off".
+To resync the relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" can be in "broken_off" state due to a failed attempt of SnapMirror failover.
+To pause the relationship, suspending further transfers, PATCH the state to "paused" for relationships with a policy of type "async" or "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" cannot be "paused".
+To resume transfers for a paused relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".
+The entries "in_sync", "out_of_sync", and "synchronizing" are only applicable to relationships with a policy of type "sync". A PATCH call on the state change only triggers the transition to the specified state. You must poll on the "state", "healthy" and "unhealthy_reason" properties using a GET request to determine if the transition is successful. To automatically initialize the relationship when specifying "create_destination" property, set the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".
+
+
+|throttle
+|integer
+a|Throttle, in KBs per second. This "throttle" overrides the "throttle" set on the SnapMirror relationship's policy. If both are not set, defaults to 0, which is interpreted as unlimited.
+
+
+|transfer
+|link:#transfer[transfer]
+a|Basic information on the current transfer or the last transfer if there is no active transfer at the time of the request.
+
+
+|transfer_schedule
+|link:#transfer_schedule[transfer_schedule]
+a|Schedule used to update asynchronous relationships. This "transfer_schedule" overrides the "transfer_schedule" set on the SnapMirror relationship's policy. To remove the "transfer_schedule", set its value to null (no-quotes).
+
+
+|unhealthy_reason
+|array[link:#snapmirror_error[snapmirror_error]]
+a|Reason the relationship is not healthy. It is a concatenation of up to four levels of error messages.
+
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#job_link]
+[.api-collapsible-fifth-title]
+job_link
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|uuid
+|string
+a|The UUID of the asynchronous job that is triggered by a POST, PATCH, or DELETE operation.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

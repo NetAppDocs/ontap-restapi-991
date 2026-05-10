@@ -1,0 +1,513 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-cloud-targets-.html'
+summary: 'Update a cloud target'
+---
+
+= Update a cloud target
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/cloud/targets/{uuid}`#
+
+*Introduced In:* 9.6
+
+Updates the cloud target specified by the UUID with the fields in the body. This request starts a job and returns a link to that job.
+
+== Related ONTAP commands
+
+* `storage aggregate object-store config modify`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|Cloud target UUID
+
+
+|ignore_warnings
+|boolean
+|query
+|False
+a|Specifies whether or not warnings should be ignored.
+
+
+|check_only
+|boolean
+|query
+|False
+a|Do not modify the configuration, only check that the PATCH request succeeds.
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning. When doing a POST, PATCH, or DELETE operation on a single record, the default is 0 seconds.  This means that if an asynchronous operation is started, the server immediately returns HTTP code 202 (Accepted) along with a link to the job.  If a non-zero value is specified for POST, PATCH, or DELETE operations, ONTAP waits that length of time to see if the job completes so it can return something other than 202.
+
+* Default value: 0
+* Max value: 120
+* Min value: 0
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|access_key
+|string
+a|Access key ID for AWS_S3 and other S3 compatible provider types.
+
+
+|authentication_type
+|string
+a|Authentication used to access the target. SnapMirror does not yet support CAP. Required in POST.
+
+
+|azure_account
+|string
+a|Azure account
+
+
+|azure_private_key
+|string
+a|Azure access key
+
+
+|cap_url
+|string
+a|This parameter is available only when auth-type is CAP. It specifies a full URL of the request to a CAP server for retrieving temporary credentials (access-key, secret-pasword, and session token) for accessing the object store.
+
+
+|certificate_validation_enabled
+|boolean
+a|Is SSL/TLS certificate validation enabled? The default value is true. This can only be modified for SGWS, IBM_COS, and ONTAP_S3 provider types.
+
+* Introduced in: 9.6
+
+
+|cluster
+|link:#cluster[cluster]
+a|
+
+|name
+|string
+a|Cloud target name
+
+
+|port
+|integer
+a|Port number of the object store that ONTAP uses when establishing a connection. Required in POST.
+
+* Introduced in: 9.6
+
+
+|secret_password
+|string
+a|Secret access key for AWS_S3 and other S3 compatible provider types.
+
+
+|server
+|string
+a|Fully qualified domain name of the object store server. Required on POST.  For Amazon S3, server name must be an AWS regional endpoint in the format s3.amazonaws.com or s3-+++<region>+++.amazonaws.com, for example, s3-us-west-2.amazonaws.com. The region of the server and the bucket must match. For Azure, if the server is a "blob.core.windows.net" or a "blob.core.usgovcloudapi.net", then a value of azure-account followed by a period is added in front of the server.+++</region>+++
+
+
+|server_side_encryption
+|string
+a|Encryption of data at rest by the object store server for AWS_S3 and other S3 compatible provider types. This is an advanced property. In most cases it is best not to change default value of "sse_s3" for object store servers which support SSE-S3 encryption. The encryption is in addition to any encryption done by ONTAP at a volume or at an aggregate level. Note that changing this option does not change encryption of data which already exist in the object store.
+
+* enum: ["none", "sse_s3"]
+* Introduced in: 9.7
+
+
+|snapmirror_use
+|string
+a|Use of the cloud target by SnapMirror.
+
+
+|ssl_enabled
+|boolean
+a|SSL/HTTPS enabled or not
+
+
+|svm
+|link:#svm[svm]
+a|This field is only applicable when used for SnapMirror. For POST and PATCH, SVM information is required for SnapMirror targets and not allowed for FabricPool targets.
+
+
+|url_style
+|string
+a|URL style used to access S3 bucket.
+
+
+|use_http_proxy
+|boolean
+a|Use HTTP proxy when connecting to the object store.
+
+
+|used
+|integer
+a|The amount of cloud space used by all the aggregates attached to the target, in bytes. This field is only populated for FabricPool targets. The value is recalculated once every 5 minutes.
+
+
+|uuid
+|string
+a|Cloud target UUID
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "access_key": "string",
+  "authentication_type": "string",
+  "azure_account": "string",
+  "azure_private_key": "string",
+  "cap_url": "https://123.45.67.89:1234/CAP/api/v1/credentials?agency=myagency&mission=mymission&role=myrole",
+  "name": "string",
+  "secret_password": "string",
+  "server": "string",
+  "server_side_encryption": "string",
+  "snapmirror_use": "string",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "url_style": "string",
+  "used": 0,
+  "uuid": "string"
+}
+====
+
+== Response
+
+```
+Status: 202, Accepted
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|job
+|link:#job_link[job_link]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "job": {
+    "uuid": "string"
+  }
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#cluster]
+[.api-collapsible-fifth-title]
+cluster
+[#ipspace]
+[.api-collapsible-fifth-title]
+ipspace
+
+IPspace to use in order to reach the cloud target.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|IPspace name
+
+
+|uuid
+|string
+a|IPspace UUID
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+This field is only applicable when used for SnapMirror. For POST and PATCH, SVM information is required for SnapMirror targets and not allowed for FabricPool targets.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#cloud_target]
+[.api-collapsible-fifth-title]
+cloud_target
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|access_key
+|string
+a|Access key ID for AWS_S3 and other S3 compatible provider types.
+
+
+|authentication_type
+|string
+a|Authentication used to access the target. SnapMirror does not yet support CAP. Required in POST.
+
+
+|azure_account
+|string
+a|Azure account
+
+
+|azure_private_key
+|string
+a|Azure access key
+
+
+|cap_url
+|string
+a|This parameter is available only when auth-type is CAP. It specifies a full URL of the request to a CAP server for retrieving temporary credentials (access-key, secret-pasword, and session token) for accessing the object store.
+
+
+|certificate_validation_enabled
+|boolean
+a|Is SSL/TLS certificate validation enabled? The default value is true. This can only be modified for SGWS, IBM_COS, and ONTAP_S3 provider types.
+
+* Introduced in: 9.6
+
+
+|cluster
+|link:#cluster[cluster]
+a|
+
+|name
+|string
+a|Cloud target name
+
+
+|port
+|integer
+a|Port number of the object store that ONTAP uses when establishing a connection. Required in POST.
+
+* Introduced in: 9.6
+
+
+|secret_password
+|string
+a|Secret access key for AWS_S3 and other S3 compatible provider types.
+
+
+|server
+|string
+a|Fully qualified domain name of the object store server. Required on POST.  For Amazon S3, server name must be an AWS regional endpoint in the format s3.amazonaws.com or s3-+++<region>+++.amazonaws.com, for example, s3-us-west-2.amazonaws.com. The region of the server and the bucket must match. For Azure, if the server is a "blob.core.windows.net" or a "blob.core.usgovcloudapi.net", then a value of azure-account followed by a period is added in front of the server.+++</region>+++
+
+
+|server_side_encryption
+|string
+a|Encryption of data at rest by the object store server for AWS_S3 and other S3 compatible provider types. This is an advanced property. In most cases it is best not to change default value of "sse_s3" for object store servers which support SSE-S3 encryption. The encryption is in addition to any encryption done by ONTAP at a volume or at an aggregate level. Note that changing this option does not change encryption of data which already exist in the object store.
+
+* enum: ["none", "sse_s3"]
+* Introduced in: 9.7
+
+
+|snapmirror_use
+|string
+a|Use of the cloud target by SnapMirror.
+
+
+|ssl_enabled
+|boolean
+a|SSL/HTTPS enabled or not
+
+
+|svm
+|link:#svm[svm]
+a|This field is only applicable when used for SnapMirror. For POST and PATCH, SVM information is required for SnapMirror targets and not allowed for FabricPool targets.
+
+
+|url_style
+|string
+a|URL style used to access S3 bucket.
+
+
+|use_http_proxy
+|boolean
+a|Use HTTP proxy when connecting to the object store.
+
+
+|used
+|integer
+a|The amount of cloud space used by all the aggregates attached to the target, in bytes. This field is only populated for FabricPool targets. The value is recalculated once every 5 minutes.
+
+
+|uuid
+|string
+a|Cloud target UUID
+
+
+|===
+
+
+[#job_link]
+[.api-collapsible-fifth-title]
+job_link
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|uuid
+|string
+a|The UUID of the asynchronous job that is triggered by a POST, PATCH, or DELETE operation.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

@@ -1,0 +1,355 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_cifs_shares.html'
+summary: 'Manage CIFS shares'
+---
+
+= Manage CIFS shares
+
+
+
+== Overview
+
+Before any users or applications can access data on the CIFS server over SMB, a CIFS share must be created with sufficient share permissions. CIFS share is a named access point in a volume which is tied to the CIFS server on the SVM. Before creating a CIFS share make sure that the path is valid within the scope of the SVM and that it is reachable.
+
+Permissions can be assigned to this newly created share by specifying the 'acls' field. When a CIFS share is created, ONTAP creates a default ACL for this share with 'Full-Control' permissions for an 'Everyone' user.
+
+== Examples
+
+=== Creating a CIFS share
+
+To create a CIFS share for a CIFS server, use the following API. Note the _return_records=true_ query parameter used to obtain the newly created entry in the response.
+
+'''
+
+----
+
+# The API:
+POST /api/protocols/cifs/shares
+
+# The call:
+curl -X POST "https://<mgmt-ip>/api/protocols/cifs/shares?return_records=true" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"access_based_enumeration\": false, \"acls\": [ { \"permission\": \"no_access\", \"type\": \"unix_user\", \"user_or_group\": \"root\" } ], \"change_notify\": true, \"comment\": \"HR Department Share\", \"encryption\": false, \"home_directory\": false, \"name\": \"TEST\", \"oplocks\": true, \"no_strict_security\": true, \"path\": \"/\", \"svm\": { \"name\": \"vs1\", \"uuid\": \"000c5cd2-ebdf-11e8-a96e-0050568ea3cb\" }, \"unix_symlink\": \"local\"}"
+
+# The response:
+{
+"num_records": 1,
+"records": [
+  {
+    "svm": {
+      "uuid": "000c5cd2-ebdf-11e8-a96e-0050568ea3cb",
+      "name": "vs1"
+    },
+    "name": "TEST",
+    "path": "/",
+    "comment": "HR Department Share",
+    "home_directory": false,
+    "oplocks": true,
+    "access_based_enumeration": false,
+    "change_notify": true,
+    "encryption": false,
+    "unix_symlink": "local",
+    "no_strict_security": true,
+    "acls": [
+      {
+        "user_or_group": "root",
+        "type": "unix_user",
+        "permission": "no_access",
+        "winsid_unixId": "0"
+      }
+    ]
+  }
+]
+}
+----
+
+'''
+
+=== Retrieving CIFS Shares for all SVMs in the cluster
+
+'''
+
+----
+
+# The API:
+GET /api/protocols/cifs/shares
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/cifs/shares?fields=*&return_records=true&return_timeout=15" -H "accept application/hal+json"
+
+# The response:
+{
+"records": [
+  {
+    "svm": {
+      "uuid": "000c5cd2-ebdf-11e8-a96e-0050568ea3cb",
+      "name": "vs1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/000c5cd2-ebdf-11e8-a96e-0050568ea3cb"
+        }
+      }
+    },
+    "name": "admin$",
+    "path": "/",
+    "home_directory": false,
+    "oplocks": false,
+    "access_based_enumeration": false,
+    "change_notify": false,
+    "encryption": false,
+    "volume": {
+      "name": "vol1",
+      "uuid": "4e06f1bc-1ddc-42e2-abb2-f221c6a2ab2a"
+    },
+    "no_strict_security": true,
+    "_links": {
+      "self": {
+        "href": "/api/protocols/cifs/shares/000c5cd2-ebdf-11e8-a96e-0050568ea3cb/admin%24"
+      }
+    }
+  },
+  {
+    "svm": {
+      "uuid": "000c5cd2-ebdf-11e8-a96e-0050568ea3cb",
+      "name": "vs1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/000c5cd2-ebdf-11e8-a96e-0050568ea3cb"
+        }
+      }
+    },
+    "name": "c$",
+    "path": "/",
+    "home_directory": false,
+    "oplocks": true,
+    "access_based_enumeration": false,
+    "change_notify": true,
+    "encryption": false,
+    "unix_symlink": "local",
+    "acls": [
+      {
+        "user_or_group": "BUILTIN\\Administrators",
+        "type": "windows",
+        "permission": "full_control"
+      }
+    ],
+    "volume": {
+      "name": "vol1",
+      "uuid": "4e06f1bc-1ddc-42e2-abb2-f221c6a2ab2a"
+    },
+    "no_strict_security": true,
+    "_links": {
+      "self": {
+        "href": "/api/protocols/cifs/shares/000c5cd2-ebdf-11e8-a96e-0050568ea3cb/c%24"
+      }
+    }
+  },
+  {
+    "svm": {
+      "uuid": "000c5cd2-ebdf-11e8-a96e-0050568ea3cb",
+      "name": "vs1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/000c5cd2-ebdf-11e8-a96e-0050568ea3cb"
+        }
+      }
+    },
+    "name": "ipc$",
+    "path": "/",
+    "home_directory": false,
+    "oplocks": false,
+    "access_based_enumeration": false,
+    "change_notify": false,
+    "encryption": false,
+    "volume": {
+      "name": "vol1",
+      "uuid": "4e06f1bc-1ddc-42e2-abb2-f221c6a2ab2a"
+    },
+    "_links": {
+      "self": {
+        "href": "/api/protocols/cifs/shares/000c5cd2-ebdf-11e8-a96e-0050568ea3cb/ipc%24"
+      }
+    }
+  },
+  {
+    "svm": {
+      "uuid": "000c5cd2-ebdf-11e8-a96e-0050568ea3cb",
+      "name": "vs1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/000c5cd2-ebdf-11e8-a96e-0050568ea3cb"
+        }
+      }
+    },
+    "name": "TEST",
+    "path": "/",
+    "comment": "HR Department Share",
+    "home_directory": false,
+    "oplocks": true,
+    "access_based_enumeration": false,
+    "change_notify": true,
+    "encryption": false,
+    "unix_symlink": "local",
+    "acls": [
+      {
+        "user_or_group": "Everyone",
+        "type": "windows",
+        "permission": "full_control"
+      },
+      {
+        "user_or_group": "root",
+        "type": "unix_user",
+        "permission": "no_access"
+      }
+    ],
+    "volume": {
+      "name": "vol1",
+      "uuid": "4e06f1bc-1ddc-42e2-abb2-f221c6a2ab2a"
+    },
+    "_links": {
+      "self": {
+        "href": "/api/protocols/cifs/shares/000c5cd2-ebdf-11e8-a96e-0050568ea3cb/TEST"
+      }
+    }
+  }
+],
+"num_records": 4,
+"_links": {
+  "self": {
+    "href": "/api/protocols/cifs/shares?fields=*&return_records=true&return_timeout=15"
+  }
+}
+}
+----
+
+'''
+
+=== Retrieving all CIFS Shares for all SVMs in the cluster for which the acls are configured for a "root" user
+
+'''
+
+----
+
+# The API:
+GET /api/protocols/cifs/shares
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/cifs/shares?acls.user_or_group=root&fields=*&return_records=true&return_timeout=15" -H "accept: application/json"
+
+# The response:
+{
+"records": [
+  {
+    "svm": {
+      "uuid": "000c5cd2-ebdf-11e8-a96e-0050568ea3cb",
+      "name": "vs1"
+    },
+    "name": "TEST",
+    "path": "/",
+    "comment": "HR Department Share",
+    "home_directory": false,
+    "oplocks": true,
+    "access_based_enumeration": false,
+    "change_notify": true,
+    "encryption": false,
+    "unix_symlink": "local",
+    "no_strict_security": true,
+    "acls": [
+      {
+        "user_or_group": "Everyone",
+        "type": "windows",
+        "permission": "full_control"
+      },
+      {
+        "user_or_group": "root",
+        "type": "unix_user",
+        "permission": "no_access"
+      }
+    ],
+    "volume": {
+      "name": "vol1",
+      "uuid": "4e06f1bc-1ddc-42e2-abb2-f221c6a2ab2a"
+    }
+  }
+],
+"num_records": 1
+}
+----
+
+=== Retrieving a specific CIFS share configuration for an SVM
+
+The configuration being returned is identified by the UUID of its SVM and the name of the share.
+
+----
+
+# The API:
+GET /api/protocols/cifs/shares/{svm.uuid}/{name}
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/cifs/shares/000c5cd2-ebdf-11e8-a96e-0050568ea3cb/TEST" -H "accept: application/json"
+
+# The response:
+{
+"svm": {
+  "uuid": "000c5cd2-ebdf-11e8-a96e-0050568ea3cb",
+  "name": "vs1"
+},
+"name": "TEST",
+"path": "/",
+"comment": "HR Department Share",
+"home_directory": false,
+"oplocks": true,
+"access_based_enumeration": false,
+"change_notify": true,
+"encryption": false,
+"unix_symlink": "local",
+"no_strict_security": true,
+"acls": [
+  {
+    "user_or_group": "Everyone",
+    "type": "windows",
+    "permission": "full_control"
+  },
+  {
+    "user_or_group": "root",
+    "type": "unix_user",
+    "permission": "no_access"
+  }
+],
+"volume": {
+  "name": "vol1",
+  "uuid": "4e06f1bc-1ddc-42e2-abb2-f221c6a2ab2a"
+}
+}
+----
+
+=== Updating a specific CIFS share for an SVM
+
+The CIFS share being modified is identified by the UUID of its SVM and the CIFS share name. The CIFS share ACLs cannot be modified with this API.
+
+----
+
+# The API:
+PATCH /api/protocols/cifs/shares/{svm.uuid}/{name}
+
+# The call:
+ curl -X PATCH "https://<mgmt-ip>/api/protocols/cifs/shares/000c5cd2-ebdf-11e8-a96e-0050568ea3cb/TEST" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"access_based_enumeration\": true, \"change_notify\": true, \"comment\": \"HR Department Share\", \"encryption\": false, \"oplocks\": true, \"no_strict_security\": true, \"path\": \"/\", \"unix_symlink\": \"widelink\"}"
+----
+
+=== Removing a specific CIFS share for an SVM
+
+The CIFS share being removed is identified by the UUID of its SVM and the CIFS share name.
+
+----
+
+# The API:
+DELETE /api/protocols/cifs/shares/{svm.uuid}/{name}
+
+# The call:
+curl -X DELETE "https://<mgmt-ip>/api/protocols/cifs/shares/000c5cd2-ebdf-11e8-a96e-0050568ea3cb/test" -H "accept: application/json"
+----
+
+'''
+
+

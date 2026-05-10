@@ -1,0 +1,509 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-security-azure-key-vaults-.html'
+summary: 'Update the AKV configuration'
+---
+
+= Update the AKV configuration
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/azure-key-vaults/{uuid}`#
+
+*Introduced In:* 9.8
+
+Updates the AKV configuration.
+Note: This method is only available to the Azure NetApp Files Cloud Volume Services.
+
+== Optional properties
+
+* `client_secret` - New password used to prove the application's identity to the AKV.
+* `key_id`- Key Identifier of the new AKV key encryption key.
+* `proxy_type`` - Type of proxy (http, https etc.) if proxy configuration is used.
+* `proxy_host` - Proxy hostname if proxy configuration is used.
+* `proxy_port` - Proxy port number if proxy configuration is used.
+* `proxy_username` - Proxy username if proxy configuration is used.
+* `proxy_password` - Proxy password if proxy configuration is used.
+* `client_id` - Application (client) ID of the deployed Azure application with appropriate access to an AKV.
+* `tenant_id` - Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV.
+
+== Related ONTAP commands
+
+* `security key-manager external azure update-client-secret`
+* `security key-manager external azure rekey-external`
+* `security key-manager external azure update-config`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|uuid
+|string
+|path
+|True
+a|AKV UUID
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning. When doing a POST, PATCH, or DELETE operation on a single record, the default is 0 seconds.  This means that if an asynchronous operation is started, the server immediately returns HTTP code 202 (Accepted) along with a link to the job.  If a non-zero value is specified for POST, PATCH, or DELETE operations, ONTAP waits that length of time to see if the job completes so it can return something other than 202.
+
+* Default value: 0
+* Max value: 120
+* Min value: 0
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|client_id
+|string
+a|Application client ID of the deployed Azure application with appropriate access to an AKV.
+
+
+|client_secret
+|string
+a|Password used by the application to prove its identity to AKV.
+
+
+|ekmip_reachability
+|array[link:#ekmip_reachability[ekmip_reachability]]
+a|
+
+|key_id
+|string
+a|Key Identifier of AKV key encryption key.
+
+
+|proxy_host
+|string
+a|Proxy host.
+
+
+|proxy_password
+|string
+a|Proxy password. Password is not audited.
+
+
+|proxy_port
+|integer
+a|Proxy port.
+
+
+|proxy_type
+|string
+a|Type of proxy.
+
+
+|proxy_username
+|string
+a|Proxy username.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|tenant_id
+|string
+a|Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV.
+
+
+|uuid
+|string
+a|A unique identifier for the Azure Key Vault (AKV).
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "client_id": "aaaaaaaa-bbbb-aaaa-bbbb-aaaaaaaaaaaa",
+  "client_secret": "abcdef",
+  "ekmip_reachability": [
+    {
+      "code": "346758",
+      "message": "embedded KMIP server status unavailable on node.",
+      "node": {
+        "name": "node1",
+        "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+      }
+    }
+  ],
+  "key_id": "https://keyvault1.vault.azure.net/keys/key1",
+  "proxy_host": "proxy.eng.com",
+  "proxy_password": "proxypassword",
+  "proxy_port": "1234",
+  "proxy_type": "http",
+  "proxy_username": "proxyuser",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "tenant_id": "zzzzzzzz-yyyy-zzzz-yyyy-zzzzzzzzzzzz",
+  "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+== Response
+
+```
+Status: 202, Accepted
+```
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 65537120
+| Azure Key Vault is not configured for the given SVM.
+
+| 65537504
+| Internal error. Failed to store configuration in internal database.
+
+| 65537517
+| The field "client_secret" must be specified.
+
+| 65537541
+| No inputs were provided for the patch request.
+
+| 65537547
+| One or more volume encryption keys for encrypted volumes of this data SVM are stored in the key manager configured for the admin SVM. Use the REST API POST method to migrate this data SVM's keys from the admin SVM's key manager to this data SVM's key manager before running the rekey operation.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#azure_reachability]
+[.api-collapsible-fifth-title]
+azure_reachability
+
+Indicates whether or not the AKV service is reachable from all the nodes in the cluster.
+This is an advanced property; there is an added cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|integer
+a|Code corresponding to the status message. Returns a 0 if AKV service is reachable from all nodes in the cluster.
+
+
+|message
+|string
+a|Error message set when reachability is false.
+
+
+|reachable
+|boolean
+a|Set to true when the AKV service is reachable from all nodes of the cluster.
+
+
+|===
+
+
+[#node]
+[.api-collapsible-fifth-title]
+node
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#ekmip_reachability]
+[.api-collapsible-fifth-title]
+ekmip_reachability
+
+Provides the connectivity status for the given SVM on the given node to all EKMIP servers configured on all nodes of the cluster.
+This is an advanced property; there is an added cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|integer
+a|Code corresponding to the error message. Returns a 0 if a given SVM is able to communicate to the EKMIP servers of all of the nodes in the cluster.
+
+
+|message
+|string
+a|Error message set when cluster-wide EKMIP server availability from the given SVM and node is false.
+
+
+|node
+|link:#node[node]
+a|
+
+|reachable
+|boolean
+a|Set to true if the given SVM on the given node is able to communicate to all EKMIP servers configured on all nodes in the cluster.
+
+
+|===
+
+
+[#state]
+[.api-collapsible-fifth-title]
+state
+
+Indicates whether or not the AKV wrapped internal key is available cluster wide.
+This is an advanced property; there is an added cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|available
+|boolean
+a|Set to true when an AKV wrapped internal key is present on all nodes of the cluster.
+
+
+|code
+|integer
+a|Code corresponding to the status message. Returns a 0 if AKV wrapped key is available on all nodes in the cluster.
+
+
+|message
+|string
+a|Error message set when top-level internal key protection key (KEK) availability on cluster is false.
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#azure_key_vault]
+[.api-collapsible-fifth-title]
+azure_key_vault
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|client_id
+|string
+a|Application client ID of the deployed Azure application with appropriate access to an AKV.
+
+
+|client_secret
+|string
+a|Password used by the application to prove its identity to AKV.
+
+
+|ekmip_reachability
+|array[link:#ekmip_reachability[ekmip_reachability]]
+a|
+
+|key_id
+|string
+a|Key Identifier of AKV key encryption key.
+
+
+|proxy_host
+|string
+a|Proxy host.
+
+
+|proxy_password
+|string
+a|Proxy password. Password is not audited.
+
+
+|proxy_port
+|integer
+a|Proxy port.
+
+
+|proxy_type
+|string
+a|Type of proxy.
+
+
+|proxy_username
+|string
+a|Proxy username.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|tenant_id
+|string
+a|Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV.
+
+
+|uuid
+|string
+a|A unique identifier for the Azure Key Vault (AKV).
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

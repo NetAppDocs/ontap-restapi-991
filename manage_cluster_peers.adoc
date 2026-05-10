@@ -1,0 +1,262 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_cluster_peers.html'
+summary: 'Manage cluster peers'
+---
+
+= Manage cluster peers
+
+
+
+== Overview
+
+Cluster peering allows administrators of ONTAP systems to establish relationships between two or more independent clusters. When a relationship exists between two clusters, the clusters can exchange user data and configuration information, and coordinate operations. The /cluster/peers endpoint supports create, get, modify, and delete operations using GET, PATCH, POST and DELETE HTTP requests.
+
+== Create a cluster peer
+
+You can set up a new cluster peer relationship by issuing a POST request to /cluster/peers. Parameters in the POST body define the settings of the peering relationship. A successful POST request that succeeds in creating a peer returns HTTP status code "201", along with the details of the created peer, such as peer UUID, name, and authentication information. A failed POST request returns an HTTP error code along with a message indicating the reason for the error. This can include malformed requests and invalid operations.
+
+=== Sample request
+
+----
+curl -X POST 'https://<mgmt-ip>/api/cluster/peers/' -d '{"authentication":{"expiry_time":"12/25/2018 12:34:56","generate_passphrase":true}}'
+----
+
+=== Examples
+
+----
+
+# Create - no params
+body = {}
+
+# Creating with a peer address and a passphrase
+body =
+{
+  "remote":
+    {
+        "ip_addresses":["1.2.3.4"]
+    }
+}
+
+# Creating with a peer name and a generated passphrase that is true
+body =
+{
+  "name":"cp_xyz123",
+  "authentication":
+    {
+        "generate_passphrase":true
+    }
+}
+
+# Creating with a name, a peer address, and a passphrase
+body =
+{
+  "name":"cp_xyz123",
+  "remote":
+    {
+        "ip_addresses": ["1.2.3.4"]
+    },
+  "authentication":
+    {
+        "passphrase":"xyz12345"
+    }
+ }
+
+# Creating with a proposed encryption protocol
+body =
+{
+  "encryption":
+    {
+        "proposed":"tls-psk"
+    }
+}
+----
+
+'''
+
+== Create local intercluster LIFs
+
+The local cluster must have an intercluster LIF on each node for the correct operation of cluster peering.
+If no local intercluster LIFs exist, you can optionally specify LIFs to be created for each node in the local cluster.
+These local interfaces, if specified, are created on each node before proceeding with the creation of the cluster peering relationship. Cluster peering relationships are not established if there is an error preventing the LIFs from being created.
+After local interfaces have been created, do not specify them for subsequent cluster peering relationships.
+
+=== Local LIF creation fields
+
+* local_network.ip_addresses - List of IP addresses to assign, one per node in the local cluster.
+* local_network.netmask - IPv4 mask or subnet mask length.
+* local_network.broadcast_domain - Broadcast domain that is in use within the IPspace.
+* local_network.gateway - The IPv4 or IPv6 address of the default router.
+
+=== Additional information on network routes
+
+When creating LIFs, the network route discovery mechanism might take additional time (1-5 seconds) to become visible in the network outside of the cluster. This delay in publishing the routes might cause an initial cluster peer "create" request to fail. This error disappears with a retry of the same request.
+
+=== Example
+
+----
+This example shows the POST body when creating four intercluster LIFs on a 4-node cluster before creating a cluster peer relationship.
+cluster_peer_4_node.txt:
+{
+  "local_network":
+  {
+      "interfaces": [
+          {"ip_address":"1.2.3.4"},
+          {"ip_address":"1.2.3.5"},
+          {"ip_address":"1.2.3.6"}
+          ],
+      "netmask": "255.255.0.0",
+      "broadcast_domain": "Default",
+      "gateway": "1.2.0.1"
+  },
+  "remote.ip_addresses": ["1.2.9.9"],
+  "authentication.passphrase": "xyz12345"
+}
+curl -X POST "https://<mgmt-ip>/api/cluster/peers" -d "@cluster_peer_4_node.txt"
+----
+
+Note that "+++<mgmt-ip>+++" is replaced by the IP address of the cluster management interface, and the body is read from the specified text file containing the fields for the new peering relationship and local interfaces.+++</mgmt-ip>+++
+
+'''
+
+== Retrieve a cluster peer
+
+You can retrieve peers in a cluster by issuing a GET request to /cluster/peers. It is also possible to retrieve a specific peer when qualified by its UUID to /cluster/peers/\{uuid}.
+A GET request might have no query parameters or a valid cluster UUID. The former retrieves all records while the latter retrieves the record for the cluster peer with that UUID.
+The following fields are used for retrieving a cluster peer.
+
+=== Required fields
+
+There are no required fields for GET requests.
+
+=== Optional fields
+
+The following fields are optional for GET requests
+
+* UUID - UUID of the cluster peer.
+
+=== Examples
+
+----
+curl -X GET "https://<mgmt-ip>/api/cluster/peers/"
+----
+
+----
+curl -X GET "https://<mgmt-ip>/api/cluster/peers/{uuid}"
+----
+
+----
+curl -X GET "https://<mgmt-ip>/api/cluster/peers/{uuid}?fields=*"
+----
+
+'''
+
+== Update a cluster peer
+
+You can update a cluster peer relationship by issuing a PATCH request to /cluster/peers/\{uuid}. As in the CLI mode, you can toggle the proposed encryption protocol, update the passphrase, or specify a new set of stable addresses.  All PATCH requests take the parameters that are to be updated in the request body. If the generate_passphrase is "true", the passphrase is returned in the PATCH response.
+This following fields highlight the parameters that control the modification of an existing cluster peering relationship.
+
+=== Required fields
+
+A PATCH request with an empty body has no effect on the cluster peer instance. All other fields and the combinations in which they are valid are indicated below:
+
+* `encryption_proposed` - Toggle the proposed encryption protocol (from "none" to "tls-psk" or otherwise). Authentication must be "true" and a passphrase must be present in body.
+* `passphrase`
+* `passphrase` or `generate passphrase`
+* `remote.ip_addresses`
+
+=== Optional fields
+
+* `expiration time` - Set the expiration time of the passphrase.
+
+=== Examples
+
+----
+
+# Updating with an empty body
+body = {}
+
+# Updating the proposed encryption protocol from tls-psk to none
+body =
+{
+  "authentication":
+    {
+        "passphrase":"xyz12345",
+        "in_use":"ok"
+    },
+  "encryption":
+    {
+        "proposed":"none"
+    }
+}
+
+# Updating the passphrase
+body =
+{
+  "authentication":
+   {
+       "passphrase":"xyz12345",
+       "in_use":"ok"
+   }
+}
+
+# Setting an auto-generated passphrase
+body =
+{
+  "authentication":
+   {
+       "generate_passphrase": true,
+       "in_use":"ok"
+   }
+}
+
+# Updating remote IP addresses
+body =
+{
+  "remote":
+    {
+        "ip_addresses":["10.224.65.30"]
+    }
+}
+----
+
+=== Sample requests
+
+----
+
+# Setting a passphrase
+curl -X PATCH 'https://<mgmt-ip>/api/cluster/peers/73123071-d0b9-11e8-a686-005056a7179a' -d '{"authentication":{"passphrase":"xyz12345","in_use":"ok"}}'
+
+# Updating a peer address
+curl -X PATCH 'https://<mgmt-ip>/api/cluster/peers/73123071-d0b9-11e8-a686-005056a7179a' -d '{"remote":{"ip_addresses":["1.2.3.4"]}}'
+----
+
+'''
+
+== Delete a cluster peer
+
+You can delete a cluster peer using the HTTP DELETE request.
+
+=== Required fields
+
+Perform all delete operations on a valid peer UUID. Deleting an invalid peer returns "HTTP 404", which indicates an error.
+
+=== Optional fields
+
+The DELETE operation has no optional fields.
+
+=== Request format
+
+DELETE "https://+++<mgmt-ip>+++/api/cluster/peers/\{uuid}"+++</mgmt-ip>+++
+
+=== Example
+
+The following request deletes a peer with peer UUID "8becc0d4-c12c-11e8-9ceb-005056bbd143".
+
+----
+curl -X DELETE "https://<mgmt-ip>/api/cluster/peers/8becc0d4-c12c-11e8-9ceb-005056bbd143"
+----
+
+

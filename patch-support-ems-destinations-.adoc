@@ -1,0 +1,355 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-support-ems-destinations-.html'
+summary: 'Update an event destination'
+---
+
+= Update an event destination
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/support/ems/destinations/{name}`#
+
+*Introduced In:* 9.6
+
+Updates an event destination.
+
+== Recommended optional properties
+
+* `filters.name` - New list of filters that should direct to this destination. The existing list is discarded.
+* `certificate` - New certificate parameters when the destination type is `rest api`.
+
+== Related ONTAP commands
+
+* `event notification destination modify`
+* `event notification modify`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|name
+|string
+|path
+|True
+a|Destination name
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|certificate
+|link:#certificate[certificate]
+a|Certificate information is valid for the "rest_api" type.
+
+
+|destination
+|string
+a|Event destination
+
+
+|filters
+|array[link:#filters[filters]]
+a|
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "certificate": {
+    "ca": "VeriSign",
+    "serial_number": "1234567890"
+  },
+  "destination": "administrator@mycompany.com",
+  "filters": [
+    {
+      "name": "important-events"
+    }
+  ]
+}
+====
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|certificate
+|link:#certificate[certificate]
+a|Certificate information is valid for the "rest_api" type.
+
+
+|destination
+|string
+a|Event destination
+
+
+|filters
+|array[link:#filters[filters]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "certificate": {
+    "ca": "VeriSign",
+    "serial_number": "1234567890"
+  },
+  "destination": "administrator@mycompany.com",
+  "filters": [
+    {
+      "name": "important-events"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 983088
+| The destination name provided cannot be empty
+
+| 983089
+| The destination name provided cannot contain spaces
+
+| 983094
+| The destination name provided is invalid. The destination name must contain between 2 and 64 characters and start and end with an alphanumeric symbol or _(underscore). The allowed special characters are _(underscore) and -(hyphen)
+
+| 983104
+| The syslog destination provided is invalid
+
+| 983116
+| The number of notifications has reached maximum capacity
+
+| 983117
+| The number of destinations has reached maximum capacity
+
+| 983129
+| The rest-api destination must contain a valid scheme, such as http// or https//
+
+| 983130
+| The rest-api destination provided contains an invalid URL
+
+| 983131
+| The rest-api destination provided contains an invalid IPv6 URL
+
+| 983142
+| The security certificate provided does not exist
+
+| 983143
+| The private security key provided does not exist
+
+| 983144
+| The security certificate information provided is incomplete. Provide the certificate and serial number
+
+| 983145
+| The rest-api destination provided has an 'http://' scheme. It is invalid to provide certificate information
+
+| 983150
+| The type of an existing destination cannot be changed
+
+| 983151
+| A property provided cannot be configured on the requested destination type
+
+| 983152
+| Default destinations cannot be modified or removed
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#certificate]
+[.api-collapsible-fifth-title]
+certificate
+
+Certificate information is valid for the "rest_api" type.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|ca
+|string
+a|Client certificate issuing CA
+
+
+|serial_number
+|string
+a|Client certificate serial number
+
+
+|===
+
+
+[#filters]
+[.api-collapsible-fifth-title]
+filters
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|===
+
+
+[#ems_destination]
+[.api-collapsible-fifth-title]
+ems_destination
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|certificate
+|link:#certificate[certificate]
+a|Certificate information is valid for the "rest_api" type.
+
+
+|destination
+|string
+a|Event destination
+
+
+|filters
+|array[link:#filters[filters]]
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

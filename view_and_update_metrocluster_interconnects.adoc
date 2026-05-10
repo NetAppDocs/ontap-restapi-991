@@ -1,0 +1,279 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'view_and_update_metrocluster_interconnects.html'
+summary: 'View and update MetroCluster interconnects'
+---
+
+= View and update MetroCluster interconnects
+
+
+
+== Overview
+
+You can use this API to retrieve and display relevant information pertaining to MetroCluster interconnect status. The `/cluster/metrocluster/interconnects` endpoint returns a list of all the interconnects in MetroCluster and their status. Each individual interconnect can be queried individually using the `+/cluster/metrocluster/interconnects/{node.uuid}/{partner_type}/{adapter}+` endpoint.
+
+'''
+
+=== Examples
+
+=== Retrieving MetroCluster interconnects
+
+----
+GET https://<mgmt-ip>/api/cluster/metrocluster/interconnects
+{
+  "records": [
+      {
+          "node": {
+              "name": "cluster1_01",
+              "uuid": "6fead8fe-8d81-11e9-b5a9-005056826931",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/6fead8fe-8d81-11e9-b5a9-005056826931"
+                  }
+              }
+          },
+          "partner_type": "ha",
+          "adapter": "e0f",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/6fead8fe-8d81-11e9-b5a9-005056826931/ha/e0f"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_01",
+              "uuid": "6fead8fe-8d81-11e9-b5a9-005056826931",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/6fead8fe-8d81-11e9-b5a9-005056826931"
+                  }
+              }
+          },
+          "partner_type": "ha",
+          "adapter": "e0g",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/6fead8fe-8d81-11e9-b5a9-005056826931/ha/e0g"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_01",
+              "uuid": "6fead8fe-8d81-11e9-b5a9-005056826931",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/6fead8fe-8d81-11e9-b5a9-005056826931"
+                  }
+              }
+          },
+          "partner_type": "dr",
+          "adapter": "e0f",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/6fead8fe-8d81-11e9-b5a9-005056826931/dr/e0f"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_01",
+              "uuid": "6fead8fe-8d81-11e9-b5a9-005056826931",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/6fead8fe-8d81-11e9-b5a9-005056826931"
+                  }
+              }
+          },
+          "partner_type": "dr",
+          "adapter": "e0g",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/6fead8fe-8d81-11e9-b5a9-005056826931/dr/e0g"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_01",
+              "uuid": "6fead8fe-8d81-11e9-b5a9-005056826931",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/6fead8fe-8d81-11e9-b5a9-005056826931"
+                  }
+              }
+          },
+          "partner_type": "aux",
+          "adapter": "e0f",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/6fead8fe-8d81-11e9-b5a9-005056826931/aux/e0f"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_01",
+              "uuid": "6fead8fe-8d81-11e9-b5a9-005056826931",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/6fead8fe-8d81-11e9-b5a9-005056826931"
+                  }
+              }
+          },
+          "partner_type": "aux",
+          "adapter": "e0g",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/6fead8fe-8d81-11e9-b5a9-005056826931/aux/e0g"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_02",
+              "uuid": "f5435191-8d81-11e9-9d4b-00505682dc8b",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/f5435191-8d81-11e9-9d4b-00505682dc8b"
+                  }
+              }
+          },
+          "partner_type": "ha",
+          "adapter": "e0f",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/f5435191-8d81-11e9-9d4b-00505682dc8b/ha/e0f"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_02",
+              "uuid": "f5435191-8d81-11e9-9d4b-00505682dc8b",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/f5435191-8d81-11e9-9d4b-00505682dc8b"
+                  }
+              }
+          },
+          "partner_type": "ha",
+          "adapter": "e0g",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/f5435191-8d81-11e9-9d4b-00505682dc8b/ha/e0g"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_02",
+              "uuid": "f5435191-8d81-11e9-9d4b-00505682dc8b",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/f5435191-8d81-11e9-9d4b-00505682dc8b"
+                  }
+              }
+          },
+          "partner_type": "dr",
+          "adapter": "e0f",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/f5435191-8d81-11e9-9d4b-00505682dc8b/dr/e0f"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_02",
+              "uuid": "f5435191-8d81-11e9-9d4b-00505682dc8b",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/f5435191-8d81-11e9-9d4b-00505682dc8b"
+                  }
+              }
+          },
+          "partner_type": "dr",
+          "adapter": "e0g",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/f5435191-8d81-11e9-9d4b-00505682dc8b/dr/e0g"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_02",
+              "uuid": "f5435191-8d81-11e9-9d4b-00505682dc8b",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/f5435191-8d81-11e9-9d4b-00505682dc8b"
+                  }
+              }
+          },
+          "partner_type": "aux",
+          "adapter": "e0f",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/f5435191-8d81-11e9-9d4b-00505682dc8b/aux/e0f"
+              }
+          }
+      },
+      {
+          "node": {
+              "name": "cluster1_02",
+              "uuid": "f5435191-8d81-11e9-9d4b-00505682dc8b",
+              "_links": {
+                  "self": {
+                      "href": "/api/cluster/nodes/f5435191-8d81-11e9-9d4b-00505682dc8b"
+                  }
+              }
+          },
+          "partner_type": "aux",
+          "adapter": "e0g",
+          "_links": {
+              "self": {
+                  "href": "/api/cluster/metrocluster/interconnects/f5435191-8d81-11e9-9d4b-00505682dc8b/aux/e0g"
+              }
+          }
+      }
+  ],
+  "num_records": 12,
+  "_links": {
+      "self": {
+          "href": "/api/cluster/metrocluster/interconnects"
+      }
+  }
+}
+----
+
+=== Retrieves information about a specific MetroCluster interconnect
+
+----
+https://<mgmt-ip>/api/cluster/metrocluster/interconnects/774b4fbc-86f9-11e9-9051-005056825c71/aux/e0f
+{
+  "node": {
+      "name": "cluster1_01",
+      "uuid": "46147363-9857-11e9-9a55-005056828eb9",
+      "_links": {
+          "self": {
+              "href": "/api/cluster/nodes/46147363-9857-11e9-9a55-005056828eb9"
+          }
+      }
+  },
+  "partner_type": "ha",
+  "adapter": "e0f",
+  "state": "up",
+  "type": "iwarp",
+  "_links": {
+      "self": {
+          "href": "/api/cluster/metrocluster/interconnects/46147363-9857-11e9-9a55-005056828eb9/ha/e0f"
+      }
+  }
+}
+----
+
+

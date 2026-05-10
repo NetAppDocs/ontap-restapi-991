@@ -1,0 +1,15 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'view_litigation_id_files.html'
+summary: 'View litigation ID files'
+---
+
+= View litigation ID files
+
+
+
+Displays the list of files under the specified litigation ID.
+
+

@@ -1,0 +1,162 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_vscan_configuration.html'
+summary: 'Manage Vscan configuration'
+---
+
+= Manage Vscan configuration
+
+
+
+== Overview
+
+This API is used to display connection status information for the external virus-scanning servers or "Vscan servers".
+
+== Examples
+
+=== Retrieving all fields for the Vscan server status
+
+'''
+
+----
+
+# The API:
+/api/protocols/vscan/server_status/
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/vscan/server_status?fields=*" -H "accept: application/hal+json"
+
+# The response:
+{
+"records": [
+  {
+    "svm": {
+      "uuid": "86fbc414-f140-11e8-8e22-0050568e0945",
+      "name": "vs1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/86fbc414-f140-11e8-8e22-0050568e0945"
+        }
+      }
+    },
+    "node": {
+      "uuid": "fe696362-f138-11e8-8e22-0050568e0945",
+      "name": "Cluster-01",
+      "_links": {
+        "self": {
+          "href": "/api/cluster/nodes/fe696362-f138-11e8-8e22-0050568e0945"
+        }
+      }
+    },
+    "ip": "10.141.46.173",
+    "type": "primary",
+    "state": "disconnected",
+    "disconnected_reason": "unknown",
+    "_links": {
+      "self": {
+        "href": "/api/protocols/vscan/server_status/86fbc414-f140-11e8-8e22-0050568e0945/Cluster-01/10.141.46.173"
+      }
+    }
+  },
+  {
+    "svm": {
+      "uuid": "86fbc414-f140-11e8-8e22-0050568e0945",
+      "name": "vs1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/86fbc414-f140-11e8-8e22-0050568e0945"
+        }
+      }
+    },
+    "node": {
+      "uuid": "fe696362-f138-11e8-8e22-0050568e0945",
+      "name": "Cluster-01",
+      "_links": {
+        "self": {
+          "href": "/api/cluster/nodes/fe696362-f138-11e8-8e22-0050568e0945"
+        }
+      }
+    },
+    "ip": "fd20:8b1e:b255:5053::46:173",
+    "type": "primary",
+    "state": "disconnected",
+    "disconnected_reason": "remote_closed",
+    "_links": {
+      "self": {
+        "href": "/api/protocols/vscan/server_status/86fbc414-f140-11e8-8e22-0050568e0945/Cluster-01/fd20%3A8b1e%3Ab255%3A5053%3A%3A46%3A173"
+      }
+    }
+  }
+],
+"num_records": 2,
+"_links": {
+  "self": {
+    "href": "/api/protocols/vscan/server_status?fields=*"
+  }
+}
+}
+----
+
+'''
+
+=== Retrieving the server status information for the server with IP address 10.141.46.173
+
+'''
+
+----
+
+# The API:
+/api/protocols/vscan/server_status
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/protocols/vscan/server_status?ip=10.141.46.173&fields=*" -H "accept: application/hal+json"
+
+# The response:
+{
+"records": [
+  {
+    "svm": {
+      "uuid": "86fbc414-f140-11e8-8e22-0050568e0945",
+      "name": "vs1",
+      "_links": {
+        "self": {
+          "href": "/api/svm/svms/86fbc414-f140-11e8-8e22-0050568e0945"
+        }
+      }
+    },
+    "node": {
+      "uuid": "fe696362-f138-11e8-8e22-0050568e0945",
+      "name": "Cluster-01",
+      "_links": {
+        "self": {
+          "href": "/api/cluster/nodes/fe696362-f138-11e8-8e22-0050568e0945"
+        }
+      }
+    },
+    "ip": "10.141.46.173",
+    "type": "primary",
+    "state": "connected",
+    "update_time": "2018-12-19T08:03:40.988Z",
+    "vendor": "XYZ",
+    "version": "1.12.2",
+    "_links": {
+      "self": {
+        "href": "/api/protocols/vscan/server_status/86fbc414-f140-11e8-8e22-0050568e0945/Cluster-01/10.141.46.173"
+      }
+    }
+  }
+],
+"num_records": 1,
+"_links": {
+  "self": {
+    "href": "/api/protocols/vscan/server_status?ip=10.141.46.173&fields=*"
+  }
+}
+}
+----
+
+'''
+
+

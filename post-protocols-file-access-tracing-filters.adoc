@@ -1,0 +1,346 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-protocols-file-access-tracing-filters.html'
+summary: 'Creates security trace filter entries'
+---
+
+= Creates security trace filter entries
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/file-access-tracing/filters`#
+
+*Introduced In:* 9.8
+
+Creates security trace filter entries.
+
+== Related ONTAP commands
+
+* `vserver security trace filter create`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|client_ip
+|string
+a|Specifies the IP address from which the client accesses the file or directory.
+
+
+|enabled
+|boolean
+a|Specifies whether to enable or disable the filter. Filters are enabled by default and are deleted after 60 mins.
+
+
+|index
+|integer
+a|Position of the file access tracing filter.
+
+
+|path
+|string
+a|Specifies the path for which permission tracing can be applied. The value can be complete path from root of CIFS share or root of volume for NFS.
+
+
+|protocol
+|string
+a|Specifies the protocol for which permission trace is required.
+
+
+|svm
+|link:#svm_reference[svm_reference]
+a|SVM, applies only to SVM-scoped objects.
+
+
+|trace_allowed_ops
+|boolean
+a|Specifies if the filter can trace file access denied and allowed events. The value of trace-allow is false by default, and it traces access denied events. The value is set to true for tracing access allowed events.
+
+
+|unix_user
+|string
+a|Specifies the UNIX username whose access requests you want to trace. The filter would match only if the request is received with this user.
+
+
+|windows_user
+|string
+a|Specifies the Windows username whose access requests you want to trace. The filter would match only if the request is received with this user.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "client_ip": "10.140.68.143",
+  "index": "1",
+  "path": "/dir1/dir2",
+  "protocol": "string",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "unix_user": "root",
+  "windows_user": "cifs1/administrator"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#file_access_filter[file_access_filter]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "records": [
+    {
+      "client_ip": "10.140.68.143",
+      "index": "1",
+      "path": "/dir1/dir2",
+      "protocol": "string",
+      "svm": {
+        "name": "svm1",
+        "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+      },
+      "unix_user": "root",
+      "windows_user": "cifs1/administrator"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#svm_reference]
+[.api-collapsible-fifth-title]
+svm_reference
+
+SVM, applies only to SVM-scoped objects.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#file_access_filter]
+[.api-collapsible-fifth-title]
+file_access_filter
+
+ONTAP allows creation of filters for file access tracing for both CIFS and NFS. These filters have protocols, path, username  and client IP based on which file access operations are logged.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|client_ip
+|string
+a|Specifies the IP address from which the client accesses the file or directory.
+
+
+|enabled
+|boolean
+a|Specifies whether to enable or disable the filter. Filters are enabled by default and are deleted after 60 mins.
+
+
+|index
+|integer
+a|Position of the file access tracing filter.
+
+
+|path
+|string
+a|Specifies the path for which permission tracing can be applied. The value can be complete path from root of CIFS share or root of volume for NFS.
+
+
+|protocol
+|string
+a|Specifies the protocol for which permission trace is required.
+
+
+|svm
+|link:#svm_reference[svm_reference]
+a|SVM, applies only to SVM-scoped objects.
+
+
+|trace_allowed_ops
+|boolean
+a|Specifies if the filter can trace file access denied and allowed events. The value of trace-allow is false by default, and it traces access denied events. The value is set to true for tracing access allowed events.
+
+
+|unix_user
+|string
+a|Specifies the UNIX username whose access requests you want to trace. The filter would match only if the request is received with this user.
+
+
+|windows_user
+|string
+a|Specifies the Windows username whose access requests you want to trace. The filter would match only if the request is received with this user.
+
+
+|===
+
+
+[#collection_links]
+[.api-collapsible-fifth-title]
+collection_links
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

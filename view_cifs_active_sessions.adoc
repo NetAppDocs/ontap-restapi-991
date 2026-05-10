@@ -1,0 +1,233 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'view_cifs_active_sessions.html'
+summary: 'View CIFS active sessions'
+---
+
+= View CIFS active sessions
+
+
+
+== Overview
+
+ONTAP CIFS sessions `show` functionality is used to provide a list of currently established CIFS sessions with SMB Clients.
+
+=== Information on the CIFS session
+
+* List all the SMB sessions for SVM and the clients along with volume information on which the clients are using.
+
+== Example
+
+=== Retrieves established sessions information
+
+To retrieve the list of CIFS sessions, use the following API. Note that _return_records=true_.
+
+'''
+
+----
+
+# The API:
+GET /protocols/cifs/sessions
+
+# The call:
+curl -X GET "https://<cluster-mgmt-ip>/api/protocols/cifs/sessions?return_timeout=15&return_records=true" -H "accept: application/json"
+
+# The response:
+{
+"records": [
+  {
+    "node": {
+      "uuid": "85d46998-4e5d-11ea-afb1-0050568ec4e4",
+      "name": "bkalyan-vsim1"
+    },
+    "svm": {
+      "uuid": "fc824aa8-4e60-11ea-afb1-0050568ec4e4",
+      "name": "vs1"
+    },
+    "identifier": 625718873227788300,
+    "connection_id": 91842,
+    "lif_address": "10.140.70.197",
+    "address": "10.74.7.182",
+    "auth_mechanism": "ntlmv2",
+    "windows_user": "NBCIFSQA2\\administrator",
+    "unix_user": "root",
+    "shares": 1,
+    "files": 2,
+    "other": 0,
+    "connected_time": "PT16H54M47S",
+    "idle_time": "PT3S",
+    "protocol_version": "smb3_1",
+    "continuously_available": "unavailable",
+    "is_session_signed": false,
+    "smb_encryption_status": "unencrypted",
+    "connection_count": 1,
+    "is_large_mtu_enabled": true,
+    "vol_names": [
+      "vol12",
+      "origin",
+      "fg",
+      "vol1"
+    ],
+    "vol_uuids": [
+      "954d697f-4e62-11ea-afb1-0050568ec4e4",
+      "0f909e06-4e6e-11ea-afb1-0050568ec4e4",
+      "08c27b7d-4e61-11ea-afb1-0050568ec4e4",
+      "02f0a240-4e61-11ea-afb1-0050568ec4e4"
+    ]
+  },
+  {
+    "node": {
+      "uuid": "85d46998-4e5d-11ea-afb1-0050568ec4e4",
+      "name": "bkalyan-vsim1"
+    },
+    "svm": {
+      "uuid": "fc824aa8-4e60-11ea-afb1-0050568ec4e4",
+       "name": "vs1"
+    },
+    "identifier": 625718873227788500,
+    "connection_id": 92080,
+    "lif_address": "10.140.70.197",
+    "address": "10.140.133.97",
+    "auth_mechanism": "ntlmv2",
+    "windows_user": "NBCIFSQA2\\administrator",
+    "unix_user": "root",
+    "shares": 1,
+    "files": 1,
+    "other": 0,
+    "connected_time": "PT1M19S",
+    "idle_time": "PT1M1S",
+    "protocol_version": "smb3",
+    "continuously_available": "unavailable",
+    "is_session_signed": false,
+    "smb_encryption_status": "unencrypted",
+    "connection_count": 1,
+    "is_large_mtu_enabled": true,
+    "vol_names": [
+      "origin",
+      "fg",
+      "vol1"
+    ],
+    "vol_uuids": [
+      "0f909e06-4e6e-11ea-afb1-0050568ec4e4",
+      "08c27b7d-4e61-11ea-afb1-0050568ec4e4",
+      "02f0a240-4e61-11ea-afb1-0050568ec4e4"
+    ]
+  }
+],
+"num_records": 2
+}
+----
+
+'''
+
+=== Retrieving CIFS server configuration details for a specific SVM
+
+'''
+
+----
+
+# The API:
+GET /protocols/cifs/sessions/{node.uuid}/{svm.uuid}/{identifier}/{connection_id}
+
+# The call:
+curl -X GET "https://<cluster-mgmt-ip>/api/protocols/cifs/sessions/85d46998-4e5d-11ea-afb1-0050568ec4e4/fc824aa8-4e60-11ea-afb1-0050568ec4e4/625718873227788300/91842?fields=*" -H "accept: application/json" -H "authorization: Basic YWRtaW46bmV0YXBwMSE="
+
+# The response:
+{
+"node": {
+  "uuid": "85d46998-4e5d-11ea-afb1-0050568ec4e4",
+  "name": "bkalyan-vsim1"
+},
+"svm": {
+  "uuid": "fc824aa8-4e60-11ea-afb1-0050568ec4e4",
+  "name": "vs1"
+},
+"identifier": 625718873227788300,
+"connection_id": 91842,
+"lif_address": "10.140.70.197",
+"address": "10.74.7.182",
+"auth_mechanism": "ntlmv2",
+"windows_user": "NBCIFSQA2\\administrator",
+"unix_user": "root",
+"shares": 1,
+"files": 2,
+"other": 0,
+"connected_time": "PT16H54M47S",
+"idle_time": "PT3S",
+"protocol_version": "smb3_1",
+"continuously_available": "unavailable",
+"is_session_signed": false,
+"smb_encryption_status": "unencrypted",
+"connection_count": 1,
+"is_large_mtu_enabled": true,
+"vol_names": [
+  "vol12",
+  "origin",
+  "fg",
+  "vol1"
+],
+"vol_uuids": [
+  "954d697f-4e62-11ea-afb1-0050568ec4e4",
+  "0f909e06-4e6e-11ea-afb1-0050568ec4e4",
+  "08c27b7d-4e61-11ea-afb1-0050568ec4e4",
+  "02f0a240-4e61-11ea-afb1-0050568ec4e4"
+]
+}
+----
+
+'''
+
+=== Removing all existing CIFS sessions for a specific node on a specific SVM
+
+To delete all the existing CIFS session, pass the identifier and connection ID as zero (0) in the following API. This will delete all of the CIFS sessions for the given SVM on the node.
+
+'''
+
+----
+
+# The API:
+DELETE /protocols/cifs/sessions/{node.uuid}/{svm.uuid}/{identifier}/{connection_id}
+
+# The call:
+curl -X DELETE "https://<cluster-mgmt-ip>/api/protocols/cifs/sessions/85d46998-4e5d-11ea-afb1-0050568ec4e4/fc824aa8-4e60-11ea-afb1-0050568ec4e4/0/0" -H "accept: application/json" -H "authorization: Basic YWRtaW46bmV0YXBwMSE="
+----
+
+'''
+
+=== Removing all CIFS sessions for a specific connection on a specific node on a specific SVM
+
+To delete a CIFS session, use the following API. This will delete the CIFS sessions for a given SVM on the node.
+
+'''
+
+----
+
+# The API:
+DELETE /protocols/cifs/sessions/{node.uuid}/{svm.uuid}/{identifier}/{connection_id}
+
+# The call:
+curl -X DELETE "https://<cluster-mgmt-ip>/api/protocols/cifs/sessions/85d46998-4e5d-11ea-afb1-0050568ec4e4/fc824aa8-4e60-11ea-afb1-0050568ec4e4/0/91842" -H "accept: application/json" -H "authorization: Basic YWRtaW46bmV0YXBwMSE="
+----
+
+'''
+
+=== Removing a specific CIFS session for a specific Node on a specific SVM
+
+To delete a specific CIFS session, use the following API. This will delete the specific CIFS session for the given SVM on the node.
+
+'''
+
+----
+
+# The API:
+DELETE /protocols/cifs/sessions/{node.uuid}/{svm.uuid}/{identifier}/{connection_id}
+
+# The call:
+curl -X DELETE "https://<cluster-mgmt-ip>/api/protocols/cifs/sessions/85d46998-4e5d-11ea-afb1-0050568ec4e4/fc824aa8-4e60-11ea-afb1-0050568ec4e4/625718873227788300/91842" -H "accept: application/json" -H "authorization: Basic YWRtaW46bmV0YXBwMSE="
+----
+
+'''
+
+

@@ -1,0 +1,585 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-cluster-licensing-licenses.html'
+summary: 'Install one or more feature licenses'
+---
+
+= Install one or more feature licenses
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/cluster/licensing/licenses`#
+
+*Introduced In:* 9.6
+
+Installs one or more feature licenses.
+
+== Required properties
+
+* `keys` - Array containing a list of NLF or 26-character license keys.
+
+== Related ONTAP commands
+
+* `system license add`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|keys
+|array[string]
+a|
+
+|licenses
+|array[link:#licenses[licenses]]
+a|Installed licenses of the package.
+
+
+|name
+|string
+a|Name of the license.
+
+
+|scope
+|string
+a|Scope of the license.
+
+
+|state
+|string
+a|Summary state of package based on all installed licenses.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "keys": [
+    "AMEPOSOIKLKGEEEEDGNDEKSJDE"
+  ],
+  "licenses": [
+    {
+      "capacity": {
+        "maximum_size": 0,
+        "used_size": 0
+      },
+      "compliance": {
+        "state": "compliant"
+      },
+      "expiry_time": "2019-03-02T19:00:00Z",
+      "host_id": "456-44-1234",
+      "installed_license": "Core Bundle",
+      "owner": "cluster1",
+      "serial_number": "123456789",
+      "start_time": "2019-02-02T19:00:00Z"
+    }
+  ],
+  "name": "NFS",
+  "scope": "string",
+  "state": "compliant"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#records[records]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "records": [
+    {
+      "keys": [
+        "AMEPOSOIKLKGEEEEDGNDEKSJDE"
+      ],
+      "licenses": [
+        {
+          "capacity": {
+            "maximum_size": 0,
+            "used_size": 0
+          },
+          "compliance": {
+            "state": "compliant"
+          },
+          "expiry_time": "2019-03-02T19:00:00Z",
+          "host_id": "456-44-1234",
+          "installed_license": "Core Bundle",
+          "owner": "cluster1",
+          "serial_number": "123456789",
+          "start_time": "2019-02-02T19:00:00Z"
+        }
+      ],
+      "name": "NFS",
+      "scope": "string",
+      "state": "compliant"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 1115117
+| Generic licensing error
+
+| 1115122
+| No cluster serial number found
+
+| 1115124
+| No node serial number found
+
+| 1115130
+| No license code was provided
+
+| 1115131
+| Installation of the license failed
+
+| 1115132
+| License already exists on system
+
+| 1115134
+| Serial number does not belong to node
+
+| 1115141
+| License data is invalid
+
+| 1115142
+| License signature is invalid
+
+| 1115143
+| Internal error applying the requested license
+
+| 1115152
+| License does not apply to the platform
+
+| 1115154
+| Unable to retrieve cluster ID
+
+| 1115155
+| Invalid cluster ID found
+
+| 1115159
+| License is not in an acceptable format
+
+| 1115160
+| License has already expired
+
+| 1115164
+| Minimum ONTAP version requirements not met
+
+| 1115179
+| FlexCache is not supported on this system
+
+| 1115180
+| FlexCache is not supported on cloud systems
+
+| 1115407
+| Capacity pool licenses cannot be installed directly
+
+| 1115427
+| License is incompatible with capacity pools licensing mode
+
+| 1115562
+| One or more errors occurred when installing a NLFv2 license
+
+| 1115563
+| Package details and serial number of license contained within the NLFv2 failure
+
+| 1115616
+| Package details and serial number of license included in the install conflict
+
+| 1115617
+| NLFv2 license install failed with summary of conflicting licenses
+
+| 66846818
+| Failed to interpret FlexCache license information
+
+| 66846821
+| FlexCache is not supported on cloud systems
+
+| 66846822
+| Invalid FlexCache capacity information provided
+
+| 655294464
+| Failed to extract license contents
+
+| 655294465
+| License key is invalid
+
+| 655294466
+| Serial number is invalid
+
+| 655294467
+| Version number is invalid
+
+| 655294468
+| Expired license
+
+| 655294469
+| License does not apply to the platform
+
+| 655294470
+| License does not apply to the product
+|===
+
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|errors
+|array[link:#error[error]]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "errors": [
+    {
+      "arguments": [
+        {
+          "code": "string",
+          "message": "string"
+        }
+      ],
+      "code": "4",
+      "message": "entry doesn't exist",
+      "target": "uuid"
+    }
+  ]
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#capacity]
+[.api-collapsible-fifth-title]
+capacity
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|maximum_size
+|integer
+a|Licensed capacity size (in bytes) that can be used.
+
+
+|used_size
+|integer
+a|Capacity that is currently used (in bytes).
+
+
+|===
+
+
+[#compliance]
+[.api-collapsible-fifth-title]
+compliance
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|state
+|string
+a|Compliance state of the license.
+
+
+|===
+
+
+[#licenses]
+[.api-collapsible-fifth-title]
+licenses
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|active
+|boolean
+a|A flag indicating whether the license is currently being enforced.
+
+
+|capacity
+|link:#capacity[capacity]
+a|
+
+|compliance
+|link:#compliance[compliance]
+a|
+
+|evaluation
+|boolean
+a|A flag indicating whether the license is in evaluation mode.
+
+
+|expiry_time
+|string
+a|Date and time when the license expires.
+
+
+|host_id
+|string
+a|A string that associates the license with a node or cluster.
+
+
+|installed_license
+|string
+a|Name of license that enabled the feature.
+
+
+|owner
+|string
+a|Cluster, node or license manager that owns the license.
+
+
+|serial_number
+|string
+a|Serial number of the license.
+
+
+|start_time
+|string
+a|Date and time when the license starts.
+
+
+|===
+
+
+[#license_package]
+[.api-collapsible-fifth-title]
+license_package
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|keys
+|array[string]
+a|
+
+|licenses
+|array[link:#licenses[licenses]]
+a|Installed licenses of the package.
+
+
+|name
+|string
+a|Name of the license.
+
+
+|scope
+|string
+a|Scope of the license.
+
+
+|state
+|string
+a|Summary state of package based on all installed licenses.
+
+
+|===
+
+
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|keys
+|array[string]
+a|
+
+|licenses
+|array[link:#licenses[licenses]]
+a|Installed licenses of the package.
+
+
+|name
+|string
+a|Name of the license.
+
+
+|scope
+|string
+a|Scope of the license.
+
+
+|state
+|string
+a|Summary state of package based on all installed licenses.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

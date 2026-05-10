@@ -1,0 +1,281 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-security-authentication-cluster-nis.html'
+summary: 'Create the NIS configuration for the cluster'
+---
+
+= Create the NIS configuration for the cluster
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/authentication/cluster/nis`#
+
+*Introduced In:* 9.6
+
+The cluster can have one NIS server configuration. Specify the NIS domain and NIS servers as input. Domain name and servers fields cannot be empty.
+Both FQDNs and IP addresses are supported for the `server` property. IPv6 must be enabled if IPv6 family addresses are specified in the `server` property. A maximum of ten NIS servers are supported.
+
+== Required properties
+
+* `domain` - NIS domain to which this configuration belongs.
+* `servers` - List of hostnames or IP addresses of NIS servers used by the NIS domain configuration.
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|bound_servers
+|array[string]
+a|
+
+|domain
+|string
+a|The NIS domain to which this configuration belongs.
+
+
+|servers
+|array[string]
+a|A list of hostnames or IP addresses of NIS servers used
+by the NIS domain configuration.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "bound_servers": [
+    "string"
+  ],
+  "domain": "string",
+  "servers": [
+    "string"
+  ]
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of NIS domain records.
+
+
+|records
+|array[link:#cluster_nis_service[cluster_nis_service]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "records": [
+    {
+      "bound_servers": [
+        "string"
+      ],
+      "domain": "string",
+      "servers": [
+        "string"
+      ]
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 1966253
+| IPv6 is not enabled in the cluster.
+
+| 3276964
+| The NIS domain name or NIS server domain is too long. The maximum supported for domain name is 64 characters and the maximum supported for NIS server domain is 255 characters.
+
+| 3276933
+| A maximum of 10 NIS servers can be configured per SVM.
+
+| 13434916
+| The SVM is in the process of being created. Wait a few minutes, and then try the command again.
+
+| 23724109
+| DNS resolution failed for one or more specified servers.
+
+| 23724112
+| DNS resolution failed due to an internal error. Contact technical support if this issue persists.
+
+| 23724132
+| DNS resolution failed for all the specified servers.
+
+| 23724130
+| Cannot use an IPv6 name server address because there are no IPv6 interfaces.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#cluster_nis_service]
+[.api-collapsible-fifth-title]
+cluster_nis_service
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|bound_servers
+|array[string]
+a|
+
+|domain
+|string
+a|The NIS domain to which this configuration belongs.
+
+
+|servers
+|array[string]
+a|A list of hostnames or IP addresses of NIS servers used
+by the NIS domain configuration.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

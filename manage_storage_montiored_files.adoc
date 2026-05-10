@@ -1,0 +1,74 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_storage_montiored_files.html'
+summary: 'Manage storage montiored files'
+---
+
+= Manage storage montiored files
+
+
+
+=== Retrieving all monitored files
+
+----
+
+# The API:
+GET /api/storage/monitored-files
+
+# The call:
+curl -X GET "https://<mgmt-ip>/api/storage/monitored-files"
+----
+
+=== Provisioning a monitored file
+
+----
+
+# The API:
+POST /api/storage/monitored-files
+
+# The call:
+curl -d "@test_mfiles_post.txt" -X POST "https://<mgmt-ip>/api/storage/monitored-files"
+test_mfiles_post.txt(body):
+{
+"svm": {
+   "name": "vs0"
+},
+"volume": {
+  "name": "vol1"
+},
+"path": "/a/b/c/file.txt"
+}
+----
+
+=== Removing a file from the monitored files list
+
+----
+
+# The API:
+DELETE /api/storage/monitored-files/{uuid}
+
+# The call:
+curl -X DELETE "https://<mgmt-ip>/api/storage/monitored-files/6f68c85b-45e1-11e9-8fc7-005056bbc848"
+----
+
+=== Alternate method for removing files from the monitored files list
+
+Monitored files can also be deleted via a combination of any of (uuid, svm.name, svm.uuid, volume.name, volume.uuid, path).
+For example, to remove all monitored-files from monitoring in a single svm named vs0, use the following
+
+----
+
+# The API:
+DELETE /api/storage/monitored-files
+
+# The call:
+curl -X DELETE "https://<mgmt-ip>/api/storage/monitored-files?svm.name=vs0"
+----
+
+== Performance monitoring
+
+Performance of the monitored file can be monitored by the `metric.+*+` and `statistics.+*+` properties. These fields show the performance of the monitored file in terms of IOPS, latency and throughput. The `metric.+*+` properties denote an average whereas `statistics.+*+` properties denote a real-time monotonically increasing value aggregated across all nodes.
+
+

@@ -1,0 +1,806 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-storage-disks-.html'
+summary: 'Retrieve a specific disk'
+---
+
+= Retrieve a specific disk
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/disks/{name}`#
+
+*Introduced In:* 9.6
+
+Retrieves a specific disk.
+
+== Related ONTAP commands
+
+* `storage disk show`
+
+== Learn more
+
+* link:manage_disks.html[DOC /storage/disks]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|name
+|string
+|path
+|True
+a|Disk name
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|aggregates
+|array[link:#aggregates[aggregates]]
+a|List of aggregates sharing this disk
+
+
+|bay
+|integer
+a|Disk shelf bay
+
+
+|bytes_per_sector
+|integer
+a|Bytes per sector.
+
+
+|class
+|string
+a|Disk class
+
+
+|container_type
+|string
+a|Type of overlying disk container
+
+
+|dr_node
+|link:#dr_node[dr_node]
+a|
+
+|drawer
+|link:#drawer[drawer]
+a|
+
+|effective_type
+|string
+a|Effective Disk type
+
+
+|encryption_operation
+|string
+a|This field should only be set as a query parameter in a PATCH operation. It is input only and won't be returned by a subsequent GET.
+
+
+|error
+|array[link:#disk_error_info[disk_error_info]]
+a|List of disk errors information.
+
+
+|fips_certified
+|boolean
+a|
+
+|firmware_version
+|string
+a|
+
+|home_node
+|link:#home_node[home_node]
+a|
+
+|key_id
+|link:#key_id[key_id]
+a|
+
+|local
+|boolean
+a|Indicates if a disk is locally attached versus being remotely attached.
+A locally attached disk resides in the same proximity as the host
+cluster versus been attached to the remote cluster.
+
+
+|model
+|string
+a|
+
+|name
+|string
+a|Cluster-wide disk name
+
+
+|node
+|link:#node[node]
+a|
+
+|outage
+|link:#outage[outage]
+a|Indicates if a disk has an entry in the failed disk registry, along with the reason for the failure.
+
+
+|paths
+|array[link:#disk_path_info[disk_path_info]]
+a|List of paths to a disk
+
+
+|pool
+|string
+a|Pool to which disk is assigned
+
+
+|protection_mode
+|string
+a|Mode of drive data protection and FIPS compliance. Possible values are:
+
+* _open_ - Data is unprotected
+* _data_ - Data protection only, without FIPS compliance
+* _part_ - Data is unprotected; other FIPS compliance settings present
+* _full_ - Full data and FIPS compliance protection
+* _miss_ - Protection mode information is not available
+
+
+|rated_life_used_percent
+|integer
+a|Percentage of rated life used
+
+
+|rpm
+|integer
+a|Revolutions per minute
+
+
+|sector_count
+|integer
+a|Number of sectors on the disk.
+
+
+|self_encrypting
+|boolean
+a|
+
+|serial_number
+|string
+a|
+
+|shelf
+|link:#shelf[shelf]
+a|
+
+|state
+|string
+a|State
+
+
+|stats
+|link:#stats[stats]
+a|
+
+|type
+|string
+a|Disk interface type
+
+
+|uid
+|string
+a|The unique identifier for a disk
+
+
+|usable_size
+|integer
+a|
+
+|vendor
+|string
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "aggregates": [
+    {
+      "_links": {
+        "self": {
+          "href": "/api/resourcelink"
+        }
+      },
+      "name": "aggr1",
+      "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+    }
+  ],
+  "bay": "1",
+  "bytes_per_sector": "520",
+  "class": "solid_state",
+  "container_type": "spare",
+  "dr_node": {
+    "name": "node1",
+    "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+  },
+  "effective_type": "vmdisk",
+  "encryption_operation": "string",
+  "error": [
+    {
+      "reason": {
+        "code": "string",
+        "message": "not responding"
+      },
+      "type": "notallflashdisk"
+    }
+  ],
+  "firmware_version": "NA51",
+  "home_node": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "name": "node1",
+    "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+  },
+  "key_id": {
+    "data": "string",
+    "fips": "string"
+  },
+  "model": "X421_HCOBE450A10",
+  "name": "1.0.1",
+  "node": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "name": "node1",
+    "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+  },
+  "outage": {
+    "reason": {
+      "code": "721081",
+      "message": "not responding"
+    }
+  },
+  "paths": [
+    {
+      "initiator": "3a",
+      "port_name": "A",
+      "port_type": "sas",
+      "wwnn": "5000c2971c1b2b8c",
+      "wwpn": "5000c2971c1b2b8d"
+    }
+  ],
+  "pool": "pool0",
+  "protection_mode": "string",
+  "rated_life_used_percent": "10",
+  "rpm": "15000",
+  "sector_count": "1172123568",
+  "serial_number": "KHG2VX8R",
+  "shelf": {
+    "_links": {
+      "self": {
+        "href": "/api/resourcelink"
+      }
+    },
+    "uid": "7777841915827391056"
+  },
+  "state": "present",
+  "stats": {
+    "average_latency": "3",
+    "iops_total": "12854",
+    "path_error_count": "0",
+    "power_on_hours": "21016",
+    "throughput": "1957888"
+  },
+  "type": "ssd",
+  "uid": "002538E5:71B00B2F:00000000:00000000:00000000:00000000:00000000:00000000:00000000:00000000",
+  "usable_size": "959934889984",
+  "vendor": "NETAPP"
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#aggregates]
+[.api-collapsible-fifth-title]
+aggregates
+
+Aggregate
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#dr_node]
+[.api-collapsible-fifth-title]
+dr_node
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#drawer]
+[.api-collapsible-fifth-title]
+drawer
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|id
+|integer
+a|
+
+|slot
+|integer
+a|
+
+|===
+
+
+[#reason]
+[.api-collapsible-fifth-title]
+reason
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Provides an error code.
+
+
+|message
+|string
+a|Provides an error message detailing the error state of this disk.
+
+
+|===
+
+
+[#disk_error_info]
+[.api-collapsible-fifth-title]
+disk_error_info
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|reason
+|link:#reason[reason]
+a|
+
+|type
+|string
+a|Disk error type.
+
+
+|===
+
+
+[#home_node]
+[.api-collapsible-fifth-title]
+home_node
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#key_id]
+[.api-collapsible-fifth-title]
+key_id
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|data
+|string
+a|Key ID of the data authentication key
+
+
+|fips
+|string
+a|Key ID of the FIPS authentication key
+
+
+|===
+
+
+[#node]
+[.api-collapsible-fifth-title]
+node
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#reason]
+[.api-collapsible-fifth-title]
+reason
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|This field provides the error code explaining why a disk failed.
+
+
+|message
+|string
+a|This field provides the error message explaining why a disk failed.
+
+
+|===
+
+
+[#outage]
+[.api-collapsible-fifth-title]
+outage
+
+Indicates if a disk has an entry in the failed disk registry, along with the reason for the failure.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|persistently_failed
+|boolean
+a|Indicates whether RAID maintains the state of this disk as failed accross reboots.
+
+
+|reason
+|link:#reason[reason]
+a|
+
+|===
+
+
+[#disk_path_info]
+[.api-collapsible-fifth-title]
+disk_path_info
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|initiator
+|string
+a|Initiator port.
+
+
+|port_name
+|string
+a|Name of the disk port.
+
+
+|port_type
+|string
+a|Disk port type.
+
+
+|wwnn
+|string
+a|Target device's World Wide Node Name.
+
+
+|wwpn
+|string
+a|Target device's World Wide Port Name.
+
+
+|===
+
+
+[#shelf]
+[.api-collapsible-fifth-title]
+shelf
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|uid
+|string
+a|
+
+|===
+
+
+[#stats]
+[.api-collapsible-fifth-title]
+stats
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|average_latency
+|integer
+a|Average I/O latency across all active paths, in milliseconds.
+
+
+|iops_total
+|integer
+a|Total I/O operations per second read and written to this disk across all active paths.
+
+
+|path_error_count
+|integer
+a|Disk path error count; failed I/O operations.
+
+
+|power_on_hours
+|integer
+a|Hours powered on.
+
+
+|throughput
+|integer
+a|Total disk throughput per second across all active paths, in bytes.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

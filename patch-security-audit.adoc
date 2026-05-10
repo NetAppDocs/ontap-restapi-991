@@ -1,0 +1,214 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'patch-security-audit.html'
+summary: 'Update administrative audit settings for GET requests'
+---
+
+= Update administrative audit settings for GET requests
+
+[.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/audit`#
+
+*Introduced In:* 9.6
+
+Updates administrative audit settings for GET requests.
+All of the fields are optional. An empty body will make no changes.
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning. When doing a POST, PATCH, or DELETE operation on a single record, the default is 0 seconds.  This means that if an asynchronous operation is started, the server immediately returns HTTP code 202 (Accepted) along with a link to the job.  If a non-zero value is specified for POST, PATCH, or DELETE operations, ONTAP waits that length of time to see if the job completes so it can return something other than 202.
+
+* Default value: 0
+* Max value: 120
+* Min value: 0
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|cli
+|boolean
+a|Enable auditing of CLI GET Operations. Valid in PATCH
+
+
+|http
+|boolean
+a|Enable auditing of HTTP GET Operations. Valid in PATCH
+
+
+|ontapi
+|boolean
+a|Enable auditing of ONTAP API GET operations. Valid in PATCH
+
+* Introduced in: 9.6
+
+
+|===
+
+
+== Response
+
+```
+Status: 202, Accepted
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|cli
+|boolean
+a|Enable auditing of CLI GET Operations. Valid in PATCH
+
+
+|http
+|boolean
+a|Enable auditing of HTTP GET Operations. Valid in PATCH
+
+
+|ontapi
+|boolean
+a|Enable auditing of ONTAP API GET operations. Valid in PATCH
+
+* Introduced in: 9.6
+
+
+|===
+
+
+== Error
+
+```
+Status: Default, Error
+```
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#security_audit]
+[.api-collapsible-fifth-title]
+security_audit
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|cli
+|boolean
+a|Enable auditing of CLI GET Operations. Valid in PATCH
+
+
+|http
+|boolean
+a|Enable auditing of HTTP GET Operations. Valid in PATCH
+
+
+|ontapi
+|boolean
+a|Enable auditing of ONTAP API GET operations. Valid in PATCH
+
+* Introduced in: 9.6
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

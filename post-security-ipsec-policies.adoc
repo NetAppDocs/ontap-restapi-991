@@ -1,0 +1,647 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'post-security-ipsec-policies.html'
+summary: 'Create an IPsec policy'
+---
+
+= Create an IPsec policy
+
+[.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/ipsec/policies`#
+
+*Introduced In:* 9.8
+
+Creates an IPsec policy.
+
+== Related ONTAP commands
+
+* `security ipsec policy create`
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|return_records
+|boolean
+|query
+|False
+a|The default is false.  If set to true, the records are returned.
+
+* Default value:
+
+|===
+
+== Request Body
+
+                
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|action
+|string
+a|Action for the IPsec policy.
+
+
+|enabled
+|boolean
+a|Indicates whether or not the policy is enabled.
+
+
+|ipspace
+|link:#ipspace[ipspace]
+a|Applies to both SVM and cluster-scoped objects. Either the UUID or name may be supplied on input.
+
+
+|local_endpoint
+|link:#local_endpoint[local_endpoint]
+a|Local endpoint for the IPsec policy.
+
+
+|local_identity
+|string
+a|Local Identity
+
+
+|name
+|string
+a|IPsec policy name.
+
+
+|protocol
+|string
+a|Lower layer protocol to be covered by the IPsec policy.
+
+
+|remote_endpoint
+|link:#remote_endpoint[remote_endpoint]
+a|Remote endpoint for the IPsec policy.
+
+
+|remote_identity
+|string
+a|Remote Identity
+
+
+|secret_key
+|string
+a|Pre-shared key for IKE negotiation.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|uuid
+|string
+a|Unique identifier of the IPsec policy.
+
+
+|===
+
+
+.Example request
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "action": "string",
+  "ipspace": {
+    "name": "exchange",
+    "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+  },
+  "local_endpoint": {
+    "address": "10.10.10.7",
+    "netmask": "24",
+    "port": "23"
+  },
+  "local_identity": "string",
+  "name": "string",
+  "protocol": "17",
+  "remote_endpoint": {
+    "address": "10.10.10.7",
+    "netmask": "24",
+    "port": "23"
+  },
+  "remote_identity": "string",
+  "secret_key": "string",
+  "svm": {
+    "name": "svm1",
+    "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+  },
+  "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+}
+====
+
+== Response
+
+```
+Status: 201, Created
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#records[records]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "num_records": "1",
+  "records": [
+    {
+      "action": "string",
+      "ipspace": {
+        "name": "exchange",
+        "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+      },
+      "local_endpoint": {
+        "address": "10.10.10.7",
+        "netmask": "24",
+        "port": "23"
+      },
+      "local_identity": "string",
+      "name": "string",
+      "protocol": "17",
+      "remote_endpoint": {
+        "address": "10.10.10.7",
+        "netmask": "24",
+        "port": "23"
+      },
+      "remote_identity": "string",
+      "secret_key": "string",
+      "svm": {
+        "name": "svm1",
+        "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+      },
+      "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default
+```
+
+ONTAP Error Response Codes
+
+|===
+| Error Code | Description
+
+| 66257099
+| Only one protocol can be specified.
+
+| 66257100
+| Only one local port can be specified.
+
+| 66257101
+| Only one remote port can be specified.
+
+| 66257104
+| IPsec policy with same name already exists in this SVM.
+
+| 66257107
+| The specified pre-shared key is not a valid hexadecimal string.
+
+| 66257109
+| The specified pre-shared key is not a valid Base64 encoded binary string.
+
+| 66257110
+| Failed to a create policy sequencing value.
+
+| 66257111
+| The IPsec policy with action ESP TRANSPORT provides packet protection and requires a secret key for authentication.
+
+| 66257112
+| The IPsec policy with the action specified does not provide packet protection and the authentication method provided for the policy will be ignored.
+
+| 66257113
+| Only one local IP subnet can be specified.
+
+| 66257114
+| Only one remote IP subnet can be specified.
+
+| 66257115
+| Port ranges containing more than one port are not supported.
+
+| 66257117
+| IPsec is not supported on the SVM specified in the policy, IPsec is supported on data SVMs only.
+
+| 66257120
+| The subnet selector must be a host address (An IPv4 address with a 32-bit netmask or an IPv6 address with a 128-bit netmask).
+
+| 66257121
+| The maximum limit of IPsec Policies has reached for the specified SVM.
+
+| 66257125
+| The local_endpoint.address must be specified with local_endpoint.netmask.
+
+| 66257126
+| The remote_endpoint.address must be specified with remote_endpoint.netmask.
+|===
+
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+[#ipspace]
+[.api-collapsible-fifth-title]
+ipspace
+
+Applies to both SVM and cluster-scoped objects. Either the UUID or name may be supplied on input.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|IPspace name
+
+
+|uuid
+|string
+a|IPspace UUID
+
+
+|===
+
+
+[#local_endpoint]
+[.api-collapsible-fifth-title]
+local_endpoint
+
+Local endpoint for the IPsec policy.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|address
+|string
+a|IPv4 or IPv6 address
+
+
+|netmask
+|string
+a|Input as netmask length (16) or IPv4 mask (255.255.0.0). For IPv6, the default value is 64 with a valid range of 1 to 127. Output is always netmask length.
+
+
+|port
+|string
+a|Application port to be covered by the IPsec policy
+
+
+|===
+
+
+[#remote_endpoint]
+[.api-collapsible-fifth-title]
+remote_endpoint
+
+Remote endpoint for the IPsec policy.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|address
+|string
+a|IPv4 or IPv6 address
+
+
+|netmask
+|string
+a|Input as netmask length (16) or IPv4 mask (255.255.0.0). For IPv6, the default value is 64 with a valid range of 1 to 127. Output is always netmask length.
+
+
+|port
+|string
+a|Application port to be covered by the IPsec policy
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#ipsec_policy]
+[.api-collapsible-fifth-title]
+ipsec_policy
+
+IPsec policy object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|action
+|string
+a|Action for the IPsec policy.
+
+
+|enabled
+|boolean
+a|Indicates whether or not the policy is enabled.
+
+
+|ipspace
+|link:#ipspace[ipspace]
+a|Applies to both SVM and cluster-scoped objects. Either the UUID or name may be supplied on input.
+
+
+|local_endpoint
+|link:#local_endpoint[local_endpoint]
+a|Local endpoint for the IPsec policy.
+
+
+|local_identity
+|string
+a|Local Identity
+
+
+|name
+|string
+a|IPsec policy name.
+
+
+|protocol
+|string
+a|Lower layer protocol to be covered by the IPsec policy.
+
+
+|remote_endpoint
+|link:#remote_endpoint[remote_endpoint]
+a|Remote endpoint for the IPsec policy.
+
+
+|remote_identity
+|string
+a|Remote Identity
+
+
+|secret_key
+|string
+a|Pre-shared key for IKE negotiation.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|uuid
+|string
+a|Unique identifier of the IPsec policy.
+
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+SVM, applies only to SVM-scoped objects.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#records]
+[.api-collapsible-fifth-title]
+records
+
+IPsec policy object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|action
+|string
+a|Action for the IPsec policy.
+
+
+|enabled
+|boolean
+a|Indicates whether or not the policy is enabled.
+
+
+|ipspace
+|link:#ipspace[ipspace]
+a|Applies to both SVM and cluster-scoped objects. Either the UUID or name may be supplied on input.
+
+
+|local_endpoint
+|link:#local_endpoint[local_endpoint]
+a|Local endpoint for the IPsec policy.
+
+
+|local_identity
+|string
+a|Local Identity
+
+
+|name
+|string
+a|IPsec policy name.
+
+
+|protocol
+|string
+a|Lower layer protocol to be covered by the IPsec policy.
+
+
+|remote_endpoint
+|link:#remote_endpoint[remote_endpoint]
+a|Remote endpoint for the IPsec policy.
+
+
+|remote_identity
+|string
+a|Remote Identity
+
+
+|secret_key
+|string
+a|Pre-shared key for IKE negotiation.
+
+
+|svm
+|link:#svm[svm]
+a|SVM, applies only to SVM-scoped objects.
+
+
+|uuid
+|string
+a|Unique identifier of the IPsec policy.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====

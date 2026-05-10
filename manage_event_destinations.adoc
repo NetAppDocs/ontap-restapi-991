@@ -1,0 +1,122 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'manage_event_destinations.html'
+summary: 'Manage event destinations'
+---
+
+= Manage event destinations
+
+
+
+== Overview
+
+Manages the list of destinations. A destination is defined by a type and a place to which an event's information is transmitted.
+
+== Destination Types
+
+An EMS destination is defined by a single type, which is one of the following:
+
+* email
+* syslog
+* rest_api
+* snmp
+
+=== Email
+
+The 'email' type allows you to define a mailbox where information about an observed event is sent by SMTP. Enter the address in the destination field in a valid format.
+For example: administrator@mycompany.com
+
+=== Syslog
+
+The 'syslog' type allows you to specify a remote syslog server that can receive information about an observed event. Enter the hostname or IP address in the destination field.
+For example: syslog.mycompany.com, 192.168.1.1
+
+=== Rest API
+
+The 'rest_api' type allows you to define a URL where information about an observed event is sent using the REST protocol. Enter the URL in the destination field.
+The URL must contain a valid transmission schema which can be one of the following:
+
+* http
+* https
+Using the 'https' schema, you can configure a client-side certificate for mutual authentication.
+For example: http://rest.mycompany.com, https://192.168.1.1
+
+=== SNMP
+
+The 'snmp' type describes addresses where information about an observed event is sent using SNMP traps. The system defines a default instance of this type and it is restricted to read-only.
+This type has the following limitations:
+
+* Cannot create new destinations of type 'snmp'
+* Cannot modify the default 'snmp' destination
+
+SNMP trap host details need to be configured through one of the following:
+
+|===
+| Type | Command / API
+
+| CLI
+| 'system snmp traphost'
+
+| ZAPI
+| 'snmp-traphost-add' / 'snmp-traphost-delete'
+|===
+
+== Examples
+
+=== Retrieving the list of active destinations
+
+[,json]
+----
+
+# API
+GET /api/support/ems/destinations
+
+# Response
+200 OK
+
+# JSON Body
+{
+"records": [
+  {
+    "name": "snmp-traphost",
+    "_links": {
+      "self": {
+        "href": "/api/support/ems/destinations/snmp-traphost"
+      }
+    }
+  }
+],
+"num_records": 1,
+"_links": {
+  "self": {
+    "href": "/api/support/ems/destinations"
+  }
+}
+}
+----
+
+=== Creating a new 'email' destination
+
+[,json]
+----
+
+# API
+POST /support/ems/destinations
+
+# JSON Body
+{
+"name": "Technician_Email",
+"type": "email",
+"destination": "technician@mycompany.com",
+"filters": [
+  { "name" : "critical-wafl" }
+]
+}
+
+# Response
+201 Created
+----
+
+

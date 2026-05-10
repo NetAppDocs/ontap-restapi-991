@@ -1,0 +1,1842 @@
+---
+sidebar: sidebar
+api: true
+explorer: false
+permalink: 'get-protocols-s3-services.html'
+summary: 'Retrieve S3 server configuration for all SVMs'
+---
+
+= Retrieve S3 server configuration for all SVMs
+
+[.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/s3/services`#
+
+*Introduced In:* 9.7
+
+Retrieves the S3 server configuration for all SVMs. Note that in order to retrieve S3 bucket policy conditions, 'fields' option should be set to '**'.
+
+== Expensive properties
+
+There is an added cost to retrieving values for these properties. They are not included by default in GET results and must be explicitly requested using the `fields` query parameter. See link:getting_started_with_the_ontap_rest_api.html#Requesting_specific_fields[Requesting specific fields] to learn more.
+
+* `statistics.+*+`
+* `metric.+*+`
+
+== Related ONTAP commands
+
+* `vserver object-store-server show`
+
+== Learn more
+
+* link:manage_protocols_s3_services.html[DOC /protocols/s3/services]
+
+
+== Parameters
+
+[cols=5*,options=header]
+|===
+
+|Name
+|Type
+|In
+|Required
+|Description
+
+|is_http_enabled
+|boolean
+|query
+|False
+a|Filter by is_http_enabled
+
+* Introduced in: 9.8
+
+
+|name
+|string
+|query
+|False
+a|Filter by name
+
+
+|users.access_key
+|string
+|query
+|False
+a|Filter by users.access_key
+
+
+|users.name
+|string
+|query
+|False
+a|Filter by users.name
+
+
+|users.svm.uuid
+|string
+|query
+|False
+a|Filter by users.svm.uuid
+
+
+|users.svm.name
+|string
+|query
+|False
+a|Filter by users.svm.name
+
+
+|users.comment
+|string
+|query
+|False
+a|Filter by users.comment
+
+
+|metric.timestamp
+|string
+|query
+|False
+a|Filter by metric.timestamp
+
+* Introduced in: 9.8
+
+
+|metric.throughput.total
+|integer
+|query
+|False
+a|Filter by metric.throughput.total
+
+* Introduced in: 9.8
+
+
+|metric.throughput.read
+|integer
+|query
+|False
+a|Filter by metric.throughput.read
+
+* Introduced in: 9.8
+
+
+|metric.throughput.write
+|integer
+|query
+|False
+a|Filter by metric.throughput.write
+
+* Introduced in: 9.8
+
+
+|metric.latency.total
+|integer
+|query
+|False
+a|Filter by metric.latency.total
+
+* Introduced in: 9.8
+
+
+|metric.latency.other
+|integer
+|query
+|False
+a|Filter by metric.latency.other
+
+* Introduced in: 9.8
+
+
+|metric.latency.read
+|integer
+|query
+|False
+a|Filter by metric.latency.read
+
+* Introduced in: 9.8
+
+
+|metric.latency.write
+|integer
+|query
+|False
+a|Filter by metric.latency.write
+
+* Introduced in: 9.8
+
+
+|metric.iops.total
+|integer
+|query
+|False
+a|Filter by metric.iops.total
+
+* Introduced in: 9.8
+
+
+|metric.iops.other
+|integer
+|query
+|False
+a|Filter by metric.iops.other
+
+* Introduced in: 9.8
+
+
+|metric.iops.read
+|integer
+|query
+|False
+a|Filter by metric.iops.read
+
+* Introduced in: 9.8
+
+
+|metric.iops.write
+|integer
+|query
+|False
+a|Filter by metric.iops.write
+
+* Introduced in: 9.8
+
+
+|metric.duration
+|string
+|query
+|False
+a|Filter by metric.duration
+
+* Introduced in: 9.8
+
+
+|metric.status
+|string
+|query
+|False
+a|Filter by metric.status
+
+* Introduced in: 9.8
+
+
+|secure_port
+|integer
+|query
+|False
+a|Filter by secure_port
+
+* Introduced in: 9.8
+
+
+|is_https_enabled
+|boolean
+|query
+|False
+a|Filter by is_https_enabled
+
+* Introduced in: 9.8
+
+
+|statistics.timestamp
+|string
+|query
+|False
+a|Filter by statistics.timestamp
+
+* Introduced in: 9.8
+
+
+|statistics.iops_raw.total
+|integer
+|query
+|False
+a|Filter by statistics.iops_raw.total
+
+* Introduced in: 9.8
+
+
+|statistics.iops_raw.other
+|integer
+|query
+|False
+a|Filter by statistics.iops_raw.other
+
+* Introduced in: 9.8
+
+
+|statistics.iops_raw.read
+|integer
+|query
+|False
+a|Filter by statistics.iops_raw.read
+
+* Introduced in: 9.8
+
+
+|statistics.iops_raw.write
+|integer
+|query
+|False
+a|Filter by statistics.iops_raw.write
+
+* Introduced in: 9.8
+
+
+|statistics.latency_raw.total
+|integer
+|query
+|False
+a|Filter by statistics.latency_raw.total
+
+* Introduced in: 9.8
+
+
+|statistics.latency_raw.other
+|integer
+|query
+|False
+a|Filter by statistics.latency_raw.other
+
+* Introduced in: 9.8
+
+
+|statistics.latency_raw.read
+|integer
+|query
+|False
+a|Filter by statistics.latency_raw.read
+
+* Introduced in: 9.8
+
+
+|statistics.latency_raw.write
+|integer
+|query
+|False
+a|Filter by statistics.latency_raw.write
+
+* Introduced in: 9.8
+
+
+|statistics.status
+|string
+|query
+|False
+a|Filter by statistics.status
+
+* Introduced in: 9.8
+
+
+|statistics.throughput_raw.total
+|integer
+|query
+|False
+a|Filter by statistics.throughput_raw.total
+
+* Introduced in: 9.8
+
+
+|statistics.throughput_raw.read
+|integer
+|query
+|False
+a|Filter by statistics.throughput_raw.read
+
+* Introduced in: 9.8
+
+
+|statistics.throughput_raw.write
+|integer
+|query
+|False
+a|Filter by statistics.throughput_raw.write
+
+* Introduced in: 9.8
+
+
+|enabled
+|boolean
+|query
+|False
+a|Filter by enabled
+
+
+|buckets.qos_policy.max_throughput_mbps
+|integer
+|query
+|False
+a|Filter by buckets.qos_policy.max_throughput_mbps
+
+* Introduced in: 9.8
+
+
+|buckets.qos_policy.min_throughput_mbps
+|integer
+|query
+|False
+a|Filter by buckets.qos_policy.min_throughput_mbps
+
+* Introduced in: 9.8
+
+
+|buckets.qos_policy.uuid
+|string
+|query
+|False
+a|Filter by buckets.qos_policy.uuid
+
+* Introduced in: 9.8
+
+
+|buckets.qos_policy.max_throughput_iops
+|integer
+|query
+|False
+a|Filter by buckets.qos_policy.max_throughput_iops
+
+* Introduced in: 9.8
+
+
+|buckets.qos_policy.name
+|string
+|query
+|False
+a|Filter by buckets.qos_policy.name
+
+* Introduced in: 9.8
+
+
+|buckets.qos_policy.min_throughput_iops
+|integer
+|query
+|False
+a|Filter by buckets.qos_policy.min_throughput_iops
+
+* Introduced in: 9.8
+
+
+|buckets.volume.name
+|string
+|query
+|False
+a|Filter by buckets.volume.name
+
+
+|buckets.volume.uuid
+|string
+|query
+|False
+a|Filter by buckets.volume.uuid
+
+
+|buckets.policy.statements.resources
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.resources
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.sid
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.sid
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.actions
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.actions
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.principals
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.principals
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.conditions.source_ips
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.conditions.source_ips
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.conditions.delimiters
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.conditions.delimiters
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.conditions.usernames
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.conditions.usernames
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.conditions.max_keys
+|integer
+|query
+|False
+a|Filter by buckets.policy.statements.conditions.max_keys
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.conditions.prefixes
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.conditions.prefixes
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.conditions.operator
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.conditions.operator
+
+* Introduced in: 9.8
+
+
+|buckets.policy.statements.effect
+|string
+|query
+|False
+a|Filter by buckets.policy.statements.effect
+
+* Introduced in: 9.8
+
+
+|buckets.name
+|string
+|query
+|False
+a|Filter by buckets.name
+
+
+|buckets.encryption.enabled
+|boolean
+|query
+|False
+a|Filter by buckets.encryption.enabled
+
+
+|buckets.comment
+|string
+|query
+|False
+a|Filter by buckets.comment
+
+
+|buckets.logical_used_size
+|integer
+|query
+|False
+a|Filter by buckets.logical_used_size
+
+
+|buckets.svm.uuid
+|string
+|query
+|False
+a|Filter by buckets.svm.uuid
+
+
+|buckets.svm.name
+|string
+|query
+|False
+a|Filter by buckets.svm.name
+
+
+|buckets.uuid
+|string
+|query
+|False
+a|Filter by buckets.uuid
+
+
+|buckets.size
+|integer
+|query
+|False
+a|Filter by buckets.size
+
+
+|certificate.uuid
+|string
+|query
+|False
+a|Filter by certificate.uuid
+
+* Introduced in: 9.8
+
+
+|certificate.name
+|string
+|query
+|False
+a|Filter by certificate.name
+
+* Introduced in: 9.8
+
+
+|port
+|integer
+|query
+|False
+a|Filter by port
+
+* Introduced in: 9.8
+
+
+|svm.uuid
+|string
+|query
+|False
+a|Filter by svm.uuid
+
+
+|svm.name
+|string
+|query
+|False
+a|Filter by svm.name
+
+
+|comment
+|string
+|query
+|False
+a|Filter by comment
+
+
+|fields
+|array[string]
+|query
+|False
+a|Specify the fields to return.
+
+
+|max_records
+|integer
+|query
+|False
+a|Limit the number of records returned.
+
+
+|return_records
+|boolean
+|query
+|False
+a|The default is true for GET calls.  When set to false, only the number of records is returned.
+
+* Default value: 1
+
+
+|return_timeout
+|integer
+|query
+|False
+a|The number of seconds to allow the call to execute before returning.  When iterating over a collection, the default is 15 seconds.  ONTAP returns earlier if either max records or the end of the collection is reached.
+
+* Default value: 15
+* Max value: 120
+* Min value: 0
+
+
+|order_by
+|array[string]
+|query
+|False
+a|Order results by specified fields and optional [asc|desc] direction. Default direction is 'asc' for ascending.
+
+|===
+
+== Response
+
+```
+Status: 200, Ok
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#collection_links[collection_links]
+a|
+
+|num_records
+|integer
+a|Number of records
+
+
+|records
+|array[link:#s3_service[s3_service]]
+a|
+
+|===
+
+
+.Example response
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "_links": {
+    "next": {
+      "href": "/api/resourcelink"
+    },
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": "/api/resourcelink"
+        }
+      },
+      "buckets": [
+        {
+          "comment": "S3 bucket.",
+          "logical_used_size": 0,
+          "name": "bucket1",
+          "policy": {
+            "statements": [
+              {
+                "actions": [
+                  "GetObject",
+                  "PutObject",
+                  "DeleteObject",
+                  "ListBucket"
+                ],
+                "conditions": [
+                  {
+                    "delimiters": [
+                      "/"
+                    ],
+                    "max_keys": [
+                      "1000"
+                    ],
+                    "operator": "ip_address",
+                    "prefixes": [
+                      "pref"
+                    ],
+                    "source_ips": [
+                      "1.1.1.1",
+                      "1.2.2.0/24"
+                    ],
+                    "usernames": [
+                      "user1"
+                    ]
+                  }
+                ],
+                "effect": "allow",
+                "principals": [
+                  "user1",
+                  "group/grp1"
+                ],
+                "resources": [
+                  "bucket1",
+                  "bucket1/*"
+                ],
+                "sid": "FullAccessToUser1"
+              }
+            ]
+          },
+          "qos_policy": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "max_throughput_iops": "10000",
+            "max_throughput_mbps": "500",
+            "min_throughput_iops": "2000",
+            "min_throughput_mbps": "500",
+            "name": "performance",
+            "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+          },
+          "size": "1677721600",
+          "svm": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "svm1",
+            "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+          },
+          "uuid": "414b29a1-3b26-11e9-bd58-0050568ea055",
+          "volume": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "volume1",
+            "uuid": "028baa66-41bd-11e9-81d5-00a0986138f7"
+          }
+        }
+      ],
+      "certificate": {
+        "_links": {
+          "self": {
+            "href": "/api/resourcelink"
+          }
+        },
+        "name": "cert1",
+        "uuid": "1cd8a442-86d1-11e0-ae1c-123478563412"
+      },
+      "comment": "S3 server",
+      "metric": {
+        "_links": {
+          "self": {
+            "href": "/api/resourcelink"
+          }
+        },
+        "duration": "PT15S",
+        "iops": {
+          "read": "200",
+          "total": "1000",
+          "write": "100"
+        },
+        "latency": {
+          "read": "200",
+          "total": "1000",
+          "write": "100"
+        },
+        "status": "ok",
+        "throughput": {
+          "read": "200",
+          "total": "1000",
+          "write": "100"
+        },
+        "timestamp": "2017-01-25T11:20:13Z"
+      },
+      "name": "Server-1",
+      "statistics": {
+        "iops_raw": {
+          "read": "200",
+          "total": "1000",
+          "write": "100"
+        },
+        "latency_raw": {
+          "read": "200",
+          "total": "1000",
+          "write": "100"
+        },
+        "status": "ok",
+        "throughput_raw": {
+          "read": "200",
+          "total": "1000",
+          "write": "100"
+        },
+        "timestamp": "2017-01-25T11:20:13Z"
+      },
+      "svm": {
+        "_links": {
+          "self": {
+            "href": "/api/resourcelink"
+          }
+        },
+        "name": "svm1",
+        "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+      },
+      "users": [
+        {
+          "access_key": "Pz3SB54G2B_6dsXQPrA5HrTPcf478qoAW6_Xx6qyqZ948AgZ_7YfCf_9nO87YoZmskxx3cq41U2JAH2M3_fs321B4rkzS3a_oC5_8u7D8j_45N8OsBCBPWGD_1d_ccfq",
+          "comment": "S3 user",
+          "name": "user-1",
+          "svm": {
+            "_links": {
+              "self": {
+                "href": "/api/resourcelink"
+              }
+            },
+            "name": "svm1",
+            "uuid": "02c9e252-41be-11e9-81d5-00a0986138f7"
+          }
+        }
+      ]
+    }
+  ]
+}
+====
+
+== Error
+
+```
+Status: Default, Error
+```
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|error
+|link:#error[error]
+a|
+
+|===
+
+
+.Example error
+[%collapsible%closed]
+====
+[source,json,subs=+macros]
+{
+  "error": {
+    "arguments": [
+      {
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "code": "4",
+    "message": "entry doesn't exist",
+    "target": "uuid"
+  }
+}
+====
+
+== Definitions
+
+[.api-def-first-level]
+.See Definitions
+[%collapsible%closed]
+//Start collapsible Definitions block
+====                
+[#href]
+[.api-collapsible-fifth-title]
+href
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|href
+|string
+a|
+
+|===
+
+
+[#collection_links]
+[.api-collapsible-fifth-title]
+collection_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|next
+|link:#href[href]
+a|
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#self_link]
+[.api-collapsible-fifth-title]
+self_link
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#_links]
+[.api-collapsible-fifth-title]
+_links
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|self
+|link:#href[href]
+a|
+
+|===
+
+
+[#aggregates]
+[.api-collapsible-fifth-title]
+aggregates
+
+Aggregate
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|
+
+|uuid
+|string
+a|
+
+|===
+
+
+[#encryption]
+[.api-collapsible-fifth-title]
+encryption
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|enabled
+|boolean
+a|Specifies whether encryption is enabled on the bucket. By default, encryption is disabled on a bucket.
+
+
+|===
+
+
+[#s3_bucket_policy_condition]
+[.api-collapsible-fifth-title]
+s3_bucket_policy_condition
+
+Information about policy conditions based on various condition operators and condition keys.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|delimiters
+|array[string]
+a|An array of delimiters that are compared with the delimiter value specified at the time of execution of an S3-based command, using the condition operator specified.
+
+
+|max_keys
+|array[integer]
+a|An array of maximum keys that are allowed or denied to be retrieved using an S3 list operation, based on the condition operator specified.
+
+
+|operator
+|string
+a|Condition operator that is applied to the specified condition key.
+
+
+|prefixes
+|array[string]
+a|An array of prefixes that are compared with the input prefix value specified at the time of execution of an S3-based command, using the condition operator specified.
+
+
+|source_ips
+|array[string]
+a|An array of IP address ranges that are compared with the IP address of a source command at the time of execution of an S3-based command, using the condition operator specified.
+
+
+|usernames
+|array[string]
+a|An array of usernames that a current user in the context is evaluated against using the condition operators.
+
+
+|===
+
+
+[#s3_bucket_policy_statement]
+[.api-collapsible-fifth-title]
+s3_bucket_policy_statement
+
+Specifies information about a single access permission.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|actions
+|array[string]
+a|
+
+|conditions
+|array[link:#s3_bucket_policy_condition[s3_bucket_policy_condition]]
+a|Specifies bucket policy conditions.
+
+
+|effect
+|string
+a|Specifies whether access is allowed or denied when a user requests the specific action. If access (to allow) is not granted explicitly to a resource, access is implicitly denied. Access can also be denied explicitly to a resource, in order to make sure that a user cannot access it, even if a different policy grants access.
+
+
+|principals
+|array[string]
+a|
+
+|resources
+|array[string]
+a|
+
+|sid
+|string
+a|Specifies the statement identifier used to differentiate between statements.
+
+
+|===
+
+
+[#policy]
+[.api-collapsible-fifth-title]
+policy
+
+A policy is an object associated with a bucket. It defines resource (bucket, folder, or object) permissions. These policies get evaluated when an S3 user makes a request by executing a specific command. The user must be part of the principal (user or group) specified in the policy. Permissions in the policies determine whether the request is allowed or denied.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|statements
+|array[link:#s3_bucket_policy_statement[s3_bucket_policy_statement]]
+a|Specifies bucket access policy statement.
+
+
+|===
+
+
+[#qos_policy]
+[.api-collapsible-fifth-title]
+qos_policy
+
+Specifes "qos_policy.max_throughput_iops" and/or "qos_policy.max_throughput_mbps" or "qos_policy.min_throughput_iops". Specifes "min_throughput_iops" is only supported on volumes hosted on a node that is flash optimized. A pre-created QoS policy can also be used by specifying "qos_policy.name" or "qos_policy.uuid" properties. Setting or assigning a QoS policy to a bucket is not supported if its containing volume or SVM already has a QoS policy attached.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|max_throughput_iops
+|integer
+a|Specifies the maximum throughput in IOPS, 0 means none. This is mutually exclusive with name and UUID during POST and PATCH.
+
+
+|max_throughput_mbps
+|integer
+a|Specifies the maximum throughput in Megabytes per sec, 0 means none. This is mutually exclusive with name and UUID during POST and PATCH.
+
+
+|min_throughput_iops
+|integer
+a|Specifies the minimum throughput in IOPS, 0 means none. Setting "min_throughput" is supported on AFF platforms only, unless FabricPool tiering policies are set. This is mutually exclusive with name and UUID during POST and PATCH.
+
+
+|min_throughput_mbps
+|integer
+a|Specifies the minimum throughput in Megabytes per sec, 0 means none. This is mutually exclusive with name and UUID during POST and PATCH.
+
+
+|name
+|string
+a|The QoS policy group name. This is mutually exclusive with UUID and other QoS attributes during POST and PATCH.
+
+
+|uuid
+|string
+a|The QoS policy group UUID. This is mutually exclusive with name and other QoS attributes during POST and PATCH.
+
+
+|===
+
+
+[#svm]
+[.api-collapsible-fifth-title]
+svm
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the SVM.
+
+
+|uuid
+|string
+a|The unique identifier of the SVM.
+
+
+|===
+
+
+[#volume]
+[.api-collapsible-fifth-title]
+volume
+
+Specifies the FlexGroup volume name and UUID where the bucket is hosted.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|The name of the volume.
+
+
+|uuid
+|string
+a|Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
+
+* example: 028baa66-41bd-11e9-81d5-00a0986138f7
+* Introduced in: 9.6
+
+
+|===
+
+
+[#s3_bucket]
+[.api-collapsible-fifth-title]
+s3_bucket
+
+A bucket is a container of objects. Each bucket defines an object namespace. S3 requests specify objects using a bucket-name and object-name pair. An object resides within a bucket.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|comment
+|string
+a|Can contain any additional information about the bucket being created or modified.
+
+
+|encryption
+|link:#encryption[encryption]
+a|
+
+|logical_used_size
+|integer
+a|Specifies the bucket logical used size up to this point.
+
+
+|name
+|string
+a|Specifies the name of the bucket. Bucket name is a string that can only contain the following combination of ASCII-range alphanumeric characters 0-9, a-z, ".", and "-".
+
+
+|policy
+|link:#policy[policy]
+a|A policy is an object associated with a bucket. It defines resource (bucket, folder, or object) permissions. These policies get evaluated when an S3 user makes a request by executing a specific command. The user must be part of the principal (user or group) specified in the policy. Permissions in the policies determine whether the request is allowed or denied.
+
+
+|qos_policy
+|link:#qos_policy[qos_policy]
+a|Specifes "qos_policy.max_throughput_iops" and/or "qos_policy.max_throughput_mbps" or "qos_policy.min_throughput_iops". Specifes "min_throughput_iops" is only supported on volumes hosted on a node that is flash optimized. A pre-created QoS policy can also be used by specifying "qos_policy.name" or "qos_policy.uuid" properties. Setting or assigning a QoS policy to a bucket is not supported if its containing volume or SVM already has a QoS policy attached.
+
+
+|size
+|integer
+a|Specifies the bucket size in bytes; ranges from 80MB to 64TB.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|uuid
+|string
+a|Specifies the unique identifier of the bucket.
+
+
+|volume
+|link:#volume[volume]
+a|Specifies the FlexGroup volume name and UUID where the bucket is hosted.
+
+
+|===
+
+
+[#certificate]
+[.api-collapsible-fifth-title]
+certificate
+
+Specifies the certificate that will be used for creating HTTPS connections to the S3 server.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|name
+|string
+a|Certificate name
+
+
+|uuid
+|string
+a|Certificate UUID
+
+
+|===
+
+
+[#iops]
+[.api-collapsible-fifth-title]
+iops
+
+The rate of I/O operations observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#latency]
+[.api-collapsible-fifth-title]
+latency
+
+The round trip latency in microseconds observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#throughput]
+[.api-collapsible-fifth-title]
+throughput
+
+The rate of throughput bytes per second observed at the storage object.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#metric]
+[.api-collapsible-fifth-title]
+metric
+
+Performance numbers, such as IOPS latency and throughput, for SVM protocols.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#_links[_links]
+a|
+
+|duration
+|string
+a|The duration over which this sample is calculated. The time durations are represented in the ISO-8601 standard format. Samples can be calculated over the following durations:
+
+
+|iops
+|link:#iops[iops]
+a|The rate of I/O operations observed at the storage object.
+
+
+|latency
+|link:#latency[latency]
+a|The round trip latency in microseconds observed at the storage object.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_ delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput
+|link:#throughput[throughput]
+a|The rate of throughput bytes per second observed at the storage object.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#iops_raw]
+[.api-collapsible-fifth-title]
+iops_raw
+
+The number of I/O operations observed at the storage object. This should be used along with delta time to calculate the rate of I/O operations per unit of time.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#latency_raw]
+[.api-collapsible-fifth-title]
+latency_raw
+
+The raw latency in microseconds observed at the storage object. This should be divided by the raw IOPS value to calculate the average latency per I/O operation.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|other
+|integer
+a|Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#throughput_raw]
+[.api-collapsible-fifth-title]
+throughput_raw
+
+Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|read
+|integer
+a|Performance metric for read I/O operations.
+
+
+|total
+|integer
+a|Performance metric aggregated over all types of I/O operations.
+
+
+|write
+|integer
+a|Peformance metric for write I/O operations.
+
+
+|===
+
+
+[#statistics]
+[.api-collapsible-fifth-title]
+statistics
+
+These are raw performance numbers, such as IOPS latency and throughput for SVM protocols. These numbers are aggregated across all nodes in the cluster and increase with the uptime of the cluster.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|iops_raw
+|link:#iops_raw[iops_raw]
+a|The number of I/O operations observed at the storage object. This should be used along with delta time to calculate the rate of I/O operations per unit of time.
+
+
+|latency_raw
+|link:#latency_raw[latency_raw]
+a|The raw latency in microseconds observed at the storage object. This should be divided by the raw IOPS value to calculate the average latency per I/O operation.
+
+
+|status
+|string
+a|Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+
+
+|throughput_raw
+|link:#throughput_raw[throughput_raw]
+a|Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
+
+
+|timestamp
+|string
+a|The timestamp of the performance data.
+
+
+|===
+
+
+[#s3_user]
+[.api-collapsible-fifth-title]
+s3_user
+
+This is a container of S3 users.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|access_key
+|string
+a|Specifies the access key for the user.
+
+
+|comment
+|string
+a|Can contain any additional information about the user being created or modified.
+
+
+|name
+|string
+a|Specifies the name of the user. A user name length can range from 1 to 64 characters and can only contain the following combination of characters 0-9, A-Z, a-z, "_", "+", "=", ",", ".","@", and "-".
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|===
+
+
+[#s3_service]
+[.api-collapsible-fifth-title]
+s3_service
+
+Specifies the S3 server configuration.
+
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|_links
+|link:#self_link[self_link]
+a|
+
+|buckets
+|array[link:#s3_bucket[s3_bucket]]
+a|
+
+|certificate
+|link:#certificate[certificate]
+a|Specifies the certificate that will be used for creating HTTPS connections to the S3 server.
+
+
+|comment
+|string
+a|Can contain any additional information about the server being created or modified.
+
+
+|enabled
+|boolean
+a|Specifies whether the S3 server being created or modified should be up or down.
+
+
+|is_http_enabled
+|boolean
+a|Specifies whether HTTP is enabled on the S3 server being created or modified. By default, HTTP is disabled on the S3 server.
+
+
+|is_https_enabled
+|boolean
+a|Specifies whether HTTPS is enabled on the S3 server being created or modified. By default, HTTPS is enabled on the S3 server.
+
+
+|metric
+|link:#metric[metric]
+a|Performance numbers, such as IOPS latency and throughput, for SVM protocols.
+
+
+|name
+|string
+a|Specifies the name of the S3 server. A server name can contain 1 to 253 characters using only the following combination of characters':' 0-9, A-Z, a-z, ".", and "-".
+
+
+|port
+|integer
+a|Specifies the HTTP listener port for the S3 server. By default, HTTP is enabled on port 80.
+
+
+|secure_port
+|integer
+a|Specifies the HTTPS listener port for the S3 server. By default, HTTPS is enabled on port 443.
+
+
+|statistics
+|link:#statistics[statistics]
+a|These are raw performance numbers, such as IOPS latency and throughput for SVM protocols. These numbers are aggregated across all nodes in the cluster and increase with the uptime of the cluster.
+
+
+|svm
+|link:#svm[svm]
+a|
+
+|users
+|array[link:#s3_user[s3_user]]
+a|
+
+|===
+
+
+[#error_arguments]
+[.api-collapsible-fifth-title]
+error_arguments
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|code
+|string
+a|Argument code
+
+
+|message
+|string
+a|Message argument
+
+
+|===
+
+
+[#error]
+[.api-collapsible-fifth-title]
+error
+
+[cols=3*,options=header]
+|===
+|Name
+|Type
+|Description
+
+|arguments
+|array[link:#error_arguments[error_arguments]]
+a|Message arguments
+
+
+|code
+|string
+a|Error code
+
+
+|message
+|string
+a|Error message
+
+
+|target
+|string
+a|The target parameter that caused the error.
+
+
+|===
+
+
+//end collapsible .Definitions block
+====
