@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-support-snmp.html'
+keywords: 'snmp configuration,snmp authentication,cluster snmp,enable snmp,disable snmp,auth traps'
 summary: 'Update cluster-wide SNMP configuration'
 ---
 
 = Update cluster-wide SNMP configuration
+:imagesdir: ./media/
+
+[.lead]
+Updates the cluster-wide SNMP configuration to manage SNMP settings like enabling or disabling SNMP and authentication traps. Use this endpoint to adjust SNMP settings according to your cluster requirements.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/support/snmp`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Updates the cluster wide SNMP configuration, such as enabling or disabling SNMP and enabling or disabling authentication traps.
 

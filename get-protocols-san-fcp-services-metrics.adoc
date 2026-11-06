@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-fcp-services-metrics.html'
+keywords: 'fc protocol,performance metrics,svm metrics,latency filter,fcp service,iops filter'
 summary: 'Retrieve historical performance metrics for the FC protocol service of an SVM'
 ---
 
 = Retrieve historical performance metrics for the FC protocol service of an SVM
+:imagesdir: ./media/
+
+[.lead]
+Retrieves historical performance metrics for the Fibre Channel protocol service of a storage virtual machine (SVM). This information helps you analyze past performance trends and assess the efficiency of the FC protocol over time.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/fcp/services/{svm.uuid}/metrics`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves historical performance metrics for the FC Protocol service of an SVM.
 

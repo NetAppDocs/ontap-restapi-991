@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_metrocluster_dr_groups.html'
+keywords: 'metrocluster, dr group, over ip, partner cluster, node pairs'
 summary: 'Manage MetroCluster DR groups'
 ---
 
 = Manage MetroCluster DR groups
+:imagesdir: ./media/
 
-
+[.lead]
+Utilize the MetroCluster DR groups API to create, manage, and retrieve information about disaster recovery groups in a MetroCluster over IP configuration. These operations support tasks such as establishing new DR groups and removing existing ones, facilitating robust disaster recovery processes.
 
 == Overview
 

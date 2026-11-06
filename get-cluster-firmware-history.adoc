@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-firmware-history.html'
+keywords: 'cluster firmware,firmware history,firmware update,node history,update details,firmware requests'
 summary: 'Retrieve history details for firmware update requests'
 ---
 
 = Retrieve history details for firmware update requests
+:imagesdir: ./media/
+
+[.lead]
+Retrieves history details for firmware update requests to review past actions and outcomes associated with firmware updates.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/firmware/history`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Retrieves the history details for firmware update requests.
+ONTAP 9.8
 
 == Learn more
 

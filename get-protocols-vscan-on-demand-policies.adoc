@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-vscan-on-demand-policies.html'
+keywords: 'vscan policy,retrieve vscan,scan paths,include extensions,exclude extensions,max file size'
 summary: 'Retrieve a Vscan On-Demand policy'
 ---
 
 = Retrieve a Vscan On-Demand policy
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the Vscan On-Demand policy to review the configuration and settings for virus scanning tasks on demand.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/vscan/{svm.uuid}/on-demand-policies`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves the Vscan On-Demand policy.
+ONTAP 9.6
 
 == Related ONTAP commands
 

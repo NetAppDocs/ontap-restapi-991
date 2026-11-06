@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_kerberos_realms.html'
+keywords: 'kerberos realm,manage kerberos,nfs kerberos,kerberos svm,kerberos update,kerberos delete'
 summary: 'Manage Kerberos realms'
 ---
 
 = Manage Kerberos realms
+:imagesdir: ./media/
 
-
+[.lead]
+Manage Kerberos realm configurations to secure and authenticate network communications within your ONTAP environment. Use these endpoints to retrieve details, create, update, or delete Kerberos realms associated with an SVM.
 
 == Examples
 

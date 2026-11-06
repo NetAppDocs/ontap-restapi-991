@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-security-gcp-kms-.html'
+keywords: 'google cloud kms,security configuration,gcp kms update,kms key management,cloud volume services,netapp ontap'
 summary: 'Update the Google Cloud KMS configuration'
 ---
 
 = Update the Google Cloud KMS configuration
+:imagesdir: ./media/
+
+[.lead]
+Updates the Google Cloud Key Management Service (KMS) configuration to modify encryption settings for enhanced security measures in your cloud environment. This operation is specific to NetApp Cloud Volume Services for Google Cloud Platform (GCP).
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/gcp-kms/{uuid}`#
 
-*Introduced In:* 9.9
+== Introduced in
+
+ONTAP 9.9
+
+== Usage notes
 
 Updates the Google Cloud KMS configuration.
 Note: This method is only available to the NetApp Cloud Volume Services for GCP.

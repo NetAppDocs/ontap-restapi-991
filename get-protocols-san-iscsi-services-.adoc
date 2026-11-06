@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-iscsi-services-.html'
+keywords: 'iscsi service,iscsi retrieval,san protocols,svm identifier,iscsi show'
 summary: 'Retrieve an iSCSI service'
 ---
 
 = Retrieve an iSCSI service
+:imagesdir: ./media/
+
+[.lead]
+Retrieves an iSCSI service to examine the current configuration and status of the iSCSI protocol services in your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/iscsi/services/{svm.uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves an iSCSI service.
+ONTAP 9.6
 
 == Related ONTAP commands
 

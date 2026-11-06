@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-storage-luns-.html'
+keywords: 'lun properties,lun update,lun clone,lun movement,lun pause,lun resume'
 summary: 'Update an existing LUN'
 ---
 
 = Update an existing LUN
+:imagesdir: ./media/
+
+[.lead]
+Updates the properties of a Logical Unit Number (LUN) to modify its configuration or manage its movement between volumes. This operation is useful for adjusting LUN settings or handling LUN clones within your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/storage/luns/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Updates the properties of a LUN. A PATCH request can also be be used to overwrite the contents of a LUN as a clone of another, to begin movement of a LUN between volumes, and to pause and resume the movement of a LUN between volumes.
 

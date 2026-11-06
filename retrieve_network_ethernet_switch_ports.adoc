@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'retrieve_network_ethernet_switch_ports.html'
+keywords: 'ethernet switch,network ports,cluster networks,storage networks,port configuration'
 summary: 'Retrieve network Ethernet switch ports'
 ---
 
 = Retrieve network Ethernet switch ports
+:imagesdir: ./media/
 
-
+[.lead]
+Retrieve detailed port information from ethernet switches within cluster or storage networks using this API. The GET operation provides a comprehensive list of ports, including their status and configuration details, aiding in network monitoring and management.
 
 == Overview
 

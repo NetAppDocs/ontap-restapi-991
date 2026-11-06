@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-protocols-san-lun-maps-.html'
+keywords: 'lun map,delete lun map,lun mapping,san protocols,lun removal,lun igroup'
 summary: 'Delete a LUN map'
 ---
 
 = Delete a LUN map
+:imagesdir: ./media/
+
+[.lead]
+Deletes a LUN map to remove the association between a logical unit number (LUN) and an initiator group, freeing the LUN for other mapping configurations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/protocols/san/lun-maps/{lun.uuid}/{igroup.uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Deletes a LUN map.
+ONTAP 9.6
 
 == Related ONTAP commands
 

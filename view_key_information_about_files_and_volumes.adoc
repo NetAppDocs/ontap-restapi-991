@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'view_key_information_about_files_and_volumes.html'
+keywords: 'files,volumes,file type,volume expiration,WORM'
 summary: 'View key information about files and volumes'
 ---
 
 = View key information about files and volumes
+:imagesdir: ./media/
 
-
+[.lead]
+Access essential details about files and volumes, such as file type and volume expiration date, using these endpoints.
 
 Use this API to view key information about files and volumes, including the file type (regular, WORM, or WORM appendable), the volume expiration date, and so on.
 

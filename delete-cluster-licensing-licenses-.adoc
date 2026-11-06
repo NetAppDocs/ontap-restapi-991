@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-cluster-licensing-licenses-.html'
+keywords: 'license delete,delete license,cluster license,license removal,serial number'
 summary: 'Delete a license'
 ---
 
 = Delete a license
+:imagesdir: ./media/
+
+[.lead]
+Deletes a license from the system when you need to remove obsolete or unused licensing information.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/cluster/licensing/licenses/{name}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Deletes a license.
+ONTAP 9.6
 
 == Related ONTAP commands
 

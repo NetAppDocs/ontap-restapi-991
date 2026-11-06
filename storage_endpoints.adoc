@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'storage_endpoints.html'
+keywords: 'storage management,physical storage,logical storage,volume management,aggregate management,snapshots'
 summary: 'ONTAP REST API storage endpoints'
 ---
 
 = ONTAP REST API storage endpoints
+:imagesdir: ./media/
 
-
+[.lead]
+Manage physical and logical storage through endpoints for aggregates, volumes, LUNs, qtrees, snapshots, quotas, and storage efficiency.
 
 == Overview
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-s3-services.html'
+keywords: 's3 server,s3 configuration,s3 bucket,s3 user,s3 services,svm configuration'
 summary: 'Create S3 server, users, and buckets configurations'
 ---
 
 = Create S3 server, users, and buckets configurations
+:imagesdir: ./media/
+
+[.lead]
+Creates configurations for S3 servers, users, and buckets, enabling seamless management of S3 storage resources within your ONTAP environment. This operation is useful when setting up or modifying S3 server settings to tailor the storage infrastructure to your specific needs.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/s3/services`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Creates an S3 server, users, and buckets configurations.
 

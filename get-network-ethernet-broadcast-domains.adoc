@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-ethernet-broadcast-domains.html'
+keywords: 'broadcast domain,ethernet cluster,network ports,ipspace filter,mtu limit'
 summary: 'Retrieve broadcast domains for the entire cluster'
 ---
 
 = Retrieve broadcast domains for the entire cluster
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a collection of broadcast domains for the entire cluster to manage network configurations efficiently.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/ethernet/broadcast-domains`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves a collection of broadcast domains for the entire cluster.
+ONTAP 9.6
 
 == Related ONTAP commands
 

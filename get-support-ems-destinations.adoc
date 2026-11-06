@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-support-ems-destinations.html'
+keywords: 'event destinations,destination filter,event notification,notification destinations,record limit,return timeout'
 summary: 'Retrieve a collection of event destinations'
 ---
 
 = Retrieve a collection of event destinations
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a list of event destinations, which helps you understand where event notifications are sent within your system. Use this information to manage and configure event notifications effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/support/ems/destinations`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves a collection of event destinations.
 

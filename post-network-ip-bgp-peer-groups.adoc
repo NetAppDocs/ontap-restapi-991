@@ -3,16 +3,27 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-network-ip-bgp-peer-groups.html'
+keywords: 'bgp peer group,peer group creation,multipath routing,cluster-wide routing,vip interface'
 summary: 'Create a new BGP peer group for VIP'
 ---
 
 = Create a new BGP peer group for VIP
+:imagesdir: ./media/
+
+[.lead]
+Creates a new BGP peer group for VIP, establishing multipath-routing automatically across the cluster. This action is useful when you want to configure multiple paths for existing or future VIP interfaces.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/network/ip/bgp/peer-groups`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Creates a new BGP peer group for VIP. Multipath-routing is turned on cluster-wide automatically if the peer group being created results in multiple paths being available for an existing or future VIP interface.
+ONTAP 9.7
+
+== Usage notes
+
+Multipath-routing is turned on cluster-wide automatically if the peer group being created results in multiple paths being available for an existing or future VIP interface.
 
 == Required properties
 

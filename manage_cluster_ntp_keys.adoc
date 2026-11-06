@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_cluster_ntp_keys.html'
+keywords: 'cluster ntp,ntp keys,shared private keys,time server authentication,digest type,secret key'
 summary: 'Manage cluster NTP keys'
 ---
 
 = Manage cluster NTP keys
+:imagesdir: ./media/
 
-
+[.lead]
+Configure shared private keys for NTP between ONTAP and external trusted time servers using these endpoints. This setup allows you to associate a key with an external server and enable authentication, ensuring secure time synchronization.
 
 == Overview
 

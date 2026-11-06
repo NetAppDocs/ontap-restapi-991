@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'retrieve_metrocluster_operations.html'
+keywords: 'metrocluster operations,retrieve operations,operation details,operation state,operation history'
 summary: 'Retrieve MetroCluster operations'
 ---
 
 = Retrieve MetroCluster operations
+:imagesdir: ./media/
 
-
+[.lead]
+Retrieve recent MetroCluster operations to monitor and analyze cluster activities. For detailed insights into a specific operation, access the endpoint using its unique identifier.
 
 = Overview
 

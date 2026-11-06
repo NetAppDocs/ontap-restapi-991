@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-fpolicy-events.html'
+keywords: 'fpolicy event,svm uuid,file operation,protocol filter,data svm,fpolicy configuration'
 summary: 'Create the FPolicy event configuration for an SVM'
 ---
 
 = Create the FPolicy event configuration for an SVM
+:imagesdir: ./media/
+
+[.lead]
+Creates an FPolicy event configuration for a specific storage virtual machine (SVM), defining how file operations are monitored. Use this to set up event monitoring on data SVMs by specifying protocols, operations, and optional filters.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/fpolicy/{svm.uuid}/events`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Creates an FPolicy event configuration for a specified SVM. FPolicy event creation is allowed only on data SVMs. When a protocol is specified, you must specify a file operation or a file operation and filters.
 

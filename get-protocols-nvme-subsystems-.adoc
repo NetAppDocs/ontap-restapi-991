@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-nvme-subsystems-.html'
+keywords: 'nvme subsystem,subsystem retrieval,nvme protocols,subsystem maps,nvme commands'
 summary: 'Retrieve an NVMe subsystem'
 ---
 
 = Retrieve an NVMe subsystem
+:imagesdir: ./media/
+
+[.lead]
+Retrieves an NVMe subsystem to access its configuration details and manage NVMe resources effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/nvme/subsystems/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves an NVMe subsystem.
+ONTAP 9.6
 
 == Expensive properties
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-security-ipsec-policies.html'
+keywords: 'ipsec policies,security ipsec,remote endpoint,local endpoint,policy retrieval'
 summary: 'Retrieve IPsec policies'
 ---
 
 = Retrieve IPsec policies
+:imagesdir: ./media/
+
+[.lead]
+Obtains the current list of IPsec policies to review and manage the security configurations associated with your network traffic.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/ipsec/policies`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves the collection of IPsec policies.
 

@@ -3,17 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-cluster-peers-.html'
+keywords: 'cluster peer,peer update,cluster relationship,peer instance,cluster uuid'
 summary: 'Update a cluster peer instance'
 ---
 
 = Update a cluster peer instance
+:imagesdir: ./media/
+
+[.lead]
+Updates a cluster peer instance to modify its configuration or state, ensuring seamless cluster communication and management.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/cluster/peers/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Updates a cluster peer instance.
-
+ONTAP 9.6
 
 == Parameters
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_luns.html'
+keywords: 'lun management,storage area network,thin provisioning,qos policy,fibre channel'
 summary: 'Manage LUNs'
 ---
 
 = Manage LUNs
+:imagesdir: ./media/
 
-
+[.lead]
+The LUN REST API provides endpoints for creating, updating, deleting, and discovering logical unit numbers (LUNs) within a storage area network. Utilize these endpoints to manage LUN provisioning, support quality of service policies, and facilitate access through initiator groups.
 
 == Overview
 
@@ -327,7 +330,7 @@ A LUN clone can also be set to auto-delete by setting the `auto_delete` property
 
 === Creating a new LUN clone
 
-You create a new LUN clone as you create any LUN - a POST request to link:getting_started_with_the_ontap_rest_api.html#/SAN/lun_create[/storage/luns]. Set `clone.source.uuid` or `clone.source.name` to identify the source LUN from which the clone is created. The LUN clone and its source must reside in the same volume.
+You create a new LUN clone as you create any LUN - a POST request to link:post-storage-luns.html[/storage/luns]. Set `clone.source.uuid` or `clone.source.name` to identify the source LUN from which the clone is created. The LUN clone and its source must reside in the same volume.
 
 The source LUN can reside in a Snapshot copy, in which case the `clone.source.name` field must be used to identify it. Add `/.snapshot/<snapshot_name>` to the path after the volume name to identify the Snapshot copy. For example `/vol/vol1/.snapshot/snap1/lun1`.
 
@@ -344,7 +347,7 @@ curl -X POST 'https://<mgmt-ip>/api/storage/luns' -H 'accept: application/hal+js
 
 === Over-writing an existing LUN's data as a clone of another
 
-You can overwrite an existing LUN as a clone of another, using a PATCH request to link:getting_started_with_the_ontap_rest_api.html#/SAN/lun_modify[/storage/luns/\{uuid}]. Set the `clone.source.uuid` or `clone.source.name` property to identify the source LUN from which the clone data is taken. The LUN clone and its source must reside in the same volume.
+You can overwrite an existing LUN as a clone of another, using a PATCH request to link:patch-storage-luns-.html[/storage/luns/\{uuid}]. Set the `clone.source.uuid` or `clone.source.name` property to identify the source LUN from which the clone data is taken. The LUN clone and its source must reside in the same volume.
 
 When used in a PATCH request, the patched LUN's data is overwritten as a clone of the source. The following properties are preserved from the patched LUN unless otherwise specified as part of the PATCH: `class`, `auto_delete`, `lun_maps`, `serial_number`, `status.state`, and `uuid`.
 
@@ -363,7 +366,7 @@ curl -X PATCH 'https://<mgmt-ip>/api/storage/luns/5a24ae5b-28af-47fb-b129-5adf6c
 
 == Moving LUNs between volumes
 
-You move a LUN between volumes by using a PATCH request to link:getting_started_with_the_ontap_rest_api.html#/SAN/lun_modify[/storage/luns/\{uuid}]. Set the volume portion of the fully qualified LUN path `name` property, `path.volume.uuid`, or `path.volume.name` property to a different volume than the LUN's current volume. Moving a LUN between volumes is an asynchronous activity. A successful request returns a response of 200 synchronously, which indicates that the movement has been successfully queued. The LUN object can then be further polled with a GET request to <<lun_get,`+/storage/luns/{uuid}+`>> to monitor the status of the movement.
+You move a LUN between volumes by using a PATCH request to link:patch-storage-luns-.html[/storage/luns/\{uuid}]. Set the volume portion of the fully qualified LUN path `name` property, `path.volume.uuid`, or `path.volume.name` property to a different volume than the LUN's current volume. Moving a LUN between volumes is an asynchronous activity. A successful request returns a response of 200 synchronously, which indicates that the movement has been successfully queued. The LUN object can then be further polled with a GET request to link:get-storage-luns-.html[/storage/luns/\{uuid}] to monitor the status of the movement.
 
 The `movement` sub-object of the LUN object is populated while a LUN movement is in progress and for two minutes following completion of a movement.
 

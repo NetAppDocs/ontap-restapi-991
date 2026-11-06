@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-name-services-unix-users.html'
+keywords: 'unix users,retrieve users,svm users,unix user list,name services,svm uuid'
 summary: 'Retrieve all UNIX users for all SVMs'
 ---
 
 = Retrieve all UNIX users for all SVMs
+:imagesdir: ./media/
+
+[.lead]
+Retrieves UNIX user information across all SVMs to manage or audit access permissions effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/name-services/unix-users`#
 
-*Introduced In:* 9.9
+== Introduced in
+
+ONTAP 9.9
+
+== Usage notes
 
 Retrieves all of the UNIX users for all of the SVMs.
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-cluster-software-download.html'
+keywords: 'software download,firmware package,https server,ftp server,cluster image,software package'
 summary: 'Download a software or firmware package'
 ---
 
 = Download a software or firmware package
+:imagesdir: ./media/
+
+[.lead]
+Downloads a software or firmware package from the server to update or install necessary components on your system. This is typically used to ensure your system is running the latest versions, enhancing performance and security.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/cluster/software/download`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Downloads a software or firmware package from the server.
+ONTAP 9.6
 
 == Required properties
 

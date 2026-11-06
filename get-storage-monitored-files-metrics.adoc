@@ -3,17 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-monitored-files-metrics.html'
+keywords: 'performance metrics,monitored file,latency monitoring,iops tracking,throughput analysis,historical data'
 summary: 'Retrieve historical performance metrics for a monitored file'
 ---
 
 = Retrieve historical performance metrics for a monitored file
+:imagesdir: ./media/
+
+[.lead]
+Retrieves historical performance metrics for a monitored file to analyze its past behavior and performance trends. This can help you assess the file's usage patterns and make informed decisions about resource allocation or optimization.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/monitored-files/{monitored_file.uuid}/metrics`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Retrieves historical performance metrics for the monitored file.
-
+ONTAP 9.8
 
 == Parameters
 

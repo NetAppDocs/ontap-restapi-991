@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-application-applications-snapshots-.html'
+keywords: 'snapshot copy,retrieve snapshot,maxdata template,component snapshot,application component'
 summary: 'Retrieve an application Snapshot copy'
 ---
 
 = Retrieve an application Snapshot copy
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a Snapshot copy of an application component to access specific point-in-time data for Maxdata template applications. This helps you manage and restore application states with greater precision.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/application/applications/{application.uuid}/snapshots/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieve a Snapshot copy of an application component.
 

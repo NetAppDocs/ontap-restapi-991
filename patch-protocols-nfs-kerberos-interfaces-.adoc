@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-protocols-nfs-kerberos-interfaces-.html'
+keywords: 'kerberos interface,network interface,interface uuid,nfs kerberos,modify kerberos'
 summary: 'Update Kerberos interface properties'
 ---
 
 = Update Kerberos interface properties
+:imagesdir: ./media/
+
+[.lead]
+Updates the properties of a Kerberos interface to modify its configuration as needed for network security or authentication purposes.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/nfs/kerberos/interfaces/{interface.uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Updates the properties of a Kerberos interface.
+ONTAP 9.6
 
 == Related ONTAP commands
 

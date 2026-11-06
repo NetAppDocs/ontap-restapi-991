@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-iscsi-services-metrics.html'
+keywords: 'iscsi metrics,performance metrics,svm metrics,historical performance,latency metrics,throughput metrics'
 summary: 'Retrieve historical performance metrics for the iSCSI protocol of an SVM'
 ---
 
 = Retrieve historical performance metrics for the iSCSI protocol of an SVM
+:imagesdir: ./media/
+
+[.lead]
+Obtains historical performance metrics for the iSCSI protocol of a storage virtual machine (SVM). This information helps you analyze and optimize the performance of your storage resources over time.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/iscsi/services/{svm.uuid}/metrics`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves historical performance metrics for the iSCSI protocol of an SVM.
 

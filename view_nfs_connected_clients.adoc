@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'view_nfs_connected_clients.html'
+keywords: 'nfs clients,connected clients,nfs protocol,idle state,client connection,volume access'
 summary: 'View NFS connected clients'
 ---
 
 = View NFS connected clients
+:imagesdir: ./media/
 
-
+[.lead]
+Retrieve information on currently connected NFS clients and identify potential idle clients across your ONTAP environment. These endpoints help you monitor client connections, assess access patterns, and manage NFS protocol versions for efficient network storage operations.
 
 == Overview
 

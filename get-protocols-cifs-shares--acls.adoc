@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-cifs-shares--acls.html'
+keywords: 'cifs share acls,share level acl,cifs permissions,cifs access control,share access control,cifs share retrieval'
 summary: 'Retrieve a share-level ACL on a CIFS share'
 ---
 
 = Retrieve a share-level ACL on a CIFS share
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the access control list (ACL) for a specific CIFS share to understand its permissions and access settings. This information is useful for managing and auditing share-level security configurations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/cifs/shares/{svm.uuid}/{share}/acls`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves the share-level ACL on a CIFS share.
 

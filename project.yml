@@ -1359,7 +1359,7 @@ sidebar:
       - title: Forward audit logs to syslog/splunk servers
         entries:
         - title: Overview
-          url: "/forward_audit_logs_to_syslog/splunk_servers.html"
+          url: "/forward_audit_logs_to_syslog_splunk_servers.html"
         - title: Define a remote syslog or splunk server to receive audit information
           url: "/get-security-audit-destinations.html"
         - title: Define the remote syslog or splunk server information
@@ -1433,7 +1433,7 @@ sidebar:
       - title: Manage authentication keys (for admins)
         entries:
         - title: Overview
-          url: "/manage_authentication_keys_(for_admins).html"
+          url: "/manage_authentication_keys_for_admins_.html"
         - title: Retrieve public keys configured for user accounts
           url: "/get-security-authentication-publickeys.html"
         - title: Create a public key for a user account
@@ -1441,7 +1441,7 @@ sidebar:
       - title: Manage authentication keys (end-users)
         entries:
         - title: Overview
-          url: "/manage_authentication_keys_(end-users).html"
+          url: "/manage_authentication_keys_end-users_.html"
         - title: Delete a public key for a user account
           url: "/delete-security-authentication-publickeys--.html"
         - title: Retrieve public keys configured for a user account

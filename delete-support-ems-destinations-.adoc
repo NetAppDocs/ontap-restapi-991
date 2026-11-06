@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-support-ems-destinations-.html'
+keywords: 'event destination,delete destination,notification delete,event notification,destination name,delete event'
 summary: 'Delete an event destination'
 ---
 
 = Delete an event destination
+:imagesdir: ./media/
+
+[.lead]
+Deletes an event destination to remove a specific notification endpoint from your configuration. Use this when you no longer need to send notifications to that destination.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/support/ems/destinations/{name}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Deletes an event destination.
+ONTAP 9.6
 
 == Related ONTAP commands
 

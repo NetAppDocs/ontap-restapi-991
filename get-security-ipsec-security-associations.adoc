@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-security-ipsec-security-associations.html'
+keywords: 'ipsec associations,security associations,internet key exchange,ipsec inbound,ipsec outbound,ike authentication'
 summary: 'Retrieve IPsec and IKE security associations'
 ---
 
 = Retrieve IPsec and IKE security associations
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the IPsec and IKE security associations to access detailed information about active security protocols, aiding in network security management.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/ipsec/security-associations`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves the IPsec and IKE (Internet Key Exchange) security associations.
 

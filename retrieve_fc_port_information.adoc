@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'retrieve_fc_port_information.html'
+keywords: 'fibre channel,fc logins,ontap connections,nvme fc,svm interface'
 summary: 'Retrieve FC port information'
 ---
 
 = Retrieve FC port information
+:imagesdir: ./media/
 
-
+[.lead]
+The Fibre Channel logins REST API provides detailed information about active FC logins formed by initiators that have successfully connected to ONTAP. These endpoints are essential for monitoring and managing connections that support higher-level protocols like Fibre Channel Protocol and NVMe over FC.
 
 == Overview
 

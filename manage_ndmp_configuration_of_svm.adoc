@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_ndmp_configuration_of_svm.html'
+keywords: 'ndmp configuration,manage svm,protocols ndmp,svm settings,ndmp settings'
 summary: 'Manage NDMP configuration of SVM'
 ---
 
 = Manage NDMP configuration of SVM
+:imagesdir: ./media/
 
-
+[.lead]
+Manage NDMP configurations of your SVMs using these endpoints to adjust settings such as authentication types and enabled status.
 
 You can use this API to manage NDMP configurations of SVMs.
 

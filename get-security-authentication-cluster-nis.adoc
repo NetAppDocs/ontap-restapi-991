@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-security-authentication-cluster-nis.html'
+keywords: 'nis configuration,nis domain,nis servers,cluster security,nis bound servers'
 summary: 'Retrieve the NIS configuration for the cluster'
 ---
 
 = Retrieve the NIS configuration for the cluster
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the NIS configuration for the cluster, giving you details about the NIS domain and servers by default.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/authentication/cluster/nis`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves the NIS configuration of the cluster. Both NIS domain and servers are displayed by default.
 The `bound_servers` property indicates the successfully bound NIS servers.

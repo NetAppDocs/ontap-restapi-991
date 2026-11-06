@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-storage-snaplock-event-retention-policies-.html'
+keywords: 'snaplock retention,delete policy,event retention,eb retention,ontap snaplock'
 summary: 'Delete an EBR policy'
 ---
 
 = Delete an EBR policy
+:imagesdir: ./media/
+
+[.lead]
+Deletes an Event Based Retention (EBR) policy when you need to remove it from your system.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/storage/snaplock/event-retention/policies/{policy.name}`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Deletes the specified Event Based Retention (EBR) policy.
 

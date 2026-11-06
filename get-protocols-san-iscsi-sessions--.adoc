@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-iscsi-sessions--.html'
+keywords: 'iscsi session,retrieve iscsi,iscsi connection,iscsi portal group,iscsi session handle'
 summary: 'Retrieve an iSCSI session'
 ---
 
 = Retrieve an iSCSI session
+:imagesdir: ./media/
+
+[.lead]
+Retrieves details about an iSCSI session, helping you monitor and manage active connections within your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/iscsi/sessions/{svm.uuid}/{tpgroup}/{tsih}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves an iSCSI session.
 

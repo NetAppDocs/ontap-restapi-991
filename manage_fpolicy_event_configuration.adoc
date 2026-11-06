@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_fpolicy_event_configuration.html'
+keywords: 'fpolicy configuration,fpolicy events,file access monitoring,file operation filters,svm protocol,cifs nfsv3'
 summary: 'Manage FPolicy event configuration'
 ---
 
 = Manage FPolicy event configuration
+:imagesdir: ./media/
 
-
+[.lead]
+Configure FPolicy event settings to determine which file accesses are monitored across different protocols, such as CIFS and NFS. By specifying file operations and applying filters, you control notifications for targeted protocols and file activities within your storage virtual machine (SVM).
 
 == Overview
 

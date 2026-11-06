@@ -3,17 +3,20 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_event_filters.html'
+keywords: 'event filters,filter management,message criteria,include exclude rules,support ems'
 summary: 'Manage event filters'
 ---
 
 = Manage event filters
+:imagesdir: ./media/
 
-
+[.lead]
+Manage specific event filter instances to tailor the handling of system messages based on criteria such as severity and message patterns. Use these endpoints to retrieve, update, or delete filters that control which events are included or excluded from certain operations.
 
 == Overview
 
 Manages a specific filter instance.
-See the documentation for <</docs/support/support_ems_filters,/support/ems/filters>> for details on the various properties.
+See the documentation for link:getting_started_with_the_ontap_rest_api.html#/docs/support/support_ems_filters[/support/ems/filters] for details on the various properties.
 
 == Examples
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'create_or_retrieve_snmp_traphosts.html'
+keywords: 'snmp traphosts,configure traphosts,retrieve traphosts,snmp traps,network monitoring,ontap snmp'
 summary: 'Create or retrieve SNMP traphosts'
 ---
 
 = Create or retrieve SNMP traphosts
+:imagesdir: ./media/
 
-
+[.lead]
+Configure and retrieve SNMP traphosts to manage how ONTAP sends SNMP traps to designated host machines. Use these endpoints to set up SNMPv1/SNMPv2c or SNMPv3 traphosts according to your network monitoring requirements.
 
 == Overview
 

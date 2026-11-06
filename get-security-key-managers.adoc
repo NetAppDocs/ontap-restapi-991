@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-security-key-managers.html'
+keywords: 'key managers,retrieve key managers,volume encryption,external server certificates,key backup'
 summary: 'Retrieve key managers'
 ---
 
 = Retrieve key managers
+:imagesdir: ./media/
+
+[.lead]
+Accesses key manager information, which is essential for managing encryption keys and maintaining security protocols.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/key-managers`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves key managers.
 

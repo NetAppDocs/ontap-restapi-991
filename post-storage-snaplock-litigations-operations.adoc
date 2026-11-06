@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-storage-snaplock-litigations-operations.html'
+keywords: 'snaplock operations,litigation management,legal hold,snaplock litigation,path management,litigation path'
 summary: 'Create or remove litigations for a path'
 ---
 
 = Create or remove litigations for a path
+:imagesdir: ./media/
+
+[.lead]
+Manages litigation holds for a specified path, applying or releasing legal holds as needed. Use this action when you need to comply with data retention requirements or legal guidelines regarding data preservation.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/snaplock/litigations/{litigation.id}/operations`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Creates or removes litigations for the specified path.
 

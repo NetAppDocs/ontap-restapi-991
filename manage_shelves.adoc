@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_shelves.html'
+keywords: 'shelf management,storage cluster,storage shelf,cluster shelves,storage information'
 summary: 'Manage shelves'
 ---
 
 = Manage shelves
+:imagesdir: ./media/
 
-
+[.lead]
+Access and manage storage shelf information within your cluster using the storage shelf GET API. Retrieve detailed data about all shelves or a specific shelf to monitor and organize your storage infrastructure effectively.
 
 == Retrieving storage shelf information
 

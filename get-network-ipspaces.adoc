@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-ipspaces.html'
+keywords: 'cluster ipspaces,network ipspaces,ipspace collection,ipspace retrieval,ipspace filters,ipspace records'
 summary: 'Retrieve IPspaces for a cluster'
 ---
 
 = Retrieve IPspaces for a cluster
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a collection of IPspaces for the entire cluster to review network isolation configurations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/ipspaces`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves a collection of IPspaces for the entire cluster.
+ONTAP 9.6
 
 == Related ONTAP commands
 

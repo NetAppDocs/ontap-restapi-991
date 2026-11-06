@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-s3-services-users.html'
+keywords: 's3 user,create user,user configuration,s3 services,access key,secret key'
 summary: 'Create an S3 user configuration'
 ---
 
 = Create an S3 user configuration
+:imagesdir: ./media/
+
+[.lead]
+Creates an S3 user configuration to define access for S3 services within a specific SVM. This operation is useful for managing user credentials and permissions for S3 interactions.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/s3/services/{svm.uuid}/users`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Creates the S3 user configuration.
+ONTAP 9.7
 
 == Important notes
 

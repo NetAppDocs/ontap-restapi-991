@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-metrocluster-diagnostics.html'
+keywords: 'metrocluster diagnostics,diagnostic results,metrocluster configuration,cluster diagnostics,diagnostic operation'
 summary: 'Retrieve diagnostic operation results for a MetroCluster configuration'
 ---
 
 = Retrieve diagnostic operation results for a MetroCluster configuration
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the results of a completed diagnostic operation for your MetroCluster configuration, which helps you assess the configuration's health and performance.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/metrocluster/diagnostics`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves the results of a completed diagnostic operation for the MetroCluster configuration.
 

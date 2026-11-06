@@ -3,17 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-ip-interfaces-metrics.html'
+keywords: 'interface metrics,performance metrics,network interface,throughput metrics,historical data'
 summary: 'Retrieve interface historical performance metrics'
 ---
 
 = Retrieve interface historical performance metrics
+:imagesdir: ./media/
+
+[.lead]
+Retrieves historical performance metrics for an interface to analyze its past performance and identify trends or issues over time.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/ip/interfaces/{uuid}/metrics`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Retrieves historical performance metrics for an interface.
-
+ONTAP 9.8
 
 == Parameters
 

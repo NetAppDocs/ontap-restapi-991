@@ -3,16 +3,26 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-security-audit.html'
+keywords: 'administrative audit,update settings,security audit,return records,return timeout'
 summary: 'Update administrative audit settings for GET requests'
 ---
 
 = Update administrative audit settings for GET requests
+:imagesdir: ./media/
+
+[.lead]
+Updates the administrative audit settings for GET requests to configure how these requests are logged and monitored within your environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/audit`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Updates administrative audit settings for GET requests.
+ONTAP 9.6
+
+== Usage notes
+
 All of the fields are optional. An empty body will make no changes.
 
 

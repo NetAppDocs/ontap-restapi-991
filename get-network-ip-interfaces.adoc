@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-ip-interfaces.html'
+keywords: 'ip interfaces,network interface,ip details,interface details,ipspace name,service policy'
 summary: 'Retrieve all IP interface details'
 ---
 
 = Retrieve all IP interface details
+:imagesdir: ./media/
+
+[.lead]
+Retrieves details of all IP interfaces to view their current configurations in your network environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/ip/interfaces`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves the details of all IP interfaces.
+ONTAP 9.6
 
 == Related ONTAP Commands
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-fc-logins.html'
+keywords: 'fc logins,retrieves logins,fiber channel,vserver initiator,san nvme'
 summary: 'Retrieve FC logins'
 ---
 
 = Retrieve FC logins
+:imagesdir: ./media/
+
+[.lead]
+Retrieves information about FC logins to monitor and manage Fibre Channel connections within your ONTAP environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/fc/logins`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves FC logins.
 

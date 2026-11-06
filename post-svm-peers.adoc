@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-svm-peers.html'
+keywords: 'svm peer,peer relationship,peer svm name,intracluster peering,svm uuid,applications peering'
 summary: 'Create a new SVM peer relationship'
 ---
 
 = Create a new SVM peer relationship
+:imagesdir: ./media/
+
+[.lead]
+Creates a new SVM peer relationship to establish communication between two SVMs. This is typically used for operations that require data sharing or replication, such as SnapMirror applications.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/svm/peers`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a new SVM peer relationship.
+ONTAP 9.6
 
 == Important notes
 

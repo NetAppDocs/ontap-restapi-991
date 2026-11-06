@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-luns-metrics.html'
+keywords: 'lun metrics,performance metrics,throughput read,latency total,iops write'
 summary: 'Retrieve historical performance metrics for a LUN'
 ---
 
 = Retrieve historical performance metrics for a LUN
+:imagesdir: ./media/
+
+[.lead]
+Obtains historical performance metrics for a LUN, which helps you analyze and monitor the performance trends over time.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/luns/{uuid}/metrics`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves historical performance metrics for a LUN.
 

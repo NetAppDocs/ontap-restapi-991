@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-name-services-name-mappings.html'
+keywords: 'name mapping,svm configuration,name services,vserver mapping,svm name'
 summary: 'Retrieve hostname mapping for all SVMs'
 ---
 
 = Retrieve hostname mapping for all SVMs
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the hostname mapping configuration for all SVMs, providing valuable information for managing name mappings across your storage virtual machines.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/name-services/name-mappings`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves the name mapping configuration for all SVMs.
 

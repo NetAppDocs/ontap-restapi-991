@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-file-access-tracing-filters-.html'
+keywords: 'security trace,filter entries,file access tracing,security filter,svm uuid,trace filter'
 summary: 'Retrieve information about security trace filter entries for an SVM'
 ---
 
 = Retrieve information about security trace filter entries for an SVM
+:imagesdir: ./media/
+
+[.lead]
+Retrieves information about security trace filter entries for a Storage Virtual Machine (SVM). Use this to examine security trace configurations and diagnose security-related activities within the SVM.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/file-access-tracing/filters/{svm.uuid}/{index}`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Retrieves information about security trace filter entries.
+ONTAP 9.8
 
 == Related ONTAP commands
 

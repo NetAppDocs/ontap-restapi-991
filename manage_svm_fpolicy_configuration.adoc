@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_svm_fpolicy_configuration.html'
+keywords: 'fpolicy configuration,fpolicy management,svm fpolicy,fpolicy events,fpolicy engine'
 summary: 'Manage SVM FPolicy configuration'
 ---
 
 = Manage SVM FPolicy configuration
+:imagesdir: ./media/
 
-
+[.lead]
+Configure FPolicy policies to manage and monitor file access events on your storage virtual machine (SVM). Use these endpoints to specify policy attributes such as events to track, associated engines for notifications, and access behavior during server downtimes. Control the scope of policies by defining criteria like included or excluded volumes, shares, and file extensions.
 
 == Overview
 

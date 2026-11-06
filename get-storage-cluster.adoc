@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-cluster.html'
+keywords: 'cluster storage,storage tiers,storage details,admin roles,readonly roles'
 summary: 'Report cluster-wide storage details across different tiers'
 ---
 
 = Report cluster-wide storage details across different tiers
+:imagesdir: ./media/
+
+[.lead]
+Reports detailed storage information across various tiers within a cluster. This is useful when you need comprehensive insights into your storage configuration and utilization.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/cluster`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Reports cluster wide storage details across different tiers. By default, this endpoint returns all fields.
 Supports the following roles: admin, and readonly.

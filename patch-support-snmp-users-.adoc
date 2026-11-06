@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-support-snmp-users-.html'
+keywords: 'snmp user,comment update,snmp comment,engine id,snmp modify,security login'
 summary: 'Update the comment parameter of an SNMP user'
 ---
 
 = Update the comment parameter of an SNMP user
+:imagesdir: ./media/
+
+[.lead]
+Updates the comment parameter for an SNMP user to manage user information effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/support/snmp/users/{engine_id}/{name}`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Updates the comment parameter of an SNMP user.
 

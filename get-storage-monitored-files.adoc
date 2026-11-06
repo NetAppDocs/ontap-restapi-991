@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-monitored-files.html'
+keywords: 'monitored files,retrieve files,file statistics,file metrics,file latency,file throughput'
 summary: 'Retrieve all monitored files'
 ---
 
 = Retrieve all monitored files
+:imagesdir: ./media/
+
+[.lead]
+Accesses the list of all monitored files, which can help you manage and analyze file activity within your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/monitored-files`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves all monitored files.
 

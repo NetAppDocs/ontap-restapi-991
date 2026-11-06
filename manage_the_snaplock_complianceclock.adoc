@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_the_snaplock_complianceclock.html'
+keywords: 'snaplock,compliance clock,expiry time,initialize compliance,system time'
 summary: 'Manage the SnapLock ComplianceClock'
 ---
 
 = Manage the SnapLock ComplianceClock
+:imagesdir: ./media/
 
-
+[.lead]
+Use this API to manage the ComplianceClock, which determines the expiration time for SnapLock objects in the system. You can initialize the ComplianceClock once, but it cannot be changed afterwards.
 
 This API manages the ComplianceClock of the system. ComplianceClock determines the expiry time of the SnapLock objects in the system. The user can initialize the ComplianceClock once and when it is set, it cannot be changed by the user. ComplianceClock initialize is not supported in REST.
 

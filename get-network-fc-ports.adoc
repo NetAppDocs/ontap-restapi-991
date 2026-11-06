@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-fc-ports.html'
+keywords: 'fc ports,network ports,fabric name,port statistics,port metrics,connected speed'
 summary: 'Retrieve FC ports'
 ---
 
 = Retrieve FC ports
+:imagesdir: ./media/
+
+[.lead]
+Retrieves information about FC ports, accessing details that are essential for configuring and monitoring your storage network. Use this endpoint when you need to manage or audit the current FC port settings and statistics.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/fc/ports`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves FC ports.
 

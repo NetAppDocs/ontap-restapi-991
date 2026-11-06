@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-ndmp.html'
+keywords: 'ndmp mode,retrieve ndmp,current ndmp,status ndmp,ndmp node,ndmp protocol'
 summary: 'Retrieve current NDMP mode'
 ---
 
 = Retrieve current NDMP mode
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the current NDMP mode, offering insight into the active data management protocol setting. You use this endpoint to monitor and verify NDMP status for data transfer operations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/ndmp`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Retrieves the current NDMP mode.
+ONTAP 9.7
 
 == Related ONTAP commands
 

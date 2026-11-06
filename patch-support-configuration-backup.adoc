@@ -3,17 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-support-configuration-backup.html'
+keywords: 'cluster configuration,configuration backup,cluster update,backup update,record return,cluster records'
 summary: 'Update cluster configuration backup information'
 ---
 
 = Update cluster configuration backup information
+:imagesdir: ./media/
+
+[.lead]
+Updates the cluster configuration backup information to ensure that the latest settings are accurately reflected in your backup records. This is useful when you need to maintain an up-to-date backup of your cluster configuration for recovery or auditing purposes.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/support/configuration-backup`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Updates the cluster configuration backup information.
-
+ONTAP 9.6
 
 == Parameters
 

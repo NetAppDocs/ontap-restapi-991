@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-ndmp-nodes.html'
+keywords: 'ndmp configurations,node configurations,ndmp nodes,authentication types,system services ndmp,node uuid'
 summary: 'Retrieve the NDMP node configurations for all nodes'
 ---
 
 = Retrieve the NDMP node configurations for all nodes
+:imagesdir: ./media/
+
+[.lead]
+Retrieves NDMP node configurations to examine the settings across all nodes, helping you manage NDMP service configurations effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/ndmp/nodes`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves NDMP node configurations for all of the nodes.
 

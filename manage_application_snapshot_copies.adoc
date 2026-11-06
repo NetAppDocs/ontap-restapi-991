@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_application_snapshot_copies.html'
+keywords: 'snapshot management,application snapshot,crash consistent,snapshot scheduling,snapshot restore,application consistent'
 summary: 'Manage application Snapshot copies'
 ---
 
 = Manage application Snapshot copies
+:imagesdir: ./media/
 
-
+[.lead]
+Manage application Snapshot copies to ensure data protection and recovery for storage elements associated with your applications. Use these endpoints to create, restore, and schedule Snapshot copies, with consistency types available for detailed record keeping.
 
 == Overview
 

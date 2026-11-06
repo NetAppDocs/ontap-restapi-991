@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_nvme_services.html'
+keywords: 'nvme services,non volatile memory express,svm nvme,performance monitoring,iops latency'
 summary: 'Manage NVMe services'
 ---
 
 = Manage NVMe services
+:imagesdir: ./media/
 
-
+[.lead]
+Create, update, delete, and discover NVMe services for SVMs using the NVMe service REST API. Establishing an NVMe service is essential before NVMe host initiators can connect to an SVM.
 
 == Overview
 

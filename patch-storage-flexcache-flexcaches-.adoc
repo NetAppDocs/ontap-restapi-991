@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-storage-flexcache-flexcaches-.html'
+keywords: 'flexcache volume,prepopulate directory,cluster storage,flexcache uuid,directory paths,ontap flexcache'
 summary: 'Pre-populate a FlexCache volume in the cluster'
 ---
 
 = Pre-populate a FlexCache volume in the cluster
+:imagesdir: ./media/
+
+[.lead]
+Prepopulates a FlexCache volume in the cluster to ensure that specific directory paths are cached and ready for access. This operation is useful when you need to optimize data access times for frequently accessed directories in your cluster environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/storage/flexcache/flexcaches/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Prepopulates a FlexCache volume in the cluster.
+ONTAP 9.8
 
 == Required properties
 

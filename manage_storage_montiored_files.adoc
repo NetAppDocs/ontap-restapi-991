@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_storage_montiored_files.html'
+keywords: 'storage monitoring,monitored files,performance metrics,delete file,provision file,storage management'
 summary: 'Manage storage montiored files'
 ---
 
 = Manage storage montiored files
+:imagesdir: ./media/
 
-
+[.lead]
+Manage monitored files within your storage environment to efficiently track and maintain performance metrics. Use these endpoints to retrieve, provision, and remove monitored files, ensuring optimized data management and monitoring capabilities.
 
 === Retrieving all monitored files
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_event_based_retention_operations.html'
+keywords: 'event retention, snaplock operations, ebr policy, volume management, retention delete'
 summary: 'Manage event based retention operations'
 ---
 
 = Manage event based retention operations
+:imagesdir: ./media/
 
-
+[.lead]
+Manage event-based retention operations to display current activities and apply policies on specified volumes. Utilize these endpoints to track and enforce retention policies effectively across your storage environment.
 
 Use this API to display all Event Based Retention (EBR) operations and to apply an EBR policy on a specified volume.
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-application-applications.html'
+keywords: 'applications retrieval,sort applications,svm filter,template protocol,application statistics,iops ranking'
 summary: 'Retrieve applications'
 ---
 
 = Retrieve applications
+:imagesdir: ./media/
+
+[.lead]
+Retrieves applications to access their specific configurations and details. Use this endpoint to gather information on applications for management and analysis purposes.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/application/applications`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves applications.
+ONTAP 9.6
 
 == Expensive properties
 

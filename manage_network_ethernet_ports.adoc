@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_network_ethernet_ports.html'
+keywords: 'ethernet ports,network device,link aggregation,vlan management,broadcast domain'
 summary: 'Manage network Ethernet ports'
 ---
 
 = Manage network Ethernet ports
+:imagesdir: ./media/
 
-
+[.lead]
+Manage Ethernet ports on your network, whether physical or virtual, using the ONTAP REST API. These endpoints enable you to retrieve detailed information, update configurations, and create or delete ports, particularly VLAN and LAG types, to optimize network connectivity and organization.
 
 == Overview
 

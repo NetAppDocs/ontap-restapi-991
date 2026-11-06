@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-security-certificates-.html'
+keywords: 'security certificate,certificate delete,delete certificate,security management,certificate uuid'
 summary: 'Delete security certificates'
 ---
 
 = Delete security certificates
+:imagesdir: ./media/
+
+[.lead]
+Deletes a security certificate to remove it from your ONTAP system when it is no longer needed or has been replaced.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/security/certificates/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Deletes a security certificate.
+ONTAP 9.6
 
 == Related ONTAP commands
 

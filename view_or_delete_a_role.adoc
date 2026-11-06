@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'view_or_delete_a_role.html'
+keywords: 'role retrieval,delete role,svm scoped role,cluster scoped role,predefined roles'
 summary: 'View or delete a role'
 ---
 
 = View or delete a role
+:imagesdir: ./media/
 
-
+[.lead]
+Retrieve or delete roles within your ONTAP environment using these endpoints. Specify the owner UUID and role name to manage roles that are either SVM-scoped or cluster-scoped. Note that while pre-defined roles can be viewed, they are not eligible for deletion.
 
 == Overview
 

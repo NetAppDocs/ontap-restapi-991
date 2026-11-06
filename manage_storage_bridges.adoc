@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_storage_bridges.html'
+keywords: 'storage bridge,cluster bridge,bridge information,wwn lookup,bridge retrieval'
 summary: 'Manage storage bridges'
 ---
 
 = Manage storage bridges
+:imagesdir: ./media/
 
-
+[.lead]
+Retrieve information about storage bridges within the cluster using these endpoints. Access details such as worldwide names (WWNs), model, state, and configuration to monitor and manage bridge connections effectively.
 
 == Retrieving storage bridge information
 

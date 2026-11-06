@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-support-ems-events.html'
+keywords: 'event retrieval,observed events,node filter,message severity,event log,event collection'
 summary: 'Retrieve observed events'
 ---
 
 = Retrieve observed events
+:imagesdir: ./media/
+
+[.lead]
+Accesses a collection of observed events, which helps in monitoring and managing your system's event logs.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/support/ems/events`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves a collection of observed events.
 

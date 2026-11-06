@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_cluster_licensing.html'
+keywords: 'cluster licensing,license compliance,feature package,node scope,site scope,license formats'
 summary: 'Manage cluster licensing'
 ---
 
 = Manage cluster licensing
+:imagesdir: ./media/
 
-
+[.lead]
+Manage licenses to customize your system's features according to organizational needs. Use these endpoints to enable new features, monitor compliance states, and manage the lifecycle of licenses across your cluster.
 
 == Overview
 

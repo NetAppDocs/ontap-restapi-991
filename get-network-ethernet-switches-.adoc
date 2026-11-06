@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-ethernet-switches-.html'
+keywords: 'ethernet switch,switch details,networking switch,ontap ethernet,network switch'
 summary: 'Retrieve Ethernet switch details'
 ---
 
 = Retrieve Ethernet switch details
+:imagesdir: ./media/
+
+[.lead]
+Accesses detailed information about an Ethernet switch, which can help you understand its configuration and status.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/ethernet/switches/{name}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves the details of an ethernet switch.
 

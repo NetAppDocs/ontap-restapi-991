@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_snaplock_file_retention_time.html'
+keywords: 'snaplock retention,privileged delete,retention time,worm file,file expiry'
 summary: 'Manage SnapLock file retention time'
 ---
 
 = Manage SnapLock file retention time
+:imagesdir: ./media/
 
-
+[.lead]
+Manage the SnapLock retention time of files to control data compliance and regulatory requirements. Use these endpoints to set or extend the retention period and perform privileged-delete operations when necessary.
 
 This API manages the SnapLock retention time of a file. You can perform a privileged-delete operation by executing this API.
 

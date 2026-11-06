@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-security-authentication-publickeys.html'
+keywords: 'public key,account creation,user account,key creation,security login,public key index'
 summary: 'Create a public key for a user account'
 ---
 
 = Create a public key for a user account
+:imagesdir: ./media/
+
+[.lead]
+Creates a public key for a user account, enabling secure authentication and access management. This is useful for configuring account security in environments where public key authentication is preferred.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/authentication/publickeys`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Creates a public key for a user account.
+ONTAP 9.7
 
 == Required properties
 
@@ -27,7 +34,7 @@ Creates a public key for a user account.
 
 == Learn more
 
-* link:manage_authentication_keys_(for_admins).html[DOC /security/authentication/publickeys]
+* link:manage_authentication_keys_for_admins_.html[DOC /security/authentication/publickeys]
 * link:manage_security-related_accounts.html[DOC /security/accounts]
 
 

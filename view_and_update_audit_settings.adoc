@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'view_and_update_audit_settings.html'
+keywords: 'audit settings, administrative audit, security log, update log, retrieve log'
 summary: 'View and update audit settings'
 ---
 
 = View and update audit settings
+:imagesdir: ./media/
 
-
+[.lead]
+Control and modify audit logging settings with these endpoints. Use them to update administrative audit settings specifically for GET requests, ensuring all changes are consistently logged.
 
 == Overview
 

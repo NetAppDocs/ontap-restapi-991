@@ -3,16 +3,26 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-security-gcp-kms-.html'
+keywords: 'google cloud,cloud kms,delete configuration,kms uuid,gcp netapp'
 summary: 'Delete a Google Cloud KMS configuration'
 ---
 
 = Delete a Google Cloud KMS configuration
+:imagesdir: ./media/
+
+[.lead]
+Deletes a Google Cloud KMS configuration to remove the key management setup from your environment. This is useful when you need to reconfigure your key management or discontinue using Google Cloud KMS.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/security/gcp-kms/{uuid}`#
 
-*Introduced In:* 9.9
+== Introduced in
 
-Deletes a Google Cloud KMS configuration.
+ONTAP 9.9
+
+== Usage notes
+
 Note: This method is only available to the NetApp Cloud Volume Services for GCP.
 
 == Related ONTAP commands

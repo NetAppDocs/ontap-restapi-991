@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_snapmirror_policies.html'
+keywords: 'snapmirror policies,async relationship,sync relationship,flexvol volume,consistency group,automated failover'
 summary: 'Manage SnapMirror policies'
 ---
 
 = Manage SnapMirror policies
+:imagesdir: ./media/
 
-
+[.lead]
+Manage SnapMirror policies to control the behavior and configuration attributes of SnapMirror relationships in your ONTAP environment. Utilize async and sync policy types to define how data is mirrored between endpoints, ensuring data consistency and availability across FlexVol volumes, FlexGroup volumes, SVMs, and Consistency Groups.
 
 == Managing SnapMirror policies
 

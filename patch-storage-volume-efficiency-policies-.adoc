@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-storage-volume-efficiency-policies-.html'
+keywords: 'volume efficiency,efficiency policy,update policy,modify efficiency,storage volume,volume policy'
 summary: 'Update a volume efficiency policy'
 ---
 
 = Update a volume efficiency policy
+:imagesdir: ./media/
+
+[.lead]
+Updates a volume efficiency policy to modify its configuration settings as needed for optimizing storage resources.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/storage/volume-efficiency-policies/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Updates a volume efficiency policy.
+ONTAP 9.8
 
 == Related ONTAP commands
 

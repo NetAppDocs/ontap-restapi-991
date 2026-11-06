@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-software-packages-.html'
+keywords: 'software package,cluster software,package information,software version,package repository'
 summary: 'Retrieve the software package information'
 ---
 
 = Retrieve the software package information
+:imagesdir: ./media/
+
+[.lead]
+Retrieves software package information to access details about available packages in the repository, which can assist in managing software updates and installations on the cluster.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/software/packages/{version}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves the software package information.
+ONTAP 9.6
 
 == Related ONTAP commands
 

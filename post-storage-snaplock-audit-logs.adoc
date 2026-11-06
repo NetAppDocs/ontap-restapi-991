@@ -3,16 +3,27 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-storage-snaplock-audit-logs.html'
+keywords: 'snaplock log,log configuration,log retention,log volume,snaplock audit'
 summary: 'Create a SnapLock log configuration for an SVM'
 ---
 
 = Create a SnapLock log configuration for an SVM
+:imagesdir: ./media/
+
+[.lead]
+Creates a SnapLock log configuration for an SVM, specifying details like the log volume, maximum log file size, and retention period. This configuration helps manage and retain audit logs according to your compliance needs.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/snaplock/audit-logs`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Creates a SnapLock log configuration for an SVM. A SnapLock log configuration consists of a volume to store the log, the maximum size of the log file, and the default period of time for which the log file should be retained. The input parameter retention_period expects the duration in ISO 8601 format.
+ONTAP 9.7
+
+== Usage notes
+
+A SnapLock log configuration consists of a volume to store the log, the maximum size of the log file, and the default period of time for which the log file should be retained. The input parameter retention_period expects the duration in ISO 8601 format.
 
 == Required properties
 

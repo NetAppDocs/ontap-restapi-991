@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-application-templates-.html'
+keywords: 'application template,retrieve template,template properties,template prerequisites,template description,template example'
 summary: 'Retrieve an application template'
 ---
 
 = Retrieve an application template
+:imagesdir: ./media/
+
+[.lead]
+Retrieves an application template to access the specific configuration properties associated with that template. This is useful when you need to understand or validate the template's prerequisites and property settings for your applications.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/application/templates/{name}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves an application template.
+ONTAP 9.6
 
 == Template properties
 

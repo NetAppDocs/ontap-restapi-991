@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-svm-svms-.html'
+keywords: 'svm deletion,delete svm,svm offline,snapmirror removal,data volume removal,vserver delete'
 summary: 'Delete an SVM'
 ---
 
 = Delete an SVM
+:imagesdir: ./media/
+
+[.lead]
+Deletes a storage virtual machine (SVM) to remove it from your ONTAP cluster. This operation is typically used when you need to decommission an SVM after ensuring all associated objects and relationships have been appropriately handled.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/svm/svms/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Deletes an SVM. As a prerequisite, SVM objects must be deleted first. SnapMirror relationships must be deleted and data volumes must be offline and deleted.
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-licensing-capacity-pools.html'
+keywords: 'capacity pools,licensing capacity,cluster licensing,node filter,license manager,serial number'
 summary: 'Retrieve capacity pools'
 ---
 
 = Retrieve capacity pools
+:imagesdir: ./media/
+
+[.lead]
+Views the details of capacity pools, which provide insights into storage allocation and usage. This information helps you manage and optimize resources within your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/licensing/capacity-pools`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves a collection of capacity pools.
 

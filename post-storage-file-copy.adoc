@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-storage-file-copy.html'
+keywords: 'file copy,flexible volumes,cutover time,hold quiescence,max throughput,volume file copy'
 summary: 'Start a file copy operation'
 ---
 
 = Start a file copy operation
+:imagesdir: ./media/
+
+[.lead]
+Initiates a file copy operation on flexible volumes. Use this endpoint to specify the files you want to copy and their destination paths.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/file/copy`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Starts a file copy operation. Only supported on flexible volumes.
 

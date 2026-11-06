@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-ntp-servers.html'
+keywords: 'external ntp,ntp servers,time adjustment,time correction,time service,ontap time'
 summary: 'Retrieve external NTP time servers'
 ---
 
 = Retrieve external NTP time servers
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the collection of external NTP time servers used for time adjustment and correction. This helps ensure your system maintains accurate time synchronization.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/ntp/servers`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves the collection of external NTP time servers ONTAP uses for time adjustment and correction.
 

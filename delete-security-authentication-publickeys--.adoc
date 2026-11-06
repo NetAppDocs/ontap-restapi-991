@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-security-authentication-publickeys--.html'
+keywords: 'public key,delete public key,user account,key index,security authentication,account owner'
 summary: 'Delete a public key for a user account'
 ---
 
 = Delete a public key for a user account
+:imagesdir: ./media/
+
+[.lead]
+Deletes a public key associated with a user account, removing access permissions linked to that key.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/security/authentication/publickeys/{owner.uuid}/{account.name}/{index}`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Deletes the public key for a user account.
 
@@ -20,7 +31,7 @@ Deletes the public key for a user account.
 
 == Learn more
 
-* link:manage_authentication_keys_(end-users).html[DOC /security/authentication/publickeys/{owner.uuid}/{account.name}/\{index}]
+* link:manage_authentication_keys_end-users_.html[DOC /security/authentication/publickeys/{owner.uuid}/{account.name}/\{index}]
 * link:manage_security-related_accounts.html[DOC /security/accounts]
 
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_storage_flexcache_origin_volumes.html'
+keywords: 'flexcache management,origin volume,flexvol configuration,flexgroup storage,intra cluster'
 summary: 'Manage storage FlexCache origin volumes'
 ---
 
 = Manage storage FlexCache origin volumes
+:imagesdir: ./media/
 
-
+[.lead]
+FlexCache origin volume endpoints provide access to configurations of persistent cache volumes within your storage environment. You use these endpoints to retrieve and modify attributes of origin volumes, supporting both intra-Vserver and cross-cluster setups. This facilitates efficient data distribution and management across clusters.
 
 == Overview
 

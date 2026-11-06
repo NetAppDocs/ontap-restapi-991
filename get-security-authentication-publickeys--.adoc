@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-security-authentication-publickeys--.html'
+keywords: 'public keys,user account,account owner,retrieve keys,security authentication'
 summary: 'Retrieve public keys configured for a user account'
 ---
 
 = Retrieve public keys configured for a user account
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the public keys that are configured for a specific user account. This is useful when you need to verify or audit the public keys associated with an account.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/authentication/publickeys/{owner.uuid}/{account.name}/{index}`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves the public keys configured for a user account.
 
@@ -20,7 +31,7 @@ Retrieves the public keys configured for a user account.
 
 == Learn more
 
-* link:manage_authentication_keys_(end-users).html[DOC /security/authentication/publickeys/{owner.uuid}/{account.name}/\{index}]
+* link:manage_authentication_keys_end-users_.html[DOC /security/authentication/publickeys/{owner.uuid}/{account.name}/\{index}]
 * link:manage_security-related_accounts.html[DOC /security/accounts]
 
 

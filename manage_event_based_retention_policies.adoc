@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_event_based_retention_policies.html'
+keywords: 'snaplock,retention period,event retention,vsadmin snaplock,legal hold'
 summary: 'Manage event based retention policies'
 ---
 
 = Manage event based retention policies
+:imagesdir: ./media/
 
-
+[.lead]
+Define and apply event-based retention policies to govern how long files are preserved based on specific criteria. Use these endpoints to manage policies, specifying a retention period for individual files or directories, with operations restricted to users with the vsadmin-snaplock role.
 
 An event retention policy consists of a policy-name and a retention-period. The policy can be applied to a single file or files in a directory. Only a user with the security login role vsadmin-snaplock can perform the operation. EBR policies cannot be applied to files under a Legal-Hold.
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-security-roles-.html'
+keywords: 'delete role,role removal,role deletion,svm role,security roles,role uuid'
 summary: 'Delete a role'
 ---
 
 = Delete a role
+:imagesdir: ./media/
+
+[.lead]
+Deletes a specified role to manage and control access within your ONTAP environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/security/roles/{owner.uuid}/{name}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Deletes the specified role.
+ONTAP 9.6
 
 == Required parameters
 

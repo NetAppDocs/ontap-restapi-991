@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_nvme_namespaces.html'
+keywords: 'nvme namespace,logical blocks,storage virtual machine,thin provisioning,performance monitoring,volume cloning'
 summary: 'Manage NVMe namespaces'
 ---
 
 = Manage NVMe namespaces
+:imagesdir: ./media/
 
-
+[.lead]
+Manage NVMe namespaces within volumes using ONTAP REST API to create, update, delete, and discover logical storage blocks accessible via the NVMe over Fabrics protocol. Use these endpoints for provisioning namespaces with specific sizes, monitoring performance metrics, and facilitating subsystem mapping for host access.
 
 == Overview
 
@@ -318,7 +321,7 @@ An NVMe namespace clone can also be set to auto-delete by setting the `auto_dele
 
 === Creating a new NVMe namespace clone
 
-You create an NVMe namespace clone as you create any NVMe namespace -- a POST to link:getting_started_with_the_ontap_rest_api.html#/NVMe/nvme_namespace_create[/storage/namespaces]. Set `clone.source.uuid` or `clone.source.name` to identify the source NVMe namespace from which the clone is created. The NVMe namespace clone and its source must reside in the same volume.
+You create an NVMe namespace clone as you create any NVMe namespace -- a POST to link:post-storage-namespaces.html[/storage/namespaces]. Set `clone.source.uuid` or `clone.source.name` to identify the source NVMe namespace from which the clone is created. The NVMe namespace clone and its source must reside in the same volume.
 
 The source NVMe namespace can reside in a Snapshot copy, in which case, the `clone.source.name` field must be used to identify it. Add `/.snapshot/<snapshot_name>` to the path after the volume name to identify the Snapshot copy. For example `/vol/vol1/.snapshot/snap1/namespace1`.
 
@@ -335,7 +338,7 @@ curl -X POST 'https://<mgmt-ip>/api/storage/namespaces' -H 'accept: application/
 
 === Over-writing an existing NVMe namespace's data as a clone of another
 
-You can over-write an existing NVMe namespace as a clone of another. You do this as a PATCH on the NVMe namespace to overwrite -- a PATCH to link:getting_started_with_the_ontap_rest_api.html#/NVMe/nvme_namespace_modify[/storage/namespaces/\{uuid}]. Set the `clone.source.uuid` or `clone.source.name` property to identify the source NVMe namespace from which the clone data is taken. The NVMe namespace clone and its source must reside in the same volume.
+You can over-write an existing NVMe namespace as a clone of another. You do this as a PATCH on the NVMe namespace to overwrite -- a PATCH to link:patch-storage-namespaces-.html[/storage/namespaces/\{uuid}]. Set the `clone.source.uuid` or `clone.source.name` property to identify the source NVMe namespace from which the clone data is taken. The NVMe namespace clone and its source must reside in the same volume.
 
 When used in a PATCH, the patched NVMe namespace's data is over-written as a clone of the source and the following properties are preserved from the patched namespace unless otherwise specified as part of the PATCH: `auto_delete`, `subsystem_map`, `status.state`, and `uuid`.
 

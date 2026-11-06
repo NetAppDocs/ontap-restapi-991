@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-mediators-.html'
+keywords: 'mediator state,mediator configuration,cluster mediator,mediator retrieval,mediator uuid'
 summary: 'Retrieve the ONTAP Mediator state and configuration'
 ---
 
 = Retrieve the ONTAP Mediator state and configuration
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the mediator's current state and configuration, which helps you understand its operational status and settings.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/mediators/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves the mediator state and configuration.
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-security-key-managers-migrate.html'
+keywords: 'key migration,svm key manager,key manager migrate,external kmip,azure key vault,google cloud key manager'
 summary: 'Migrate SVM keys between security key managers'
 ---
 
 = Migrate SVM keys between security key managers
+:imagesdir: ./media/
+
+[.lead]
+Migrates the keys of an SVM between the cluster's key manager and the SVM's key manager. This operation is useful when transitioning keys to a different key management system within your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/key-managers/{source.uuid}/migrate`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Migrates the keys belonging to an SVM between the cluster's key manager and the SVM's key manager. This operation can run for several minutes.
 

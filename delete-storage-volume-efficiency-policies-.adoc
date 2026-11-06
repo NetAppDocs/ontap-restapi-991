@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-storage-volume-efficiency-policies-.html'
+keywords: 'volume efficiency policy,delete volume efficiency,remove efficiency policy,storage policy delete,volume efficiency management'
 summary: 'Delete a volume efficiency policy'
 ---
 
 = Delete a volume efficiency policy
+:imagesdir: ./media/
+
+[.lead]
+Deletes a volume efficiency policy to remove unwanted or outdated policies from the system.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/storage/volume-efficiency-policies/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Deletes a volume efficiency policy.
+ONTAP 9.8
 
 == Related ONTAP commands
 

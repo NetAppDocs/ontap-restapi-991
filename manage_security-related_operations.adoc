@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_security-related_operations.html'
+keywords: 'security operations,cluster encryption,key manager configuration,software encryption,fips mode'
 summary: 'Manage security-related operations'
 ---
 
 = Manage security-related operations
+:imagesdir: ./media/
 
-
+[.lead]
+Use these endpoints to perform security-related operations across your cluster. Whether configuring encryption settings or managing FIPS mode, these APIs help ensure your data is protected according to your security requirements.
 
 :doctype: book
 

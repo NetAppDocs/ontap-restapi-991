@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-cluster-mediators.html'
+keywords: 'create mediator,connect mediator,mediator information,return timeout,return records'
 summary: 'Create and connect an ONTAP Mediator'
 ---
 
 = Create and connect an ONTAP Mediator
+:imagesdir: ./media/
+
+[.lead]
+Creates and connects an ONTAP Mediator to facilitate communication and coordination between systems. Use this endpoint when setting up a new mediator to ensure proper integration in your environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/cluster/mediators`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Creates and connect a mediator.
 

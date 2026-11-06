@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-file-security-permissions--acl.html'
+keywords: 'file security,permissions,acl management,ntfs dacl,ntfs sacl'
 summary: 'Add a new SACL or DACL ACE'
 ---
 
 = Add a new SACL or DACL ACE
+:imagesdir: ./media/
+
+[.lead]
+Adds a new SACL or DACL ACE to manage file and directory security settings. Use this endpoint to configure access control entries for NTFS file permissions.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/file-security/permissions/{svm.uuid}/{path}/acl`#
 
-*Introduced In:* 9.9
+== Introduced in
+
+ONTAP 9.9
+
+== Usage notes
 
 Adds the new SACL/DACL ACL.
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_snapshot_copy_policies_and_schedules.html'
+keywords: 'snapshot management,snapshot policies,schedule retention,snapshot prefix,snapshot creation'
 summary: 'Manage Snapshot copy policies and schedules'
 ---
 
 = Manage Snapshot copy policies and schedules
+:imagesdir: ./media/
 
-
+[.lead]
+Use the Snapshot copy policy schedule APIs to manage schedules associated with Snapshot copy policies in your ONTAP environment. These endpoints help you create, retrieve, update, and delete schedules linked to Snapshot copy policies, ensuring efficient data protection and retention practices.
 
 == Overview
 

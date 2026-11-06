@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_nvme_subsystem_maps.html'
+keywords: 'nvme subsystem,subsystem map,nvme namespace,map creation,map deletion,subsystem hosts'
 summary: 'Manage NVMe subsystem maps'
 ---
 
 = Manage NVMe subsystem maps
+:imagesdir: ./media/
 
-
+[.lead]
+Create, delete, and discover NVMe subsystem maps to manage the association between NVMe namespaces and subsystems. These mappings grant access to hosts within a subsystem, facilitating efficient data access and management.
 
 == Overview
 

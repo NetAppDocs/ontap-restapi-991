@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-cluster-jobs-.html'
+keywords: 'job state,asynchronous job,update job,pause job,resume job,cancel job'
 summary: 'Update the state of an asynchronous job'
 ---
 
 = Update the state of an asynchronous job
+:imagesdir: ./media/
+
+[.lead]
+Updates the state of an asynchronous job to manage the progress or status of specific tasks within your system. Use this endpoint when you need to modify the state of ongoing operations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/cluster/jobs/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Updates the state of a specific asynchronous job.
 

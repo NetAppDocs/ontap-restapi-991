@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'snaplock_endpoints.html'
+keywords: 'snaplock worm,legal hold,compliance clock,privileged delete,file fingerprint,event retention'
 summary: 'ONTAP REST API snaplock endpoints'
 ---
 
 = ONTAP REST API snaplock endpoints
+:imagesdir: ./media/
 
-
+[.lead]
+SnapLock endpoints manage storage-enforced WORM and retention functionalities for non-rewritable data in regulatory environments. Use these endpoints to configure SnapLock logs, compliance clocks, event and file retention policies, privileged deletes, file fingerprints, and legal holds, ensuring data integrity and adherence to compliance standards.
 
 SnapLock is an alternative to the traditional optical "write once, read many" (WORM) data. SnapLock is used for the storage of read-only WORM data. SnapLock is a license-based, disk-based, open-protocol feature that works with application software to administer non-rewritable storage of data. The primary objective of this feature is to provide storage-enforced WORM and retention functionality. SnapLock can be deployed for protecting data in strict regulatory environments in such a way that even the storage administrator is considered an untrusted party. SnapLock provides special purpose volumes in which files can be stored and committed to a non-erasable, non-rewritable state either forever or for a designated retention period. SnapLock allows this retention to be performed at the granularity of individual files.
 These APIs allow you to manage the following endpoints:

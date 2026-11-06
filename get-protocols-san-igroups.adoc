@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-igroups.html'
+keywords: 'san protocols,initiator groups,lun mapping,ontap commands,field request,filter parameters'
 summary: 'Retrieve initiator groups'
 ---
 
 = Retrieve initiator groups
+:imagesdir: ./media/
+
+[.lead]
+Retrieves information about initiator groups, which can help you manage and configure access in your storage network.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/igroups`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves initiator groups.
 
@@ -845,7 +856,7 @@ All initiators or nested initiator groups in an initiator group must be from the
 
 When an initiator group is created, the `protocol` property is used to restrict member initiators to Fibre Channel (_fcp_), iSCSI (_iscsi_), or both (_mixed_). Initiator groups within a nested hierarchy may not have conflicting protocols.
 
-Zero or more initiators or nested initiator groups can be supplied when the initiator group is created. After creation, initiators can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/initiators` endpoint. Initiator groups containing other initiator groups report the aggregated list of initiators from all nested initiator groups, but modifications of the initiator list must be performed on the initiator group that directly contains the initiators. See link:post-protocols-san-igroups-initiators(#-san-igroup-initiator-create)anddelete-protocols-san-igroups-initiators-.html<</SAN/igroup_initiator_create,POST /protocols/san/igroups/{igroup.uuid}/initiators>> and [DELETE /protocols/san/igroups/{igroup.uuid}/initiators/\{name}]  for more details.
+Zero or more initiators or nested initiator groups can be supplied when the initiator group is created. After creation, initiators can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/initiators` endpoint. Initiator groups containing other initiator groups report the aggregated list of initiators from all nested initiator groups, but modifications of the initiator list must be performed on the initiator group that directly contains the initiators. See link:post-protocols-san-igroups-initiators.html[POST /protocols/san/igroups/{igroup.uuid}/initiators]  and link:delete-protocols-san-igroups-initiators-.html[DELETE /protocols/san/igroups/{igroup.uuid}/initiators/\{name}]  for more details.
 
 
 [cols=3*,options=header]
@@ -878,7 +889,7 @@ This array contains only the direct children of the initiator group. If the memb
 
 Zero or more nested initiator groups can be supplied when the initiator group is created. The initiator group will act as if it contains the aggregatation of all initiators in any nested initiator groups.
 
-After creation, nested initiator groups can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/igroups` endpoint. See link:post-protocols-san-igroups-igroups(#-san-igroup-nested-create)anddelete-protocols-san-igroups-igroups-.html<</SAN/igroup_nested_create,POST /protocols/san/igroups/{igroup.uuid}/igroups>> and [DELETE /protocols/san/igroups/{igroup.uuid}/igroups/\{uuid}]  for more details.
+After creation, nested initiator groups can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/igroups` endpoint. See link:post-protocols-san-igroups-igroups.html[POST /protocols/san/igroups/{igroup.uuid}/igroups]  and link:delete-protocols-san-igroups-igroups-.html[DELETE /protocols/san/igroups/{igroup.uuid}/igroups/\{uuid}]  for more details.
 
 
 |initiators
@@ -889,7 +900,7 @@ This property is mutually exclusive with the _igroups_ property during POST.
 
 During GET, this array contains initiators that are members of this group or any nested initiator groups below this group. When initiators of nested groups are returned, they include links to the initiator group that directly contains the initiator.
 
-Zero or more initiators can be supplied when the initiator group is created. After creation, initiators can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/initiators` endpoint. See link:post-protocols-san-igroups-initiators(#-san-igroup-initiator-create)anddelete-protocols-san-igroups-initiators-.html<</SAN/igroup_initiator_create,POST /protocols/san/igroups/{igroup.uuid}/initiators>> and [DELETE /protocols/san/igroups/{igroup.uuid}/initiators/\{name}]  for more details.
+Zero or more initiators can be supplied when the initiator group is created. After creation, initiators can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/initiators` endpoint. See link:post-protocols-san-igroups-initiators.html[POST /protocols/san/igroups/{igroup.uuid}/initiators]  and link:delete-protocols-san-igroups-initiators-.html[DELETE /protocols/san/igroups/{igroup.uuid}/initiators/\{name}]  for more details.
 
 
 |lun_maps

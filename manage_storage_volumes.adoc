@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_storage_volumes.html'
+keywords: 'flexvol volumes,flexgroup scalability,storage efficiency,flexclone snapshots,qos performance'
 summary: 'Manage storage volumes'
 ---
 
 = Manage storage volumes
+:imagesdir: ./media/
 
-
+[.lead]
+Manage storage volumes to create, modify, and monitor FlexVol, FlexGroup, FlexClone, and SnapLock volumes within your environment. Use these endpoints to provision and optimize storage, enforce quotas, and analyze file system properties to maintain effective storage operations.
 
 == Overview
 
@@ -42,7 +45,7 @@ The following APIs can be used to enable or disable and obtain quota state for a
 
 == File System Analytics
 
-File system analytics provide a quick method for obtaining information summarizing properties of all files within any directory tree of a volume. For more information on file system analytics, see link:storage_volumes_volume.uuid_files_path_endpoint_overview.html[DOC /storage/volumes{volume.uuid}/files/\{path}] . Analytics can be enabled or disabled on individual volumes.
+File system analytics provide a quick method for obtaining information summarizing properties of all files within any directory tree of a volume. For more information on file system analytics, see link:storage_volumes_volume_uuid_files_path_endpoint_overview.html[DOC /storage/volumes{volume.uuid}/files/\{path}] . Analytics can be enabled or disabled on individual volumes.
 
 The following APIs can be used to enable or disable and obtain analytics state for a FlexVol volume or a FlexGroup volume:
 

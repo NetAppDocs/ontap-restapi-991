@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_nfs_services.html'
+keywords: 'nfs configuration,svm management,performance monitoring,vstorage enabled,iops latency,throughput statistics'
 summary: 'Manage NFS services'
 ---
 
 = Manage NFS services
+:imagesdir: ./media/
 
-
+[.lead]
+Manage NFS service configurations to control and adjust NFS settings for your storage virtual machines (SVMs). Use these endpoints to retrieve, create, update, and delete NFS configurations, ensuring optimal performance and resource allocation for your network storage.
 
 === Retrieving an NFS configuration
 

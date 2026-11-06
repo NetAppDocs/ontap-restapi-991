@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-protocols-file-access-tracing-filters-.html'
+keywords: 'security trace,trace filters,file access tracing,delete filters,svm uuid'
 summary: 'Delete security trace filters'
 ---
 
 = Delete security trace filters
+:imagesdir: ./media/
+
+[.lead]
+Deletes security trace filters to remove existing configurations that trace security-related activities. Use this when you need to update or clear trace filter settings.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/protocols/file-access-tracing/filters/{svm.uuid}/{index}`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Deletes security trace filters.
+ONTAP 9.8
 
 == Related ONTAP commands
 

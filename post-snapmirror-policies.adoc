@@ -3,16 +3,27 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-snapmirror-policies.html'
+keywords: 'snapmirror policy,identity preservation,snapshot replication,svm configuration,async policy,sync policy'
 summary: 'Create a SnapMirror policy'
 ---
 
 = Create a SnapMirror policy
+:imagesdir: ./media/
+
+[.lead]
+Creates a SnapMirror policy to define the rules and settings for data replication between source and destination storage systems. Use this when you need to establish or update SnapMirror relationships to manage data protection and disaster recovery workflows.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/snapmirror/policies`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a SnapMirror policy. The property "identity_preservation" is applicable to only SnapMirror relationships with SVM endpoints and it indicates which configuration of the source SVM is replicated to the destination SVM.
+ONTAP 9.6
+
+== Usage notes
+
+The property "identity_preservation" is applicable to only SnapMirror relationships with SVM endpoints and it indicates which configuration of the source SVM is replicated to the destination SVM.
 
 It takes the following values:
 

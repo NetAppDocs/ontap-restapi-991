@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_cluster_nodes.html'
+keywords: 'cluster nodes,add node,delete node,node state,service processor,node configuration'
 summary: 'Manage cluster nodes'
 ---
 
 = Manage cluster nodes
+:imagesdir: ./media/
 
-
+[.lead]
+Use the Manage Cluster Nodes API to add, update, and retrieve node-specific configurations within a cluster. Utilize these endpoints to ensure all nodes are properly configured and operational, maintaining consistency across the cluster.
 
 = Overview
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_s3_service_policies.html'
+keywords: 's3 service management,s3 policy permissions,bucket access control,s3 resource management,s3 policy creation'
 summary: 'Manage S3 service policies'
 ---
 
 = Manage S3 service policies
+:imagesdir: ./media/
 
-
+[.lead]
+Manage S3 service policies to define and control access permissions for buckets and objects within your storage environment. Use these endpoints to create, retrieve, update, and delete policies, ensuring secure and organized management of your S3 resources.
 
 == Overview
 

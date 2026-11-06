@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_vscan_configuration.html'
+keywords: 'vscan configuration,virus scanning,server status,connection status,vscan server'
 summary: 'Manage Vscan configuration'
 ---
 
 = Manage Vscan configuration
+:imagesdir: ./media/
 
-
+[.lead]
+Access Vscan server configuration endpoints to display connection status details for external virus-scanning servers. Use these endpoints to monitor the status and connectivity of your Vscan servers effectively.
 
 == Overview
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-network-fc-wwpn-aliases.html'
+keywords: 'fc alias,wwpn alias,svm uuid,svm name,fc wwpn'
 summary: 'Create an FC WWPN alias'
 ---
 
 = Create an FC WWPN alias
+:imagesdir: ./media/
+
+[.lead]
+Creates an FC WWPN alias to define a human-readable name for a World Wide Port Name (WWPN) in your storage virtual machine (SVM). Use this feature to simplify management and identification of WWPNs in your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/network/fc/wwpn-aliases`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates an FC WWPN alias.
+ONTAP 9.6
 
 == Required properties
 

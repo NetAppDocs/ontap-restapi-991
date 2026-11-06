@@ -3,17 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-name-services-ldap.html'
+keywords: 'ldap configuration,svm ldap,ldap settings,ldap retrieval,ldap filter,svm settings'
 summary: 'Retrieve an LDAP configuration for all SVMs'
 ---
 
 = Retrieve an LDAP configuration for all SVMs
+:imagesdir: ./media/
+
+[.lead]
+Retrieves LDAP configurations for all SVMs to review or manage their directory service settings effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/name-services/ldap`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves the LDAP configurations for all SVMs.
-
+ONTAP 9.6
 
 == Parameters
 

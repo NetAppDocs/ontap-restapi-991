@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-support-ems-filters.html'
+keywords: 'event filter,create filter,filter rules,event criteria,ems support,ontap event'
 summary: 'Create an event filter'
 ---
 
 = Create an event filter
+:imagesdir: ./media/
+
+[.lead]
+Creates an event filter to customize which events you want to monitor based on specific criteria. This helps you manage and respond to events more effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/support/ems/filters`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates an event filter.
+ONTAP 9.6
 
 == Required properties
 

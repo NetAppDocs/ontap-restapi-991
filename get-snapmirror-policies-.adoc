@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-snapmirror-policies-.html'
+keywords: 'snapmirror policy,retrieve snapmirror,snapmirror uuid,snapmirror policy fields,snapmirror policies'
 summary: 'Retrieve a specific SnapMirror policy'
 ---
 
 = Retrieve a specific SnapMirror policy
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the details of a specified SnapMirror policy, helping you understand its configuration and rules. You might use this endpoint to review policies for replication tasks or compliance requirements.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/snapmirror/policies/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves a specific SnapMirror policy.
 

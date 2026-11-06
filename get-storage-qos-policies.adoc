@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-qos-policies.html'
+keywords: 'qos policies,collection retrieval,object count filter,expected iops,peak iops,svm uuid'
 summary: 'Retrieve QoS policies'
 ---
 
 = Retrieve QoS policies
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a collection of Quality of Service (QoS) policies to review and manage the performance settings applied to storage resources.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/qos/policies`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves a collection of QoS policies.
 
