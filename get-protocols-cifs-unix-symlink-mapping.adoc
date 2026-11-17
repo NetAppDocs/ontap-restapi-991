@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-cifs-unix-symlink-mapping.html'
+keywords: 'cifs unix mapping,unix symlink retrieval,symbolic link mapping,cifs symlink show,unix link paths'
 summary: 'Retrieve UNIX symbolic link mappings for CIFS clients'
 ---
 
 = Retrieve UNIX symbolic link mappings for CIFS clients
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the UNIX symbolic link mappings for CIFS clients to view the current link associations configured for cross-protocol access between UNIX and CIFS.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/cifs/unix-symlink-mapping`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves UNIX symbolic link mappings for CIFS clients.
+ONTAP 9.6
 
 == Related ONTAP commands
 

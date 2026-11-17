@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-s3-services-users.html'
+keywords: 'svm configuration,s3 user,retrieve configuration,object store,svm services'
 summary: 'Retrieve the SVM configuration for an S3 user'
 ---
 
 = Retrieve the SVM configuration for an S3 user
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the SVM configuration for an S3 user to understand the user's specific storage virtual machine settings. This is typically used to verify the configuration or troubleshoot issues related to S3 services.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/s3/services/{svm.uuid}/users`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves the S3 user's SVM configuration.
 

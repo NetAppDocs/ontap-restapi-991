@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-s3-services-groups.html'
+keywords: 's3 group,svm configuration,object store,group show,svm uuid,record limit'
 summary: 'Retrieve S3 group configuration'
 ---
 
 = Retrieve S3 group configuration
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the S3 group's configuration associated with a specific SVM. This helps you understand the current settings and parameters configured for S3 operations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/s3/services/{svm.uuid}/groups`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves the S3 group's SVM configuration.
 

@@ -3,16 +3,27 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-cifs-services.html'
+keywords: 'cifs server,svm cifs,active directory,netbios aliases,wins servers'
 summary: 'Create a CIFS server'
 ---
 
 = Create a CIFS server
+:imagesdir: ./media/
+
+[.lead]
+Creates a CIFS server within a Storage Virtual Machine (SVM) to configure and manage CIFS protocols for file sharing. Use this endpoint to establish a connection to a Windows Active Directory domain, setting up essential CIFS server properties for network integration.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/cifs/services`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a CIFS server. Each SVM can have one CIFS server.
+ONTAP 9.6
+
+== Usage notes
+
+Each SVM can have one CIFS server.
 
 == Important notes
 

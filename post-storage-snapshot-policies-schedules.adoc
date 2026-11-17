@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-storage-snapshot-policies-schedules.html'
+keywords: 'snapshot policies,snapshot schedules,snapshot copy,snapshot retention,schedule prefix'
 summary: 'Add a schedule to a Snapshot copy policy'
 ---
 
 = Add a schedule to a Snapshot copy policy
+:imagesdir: ./media/
+
+[.lead]
+Adds a schedule to a Snapshot copy policy to define when Snapshot copies are captured on the volume. This helps manage and automate the creation of backups according to your specified schedule.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/snapshot-policies/{snapshot_policy.uuid}/schedules`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Adds a schedule to a Snapshot copy policy.
+ONTAP 9.8
 
 == Required properties
 

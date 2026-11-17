@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_storage_switches.html'
+keywords: 'storage switches,cluster switches,brocade switches,switch fabric,fc ports'
 summary: 'Manage storage switches'
 ---
 
 = Manage storage switches
+:imagesdir: ./media/
 
-
+[.lead]
+Retrieve storage switch details in your cluster through these endpoints. Access information like switch names, models, and statuses for monitoring and management tasks.
 
 == Retrieving storage switch information
 

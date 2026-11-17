@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-snapshot-policies-.html'
+keywords: 'snapshot policy,snapshot details,snapshot copy,policy details,snapshot uuid'
 summary: 'Retrieve Snapshot copy policy details'
 ---
 
 = Retrieve Snapshot copy policy details
+:imagesdir: ./media/
+
+[.lead]
+Retrieves specific details of a Snapshot copy policy, helping you to understand or manage Snapshot configurations effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/snapshot-policies/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves details of a specific Snapshot copy policy.
 

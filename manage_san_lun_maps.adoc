@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_san_lun_maps.html'
+keywords: 'lun map,lun mapping,initiator group,san protocols,logical unit number'
 summary: 'Manage SAN LUN maps'
 ---
 
 = Manage SAN LUN maps
+:imagesdir: ./media/
 
-
+[.lead]
+Use the LUN map endpoints to create, delete, and manage associations between LUNs and initiator groups. Establishing these relationships controls access to LUNs from multiple initiator groups, ensuring efficient storage utilization and security.
 
 == Overview
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-network-ethernet-ports-.html'
+keywords: 'vlan delete,lag delete,ethernet port,network port,ontap delete'
 summary: 'Delete a VLAN or LAG'
 ---
 
 = Delete a VLAN or LAG
+:imagesdir: ./media/
+
+[.lead]
+Deletes a VLAN or LAG to remove network configurations that are no longer needed or to reconfigure your network setup.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/network/ethernet/ports/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Deletes a VLAN or LAG.
+ONTAP 9.6
 
 == Related ONTAP commands
 

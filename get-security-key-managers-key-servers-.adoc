@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-security-key-managers-key-servers-.html'
+keywords: 'key servers,external key manager,key manager servers,security key manager,key manager configuration'
 summary: 'Retrieve key servers configured in an external key manager'
 ---
 
 = Retrieve key servers configured in an external key manager
+:imagesdir: ./media/
+
+[.lead]
+Retrieves information about key servers that are configured in an external key manager. Use this to assess and manage key server configurations for secure data management.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/key-managers/{uuid}/key-servers/{server}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves key servers configured in an external key manager.
 

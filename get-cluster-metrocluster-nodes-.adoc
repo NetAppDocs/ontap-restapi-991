@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-metrocluster-nodes-.html'
+keywords: 'node configuration,metrocluster nodes,cluster nodes,metrocluster configuration,node uuid'
 summary: 'Retrieve a node configuration in MetroCluster'
 ---
 
 = Retrieve a node configuration in MetroCluster
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the node configuration in a MetroCluster to view the current node setup and settings.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/metrocluster/nodes/{node.uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Retrieves the node configuration in the MetroCluster.
+ONTAP 9.8
 
 == Related ONTAP Commands
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-volumes-snapshots.html'
+keywords: 'volume snapshots,retrieve snapshots,snapshot copies,volume snapshot collection,snapshot filters'
 summary: 'Retrieve volume Snapshot copies'
 ---
 
 = Retrieve volume Snapshot copies
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a collection of volume Snapshot copies to review or manage the existing snapshots associated with a specific volume.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/volumes/{volume.uuid}/snapshots`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves a collection of volume Snapshot copies.
+ONTAP 9.6
 
 == Related ONTAP commands
 

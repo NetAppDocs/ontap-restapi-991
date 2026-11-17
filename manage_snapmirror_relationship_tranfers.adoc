@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_snapmirror_relationship_tranfers.html'
+keywords: 'snapmirror transfers,snapmirror relationship,initialize snapmirror,restore snapmirror,abort transfer,active transfers'
 summary: 'Manage SnapMirror relationship tranfers'
 ---
 
 = Manage SnapMirror relationship tranfers
+:imagesdir: ./media/
 
-
+[.lead]
+Manage transfers on existing SnapMirror relationships, including operations like initialize, update, and restore-transfer. Use this API to control active transfers and handle restore relationships efficiently.
 
 == Overview
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-nvme-subsystem-controllers.html'
+keywords: 'nvme subsystem,subsystem controllers,interface transport,admin queue,node uuid,host transport'
 summary: 'Retrieve NVMe subsystem controllers'
 ---
 
 = Retrieve NVMe subsystem controllers
+:imagesdir: ./media/
+
+[.lead]
+Retrieves NVMe subsystem controllers to access configuration and status information for NVMe protocol usage. This helps in managing and monitoring NVMe storage resources effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/nvme/subsystem-controllers`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves NVMe subsystem controllers.
+ONTAP 9.6
 
 == Related ONTAP commands
 

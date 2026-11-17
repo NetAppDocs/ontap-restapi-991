@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_bgp_peer_groups.html'
+keywords: 'bgp peer-groups,network sessions,cluster configuration,local interface,peer router'
 summary: 'Manage BGP peer groups'
 ---
 
 = Manage BGP peer groups
+:imagesdir: ./media/
 
-
+[.lead]
+Manage BGP peer groups to create, update, retrieve, and delete configurations for BGP sessions within your network. Use these endpoints to establish and maintain BGP connections between local interfaces and peer routers, ensuring efficient routing and communication across your cluster.
 
 == Overview
 

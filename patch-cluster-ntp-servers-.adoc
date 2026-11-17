@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-cluster-ntp-servers-.html'
+keywords: 'ontap ntp,ntp server configuration,cluster time-service,ntp server update,authentication enabled,ntp key'
 summary: 'Update an NTP server configuration after validation'
 ---
 
 = Update an NTP server configuration after validation
+:imagesdir: ./media/
+
+[.lead]
+Updates the configuration of an NTP server for the ONTAP cluster. This is useful when you need to make changes to the server's settings, such as modifying the authentication status or updating the NTP version.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/cluster/ntp/servers/{server}`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Updates the configuration of an NTP server used by the ONTAP cluster after validation.
 Patchable fields are:

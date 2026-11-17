@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-network-ethernet-broadcast-domains-.html'
+keywords: 'broadcast domain,update broadcast domain,ethernet network,broadcast domain properties,modify broadcast domain'
 summary: 'Update broadcast domain properties'
 ---
 
 = Update broadcast domain properties
+:imagesdir: ./media/
+
+[.lead]
+Updates the properties of a broadcast domain to adjust its configuration settings.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/network/ethernet/broadcast-domains/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Updates the properties of a broadcast domain.
+ONTAP 9.6
 
 == Related ONTAP commands
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-network-fc-wwpn-aliases-.html'
+keywords: 'fc deletion,wwpn alias removal,svm identifier,fc network management,wwpn alias management'
 summary: 'Delete an FC WWPN alias'
 ---
 
 = Delete an FC WWPN alias
+:imagesdir: ./media/
+
+[.lead]
+Deletes a Fibre Channel World Wide Port Name (WWPN) alias, removing the association for a specific FC device. Use this operation when you need to update or clean up your FC configuration.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/network/fc/wwpn-aliases/{svm.uuid}/{alias}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Deletes an FC WWPN alias.
 

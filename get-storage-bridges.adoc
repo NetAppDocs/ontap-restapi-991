@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-bridges.html'
+keywords: 'storage bridges,bridge collection,fc ports,errors severity,security enabled,firmware version'
 summary: 'Retrieve a collection of bridges'
 ---
 
 = Retrieve a collection of bridges
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a collection of bridges, accessing the available bridge configurations within your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/bridges`#
 
-*Introduced In:* 9.9
+== Introduced in
 
-Retrieves a collection of bridges.
+ONTAP 9.9
 
 == Related ONTAP commands
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-volumes-.html'
+keywords: 'volume retrieval,quota state,flexvol flexgroup,expensive properties,specific fields'
 summary: 'Retrieve a volume'
 ---
 
 = Retrieve a volume
+:imagesdir: ./media/
+
+[.lead]
+Retrieves detailed information about a specific volume, including its quota state, for either a FlexVol or a FlexGroup volume. Use this endpoint to access volume configurations necessary for storage management and analysis tasks.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/volumes/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves a volume. The GET API can be used to retrieve the quota state for a FlexVol or a FlexGroup volume.
 

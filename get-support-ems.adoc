@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-support-ems.html'
+keywords: 'ems configuration,retrieve ems,ems settings,ems management,ontap ems'
 summary: 'Retrieve EMS configuration'
 ---
 
 = Retrieve EMS configuration
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the EMS configuration to view the current settings for event messaging.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/support/ems`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves the EMS configuration.
+ONTAP 9.6
 
 == Related ONTAP commands
 

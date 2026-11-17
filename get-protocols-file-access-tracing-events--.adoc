@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-file-access-tracing-events--.html'
+keywords: 'file access,trace results,node uuid,sequence number,svm uuid,events tracing'
 summary: 'Retrieve trace results for a sequence number'
 ---
 
 = Retrieve trace results for a sequence number
+:imagesdir: ./media/
+
+[.lead]
+Retrieves trace results for a specific sequence number, which helps you analyze security tracing operations within your system.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/file-access-tracing/events/{node.uuid}/{svm.uuid}/{index}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves trace results for the specified sequence number.
 

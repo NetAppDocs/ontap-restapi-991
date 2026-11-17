@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_storage_aggregates.html'
+keywords: 'storage aggregates,aggregate expansion,raid configuration,software encryption,cloud tiering'
 summary: 'Manage storage aggregates'
 ---
 
 = Manage storage aggregates
+:imagesdir: ./media/
 
-
+[.lead]
+Modify storage aggregates using PATCH operations to update their properties, such as name, node location, disk count, and encryption status. These endpoints facilitate aggregate management, expansion, and relocation within your cluster. PATCH operations on disk count are restricted during specific automatic creation scenarios.
 
 == Updating storage aggregates
 

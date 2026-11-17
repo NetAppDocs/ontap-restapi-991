@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_role_privilege_details.html'
+keywords: 'role privileges, svm roles, cluster roles, privilege configuration, role management'
 summary: 'Manage role privilege details'
 ---
 
 = Manage role privilege details
+:imagesdir: ./media/
 
-
+[.lead]
+Configure and retrieve role privilege details to manage access levels for REST URI paths within your system. Use these endpoints to add privilege tuples to existing roles or to view all privileges associated with a role, whether SVM-scoped or cluster-scoped. Note that pre-defined roles can be retrieved but not modified.
 
 == Overview
 

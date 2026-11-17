@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-support-configuration-backup-backups.html'
+keywords: 'configuration backup,retrieve backup,backup files,list backups,ontap backup,backup nodes'
 summary: 'Retrieve configuration backup files'
 ---
 
 = Retrieve configuration backup files
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a list of configuration backup files, helping you to manage and review backup data effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/support/configuration-backup/backups`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Retrieves a list of configuration backup files.
+ONTAP 9.7
 
 == Related ONTAP commands
 

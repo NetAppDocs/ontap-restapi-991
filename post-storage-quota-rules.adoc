@@ -3,16 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-storage-quota-rules.html'
+keywords: 'quota policy,quota rule,flexvol volume,flexgroup volume,qtree creation,space limit'
 summary: 'Create a quota policy rule for a FlexVol or a FlexGroup volume'
 ---
 
 = Create a quota policy rule for a FlexVol or a FlexGroup volume
+:imagesdir: ./media/
+
+[.lead]
+Creates a quota policy rule for a FlexVol or a FlexGroup volume to manage and enforce storage limits within your volumes effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/quota/rules`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a quota policy rule for a FlexVol or a FlexGroup volume.
+ONTAP 9.6
+
+== Usage notes
 
 Important notes:
 

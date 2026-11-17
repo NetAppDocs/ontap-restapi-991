@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-security-key-managers-.html'
+keywords: 'key managers,retrieve key managers,key manager uuid,security key managers,key manager fields,key manager status'
 summary: 'Retrieve key managers'
 ---
 
 = Retrieve key managers
+:imagesdir: ./media/
+
+[.lead]
+Retrieves key managers to access and manage encryption keys within your storage environment. This is essential for maintaining the security and integrity of your data.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/key-managers/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves key managers.
+ONTAP 9.6
 
 == Expensive properties
 

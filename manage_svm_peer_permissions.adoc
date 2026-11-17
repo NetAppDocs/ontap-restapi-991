@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_svm_peer_permissions.html'
+keywords: 'svm permissions,cluster administrator,peer relationship,intercluster permissions,local svm'
 summary: 'Manage SVM peer permissions'
 ---
 
 = Manage SVM peer permissions
+:imagesdir: ./media/
 
-
+[.lead]
+Manage SVM peer permissions to streamline the creation of intercluster SVM peer relationships. These permissions enable automatic peering between clusters without needing explicit acceptance, simplifying the process and ensuring seamless integration.
 
 == Managing SVM peer permissions
 

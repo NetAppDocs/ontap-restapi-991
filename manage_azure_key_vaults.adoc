@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_azure_key_vaults.html'
+keywords: 'azure key vault,cloud key management,azure netapp files,encryption keys,secure store'
 summary: 'Manage Azure Key Vaults'
 ---
 
 = Manage Azure Key Vaults
+:imagesdir: ./media/
 
-
+[.lead]
+Configure and manage Azure Key Vaults to securely store encryption keys for Azure NetApp Files Cloud Volume Services. Utilize these endpoints to establish communication between Azure NetApp Files Cloud Volume Services and your deployed Azure application with access to Azure Key Vault. Advanced properties are available upon explicit request.
 
 == Overview
 

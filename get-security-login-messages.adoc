@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-security-login-messages.html'
+keywords: 'login banner,retrieve motd,cluster message,svm message,filter scope,order results'
 summary: 'Retrieve login banner and messages of the day'
 ---
 
 = Retrieve login banner and messages of the day
+:imagesdir: ./media/
+
+[.lead]
+Obtains the login banner and messages of the day (MOTD) configured in the cluster and specific SVMs to keep track of important announcements or operational messages that are displayed upon login.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/security/login/messages`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves the login banner and messages of the day (MOTD) configured in the cluster
 and in specific SVMs.

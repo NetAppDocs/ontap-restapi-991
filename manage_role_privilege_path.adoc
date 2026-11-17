@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_role_privilege_path.html'
+keywords: 'role privilege,access level,svm role,cluster scoped,owner uuid'
 summary: 'Manage role privilege path'
 ---
 
 = Manage role privilege path
+:imagesdir: ./media/
 
-
+[.lead]
+Manage role privilege paths by retrieving, modifying, or deleting REST API paths within a role's privilege tuple. Use these endpoints to access or adjust the access level for specific paths in roles that are either SVM-scoped or cluster-scoped. Note that access levels in predefined roles cannot be updated.
 
 == Overview
 

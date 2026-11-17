@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-metrocluster-operations.html'
+keywords: 'metrocluster operations,local cluster,operation history,operation state,error filter,node filter'
 summary: 'Retrieve MetroCluster operations on the local cluster'
 ---
 
 = Retrieve MetroCluster operations on the local cluster
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a list of MetroCluster operations on the local cluster to monitor and manage the state and progress of these operations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/metrocluster/operations`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Retrieves the list of MetroCluster operations on the local cluster.
+ONTAP 9.8
 
 == Related ONTAP Commands
 

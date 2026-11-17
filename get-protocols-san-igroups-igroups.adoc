@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-igroups-igroups.html'
+keywords: 'nested initiator groups,initiator group children,parent initiator group,ontap san protocols,lun igroup show'
 summary: 'Retrieve nested initiator groups of an initiator group'
 ---
 
 = Retrieve nested initiator groups of an initiator group
+:imagesdir: ./media/
+
+[.lead]
+Retrieves nested initiator groups directly under a specified initiator group. This helps you manage and review the hierarchy of initiator groups in your storage configuration.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/igroups/{igroup.uuid}/igroups`#
 
-*Introduced In:* 9.9
+== Introduced in
+
+ONTAP 9.9
+
+== Usage notes
 
 Retrieves nested initiator groups of an initiator group.
 This API only reports the nested initiator groups that are direct

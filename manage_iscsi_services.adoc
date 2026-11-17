@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_iscsi_services.html'
+keywords: 'iscsi services,iscsi target,svm performance,iscsi initiators,svm target'
 summary: 'Manage iSCSI services'
 ---
 
 = Manage iSCSI services
+:imagesdir: ./media/
 
-
+[.lead]
+Use the iSCSI services endpoints to create, update, delete, and discover iSCSI services for Storage Virtual Machines (SVMs). Establishing an iSCSI service is essential before initiators can log in to the SVM, making these endpoints crucial for configuring your storage network.
 
 == Overview
 

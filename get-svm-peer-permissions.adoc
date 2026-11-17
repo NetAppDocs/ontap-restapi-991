@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-svm-peer-permissions.html'
+keywords: 'svm permissions,peer permissions,cluster peer permissions,vserver peer,vserver permissions'
 summary: 'Retrieve SVM peer permissions'
 ---
 
 = Retrieve SVM peer permissions
+:imagesdir: ./media/
+
+[.lead]
+Retrieves SVM peer permissions to see the access configurations between storage virtual machines. This helps you understand and manage the permissions set for SVM interactions in your environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/svm/peer-permissions`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves the list of SVM peer permissions.
 

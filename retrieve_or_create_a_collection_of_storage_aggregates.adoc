@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'retrieve_or_create_a_collection_of_storage_aggregates.html'
+keywords: 'storage aggregates,cluster data,aggregate retrieval,aggregate creation,recommended aggregates'
 summary: 'Retrieve or create a collection of storage aggregates'
 ---
 
 = Retrieve or create a collection of storage aggregates
+:imagesdir: ./media/
 
-
+[.lead]
+Access storage aggregate information with these endpoints to retrieve data aggregates in your cluster, excluding system-owned root aggregates. You can also query aggregates recommended for creation or view usable spare groups using specific query parameters.
 
 == Retrieving storage aggregate information
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-security-ssh.html'
+keywords: 'ssh server,cluster settings,ssh encryption,mac algorithms,connection limits,ssh configuration'
 summary: 'Update the SSH server setting for a cluster'
 ---
 
 = Update the SSH server setting for a cluster
+:imagesdir: ./media/
+
+[.lead]
+Updates the SSH server settings for a cluster to configure security protocols and connection parameters. Use this endpoint to manage encryption, authentication retries, and connection limits for enhanced security and performance.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/ssh`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Updates the SSH server setting for a cluster.
 

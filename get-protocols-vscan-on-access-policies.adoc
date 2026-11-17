@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-vscan-on-access-policies.html'
+keywords: 'vscan policy,on-access policy,vscan filters,scan readonly,include extensions,exclude paths'
 summary: 'Retrieve a Vscan On-Access policy'
 ---
 
 = Retrieve a Vscan On-Access policy
+:imagesdir: ./media/
+
+[.lead]
+Retrieves details of a Vscan On-Access policy to understand its current configuration and settings.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/vscan/{svm.uuid}/on-access-policies`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves the Vscan On-Access policy.
 

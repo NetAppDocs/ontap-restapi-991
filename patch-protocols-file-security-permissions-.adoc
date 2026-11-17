@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-protocols-file-security-permissions-.html'
+keywords: 'file security,permissions update,sd information,owner group,control flags'
 summary: 'Update the SD information'
 ---
 
 = Update the SD information
+:imagesdir: ./media/
+
+[.lead]
+Updates the security descriptor information, including owner, group, and control flags, for file directories. This operation is typically used to modify access permissions and security settings within your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/file-security/permissions/{svm.uuid}/{path}`#
 
-*Introduced In:* 9.9
+== Introduced in
+
+ONTAP 9.9
+
+== Usage notes
 
 Updates SD specific Information i.e owner, group & control-flags
 

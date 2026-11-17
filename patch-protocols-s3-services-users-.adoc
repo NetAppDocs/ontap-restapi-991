@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-protocols-s3-services-users-.html'
+keywords: 's3 user,update configuration,regenerate keys,user access,secret key'
 summary: 'Update an S3 user configuration'
 ---
 
 = Update an S3 user configuration
+:imagesdir: ./media/
+
+[.lead]
+Updates an S3 user configuration for an SVM to modify user access details and manage authentication settings.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/s3/services/{svm.uuid}/users/{name}`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Updates the S3 user configuration of an SVM.
 

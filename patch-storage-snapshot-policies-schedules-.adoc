@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-storage-snapshot-policies-schedules-.html'
+keywords: 'snapshot policy,modify schedule,snapshot schedule,policy update,snapshot copy,storage snapshot'
 summary: 'Update a Snapshot copy policy schedule'
 ---
 
 = Update a Snapshot copy policy schedule
+:imagesdir: ./media/
+
+[.lead]
+Updates a Snapshot copy policy schedule to modify the timing and frequency of Snapshot copy creations according to your data protection needs.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/storage/snapshot-policies/{snapshot_policy.uuid}/schedules/{schedule.uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Updates a Snapshot copy policy schedule
 

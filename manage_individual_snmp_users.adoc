@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_individual_snmp_users.html'
+keywords: 'snmp user,manage snmp,update snmp,delete snmp,snmp community,snmp cluster'
 summary: 'Manage individual SNMP users'
 ---
 
 = Manage individual SNMP users
+:imagesdir: ./media/
 
-
+[.lead]
+Define, retrieve, update, and delete individual SNMP users within your ONTAP environment to manage user-specific settings and permissions.
 
 == Overview
 

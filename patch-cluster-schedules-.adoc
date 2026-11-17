@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-cluster-schedules-.html'
+keywords: 'update schedule,cron schedule,interval schedule,cluster schedules,modify schedule'
 summary: 'Update a schedule'
 ---
 
 = Update a schedule
+:imagesdir: ./media/
+
+[.lead]
+Updates an existing schedule, adjusting its parameters as needed.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/cluster/schedules/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Updates a schedule. Note that you cannot modify a cron field of an interval schedule, or the interval field of a cron schedule.
 

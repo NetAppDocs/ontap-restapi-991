@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_security-related_accounts.html'
+keywords: 'user accounts,cluster management,svm management,authentication methods,rbac role,security certificate'
 summary: 'Manage security-related accounts'
 ---
 
 = Manage security-related accounts
+:imagesdir: ./media/
 
-
+[.lead]
+Manage security-related accounts to control user access and operations within your cluster or individual SVMs. These endpoints facilitate the creation, modification, and deletion of user accounts, along with setting specific privileges and authentication methods. Use these endpoints to ensure secure and efficient management of user roles and access scopes.
 
 == Overview
 

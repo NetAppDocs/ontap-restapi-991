@@ -3,17 +3,20 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_event_filter_rules.html'
+keywords: 'event filter,ems rules,manage rules,severity criteria,message filter'
 summary: 'Manage event filter rules'
 ---
 
 = Manage event filter rules
+:imagesdir: ./media/
 
-
+[.lead]
+Manage event filter rules to control the handling of specific instances within filters. Use these endpoints to retrieve, update, or delete individual rules as part of your event management strategy.
 
 == Overview
 
 Manages a specific instance of a rule within a filter.
-See the documentation for <</docs/support/support_ems_filters,/support/ems/filters>> for details on the various properties in a rule.
+See the documentation for link:getting_started_with_the_ontap_rest_api.html#/docs/support/support_ems_filters[/support/ems/filters] for details on the various properties in a rule.
 
 == Examples
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-network-fc-interfaces.html'
+keywords: 'fc interface,create interface,fibre channel,svm location,data protocol,network interface'
 summary: 'Create an FC interface'
 ---
 
 = Create an FC interface
+:imagesdir: ./media/
+
+[.lead]
+Creates an FC interface, specifying the storage virtual machine (SVM) and port details. Use this operation to configure a new Fibre Channel connection for your network resources.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/network/fc/interfaces`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates an FC interface.
+ONTAP 9.6
 
 == Required properties
 

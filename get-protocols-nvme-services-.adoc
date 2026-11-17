@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-nvme-services-.html'
+keywords: 'nvme service,retrieve nvme,nvme protocol,svm uuid,ontap nvme'
 summary: 'Retrieve an NVMe service'
 ---
 
 = Retrieve an NVMe service
+:imagesdir: ./media/
+
+[.lead]
+Retrieves an NVMe service to access information about the current NVMe configuration and settings. This is useful for managing and monitoring NVMe services within your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/nvme/services/{svm.uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves an NVMe service.
+ONTAP 9.6
 
 == Related ONTAP commands
 

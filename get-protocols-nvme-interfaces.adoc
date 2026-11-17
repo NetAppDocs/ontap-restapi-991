@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-nvme-interfaces.html'
+keywords: 'nvme interface,ontap nvme,protocol nvme,fc interface,transport address,node uuid'
 summary: 'Retrieve NVMe interfaces'
 ---
 
 = Retrieve NVMe interfaces
+:imagesdir: ./media/
+
+[.lead]
+Retrieves NVMe interfaces to view the available configurations for NVMe protocol communication.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/nvme/interfaces`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves NVMe interfaces.
+ONTAP 9.6
 
 == Related ONTAP commands
 

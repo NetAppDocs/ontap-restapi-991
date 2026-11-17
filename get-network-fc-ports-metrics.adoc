@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-fc-ports-metrics.html'
+keywords: 'fc port,performance metrics,historical metrics,throughput monitoring,latency analysis,iops tracking'
 summary: 'Retrieve FC port historical performance metrics'
 ---
 
 = Retrieve FC port historical performance metrics
+:imagesdir: ./media/
+
+[.lead]
+Accesses historical performance metrics for an FC port, which can help you analyze past performance trends and troubleshoot issues.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/fc/ports/{uuid}/metrics`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves historical performance metrics for an FC port
 

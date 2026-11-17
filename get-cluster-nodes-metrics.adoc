@@ -3,17 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-nodes-metrics.html'
+keywords: 'node metrics,performance metrics,historical metrics,processor utilization,time range,uuid'
 summary: 'Retrieve node historical performance metrics'
 ---
 
 = Retrieve node historical performance metrics
+:imagesdir: ./media/
+
+[.lead]
+Retrieves historical performance metrics for a node to analyze and monitor its performance over time. This information aids in understanding trends and making informed decisions regarding node management.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/nodes/{uuid}/metrics`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Retrieves historical performance metrics for a node.
-
+ONTAP 9.8
 
 == Parameters
 

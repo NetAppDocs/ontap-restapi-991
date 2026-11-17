@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-application-applications.html'
+keywords: 'create application,application template,application property,storage service,protection type'
 summary: 'Create an application'
 ---
 
 = Create an application
+:imagesdir: ./media/
+
+[.lead]
+Creates an application by selecting a template and specifying required properties such as the name and storage virtual machine (SVM). This process helps you automate best practices and tailor the application to your specific needs by using just one template, ensuring efficient resource configuration.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/application/applications`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates an application.
+ONTAP 9.6
 
 == Template properties
 

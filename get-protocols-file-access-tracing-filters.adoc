@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-file-access-tracing-filters.html'
+keywords: 'file access tracing,security trace filters,vserver trace filters,trace filter entries,protocol filters,client ip filters'
 summary: 'Retrieve information about security trace filter entries'
 ---
 
 = Retrieve information about security trace filter entries
+:imagesdir: ./media/
+
+[.lead]
+Retrieves details about security trace filter entries to analyze security events and activities within your environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/file-access-tracing/filters`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves information about security trace filter entries.
 

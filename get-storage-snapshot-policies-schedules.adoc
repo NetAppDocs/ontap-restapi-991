@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-snapshot-policies-schedules.html'
+keywords: 'snapshot policy schedules,retrieve schedules,snapshot copy policies,snapshot policy uuid,schedule filters'
 summary: 'Retrieve Snapshot copy policy schedules'
 ---
 
 = Retrieve Snapshot copy policy schedules
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a collection of Snapshot copy policy schedules to understand the scheduling details for your Snapshot operations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/snapshot-policies/{snapshot_policy.uuid}/schedules`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Retrieves a collection of Snapshot copy policy schedules.
+ONTAP 9.8
 
 == Related ONTAP commands
 

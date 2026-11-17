@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-namespaces-metrics.html'
+keywords: 'nvme namespace,performance metrics,historical metrics,latency metrics,iops metrics,throughput metrics'
 summary: 'Retrieve historical performance metrics for an NVMe namespace'
 ---
 
 = Retrieve historical performance metrics for an NVMe namespace
+:imagesdir: ./media/
+
+[.lead]
+Accesses historical performance data for an NVMe namespace, which helps you analyze trends and performance over time.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/namespaces/{uuid}/metrics`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves historical performance metrics for an NVMe namespace.
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-security-azure-key-vaults.html'
+keywords: 'azure key vault,cluster configuration,svm setup,akv encryption,key identifier,azure netapp files'
 summary: 'Create an AKV configuration for all clusters and SVMs'
 ---
 
 = Create an AKV configuration for all clusters and SVMs
+:imagesdir: ./media/
+
+[.lead]
+Configures AKV settings for all clusters and SVMs, establishing the necessary parameters for secure key management in Azure environments. This is particularly useful for setting up encryption key access across your Azure NetApp Files Cloud Volume Services.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/azure-key-vaults`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Configures the AKV configuration for all clusters and SVMs.
 Note: This method is only available to the Azure NetApp Files Cloud Volume Services.

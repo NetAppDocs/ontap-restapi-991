@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-ports.html'
+keywords: 'storage ports,firmware version,cable length,port speed,serial number,mac address'
 summary: 'Retrieve storage ports'
 ---
 
 = Retrieve storage ports
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a collection of storage ports to review their configurations and statuses.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/ports`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves a collection of storage ports.
+ONTAP 9.6
 
 == Related ONTAP commands
 

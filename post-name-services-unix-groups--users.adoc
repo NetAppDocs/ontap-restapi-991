@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-name-services-unix-groups--users.html'
+keywords: 'unix group,svm uuid,add users,append users,duplicate ignore'
 summary: 'Add users to a UNIX group and SVM'
 ---
 
 = Add users to a UNIX group and SVM
+:imagesdir: ./media/
+
+[.lead]
+Adds users to a specific UNIX group and Storage Virtual Machine (SVM). This operation updates the group's user list, appending new users without affecting existing entries.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/name-services/unix-groups/{svm.uuid}/{unix_group.name}/users`#
 
-*Introduced In:* 9.9
+== Introduced in
+
+ONTAP 9.9
+
+== Usage notes
 
 Adds users to the specified UNIX group and SVM.
 

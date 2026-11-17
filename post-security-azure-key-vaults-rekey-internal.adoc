@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-security-azure-key-vaults-rekey-internal.html'
+keywords: 'azure key vault,rekey internal,svm key hierarchy,azure netapp files,cloud volume services'
 summary: 'Re-key the internal key in the key hierarchy for an SVM'
 ---
 
 = Re-key the internal key in the key hierarchy for an SVM
+:imagesdir: ./media/
+
+[.lead]
+Rekeys the internal key in the key hierarchy for an SVM when it has an AKV configuration. This operation is specific to Azure NetApp Files Cloud Volume Services.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/azure-key-vaults/{azure_key_vault.uuid}/rekey-internal`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Rekeys the internal key in the key hierarchy for an SVM with an AKV configuration.
 Note: This method is only available to the Azure NetApp Files Cloud Volume Services.

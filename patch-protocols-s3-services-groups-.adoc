@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-protocols-s3-services-groups-.html'
+keywords: 's3 group configuration,svm group update,group name change,group users modify,group policies attach,object store modify'
 summary: 'Update the S3 group configuration for an SVM'
 ---
 
 = Update the S3 group configuration for an SVM
+:imagesdir: ./media/
+
+[.lead]
+Updates the S3 group configuration for an SVM to modify group attributes, such as name, users, and policies.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/s3/services/{svm.uuid}/groups/{id}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Updates the S3 group configuration of an SVM.
 

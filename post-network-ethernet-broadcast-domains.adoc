@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-network-ethernet-broadcast-domains.html'
+keywords: 'broadcast domain,ethernet network,mtu settings,ipspace configuration,network port'
 summary: 'Create a new broadcast domain'
 ---
 
 = Create a new broadcast domain
+:imagesdir: ./media/
+
+[.lead]
+Creates a new broadcast domain to define a network space within your ONTAP environment. Use this operation when you need to configure network settings such as the maximum transmission unit (MTU) and associate the domain with a specific IPspace.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/network/ethernet/broadcast-domains`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a new broadcast domain.
+ONTAP 9.6
 
 == Required properties
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-protocols-ndmp-svms-.html'
+keywords: 'ndmp configuration,ndmp update,specific svm,svm uuid,ndmp modify'
 summary: 'Update the NDMP configuration for an SVM'
 ---
 
 = Update the NDMP configuration for an SVM
+:imagesdir: ./media/
+
+[.lead]
+Updates the NDMP configuration for a specific SVM to modify its settings according to your requirements.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/protocols/ndmp/svms/{svm.uuid}`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Updates the NDMP configuration for a specific SVM.
+ONTAP 9.7
 
 == Related ONTAP commands
 

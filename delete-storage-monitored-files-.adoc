@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-storage-monitored-files-.html'
+keywords: 'remove file,delete monitored file,storage monitoring,file uuid,remove monitored file'
 summary: 'Removes the file from the monitored file list'
 ---
 
 = Removes the file from the monitored file list
+:imagesdir: ./media/
+
+[.lead]
+Removes a file from the monitored list when it's no longer needed for tracking or analysis. This action helps manage the list by eliminating files that are no longer relevant.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/storage/monitored-files/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Removes the file from the list of monitored files.
 

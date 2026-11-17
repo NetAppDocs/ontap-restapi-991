@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-aggregates-metrics.html'
+keywords: 'aggregate metrics,performance metrics,latency read,iops write,throughput total,storage aggregate'
 summary: 'Retrieve historical performance metrics for an aggregate'
 ---
 
 = Retrieve historical performance metrics for an aggregate
+:imagesdir: ./media/
+
+[.lead]
+Accesses historical performance metrics for an aggregate, helping you analyze past performance trends and make informed decisions for resource management.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/aggregates/{uuid}/metrics`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves historical performance metrics for an aggregate.
 

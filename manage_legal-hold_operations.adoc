@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_legal-hold_operations.html'
+keywords: 'legal hold,snaplock,litigation operations,manage litigation,storage snaplock'
 summary: 'Manage legal-hold operations'
 ---
 
 = Manage legal-hold operations
+:imagesdir: ./media/
 
-
+[.lead]
+Manage legal-hold operations associated with specific litigation IDs to control and execute legal-hold actions on relevant files.
 
 Manages the legal-hold operations for the specified litigation ID.
 

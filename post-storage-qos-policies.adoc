@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-storage-qos-policies.html'
+keywords: 'qos policy,svm creation,policy name,qos fixed,qos adaptive,qos policy group'
 summary: 'Create a QoS policy'
 ---
 
 = Create a QoS policy
+:imagesdir: ./media/
+
+[.lead]
+Creates a QoS policy to manage the performance of storage workloads within a specific SVM. This is useful for ensuring that critical applications receive the necessary resources while maintaining overall system efficiency.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/qos/policies`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a QoS policy.
+ONTAP 9.6
 
 == Required properties
 

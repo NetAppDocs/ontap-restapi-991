@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-san-igroups-initiators.html'
+keywords: 'initiator group,initiator add,igroup uuid,san protocols,lun igroup'
 summary: 'Add initiators to an initiator group'
 ---
 
 = Add initiators to an initiator group
+:imagesdir: ./media/
+
+[.lead]
+Adds initiators to an initiator group, organizing them for efficient management within your storage network. Use this operation to expand the group with new initiator names, enhancing connectivity and access configurations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/san/igroups/{igroup.uuid}/initiators`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Adds one or more initiators to an initiator group.
 This API does not support adding initiators to an initiator group that

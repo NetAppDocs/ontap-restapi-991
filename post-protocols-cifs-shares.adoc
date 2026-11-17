@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-cifs-shares.html'
+keywords: 'cifs share,create cifs,svm namespace,share permissions,cifs path'
 summary: 'Create a CIFS share'
 ---
 
 = Create a CIFS share
+:imagesdir: ./media/
+
+[.lead]
+Creates a CIFS share to enable file sharing over the CIFS protocol within an existing Storage Virtual Machine (SVM). This allows you to manage access and permissions for shared files and directories.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/cifs/shares`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a CIFS share.
+ONTAP 9.6
 
 == Required properties
 

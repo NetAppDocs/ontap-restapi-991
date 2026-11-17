@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-support-ems-destinations-.html'
+keywords: 'event destinations,destination name,event notification,event show,ontap events'
 summary: 'Retrieve an event destination'
 ---
 
 = Retrieve an event destination
+:imagesdir: ./media/
+
+[.lead]
+Retrieves event destination configurations, which specify where event notifications are sent. Use this endpoint to manage the destinations for system alerts and notifications.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/support/ems/destinations/{name}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves event destinations.
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-ip-service-policies.html'
+keywords: 'service policies,network policies,ip policies,ontap service,network interface,service policy collection'
 summary: 'Retrieve service policies'
 ---
 
 = Retrieve service policies
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a collection of service policies to review their configurations and details. Use this to understand applied policies and manage network services effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/ip/service-policies`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves a collection of service policies.
+ONTAP 9.6
 
 == Related ONTAP commands
 

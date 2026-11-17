@@ -3,16 +3,26 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-cluster-nodes-.html'
+keywords: 'delete node,cluster management,node removal,virtual interface shutdown,shared resource management'
 summary: 'Delete a node from a cluster'
 ---
 
 = Delete a node from a cluster
+:imagesdir: ./media/
+
+[.lead]
+Deletes a node from the cluster when you need to remove it permanently. Ensure all shared resources are shut down before proceeding to avoid command failure.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/cluster/nodes/{uuid}`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Deletes a node from the cluster.
+ONTAP 9.7
+
+== Usage notes
+
 Note that before deleting a node from the cluster, you must shut down all of the node's shared resources, such as virtual interfaces to clients. If any of the node's shared resources are still active, the command fails.
 
 == Optional parameters:

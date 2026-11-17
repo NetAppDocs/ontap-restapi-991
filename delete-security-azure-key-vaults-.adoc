@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-security-azure-key-vaults-.html'
+keywords: 'azure key vault,azure netapp files,cloud volume services,akv configuration,key manager'
 summary: 'Delete an AKV configuration'
 ---
 
 = Delete an AKV configuration
+:imagesdir: ./media/
+
+[.lead]
+Removes an AKV configuration that is integrated with Azure NetApp Files Cloud Volume Services, disabling the external key manager setup for Azure.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/security/azure-key-vaults/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Deletes an AKV configuration.
 Note: This method is only available to the Azure NetApp Files Cloud Volume Services.

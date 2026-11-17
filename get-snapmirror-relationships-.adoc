@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-snapmirror-relationships-.html'
+keywords: 'snapmirror relationship,relationship uuid,relationship retrieval,snapmirror show,snapmirror destinations'
 summary: 'Retrieve a SnapMirror relationship'
 ---
 
 = Retrieve a SnapMirror relationship
+:imagesdir: ./media/
+
+[.lead]
+Retrieves details of a SnapMirror relationship, helping you understand its configuration and status.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/snapmirror/relationships/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves a SnapMirror relationship.
 

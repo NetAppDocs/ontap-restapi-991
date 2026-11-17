@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-fcp-services-.html'
+keywords: 'fc protocol,retrieve service,svm uuid,fcp service,san protocols'
 summary: 'Retrieve an FC protocol service'
 ---
 
 = Retrieve an FC protocol service
+:imagesdir: ./media/
+
+[.lead]
+Retrieves an FC Protocol service to access information about the Fibre Channel protocol configuration on your storage system. This can be useful for managing and verifying the setup of your SAN environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/fcp/services/{svm.uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves an FC Protocol service.
+ONTAP 9.6
 
 == Related ONTAP commands
 

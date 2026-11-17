@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-fc-interfaces.html'
+keywords: 'fc interfaces,network interfaces,fibre channel,interface statistics,interface filters,ontap network'
 summary: 'Retrieve FC interfaces'
 ---
 
 = Retrieve FC interfaces
+:imagesdir: ./media/
+
+[.lead]
+Retrieves FC interfaces to view their current configuration and status within your storage network.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/fc/interfaces`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves FC interfaces.
+ONTAP 9.6
 
 == Related ONTAP commands
 

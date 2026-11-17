@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-network-ip-service-policies-.html'
+keywords: 'service policy,network interfaces,delete service,service policy delete,interface policy,network policy'
 summary: 'Delete a service policy for network interfaces'
 ---
 
 = Delete a service policy for network interfaces
+:imagesdir: ./media/
+
+[.lead]
+Removes a service policy from network interfaces, which is useful for managing network configurations and ensuring policies no longer needed are eliminated.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/network/ip/service-policies/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Deletes a service policy for network interfaces.
 

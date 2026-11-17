@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-metrocluster-operations-.html'
+keywords: 'metrocluster operation,specific operation,operation information,metrocluster details,cluster operation'
 summary: 'Retrieve information about a MetroCluster operation'
 ---
 
 = Retrieve information about a MetroCluster operation
+:imagesdir: ./media/
+
+[.lead]
+Obtains details about a specific MetroCluster operation, which helps you monitor and manage MetroCluster activities effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/metrocluster/operations/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves information about a specific MetroCluster operation.
 

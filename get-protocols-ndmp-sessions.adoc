@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-ndmp-sessions.html'
+keywords: 'ndmp sessions,svm scope,node scope,ndmp probe,data ip,tape device'
 summary: 'Retrieve NDMP sessions'
 ---
 
 = Retrieve NDMP sessions
+:imagesdir: ./media/
+
+[.lead]
+Retrieves a list of active NDMP sessions, which can help you monitor current data transfer activities within your storage environment. Depending on the scope, you can view sessions for a specific SVM or across the entire cluster.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/ndmp/sessions`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves a collection of NDMP sessions. In the case of SVM-scope, if this API is executed on a data IP, it displays the list of NDMP sessions under the specified SVM; otherwise it displays the list of NDMP sessions for all the SVMs under the cluster. In the case of node-scope, it displays the list of NDMP sessions for all nodes.
 

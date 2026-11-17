@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-svm-peer-permissions-.html'
+keywords: 'svm permissions,peer permissions,update permissions,cluster peer,svm update'
 summary: 'Update SVM peer permissions'
 ---
 
 = Update SVM peer permissions
+:imagesdir: ./media/
+
+[.lead]
+Updates SVM peer permissions to modify access settings between storage virtual machines. This is useful when you need to change permissions for specific applications or workflows.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/svm/peer-permissions/{cluster_peer.uuid}/{svm.uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Updates the SVM peer permissions.
+ONTAP 9.6
 
 == Related ONTAP commands
 

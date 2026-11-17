@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-luns.html'
+keywords: 'lun retrieval,lun mapping,lun move,lun statistics,storage luns'
 summary: 'Retrieve LUNs'
 ---
 
 = Retrieve LUNs
+:imagesdir: ./media/
+
+[.lead]
+Retrieves LUNs to access detailed information about logical unit numbers in your storage environment. This operation is useful for monitoring and managing LUN configurations and their mappings.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/luns`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves LUNs.
+ONTAP 9.6
 
 == Expensive properties
 

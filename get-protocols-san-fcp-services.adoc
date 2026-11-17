@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-fcp-services.html'
+keywords: 'fc protocol,fc services,protocol services,svc fcp,fc san,fc throughput'
 summary: 'Retrieve FC protocol services'
 ---
 
 = Retrieve FC protocol services
+:imagesdir: ./media/
+
+[.lead]
+Retrieves FC protocol services to access the configuration details needed for managing Fibre Channel connectivity. Use this endpoint when you need to examine or audit current FC service settings within your ONTAP environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/fcp/services`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves FC Protocol services.
+ONTAP 9.6
 
 == Expensive properties
 

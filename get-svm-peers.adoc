@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-svm-peers.html'
+keywords: 'svm peer relationships,svm peer list,svm peer retrieval,svm peer show,svm peer cluster'
 summary: 'Retrieve SVM peer relationships'
 ---
 
 = Retrieve SVM peer relationships
+:imagesdir: ./media/
+
+[.lead]
+Retrieves SVM peer relationships to obtain a list of existing peer connections for a specific SVM. This information helps you understand the network topology and manage peer configurations effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/svm/peers`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves the list of SVM peer relationships.
 

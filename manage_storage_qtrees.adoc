@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_storage_qtrees.html'
+keywords: 'qtree management,qtree qos,create qtree,delete qtree,security style,unix permissions'
 summary: 'Manage storage qtrees'
 ---
 
 = Manage storage qtrees
+:imagesdir: ./media/
 
-
+[.lead]
+Manage storage qtrees to create, retrieve, modify, and delete qtrees within FlexVol or FlexGroup volumes. These endpoints facilitate logical organization and quality-of-service settings, ensuring efficient file system management.
 
 == Overview
 

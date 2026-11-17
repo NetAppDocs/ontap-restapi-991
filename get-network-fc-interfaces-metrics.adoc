@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-fc-interfaces-metrics.html'
+keywords: 'fc interface,performance metrics,latency metrics,throughput metrics,uuid filter,interval range'
 summary: 'Retrieve FC interface historical performance metrics'
 ---
 
 = Retrieve FC interface historical performance metrics
+:imagesdir: ./media/
+
+[.lead]
+Accesses historical performance metrics for an FC interface to analyze past performance trends. This information helps you assess interface efficiency and make informed decisions on configuration adjustments.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/fc/interfaces/{uuid}/metrics`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves historical performance metrics for an FC interface.
 

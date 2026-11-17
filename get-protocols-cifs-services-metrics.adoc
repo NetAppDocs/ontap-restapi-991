@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-cifs-services-metrics.html'
+keywords: 'cifs performance,svm metrics,latency read,throughput write,iops total,interval duration'
 summary: 'Retrieve CIFS protocol historical performance metrics for an SVM'
 ---
 
 = Retrieve CIFS protocol historical performance metrics for an SVM
+:imagesdir: ./media/
+
+[.lead]
+Accesses historical performance metrics for the CIFS protocol of an SVM. This is useful for analyzing past performance trends and troubleshooting issues related to CIFS protocol operations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/cifs/services/{svm.uuid}/metrics`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves historical performance metrics for the CIFS protocol of an SVM.
 

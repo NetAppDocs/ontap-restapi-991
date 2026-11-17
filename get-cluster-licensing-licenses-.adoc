@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-cluster-licensing-licenses-.html'
+keywords: 'license package,retrieve license,licensed packages,unlicensed packages,license scope,license compliance'
 summary: 'Retrieve a license package'
 ---
 
 = Retrieve a license package
+:imagesdir: ./media/
+
+[.lead]
+Retrieves details of a specific license package, which helps you manage and monitor the licensing status of your ONTAP system.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/cluster/licensing/licenses/{name}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves a specific license package.
 

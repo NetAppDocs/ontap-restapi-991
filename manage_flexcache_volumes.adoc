@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_flexcache_volumes.html'
+keywords: 'flexcache volumes, flexcache configurations, flexgroup, intra-vserver, cross-cluster, fan-out'
 summary: 'Manage FlexCache volumes'
 ---
 
 = Manage FlexCache volumes
+:imagesdir: ./media/
 
-
+[.lead]
+FlexCache APIs manage configurations for persistent caches of origin volumes within ONTAP. These endpoints are used to create, retrieve, modify, and delete FlexCache volumes across different Vserver and cluster configurations, supporting efficient data access and management.
 
 :doctype: book
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-volumes-metrics.html'
+keywords: 'performance metrics,historical volume,latency filter,iops filter,flexcache savings,throughput analysis'
 summary: 'Retrieve historical performance metrics for a volume'
 ---
 
 = Retrieve historical performance metrics for a volume
+:imagesdir: ./media/
+
+[.lead]
+Accesses historical performance metrics for a volume to analyze past performance trends and make informed decisions on resource management.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/volumes/{volume.uuid}/metrics`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Retrieves historical performance metrics for a volume.
 

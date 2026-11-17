@@ -3,16 +3,27 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-support-configuration-backup-backups.html'
+keywords: 'configuration backup,backup creation,backup file name,ontap configuration,node identifier,system configuration'
 summary: 'Create a configuration backup'
 ---
 
 = Create a configuration backup
+:imagesdir: ./media/
+
+[.lead]
+Creates a configuration backup to preserve the current state of your system settings. Use this endpoint to generate a backup file with a .7z extension, ensuring you have a restore point for system configurations.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/support/configuration-backup/backups`#
 
-*Introduced In:* 9.7
+== Introduced in
 
-Creates a configuration backup. The required backup file name must end with .7z extension.
+ONTAP 9.7
+
+== Usage notes
+
+The required backup file name must end with .7z extension.
 
 == Required properties
 

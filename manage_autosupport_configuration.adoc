@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_autosupport_configuration.html'
+keywords: 'autosupport configuration,netapp call home,cluster connectivity,modify autosupport,ontap cluster'
 summary: 'Manage AutoSupport configuration'
 ---
 
 = Manage AutoSupport configuration
+:imagesdir: ./media/
 
-
+[.lead]
+Manage the AutoSupport configuration to maintain communication between your cluster and NetApp support systems. Use GET calls to retrieve configuration details and connectivity issues, while PATCH calls modify the setup as needed.
 
 == Overview
 

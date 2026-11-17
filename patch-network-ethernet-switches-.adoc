@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-network-ethernet-switches-.html'
+keywords: 'ethernet switch,update switch,switch name,network switches,ethernet update'
 summary: 'Update an Ethernet switch'
 ---
 
 = Update an Ethernet switch
+:imagesdir: ./media/
+
+[.lead]
+Updates an Ethernet switch configuration, modifying its settings to meet your network requirements.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/network/ethernet/switches/{name}`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Update Ethernet Switch REST API
 

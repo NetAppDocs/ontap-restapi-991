@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_google_cloud_kms.html'
+keywords: 'google cloud kms,netapp cloud volume,gckms configuration,key management,gcp kms'
 summary: 'Manage Google Cloud KMS'
 ---
 
 = Manage Google Cloud KMS
+:imagesdir: ./media/
 
-
+[.lead]
+Utilize Google Cloud Key Management Services (KMS) endpoints to securely store encryption keys for NetApp Cloud Volume Services within Google Cloud. These endpoints facilitate managing key configurations, retrieving specific key data, and updating application credentials, ensuring robust encryption key management.
 
 == Overview
 

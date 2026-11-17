@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_nfs_export_policies.html'
+keywords: 'nfs export,export policies,policy rule,export clients,single svm'
 summary: 'Manage NFS export policies'
 ---
 
 = Manage NFS export policies
+:imagesdir: ./media/
 
-
+[.lead]
+Use NFS export policy endpoints to manage access controls for NFS shares within your storage environment. Retrieve, create, update, and delete export policies and rules to define access permissions for specific clients and ensure secure data access.
 
 == Export Policies
 

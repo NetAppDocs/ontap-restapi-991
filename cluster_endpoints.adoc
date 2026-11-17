@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'cluster_endpoints.html'
+keywords: 'cluster creation,add nodes,update software,manage configuration,view jobs,discover nodes'
 summary: 'ONTAP REST API cluster endpoints'
 ---
 
 = ONTAP REST API cluster endpoints
+:imagesdir: ./media/
 
-
+[.lead]
+Manage cluster creation, configuration, and node discovery using these endpoints to ensure your ONTAP cluster is ready and optimized for operation. Access pre-cluster APIs for initial setup and progress monitoring before full cluster creation.
 
 == Overview
 

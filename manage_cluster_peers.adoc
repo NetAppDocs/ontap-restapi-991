@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_cluster_peers.html'
+keywords: 'cluster peering,create cluster peer,intercluster LIF,retrieve cluster peer,update cluster peer,delete cluster peer'
 summary: 'Manage cluster peers'
 ---
 
 = Manage cluster peers
+:imagesdir: ./media/
 
-
+[.lead]
+Cluster peering endpoints facilitate the establishment of relationships between independent ONTAP clusters, enabling the exchange of user data and coordination of operations. Use these endpoints to create, retrieve, update, and delete cluster peer relationships, ensuring efficient management of inter-cluster communication.
 
 == Overview
 

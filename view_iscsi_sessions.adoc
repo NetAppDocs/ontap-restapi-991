@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'view_iscsi_sessions.html'
+keywords: 'iscsi sessions,iscsi initiator,iscsi target,iscsi lif,target portal group'
 summary: 'View iSCSI sessions'
 ---
 
 = View iSCSI sessions
+:imagesdir: ./media/
 
-
+[.lead]
+View detailed information about iSCSI sessions, which are TCP connections linking initiators with targets. Use these endpoints to monitor which initiators have successfully logged in to ONTAP systems.
 
 == Overview
 

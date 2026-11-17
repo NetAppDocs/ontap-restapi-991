@@ -3,16 +3,26 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-security-gcp-kms-restore.html'
+keywords: 'gcp kms restore,google cloud keys,svm key restore,cloud volume services,gcp configuration'
 summary: 'Restore keys for an SVM from a Google Cloud KMS'
 ---
 
 = Restore keys for an SVM from a Google Cloud KMS
+:imagesdir: ./media/
+
+[.lead]
+Restores the keys for an SVM from a configured Google Cloud KMS. This is used when you need to recover encryption keys as part of managing secure access to your data in a Google Cloud environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/security/gcp-kms/{gcp_kms.uuid}/restore`#
 
-*Introduced In:* 9.9
+== Introduced in
 
-Restores the keys for an SVM from a configured Google Cloud KMS.
+ONTAP 9.9
+
+== Usage notes
+
 Note: This method is only available to the NetApp Cloud Volume Services for GCP.
 
 == Related ONTAP commands

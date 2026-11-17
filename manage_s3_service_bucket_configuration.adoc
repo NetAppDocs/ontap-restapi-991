@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_s3_service_bucket_configuration.html'
+keywords: 's3 bucket,object namespace,access policy,ontap admin,resource permissions,qos policy'
 summary: 'Manage S3 service bucket configuration'
 ---
 
 = Manage S3 service bucket configuration
+:imagesdir: ./media/
 
-
+[.lead]
+Configure and manage S3 buckets within your storage environment using these endpoints. Define object namespaces, manage access policies, and control data storage for each bucket associated with an S3 user on the server.
 
 == Overview
 

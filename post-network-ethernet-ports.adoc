@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-network-ethernet-ports.html'
+keywords: 'vlan creation,lag creation,ethernet ports,network ports,broadcast domain'
 summary: 'Create a new VLAN or LAG'
 ---
 
 = Create a new VLAN or LAG
+:imagesdir: ./media/
+
+[.lead]
+Creates a new VLAN or LAG, configuring network resources to enhance communication capabilities within your ONTAP system. Use this endpoint to define VLAN and LAG properties such as mode, distribution policy, and member ports for tailored network setups.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/network/ethernet/ports`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Creates a new VLAN (such as node1:e0a-100) or LAG (ifgrp, such as node2:a0a).
 

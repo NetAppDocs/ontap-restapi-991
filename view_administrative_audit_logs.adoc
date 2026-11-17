@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'view_administrative_audit_logs.html'
+keywords: 'audit logs,log records,timestamp,node name,log index,cluster scope'
 summary: 'View administrative audit logs'
 ---
 
 = View administrative audit logs
+:imagesdir: ./media/
 
-
+[.lead]
+Use these APIs to retrieve administrative audit log records, which include details like timestamps, node names, and indices. You can utilize this information to monitor and review actions taken within the system.
 
 == Overview
 

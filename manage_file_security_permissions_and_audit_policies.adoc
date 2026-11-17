@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_file_security_permissions_and_audit_policies.html'
+keywords: 'file security,ntfs permissions,access control,security audit,audit policies'
 summary: 'Manage file security permissions and audit policies'
 ---
 
 = Manage file security permissions and audit policies
+:imagesdir: ./media/
 
-
+[.lead]
+Manage NTFS file security permissions and audit policies directly through the ONTAP REST API without needing a client. These endpoints simplify the process by combining multiple steps into a single operation, allowing you to efficiently create and apply security descriptors with access control entries for both discretionary and system access control lists.
 
 == Overview
 

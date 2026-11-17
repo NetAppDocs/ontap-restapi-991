@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-audit.html'
+keywords: 'audit configuration,log path,snapshot operations,security events,file operations,cifs logon'
 summary: 'Create an audit configuration'
 ---
 
 = Create an audit configuration
+:imagesdir: ./media/
+
+[.lead]
+Creates an audit configuration to define how audit logs are captured and stored within a specific SVM. This setup is essential for tracking access and changes to your storage resources for security and compliance purposes.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/audit`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates an audit configuration.
+ONTAP 9.6
 
 == Required properties
 

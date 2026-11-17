@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-nvme-subsystem-maps.html'
+keywords: 'nvme subsystem,subsystem maps,nvme protocols,vserver nvme,nvme filter,ontap nvme'
 summary: 'Retrieve NVMe subsystem maps'
 ---
 
 = Retrieve NVMe subsystem maps
+:imagesdir: ./media/
+
+[.lead]
+Retrieves NVMe subsystem maps to review the current mappings of NVMe subsystems in your ONTAP environment. This operation is useful for auditing configurations or troubleshooting connectivity issues.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/nvme/subsystem-maps`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves NVMe subsystem maps.
+ONTAP 9.6
 
 == Expensive properties
 

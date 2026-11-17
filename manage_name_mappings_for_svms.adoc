@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_name_mappings_for_svms.html'
+keywords: 'name mapping,unix identity,cifs identity,kerberos conversion,svm rules'
 summary: 'Manage name mappings for SVMs'
 ---
 
 = Manage name mappings for SVMs
+:imagesdir: ./media/
 
-
+[.lead]
+Name mapping endpoints facilitate the conversion of identity credentials between CIFS, UNIX, and Kerberos, ensuring seamless file access for users across different client protocols. You use these endpoints to define and manage conversion rules within Storage Virtual Machines (SVMs), structured as patterns and replacements that apply according to priority lists.
 
 == Overview
 

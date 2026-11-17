@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_files_and_directories.html'
+keywords: 'manage files,read file,modify properties,file directories,file system analytics'
 summary: 'Manage files and directories'
 ---
 
 = Manage files and directories
+:imagesdir: ./media/
 
-
+[.lead]
+Read, write, and manage files and directories using these endpoints. Specify the path to target specific files or directories, and utilize query parameters for detailed operations, such as retrieving metadata or applying QoS policies. Note that files must not exceed 1 MB in data length for read/write operations.
 
 == Overview
 

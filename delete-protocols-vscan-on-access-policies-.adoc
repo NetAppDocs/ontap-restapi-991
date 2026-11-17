@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-protocols-vscan-on-access-policies-.html'
+keywords: 'delete policy,vscan policy,on-access policy,anti-virus configuration,svm uuid'
 summary: 'Delete an antivirus On-Access policy configuration'
 ---
 
 = Delete an antivirus On-Access policy configuration
+:imagesdir: ./media/
+
+[.lead]
+Deletes an antivirus On-Access policy configuration to remove an existing policy that is no longer required.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/protocols/vscan/{svm.uuid}/on-access-policies/{name}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Deletes the anti-virus On-Access policy configuration.
 

@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-storage-file-move.html'
+keywords: 'file move,flexible volumes,volume file,cutover time,hold quiescence,max throughput'
 summary: 'Start a file move operation'
 ---
 
 = Start a file move operation
+:imagesdir: ./media/
+
+[.lead]
+Initiates a file move operation for flexible volumes, specifying the files to move and their destination paths. Use this endpoint to manage file transfers between volumes efficiently.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/storage/file/move`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Starts a file move operation. Only supported on flexible volumes.
 

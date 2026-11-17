@@ -3,16 +3,26 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-security-azure-key-vaults-.html'
+keywords: 'azure key vault,update configuration,netapp files,cloud volume services,proxy settings'
 summary: 'Update the AKV configuration'
 ---
 
 = Update the AKV configuration
+:imagesdir: ./media/
+
+[.lead]
+Updates the AKV configuration, adjusting settings specific to Azure NetApp Files Cloud Volume Services. This allows you to modify authentication and connection parameters for enhanced integration with Azure Key Vault.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/security/azure-key-vaults/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Updates the AKV configuration.
+ONTAP 9.8
+
+== Usage notes
+
 Note: This method is only available to the Azure NetApp Files Cloud Volume Services.
 
 == Optional properties

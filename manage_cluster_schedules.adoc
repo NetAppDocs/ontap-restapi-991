@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_cluster_schedules.html'
+keywords: 'cluster schedules,job schedule management,cron schedule,interval schedule,metrocluster schedule'
 summary: 'Manage cluster schedules'
 ---
 
 = Manage cluster schedules
+:imagesdir: ./media/
 
-
+[.lead]
+Utilize the cluster schedules endpoints to view, create, and modify job schedules within your cluster environment. These endpoints are essential for managing when specific tasks are executed, whether at regular intervals or specific times, ensuring efficient operations.
 
 == Overview
 

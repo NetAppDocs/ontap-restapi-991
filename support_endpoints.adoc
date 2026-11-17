@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'support_endpoints.html'
+keywords: 'configuration backups,autosupport settings,event handling,node settings,cluster settings'
 summary: 'ONTAP REST API support endpoints'
 ---
 
 = ONTAP REST API support endpoints
+:imagesdir: ./media/
 
-
+[.lead]
+Use ONTAP support endpoints to manage configuration backups, autosupport settings, and event handling effectively. Configuration backups ensure the protection and recovery of node and cluster settings, particularly essential for single-node clusters.
 
 == Overview
 

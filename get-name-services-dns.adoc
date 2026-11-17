@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-name-services-dns.html'
+keywords: 'dns configuration,svm dns,cluster dns,name server,status state,source address'
 summary: 'Retrieve DNS configurations for all SVMs'
 ---
 
 = Retrieve DNS configurations for all SVMs
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the DNS configurations for all SVMs to manage or review their DNS settings. Specify 'scope' as 'svm' for data SVM configurations or 'cluster' for the overall cluster configuration.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/name-services/dns`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves the DNS configurations of all SVMs.
 Specify 'scope' as 'svm' to retrieve the DNS configuration of all the data SVMs.

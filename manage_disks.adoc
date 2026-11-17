@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_disks.html'
+keywords: 'storage disk,cluster disks,disk retrieval,disk modification,disk encryption'
 summary: 'Manage disks'
 ---
 
 = Manage disks
+:imagesdir: ./media/
 
-
+[.lead]
+Retrieve storage disk information with the GET API to access all disks in the cluster. Use these endpoints to efficiently monitor and manage disk data within your storage infrastructure.
 
 == Retrieving storage disk information
 

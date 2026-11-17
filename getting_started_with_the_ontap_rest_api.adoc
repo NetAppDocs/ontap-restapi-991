@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'getting_started_with_the_ontap_rest_api.html'
+keywords: 'ontap rest,storage management,hal linking,record filtering,query parameters'
 summary: 'Getting started with the ONTAP REST API'
 ---
 
 = Getting started with the ONTAP REST API
+:imagesdir: ./media/
 
-
+[.lead]
+The ONTAP REST API provides a comprehensive suite of endpoints designed to facilitate communication with ONTAP resources via HTTP methods. This documentation details the types of API calls you can make, including functionality, usage examples, and endpoint specifics. Explore this content to effectively leverage the ONTAP REST API in managing ONTAP resources such as clusters, SVMs, and storage objects.
 
 ONTAP adds support for an expansive RESTful API. The documentation below provides information about the types of API calls available to you, as well as details about using each API endpoint. You can learn more about the ONTAP REST API at the ONTAP Automation docs site:  https://docs.netapp.com/us-en/ontap-automation/index.html. NetApp welcomes your comments and suggestions about the ONTAP REST API and the documentation for its use.</br>
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_home_directory_search_paths.html'
+keywords: 'ontap home directory,cifs home directory,dynamic share,home directory path,svm path,cifs search path'
 summary: 'Manage home directory search paths'
 ---
 
 = Manage home directory search paths
+:imagesdir: ./media/
 
-
+[.lead]
+Configure and manage CIFS home directory search paths to streamline access to dynamic shares for SMB users on your server. These endpoints enable ONTAP to locate home directories efficiently by traversing specified paths within an SVM. Adding at least one search path is essential for utilizing the CIFS home directories feature.
 
 == Overview
 

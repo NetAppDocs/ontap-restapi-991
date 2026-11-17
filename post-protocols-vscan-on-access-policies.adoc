@@ -3,16 +3,27 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-vscan-on-access-policies.html'
+keywords: 'vscan on-access,svm policy,data svm,vscan policy,file scan,policy creation'
 summary: 'Create a Vscan On-Access policy'
 ---
 
 = Create a Vscan On-Access policy
+:imagesdir: ./media/
+
+[.lead]
+Creates a Vscan On-Access policy on a data SVM, facilitating the scanning of files for viruses and malware. This endpoint is essential for configuring security measures in your storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/vscan/{svm.uuid}/on-access-policies`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a Vscan On-Access policy. Created only on a data SVM.
+ONTAP 9.6
+
+== Usage notes
+
+Created only on a data SVM.
 </b>Important notes:
 
 * You must enable the policy on an SVM before its files can be scanned.

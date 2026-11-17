@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-application-applications-snapshots.html'
+keywords: 'snapshot retrieval,application snapshot,application consistent,create time filter,consistency type'
 summary: 'Retrieve an application Snapshot copy'
 ---
 
 = Retrieve an application Snapshot copy
+:imagesdir: ./media/
+
+[.lead]
+Retrieves Snapshot copies of an application to review or manage historical data states. By accessing these snapshots, you can ensure application consistency and maintain a record of data at specific points in time.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/application/applications/{application.uuid}/snapshots`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves Snapshot copies of an application.
+ONTAP 9.6
 
 == Query examples
 

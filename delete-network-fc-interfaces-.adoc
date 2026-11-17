@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-network-fc-interfaces-.html'
+keywords: 'fc interface,delete interface,unique identifier,fibre channel,network delete'
 summary: 'Delete an FC interface'
 ---
 
 = Delete an FC interface
+:imagesdir: ./media/
+
+[.lead]
+Deletes a Fibre Channel (FC) interface when you need to remove an existing connection from the system.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/network/fc/interfaces/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Deletes an FC interface.
 

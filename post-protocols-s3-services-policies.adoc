@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-s3-services-policies.html'
+keywords: 's3 policy,s3 configuration,policy creation,allow or deny,policy name,policy actions'
 summary: 'Create an S3 policy configuration'
 ---
 
 = Create an S3 policy configuration
+:imagesdir: ./media/
+
+[.lead]
+Creates an S3 policy configuration to define access control rules for S3 resources within an SVM. You use this to manage permissions for S3 operations, specifying which actions are allowed or denied on designated resources.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/s3/services/{svm.uuid}/policies`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Creates the S3 policy configuration.
+ONTAP 9.8
 
 == Important notes
 

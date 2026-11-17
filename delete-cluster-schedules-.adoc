@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-cluster-schedules-.html'
+keywords: 'schedule delete,delete schedule,schedule removal,remove schedule,cluster schedule,uuid schedule'
 summary: 'Delete a schedule'
 ---
 
 = Delete a schedule
+:imagesdir: ./media/
+
+[.lead]
+Removes an existing schedule, eliminating its associated tasks from being executed in the future.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/cluster/schedules/{uuid}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Deletes a schedule.
 

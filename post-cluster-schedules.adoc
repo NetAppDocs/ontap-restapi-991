@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-cluster-schedules.html'
+keywords: 'cluster schedule,create schedule,job schedule,schedule name,cron schedule,interval schedule'
 summary: 'Create a schedule'
 ---
 
 = Create a schedule
+:imagesdir: ./media/
+
+[.lead]
+Creates a schedule to automate tasks at specified intervals or times. Use this endpoint to define job schedules by specifying either a cron or interval field.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/cluster/schedules`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates a schedule.
+ONTAP 9.6
 
 == Required Fields
 

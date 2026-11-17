@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-network-ethernet-switch-ports.html'
+keywords: 'ethernet switch,network switch ports,duplex type,switch state,vlan id,switch speed'
 summary: 'Retrieve Ethernet switch ports'
 ---
 
 = Retrieve Ethernet switch ports
+:imagesdir: ./media/
+
+[.lead]
+Retrieves Ethernet switch port information to view the current configuration and status of each port. This can help you manage and troubleshoot network connections effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/network/ethernet/switch/ports`#
 
-*Introduced In:* 9.8
+== Introduced in
+
+ONTAP 9.8
+
+== Usage notes
 
 Retrieves the ethernet switch ports.
 

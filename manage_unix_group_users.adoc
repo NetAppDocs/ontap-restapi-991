@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_unix_group_users.html'
+keywords: 'unix group management, svm user, add unix user, delete unix user, manage unix users'
 summary: 'Manage UNIX group users'
 ---
 
 = Manage UNIX group users
+:imagesdir: ./media/
 
-
+[.lead]
+Manage UNIX group users by adding or deleting UNIX users within a UNIX group on an SVM. Use these endpoints to efficiently handle multiple user assignments in a single operation.
 
 == Overview
 

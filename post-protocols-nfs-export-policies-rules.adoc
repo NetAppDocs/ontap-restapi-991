@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'post-protocols-nfs-export-policies-rules.html'
+keywords: 'export policy rule,read-only security,read-write security,nfs export policy,client matching,volume access'
 summary: 'Create an export policy rule'
 ---
 
 = Create an export policy rule
+:imagesdir: ./media/
+
+[.lead]
+Creates an export policy rule to define access permissions and security settings for storage volumes. Use this endpoint to specify which clients can access the volumes and determine their read-only or read-write permissions.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-post]#POST# [.api-doc-code-block]#`/protocols/nfs/export-policies/{policy.id}/rules`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Creates an export policy rule.
+ONTAP 9.6
 
 == Required properties
 

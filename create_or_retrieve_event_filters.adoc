@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'create_or_retrieve_event_filters.html'
+keywords: 'event filters,filter rules,filter logic,name pattern,severity pattern,snmp trap type'
 summary: 'Create or retrieve event filters'
 ---
 
 = Create or retrieve event filters
+:imagesdir: ./media/
 
-
+[.lead]
+Manage event filters to control how the system processes and forwards specific events based on defined rules. Use these endpoints to create, retrieve, or modify filters that identify events requiring additional handling, ensuring precise event management across your environment.
 
 == Overview
 

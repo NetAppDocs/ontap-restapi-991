@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-storage-flexcache-origins.html'
+keywords: 'flexcache origin,flexcache cluster,flexcache state,flexcache size,flexcache space guarantee,flexcache ip address'
 summary: 'Retrieve the origin of a FlexCache volume in the cluster'
 ---
 
 = Retrieve the origin of a FlexCache volume in the cluster
+:imagesdir: ./media/
+
+[.lead]
+Retrieves the origin information of a FlexCache volume within the cluster. Use this endpoint to access specific details about the FlexCache's configuration and status, which may be necessary for monitoring or managing storage resources.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/storage/flexcache/origins`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Retrieves origin of FlexCache in the cluster.
 

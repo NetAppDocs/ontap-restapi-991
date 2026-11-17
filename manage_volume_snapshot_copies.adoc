@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_volume_snapshot_copies.html'
+keywords: 'snapshot copy,manage snapshot,volume snapshot,create snapshot,delete snapshot,scheduled snapshot'
 summary: 'Manage volume Snapshot copies'
 ---
 
 = Manage volume Snapshot copies
+:imagesdir: ./media/
 
-
+[.lead]
+Snapshot copy APIs manage the creation, modification, deletion, and retrieval of volume Snapshot copies in ONTAP. Use these endpoints to handle different types of Snapshot copies, such as scheduled, user-requested, and SnapMirror Snapshot copies.
 
 == Overview
 

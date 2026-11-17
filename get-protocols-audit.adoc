@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-audit.html'
+keywords: 'audit configurations,vserver audit,log retention,log rotation,file operations,user account'
 summary: 'Retrieve audit configurations'
 ---
 
 = Retrieve audit configurations
+:imagesdir: ./media/
+
+[.lead]
+Retrieves audit configurations to review and manage your current auditing setup.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/audit`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves audit configurations.
+ONTAP 9.6
 
 == Related ONTAP commands
 

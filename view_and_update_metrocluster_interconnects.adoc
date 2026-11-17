@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'view_and_update_metrocluster_interconnects.html'
+keywords: 'metrocluster interconnects,interconnect status,partner type,node information,adapter details,state monitoring'
 summary: 'View and update MetroCluster interconnects'
 ---
 
 = View and update MetroCluster interconnects
+:imagesdir: ./media/
 
-
+[.lead]
+Use the MetroCluster interconnect endpoints to view and update the status of interconnects within your MetroCluster configuration. You can retrieve a comprehensive list of interconnects or query individual interconnect details to monitor their current status and performance.
 
 == Overview
 

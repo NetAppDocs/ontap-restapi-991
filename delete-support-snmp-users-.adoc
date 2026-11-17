@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-support-snmp-users-.html'
+keywords: 'snmp user,delete snmp,engine id,switch management,svm management,snmpv3'
 summary: 'Delete an SNMP user'
 ---
 
 = Delete an SNMP user
+:imagesdir: ./media/
+
+[.lead]
+Removes an SNMP user from your system to manage or update SNMP configurations effectively.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/support/snmp/users/{engine_id}/{name}`#
 
-*Introduced In:* 9.7
+== Introduced in
+
+ONTAP 9.7
+
+== Usage notes
 
 Deletes an SNMP user. The engine ID can be the engine ID of the administrative SVM or a data SVM. It can also be the SNMPv3 engine ID of a remote switch.
 

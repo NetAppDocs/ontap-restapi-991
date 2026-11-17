@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-support-ems-filters-rules-.html'
+keywords: 'event filter,filter rule,ontap event,ems filter,event filter show'
 summary: 'Retrieve an event filter rule'
 ---
 
 = Retrieve an event filter rule
+:imagesdir: ./media/
+
+[.lead]
+Retrieves an event filter rule to review its configuration and understand how events are filtered in your system.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/support/ems/filters/{name}/rules/{index}`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves an event filter rule.
+ONTAP 9.6
 
 == Related ONTAP commands
 

@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'get-protocols-san-iscsi-services.html'
+keywords: 'iscsi services,retrieve iscsi,vserver iscsi,iscsi statistics,san protocols,iscsi metrics'
 summary: 'Retrieve iSCSI services'
 ---
 
 = Retrieve iSCSI services
+:imagesdir: ./media/
+
+[.lead]
+Retrieves iSCSI services to view their current configurations and operational status within your networked storage environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-get]#GET# [.api-doc-code-block]#`/protocols/san/iscsi/services`#
 
-*Introduced In:* 9.6
+== Introduced in
 
-Retrieves iSCSI services.
+ONTAP 9.6
 
 == Expensive properties
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'manage_broadcast_domains.html'
+keywords: 'broadcast domains,ethernet ports,layer 2,network cluster,ipspace'
 summary: 'Manage broadcast domains'
 ---
 
 = Manage broadcast domains
+:imagesdir: ./media/
 
-
+[.lead]
+Manage broadcast domains to configure and organize Ethernet port connectivity at the layer 2 level. Use these endpoints to retrieve, create, update, and delete broadcast domains within your cluster configuration.
 
 == Overview
 

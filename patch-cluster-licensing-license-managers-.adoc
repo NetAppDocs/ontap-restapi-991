@@ -3,16 +3,23 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'patch-cluster-licensing-license-managers-.html'
+keywords: 'license manager,license configuration,cluster licensing,update license,modify license manager'
 summary: 'Update the license manager configuration'
 ---
 
 = Update the license manager configuration
+:imagesdir: ./media/
+
+[.lead]
+Updates the license manager configuration to modify existing settings and optimize license management in your environment.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-patch]#PATCH# [.api-doc-code-block]#`/cluster/licensing/license-managers/{uuid}`#
 
-*Introduced In:* 9.8
+== Introduced in
 
-Updates the license manager configuration.
+ONTAP 9.8
 
 == Learn more
 

@@ -3,12 +3,15 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'retrieve_and_create_snmp_users.html'
+keywords: 'snmp users,snmpv1 community,snmpv3 usm,local snmpv3,remote snmpv3'
 summary: 'Retrieve and create SNMP users'
 ---
 
 = Retrieve and create SNMP users
+:imagesdir: ./media/
 
-
+[.lead]
+Define, retrieve, and add SNMP users to manage network monitoring and security settings within your ONTAP environment. SNMP users can be community users for SNMPv1/SNMPv2c protocols or User-based Security Model (USM) users for SNMPv3, supporting both local and remote configurations. These endpoints are useful for querying the ONTAP SNMP server and configuring SNMPv3 traps.
 
 == Overview
 

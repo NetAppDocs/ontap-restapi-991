@@ -3,14 +3,25 @@ sidebar: sidebar
 api: true
 explorer: false
 permalink: 'delete-cluster-software-packages-.html'
+keywords: 'delete software,remove package,cluster software,software version,endpoint delete,package removal'
 summary: 'Delete a software package from the cluster'
 ---
 
 = Delete a software package from the cluster
+:imagesdir: ./media/
+
+[.lead]
+Removes a software package from the cluster, which is useful when you need to manage or free up resources.
+
+== HTTP method and endpoint
 
 [.api-doc-operation .api-doc-operation-delete]#DELETE# [.api-doc-code-block]#`/cluster/software/packages/{version}`#
 
-*Introduced In:* 9.6
+== Introduced in
+
+ONTAP 9.6
+
+== Usage notes
 
 Deletes a software package from the cluster. The delete operation fails if the package is currently installed.
 
